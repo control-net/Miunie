@@ -12,7 +12,7 @@ namespace Miunie.Discord
             _discordClient = discordClient;
         }
 
-        public async Task StartAsync()
+        public async Task ConnectAsync()
         {
             await _discordClient.ConnectAsync();
         }

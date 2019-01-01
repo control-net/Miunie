@@ -5,17 +5,17 @@ namespace Miunie.Discord
 {
     public class CommandHandler
     {
-        private CommandsNextModule _commandService;
+        private CommandsNextModule _commandsNextModule;
 
-        public CommandHandler(CommandsNextModule commandService)
+        public CommandHandler(CommandsNextModule commandsNextModule)
         {
-            _commandService = commandService;
+            _commandsNextModule = commandsNextModule;
         }
 
         public async Task InitializeAsync()
         {
             /*
-             TODO (Charly): Here we should register the commands,
+             TODO (Charly): Here we should register the commands, converters...
              using the _commandService.RegisterCommands method
              https://dsharpplus.emzi0767.com/api/DSharpPlus.CommandsNext.CommandsNextModule.html#DSharpPlus_CommandsNext_CommandsNextModule_RegisterCommands_Assembly_
             */
