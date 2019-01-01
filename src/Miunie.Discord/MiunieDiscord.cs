@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Miunie.Core;
 
 namespace Miunie.Discord
@@ -11,6 +12,12 @@ namespace Miunie.Discord
         {
             _client = client;
             _commandHandler = commandHandler;
+        }
+
+        public async Task RunAsync()
+        {
+            await _client.ConnectAsync();
+            await _commandHandler.InitializeAsync();
         }
     }
 }
