@@ -1,23 +1,67 @@
 using System.Threading.Tasks;
+using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using Miunie.Core;
+using Miunie.Discord.Configuration;
 
 namespace Miunie.Discord
 {
     public class MiunieDiscord : IDiscord
     {
-        private DSharpClient _client;
-        private CommandHandler _commandHandler;
+        private DiscordClient _discordClient;
+        private CommandsNextModule _commandsNextModule;
+        private IBotConfiguration _botConfiguration;
 
-        public MiunieDiscord(DSharpClient client, CommandHandler commandHandler)
+        public MiunieDiscord(IBotConfiguration botConfiguration)
         {
-            _client = client;
-            _commandHandler = commandHandler;
+            _botConfiguration = botConfiguration;
         }
 
         public async Task RunAsync()
         {
-            await _client.ConnectAsync();
-            await _commandHandler.InitializeAsync();
+
+            await InitializeDiscordClientAsync();
+
+            await InitializeCommandsNextModuleAsync();
+
+        }
+
+        private async Task InitializeDiscordClientAsync()
+        {
+            var discordConfiguration = GetDefaultDiscordConfiguration();
+
+            _discordClient = new DiscordClient(discordConfiguration);
+
+            await _discordClient.ConnectAsync();
+        }
+
+        private async Task InitializeCommandsNextModuleAsync()
+        {
+            var commandsNextConfiguration = GetDefaultCommandsNextConfiguration();
+            _commandsNextModule = _discordClient.UseCommandsNext(commandsNextConfiguration);
+
+            //TODO (Charly) : Uncomment the next line to register commands, with the parameter being the assembly
+            //await _commandsNextModule.RegisterCommands();
+        }
+
+        private DiscordConfiguration GetDefaultDiscordConfiguration()
+        {
+            return new DiscordConfiguration()
+            {
+                Token = _botConfiguration.GetBotToken(),
+                TokenType = TokenType.User,
+                AutoReconnect = true,
+                LogLevel = LogLevel.Debug,
+                UseInternalLogHandler = true
+            };
+        }
+
+        private CommandsNextConfiguration GetDefaultCommandsNextConfiguration()
+        {
+            return new CommandsNextConfiguration()
+            {
+                EnableMentionPrefix = true
+            };
         }
     }
 }
