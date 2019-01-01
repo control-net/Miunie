@@ -19,11 +19,9 @@ namespace Miunie.Discord
 
         public async Task RunAsync()
         {
-
             await InitializeDiscordClientAsync();
 
             await InitializeCommandsNextModuleAsync();
-
         }
 
         private async Task InitializeDiscordClientAsync()
