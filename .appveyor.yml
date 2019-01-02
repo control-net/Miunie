@@ -7,4 +7,4 @@ dotnet_csproj:
   version: '{version}'
   package_version: '{version}'
 build_script:
-  - dotnet build -c Release
+  - dotnet build src -c Release
