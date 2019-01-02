@@ -15,7 +15,8 @@ namespace Miunie.Configuration
 
         public string GetBotToken()
         {
-            return _config.GetValueFor(DiscordBotTokenKey);
+public string GetBotToken()
+      => _config.GetValueFor(DiscordBotTokenKey);
         }
     }
 }
