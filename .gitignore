@@ -339,3 +339,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database 
 healthchecksdb
+
+# Miunie specific
+App.config.template
+App.config
