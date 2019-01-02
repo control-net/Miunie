@@ -8,3 +8,6 @@ dotnet_csproj:
   package_version: '{version}'
 build_script:
   - dotnet build src -c Release
+test_script:
+- ps: >-
+    &('dotnet') ('test', 'src/Miunie.Configuration.XUnit.Tests/Miunie.Configuration.XUnit.Tests.csproj', '--test-adapter-path:.', '--logger:Appveyor')
