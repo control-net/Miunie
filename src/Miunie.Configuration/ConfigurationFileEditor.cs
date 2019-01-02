@@ -3,11 +3,11 @@ using Miunie.Configuration.Entities;
 
 namespace Miunie.Configuration
 {
-    internal class ConfigurationFileEditor
+    public class ConfigurationFileEditor
     {
         private readonly System.Configuration.Configuration _file;
 
-        internal ConfigurationFileEditor()
+        public ConfigurationFileEditor()
         {
             _file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         }

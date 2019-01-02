@@ -7,7 +7,7 @@ namespace Miunie.Configuration
     {
         private readonly ConfigurationFileEditor _editor;
 
-        private ConfigManager(ConfigurationFileEditor editor)
+        public ConfigManager(ConfigurationFileEditor editor)
         {
             _editor = editor;
         }

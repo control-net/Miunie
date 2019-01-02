@@ -341,5 +341,4 @@ ASALocalRun/
 healthchecksdb
 
 # Miunie specific
-App.config.template
 App.config
