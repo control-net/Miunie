@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Miunie.Core;
 
 namespace Miunie.ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            await InversionOfControl.Container.GetInstance<MiunieBot>().RunAsync();
         }
     }
 }

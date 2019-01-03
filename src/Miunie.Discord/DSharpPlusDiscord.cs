@@ -6,13 +6,13 @@ using Miunie.Discord.Configuration;
 
 namespace Miunie.Discord
 {
-    public class MiunieDiscord : IDiscord
+    public class DSharpPlusDiscord : IDiscord
     {
         private DiscordClient _discordClient;
         private CommandsNextModule _commandsNextModule;
         private IBotConfiguration _botConfiguration;
 
-        public MiunieDiscord(IBotConfiguration botConfiguration)
+        public DSharpPlusDiscord(IBotConfiguration botConfiguration)
         {
             _botConfiguration = botConfiguration;
         }
@@ -22,6 +22,8 @@ namespace Miunie.Discord
             await InitializeDiscordClientAsync();
 
             await InitializeCommandsNextModuleAsync();
+
+            await Task.Delay(-1);
         }
 
         private async Task InitializeDiscordClientAsync()
@@ -47,9 +49,9 @@ namespace Miunie.Discord
             return new DiscordConfiguration()
             {
                 Token = _botConfiguration.GetBotToken(),
-                TokenType = TokenType.User,
+                TokenType = TokenType.Bot,
                 AutoReconnect = true,
-                LogLevel = LogLevel.Debug,
+                LogLevel = LogLevel.Info,
                 UseInternalLogHandler = true
             };
         }

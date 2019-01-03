@@ -3,6 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lamar" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
+    <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
+    <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
+  </ItemGroup>
 
 </Project>
