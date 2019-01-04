@@ -1,8 +1,11 @@
+using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using Miunie.Core;
 using Miunie.Discord.Configuration;
+using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord
 {
@@ -10,6 +13,7 @@ namespace Miunie.Discord
     {
         private DiscordClient _discordClient;
         private CommandsNextModule _commandsNextModule;
+        private DependencyCollection _dependencyCollection;
         private IBotConfiguration _botConfiguration;
 
         public DSharpPlusDiscord(IBotConfiguration botConfiguration)
@@ -19,11 +23,22 @@ namespace Miunie.Discord
 
         public async Task RunAsync()
         {
+            InitializeDependencyCollection();
+
             await InitializeDiscordClientAsync();
 
-            await InitializeCommandsNextModuleAsync();
+            InitializeCommandsNextModuleAsync();
 
             await Task.Delay(-1);
+        }
+
+        private void InitializeDependencyCollection()
+        {
+            using (var dependencyCollectionBuilder = new DependencyCollectionBuilder())
+            {
+                dependencyCollectionBuilder.AddInstance(new EntityConvertor());
+                _dependencyCollection = dependencyCollectionBuilder.Build();
+            }
         }
 
         private async Task InitializeDiscordClientAsync()
@@ -35,13 +50,11 @@ namespace Miunie.Discord
             await _discordClient.ConnectAsync();
         }
 
-        private async Task InitializeCommandsNextModuleAsync()
+        private void InitializeCommandsNextModuleAsync()
         {
             var commandsNextConfiguration = GetDefaultCommandsNextConfiguration();
             _commandsNextModule = _discordClient.UseCommandsNext(commandsNextConfiguration);
-
-            //TODO (Charly) : Uncomment the next line to register commands, with the parameter being the assembly
-            //await _commandsNextModule.RegisterCommands();
+            _commandsNextModule.RegisterCommands<CommandModules.ProfileCommand>();
         }
 
         private DiscordConfiguration GetDefaultDiscordConfiguration()
@@ -60,7 +73,8 @@ namespace Miunie.Discord
         {
             return new CommandsNextConfiguration()
             {
-                EnableMentionPrefix = true
+                EnableMentionPrefix = true,
+                Dependencies = _dependencyCollection
             };
         }
     }
