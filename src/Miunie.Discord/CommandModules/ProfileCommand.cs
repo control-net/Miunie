@@ -18,7 +18,7 @@ namespace Miunie.Discord.CommandModules
         [Command("profile")]
         public async Task ShowProfile(CommandContext context, DiscordMember memeber)
         {
-            //TODO: (Charly) uncomment once EntityConvertor and ProfileService are implemented
+            //TODO: (Charly) uncomment once EntityConvertor and ProfileService are implemented, along with MiunieEntities
             //var miunieUser = _entityConvertor.DiscordMemberToMiunieUser(member);
             //var miunieChannel = _entityConvertor.DiscordChannelToMiunieUser(context.Channel);
             //_profileService.ShowProfile(miunieUser, miunieChannel);
