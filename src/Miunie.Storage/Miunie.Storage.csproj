@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
+  
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
+    <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 </Project>

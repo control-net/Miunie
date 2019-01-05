@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
     <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
     <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
+    <ProjectReference Include="..\Miunie.Storage\Miunie.Storage.csproj" />
   </ItemGroup>
 
 </Project>
