@@ -1,6 +1,8 @@
 using Lamar;
 using Miunie.Configuration;
 using Miunie.Core;
+using Miunie.Core.Storage;
+using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
 
@@ -35,6 +37,7 @@ namespace Miunie.ConsoleApp
                 c.ForSingletonOf<IDiscord>().UseIfNone<DSharpPlusDiscord>();
                 c.ForSingletonOf<IBotConfiguration>().UseIfNone<BotConfiguration>();
                 c.ForSingletonOf<IConfiguration>().UseIfNone<ConfigManager>();
+                c.ForSingletonOf<IDataStorage>().UseIfNone<JsonDataStorage>();
             });
         }
     }
