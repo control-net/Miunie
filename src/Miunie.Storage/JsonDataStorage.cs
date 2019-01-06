@@ -7,7 +7,7 @@ namespace Miunie.Storage
 {
     public class JsonDataStorage : IDataStorage
     {
-        private string _resourcesFolder = "Resources";
+        private readonly string _resourcesFolder = "Resources";
 
         public JsonDataStorage()
         {
