@@ -35,6 +35,7 @@ namespace Miunie.ConsoleApp
             container = new Container(c =>
             {
                 c.ForSingletonOf<IDiscord>().UseIfNone<DSharpPlusDiscord>();
+                c.ForSingletonOf<IDiscordMessages>().UseIfNone<DSharpPlusDiscord>();
                 c.ForSingletonOf<IBotConfiguration>().UseIfNone<BotConfiguration>();
                 c.ForSingletonOf<IConfiguration>().UseIfNone<ConfigManager>();
                 c.ForSingletonOf<IDataStorage>().UseIfNone<JsonDataStorage>();

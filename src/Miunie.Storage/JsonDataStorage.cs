@@ -29,6 +29,10 @@ namespace Miunie.Storage
 
         public T RestoreObject<T>(string file)
         {
+            // NOTE(Peter): This is to ensure files like "Users/u123"
+            // are valid and create a subdirectory if needed.
+            Directory.CreateDirectory($"{_resourcesFolder}/{Path.GetDirectoryName(file)}");
+
             string json = GetOrCreateFileContents(file);
             return JsonConvert.DeserializeObject<T>(json);
         }

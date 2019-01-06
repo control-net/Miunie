@@ -13,7 +13,19 @@ namespace Miunie.Core
         }
 
         public MiunieUser GetById(ulong userId)
-            => _dataStorage.RestoreObject<MiunieUser>(GetKeyById(userId));
+        {
+            var user = _dataStorage.RestoreObject<MiunieUser>(GetKeyById(userId));
+            if(user is null)
+            {
+                user = new MiunieUser{ Id = userId };
+                StoreUser(user);
+            }
+
+            return user;
+        }
+
+        public void StoreUser(MiunieUser user)
+            => _dataStorage.StoreObject(user, GetKeyById(user.Id));
 
         private string GetKeyById(ulong userId)
             => string.Format(UserStorageKeyTemplate, userId);

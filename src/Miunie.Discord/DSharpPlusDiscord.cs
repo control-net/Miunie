@@ -9,7 +9,7 @@ using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord
 {
-    public class DSharpPlusDiscord : IDiscord
+    public class DSharpPlusDiscord : IDiscord, IDiscordMessages
     {
         private DiscordClient _discordClient;
         private CommandsNextModule _commandsNextModule;
@@ -39,6 +39,7 @@ namespace Miunie.Discord
             using (var dependencyCollectionBuilder = new DependencyCollectionBuilder())
             {
                 dependencyCollectionBuilder.AddInstance(_entityConvertor);
+                dependencyCollectionBuilder.AddInstance(new ProfileService(this));
                 _dependencyCollection = dependencyCollectionBuilder.Build();
             }
         }
@@ -78,6 +79,12 @@ namespace Miunie.Discord
                 EnableMentionPrefix = true,
                 Dependencies = _dependencyCollection
             };
+        }
+
+        public async Task SendMessage(string message, MiunieChannel targetChannel)
+        {
+            var channel = await _discordClient.GetChannelAsync(targetChannel.ChannelId);
+            await channel.SendMessageAsync(message);
         }
     }
 }
