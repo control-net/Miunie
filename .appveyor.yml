@@ -10,5 +10,4 @@ build_script:
   - dotnet build src -c Release
 test_script:
 - ps: >-
-    &('dotnet') ('test', 'src/Miunie.Configuration.XUnit.Tests/Miunie.Configuration.XUnit.Tests.csproj', '--test-adapter-path:.', '--logger:Appveyor')
-    &('dotnet') ('test', 'src/Miunie.Storage.XUnit.Tests/Miunie.Storage.XUnit.Tests.csproj', '--test-adapter-path:.', '--logger:Appveyor')
+    &('dotnet') ('test', 'src/*.Tests', '--test-adapter-path:.', '--logger:Appveyor')
