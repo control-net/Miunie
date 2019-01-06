@@ -1,3 +1,6 @@
+using DSharpPlus.Entities;
+using Miunie.Core;
+
 namespace Miunie.Discord.Convertors
 {
     /// <summary>
@@ -6,26 +9,25 @@ namespace Miunie.Discord.Convertors
     /// </summary>
     public class EntityConvertor
     {
-        //TODO: (Charly) Uncomment and implement the following methods,
-        // once we have the Miunie entities implemented
-        // NOTE: You're free to change the methods names
+        private readonly MiunieUserService _miunieUserService;
 
-        /*
-        public MiunieUser DiscordMemberToMiunieUser(DiscordMember discordMember)
+        public EntityConvertor(MiunieUserService miunieUserService)
         {
-            var miunieUser = new MiunieUser();
-            //fill the miunieUser properties with the discordMember properties
-            return miunieUser;
+            _miunieUserService = miunieUserService;
         }
-         */
+
+        public MiunieUser DiscordMemberToMiunieUser(DiscordMember discordMember)
+            => _miunieUserService.GetById(discordMember.Id);
          
-         /*
         public MiunieChannel DiscordChannelToMiunieUser(DiscordChannel discordChannel)
         {
-            var miunieChannel = new MiunieChannel();
-            //fill the miunieChannel properties with the discordChannel properties
+            var miunieChannel = new MiunieChannel
+            {
+                ChannelId = discordChannel.Id,
+                GuildId = discordChannel.GuildId
+            };
+
             return miunieChannel;
         }
-         */
     }
 }
