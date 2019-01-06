@@ -14,11 +14,13 @@ namespace Miunie.Discord
         private DiscordClient _discordClient;
         private CommandsNextModule _commandsNextModule;
         private DependencyCollection _dependencyCollection;
-        private IBotConfiguration _botConfiguration;
+        private readonly IBotConfiguration _botConfiguration;
+        private readonly EntityConvertor _entityConvertor;
 
-        public DSharpPlusDiscord(IBotConfiguration botConfiguration)
+        public DSharpPlusDiscord(IBotConfiguration botConfiguration, EntityConvertor entityConvertor)
         {
             _botConfiguration = botConfiguration;
+            _entityConvertor = entityConvertor;
         }
 
         public async Task RunAsync()
@@ -36,7 +38,7 @@ namespace Miunie.Discord
         {
             using (var dependencyCollectionBuilder = new DependencyCollectionBuilder())
             {
-                dependencyCollectionBuilder.AddInstance(new EntityConvertor());
+                dependencyCollectionBuilder.AddInstance(_entityConvertor);
                 _dependencyCollection = dependencyCollectionBuilder.Build();
             }
         }
