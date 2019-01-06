@@ -10,4 +10,4 @@ build_script:
   - dotnet build src -c Release
 test_script:
 - ps: >-
-    &('dotnet') ('test', 'src/*.Tests', '--test-adapter-path:.', '--logger:Appveyor')
+    &('dotnet') ('test', 'src', '--test-adapter-path:.', '--logger:Appveyor')
