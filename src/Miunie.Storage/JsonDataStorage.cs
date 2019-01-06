@@ -19,6 +19,7 @@ namespace Miunie.Storage
             _resourcesFolder = resourcesFolder;
             Directory.CreateDirectory(_resourcesFolder);
         }
+        
         public void StoreObject(object obj, string file)
         {
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
