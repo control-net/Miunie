@@ -17,21 +17,21 @@ namespace Miunie.Storage.XUnit.Tests
         {
             string objectToSave = "hello";
             string fileName = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-            
-            ShouldStoreObject(objectToSave, fileName);
-            ShouldRestoreExistingObject(objectToSave, fileName);            
+            string collection = "Welcome";
+            ShouldStoreObject(objectToSave, collection, fileName);
+            ShouldRestoreExistingObject(objectToSave, collection, fileName);            
         }
 
-        private void ShouldStoreObject(object objectToSave, string fileName)
+        private void ShouldStoreObject(object objectToSave, string collection, string fileName)
         {
-            _storageFixture.Storage.StoreObject(objectToSave, fileName);
+            _storageFixture.Storage.StoreObject(objectToSave, collection, fileName);
 
-            Assert.True(_storageFixture.Storage.KeyExists(fileName));
+            Assert.True(_storageFixture.Storage.KeyExists(collection, fileName));
         }
         
-        private void ShouldRestoreExistingObject(object expectedObejct, string fileName)
+        private void ShouldRestoreExistingObject(object expectedObejct, string collection, string key)
         {            
-            var restoredObject = _storageFixture.Storage.RestoreObject<object>(fileName);
+            var restoredObject = _storageFixture.Storage.RestoreObject<object>(collection, key);
 
             Assert.Equal(expectedObejct, restoredObject);
         }
