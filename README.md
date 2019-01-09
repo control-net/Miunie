@@ -53,7 +53,7 @@ This is a step by step guide to get Miunie ready on your machine and ready for d
 - Click on the folder named `src` right click in the whitespace and click `Git Bash Here`. [Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
 - The Git Terminal should now open. Run the following commands in the this order.
   - `dotnet restore` - Restores the project dependencies & Nuget Packages.
-  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the bot builds. You should see the build secceeded with no warnings or errors.
+  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build secceeded with no warnings or errors.
   - `dotnet test` - This runs the unit tests for the project. You should see an completed output stating the all tests passed.
 - Now we know the project was forked and cloned correctly, you can type `code .` to open Visual Studio Code in that directory and get started on your project.
 
