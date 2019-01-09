@@ -74,7 +74,7 @@ To run the unit tests already inclduded in the project folow the directions that
 - [DsharpPlus](https://github.com/DSharpPlus/DSharpPlus) - Discord API wrapper library
 - ❤️ Love and Care 💙
 
-## Contributing
+## Contributing - TODO
 
 Please read [CONTRIBUTING.md](TODO) for details on our code of conduct, and the process for submitting pull requests to us.
 
