@@ -64,7 +64,7 @@ To run the unit tests already inclduded in the project folow the directions that
 - Visual Studio IDE
   - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests` [Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
 - Visual Studio Code
-  - `dotnet test` - From the terminal.
+  - `dotnet test` - From the terminal. Ensure you're in the working directory of the bot (The with that has Miunie.sln)
 
 ## Deployment - TODO
 
