@@ -1,4 +1,4 @@
-# Miunie
+# Miunie the community developed Disord bot
 
 [![Build status](https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true)](https://ci.appveyor.com/project/discord-bot-tutorial/miunie) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE)
 
@@ -6,7 +6,7 @@
     <img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png">
 </p>
 
-## Miunie is a community developed Disord bot
+## About
 
 You might be familiar with Community-Bot, which is a previous version of this project. This greenfield version aims to improve architecture.
 
