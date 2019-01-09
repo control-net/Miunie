@@ -1,9 +1,10 @@
 # Miunie the community developed Disord bot
 
-[![Build status](https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true)](https://ci.appveyor.com/project/discord-bot-tutorial/miunie) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE)
-
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png">
+<a href="https://ci.appveyor.com/project/discord-bot-tutorial/miunie"><img src="https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true" alt="build status"></a>
+<a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors"><img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license"></a>
+<a href="https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
+<img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png" alt = "Main Image"></a>
 </p>
 
 ## About
