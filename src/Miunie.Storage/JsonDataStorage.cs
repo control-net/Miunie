@@ -15,7 +15,6 @@ namespace Miunie.Storage
         public JsonDataStorage()
         {
             var resourcesDirectory = Directory.CreateDirectory(_resourcesFolder);
-            var _groups = resourcesDirectory.GetDirectories().ToList();
         }
 
         public JsonDataStorage(string resourcesFolder)
@@ -25,9 +24,9 @@ namespace Miunie.Storage
         }
         
         public void StoreObject(object obj, string collection, string key)
-        {
-            Directory.CreateDirectory($"{_resourcesFolder}/{collection}");
-            var file = GetFileNameFromKey(key);
+        {            
+            var file = GetFileNameByKey(key);
+            EnsureCollectionExists(collection);
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             string filePath = String.Concat(_resourcesFolder, "/", collection, "/", file);
             File.WriteAllText(filePath, json);
@@ -35,18 +34,29 @@ namespace Miunie.Storage
 
         public T RestoreObject<T>(string collection, string key)
         {
-            var file = GetFileNameFromKey(key);
-            // NOTE(Peter): This is to ensure files like "Users/u123"
-            // are valid and create a subdirectory if needed.
-            Directory.CreateDirectory($"{_resourcesFolder}/{collection}");
+            var file = GetFileNameByKey(key);
+            EnsureCollectionExists(collection);            
             var filePath = String.Concat(collection, "/", file);
-            string json = GetOrCreateFileContents(filePath);
-            return JsonConvert.DeserializeObject<T>(json);
+            return RestoreByPath<T>(filePath);
+        }
+        
+        public IEnumerable<T> RestoreCollection<T>(string collection)
+        {
+            EnsureCollectionExists(collection);
+            var collectionPath = String.Concat(_resourcesFolder, "/", collection);
+            var filePaths =  Directory.GetFiles(collectionPath);
+            var files = new HashSet<T>();
+            foreach (var filePath in filePaths)
+            {
+                var fileName = Path.GetFileName(filePath);
+                var file = RestoreObject<T>(collection, fileName);
+                files.Add(file);
+            }
+            return files;
         }
 
         public void WipeData()
         {
-            
             var directories = Directory.GetDirectories(_resourcesFolder);
             
             foreach(var directory in directories)
@@ -64,27 +74,36 @@ namespace Miunie.Storage
 
         public bool KeyExists(string collection, string key)
         {
-            var file = GetFileNameFromKey(key);
+            var file = GetFileNameByKey(key);
             return LocalFileExists(String.Concat(collection, "/", file));
         }
-        
-        private string GetFileNameFromKey(string key)
-            => String.Format(FileTemplate, key);
+
         private bool LocalFileExists(string file)
         {
             string filePath = String.Concat(_resourcesFolder, "/", file);
             return File.Exists(filePath);
         }
+        private string GetFileNameByKey(string key)
+            => String.Format(FileTemplate, key);
 
-        private string GetOrCreateFileContents(string file)
+        private T RestoreByPath<T>(string filePath)
         {
-            string filePath = String.Concat(_resourcesFolder, "/", file);
-            if (!File.Exists(filePath))
-            {
-                File.WriteAllText(filePath, "");
-                return "";
-            }
-            return File.ReadAllText(filePath);
+            string json = GetOrCreateFileContent(filePath);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        private string GetOrCreateFileContent(string path)
+        {
+            var filePath = String.Concat(_resourcesFolder, "/", path);
+            if (File.Exists(filePath)) return File.ReadAllText(filePath);
+            File.WriteAllText(filePath, "");
+            return "";
+        }
+
+        // NOTE(Peter): This is to ensure files like "Users/u123"
+        // are valid and create a subdirectory if needed.
+        private void EnsureCollectionExists(string collection)
+        {
+            Directory.CreateDirectory($"{_resourcesFolder}/{collection}");
         }
     }
 }
