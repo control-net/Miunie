@@ -4,7 +4,8 @@ namespace Miunie.Core
 {
     public class MiunieUserService
     {
-        private const string UserStorageKeyTemplate = "Users/u{0}";
+        private const string UserStorageKeyTemplate = "u{0}";
+        private const string UserStorageCollection = "Users";
         private readonly IDataStorage _dataStorage;
 
         public MiunieUserService(IDataStorage dataStorage)
@@ -14,7 +15,7 @@ namespace Miunie.Core
 
         public MiunieUser GetById(ulong userId)
         {
-            var user = _dataStorage.RestoreObject<MiunieUser>(GetKeyById(userId));
+            var user = _dataStorage.RestoreObject<MiunieUser>(UserStorageCollection, GetKeyById(userId));
             if(user is null)
             {
                 user = new MiunieUser{ Id = userId };
@@ -25,7 +26,7 @@ namespace Miunie.Core
         }
 
         public void StoreUser(MiunieUser user)
-            => _dataStorage.StoreObject(user, GetKeyById(user.Id));
+            => _dataStorage.StoreObject(user, UserStorageCollection, GetKeyById(user.Id));
 
         private string GetKeyById(ulong userId)
             => string.Format(UserStorageKeyTemplate, userId);
