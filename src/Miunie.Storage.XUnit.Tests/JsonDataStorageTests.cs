@@ -69,6 +69,7 @@ namespace Miunie.Storage.XUnit.Tests
             var path = Path.Combine(ResourcesFolder, Collection, file);
             return File.Exists(path);
         }
+
         private string SaveObjectInTestCollection(object obj)
         {
             GenerateCollectionDirectory(Collection);
