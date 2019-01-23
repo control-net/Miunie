@@ -9,13 +9,15 @@ namespace Miunie.Configuration
 
         public ConfigurationFileEditor()
         {
-            _file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            _file = ConfigurationManager
+                .OpenExeConfiguration(ConfigurationUserLevel.None);
         }
 
         internal void Save()
         {
             _file.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(_file.AppSettings.SectionInformation.Name);
+            ConfigurationManager
+                .RefreshSection(_file.AppSettings.SectionInformation.Name);
         }
 
         internal void WriteSetting(KeyValuePair setting)
@@ -46,3 +48,4 @@ namespace Miunie.Configuration
         }
     }
 }
+

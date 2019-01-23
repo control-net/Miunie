@@ -14,7 +14,8 @@ namespace Miunie.Storage
 
         public JsonDataStorage()
         {
-            var resourcesDirectory = Directory.CreateDirectory(_resourcesFolder);
+            var resourcesDirectory = Directory
+                .CreateDirectory(_resourcesFolder);
         }
 
         public JsonDataStorage(string resourcesFolder)
@@ -22,28 +23,31 @@ namespace Miunie.Storage
             _resourcesFolder = resourcesFolder;
             Directory.CreateDirectory(_resourcesFolder);
         }
-        
+
         public void StoreObject(object obj, string collection, string key)
-        {            
+        {
             var file = GetFileNameByKey(key);
             EnsureCollectionExists(collection);
-            string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            string filePath = String.Concat(_resourcesFolder, "/", collection, "/", file);
+
+            string json = JsonConvert
+                .SerializeObject(obj, Formatting.Indented);
+
+            string filePath = Path.Combine(_resourcesFolder, collection, file);
             File.WriteAllText(filePath, json);
-        }        
+        }
 
         public T RestoreObject<T>(string collection, string key)
         {
             var file = GetFileNameByKey(key);
-            EnsureCollectionExists(collection);            
+            EnsureCollectionExists(collection);
             var filePath = String.Concat(collection, "/", file);
             return RestoreByPath<T>(filePath);
         }
-        
+
         public IEnumerable<T> RestoreCollection<T>(string collection)
         {
             EnsureCollectionExists(collection);
-            var collectionPath = String.Concat(_resourcesFolder, "/", collection);
+            var collectionPath = Path.Combine(_resourcesFolder, collection);
             var filePaths =  Directory.GetFiles(collectionPath);
             var files = new HashSet<T>();
             foreach (var filePath in filePaths)
@@ -58,7 +62,7 @@ namespace Miunie.Storage
         public void WipeData()
         {
             var directories = Directory.GetDirectories(_resourcesFolder);
-            
+
             foreach(var directory in directories)
             {
                 var files = Directory.GetFiles(directory);
@@ -68,7 +72,7 @@ namespace Miunie.Storage
                 }
                 Directory.Delete(directory);
             }
-            
+
             Directory.Delete(_resourcesFolder);
         }
 
@@ -83,6 +87,7 @@ namespace Miunie.Storage
             string filePath = String.Concat(_resourcesFolder, "/", file);
             return File.Exists(filePath);
         }
+
         private string GetFileNameByKey(string key)
             => String.Format(FileTemplate, key);
 
@@ -91,6 +96,7 @@ namespace Miunie.Storage
             string json = GetOrCreateFileContent(filePath);
             return JsonConvert.DeserializeObject<T>(json);
         }
+
         private string GetOrCreateFileContent(string path)
         {
             var filePath = String.Concat(_resourcesFolder, "/", path);
@@ -99,11 +105,11 @@ namespace Miunie.Storage
             return "";
         }
 
-        // NOTE(Peter): This is to ensure files like "Users/u123"
-        // are valid and create a subdirectory if needed.
         private void EnsureCollectionExists(string collection)
         {
-            Directory.CreateDirectory($"{_resourcesFolder}/{collection}");
+            var collectionDir = Path.Combine(_resourcesFolder, collection);
+            Directory.CreateDirectory(collectionDir);
         }
     }
 }
+

@@ -17,3 +17,4 @@ namespace Miunie.Configuration
         => _config.GetValueFor(DiscordBotTokenKey);
     }
 }
+

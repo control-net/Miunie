@@ -9,7 +9,11 @@ namespace Miunie.Storage.XUnit.Tests
 
         public JsonDataStorageFixture()
         {
-            ResourcesFolder = String.Concat("ResourcesTests", DateTimeOffset.Now.ToUnixTimeMilliseconds());
+            ResourcesFolder = String.Concat(
+                    "ResourcesTests",
+                    DateTimeOffset.Now.ToUnixTimeMilliseconds()
+                );
+
             Storage = new JsonDataStorage(ResourcesFolder);
         }
         public void Dispose()
@@ -18,3 +22,4 @@ namespace Miunie.Storage.XUnit.Tests
         }
     }
 }
+

@@ -16,18 +16,19 @@ namespace Miunie.Discord.Convertors
             _miunieUserService = miunieUserService;
         }
 
-        public MiunieUser DiscordMemberToMiunieUser(DiscordMember discordMember)
-            => _miunieUserService.GetById(discordMember.Id);
-         
-        public MiunieChannel DiscordChannelToMiunieUser(DiscordChannel discordChannel)
+        public MiunieUser DiscordMemberToMiunieUser(DiscordMember member)
+            => _miunieUserService.GetById(member.Id);
+
+        public MiunieChannel DiscordChannelToMiunieUser(DiscordChannel c)
         {
             var miunieChannel = new MiunieChannel
             {
-                ChannelId = discordChannel.Id,
-                GuildId = discordChannel.GuildId
+                ChannelId = c.Id,
+                GuildId = c.GuildId
             };
 
             return miunieChannel;
         }
     }
 }
+

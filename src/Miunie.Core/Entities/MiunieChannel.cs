@@ -6,3 +6,4 @@ namespace Miunie.Core
         public ulong GuildId { get; set; }
     }
 }
+
