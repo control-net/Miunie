@@ -12,14 +12,16 @@ namespace Miunie.Core
             _discordMessages = discordMessages;
         }
 
-        public async Task ShowProfile(MiunieUser sourceUser, MiunieChannel sourceChannel)
+        public async Task ShowProfile(MiunieUser u, MiunieChannel c)
         {
-            // TODO(Peter): This should probably come from some kind of a Language
-            // Service to enable things like translation and easy edits in case
-            // of a misspell.
-            var response = $":frame_photo: **USER PROFILE**\nReputation: {sourceUser.Reputation}";
+            // TODO(Peter): This should probably come from some kind of a
+            // Language Service to enable things like translation and easy
+            // edits in case of a misspell.
+            var response = ":frame_photo: **USER PROFILE**\n";
+            response += $"Reputation: {u.Reputation}";
 
-            await _discordMessages.SendMessage(response, sourceChannel);
+            await _discordMessages.SendMessage(response, c);
         }
     }
 }
+

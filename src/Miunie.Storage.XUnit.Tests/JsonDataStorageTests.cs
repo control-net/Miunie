@@ -4,10 +4,11 @@ using Xunit;
 namespace Miunie.Storage.XUnit.Tests
 {
     public class JsonDataStorageTests : IClassFixture<JsonDataStorageFixture>
-    {        
+    {
         private JsonDataStorageFixture _storageFixture;
         private readonly object _objectToSave;
         private readonly string _collection;
+
         public JsonDataStorageTests(JsonDataStorageFixture storageFixture)
         {
             _storageFixture = storageFixture;
@@ -18,27 +19,43 @@ namespace Miunie.Storage.XUnit.Tests
         [Fact]
         public void ShouldStoreAndRestoreObject()
         {
-            string fileName = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
+            string fileName = DateTimeOffset.Now
+                .ToUnixTimeMilliseconds()
+                .ToString();
+
             ShouldStoreObject(_objectToSave, _collection, fileName);
             ShouldRestoreExistingObject(_objectToSave, _collection, fileName);
             ShouldRestoreCollection(_collection);
         }
+
         private void ShouldRestoreCollection(string collection)
         {
-            var objects = _storageFixture.Storage.RestoreCollection<object>(collection);
+            var objects = _storageFixture.Storage
+                .RestoreCollection<object>(collection);
+
             Assert.NotEmpty(collection);
         }
-        private void ShouldStoreObject(object objectToSave, string collection, string fileName)
+
+        private void ShouldStoreObject(
+            object obj,
+            string collection,
+            string file)
         {
-            _storageFixture.Storage.StoreObject(objectToSave, collection, fileName);
+            _storageFixture.Storage.StoreObject(obj, collection, file);
 
-            Assert.True(_storageFixture.Storage.KeyExists(collection, fileName));
+            Assert.True(_storageFixture.Storage.KeyExists(collection, file));
         }
-        private void ShouldRestoreExistingObject(object expectedObejct, string collection, string key)
-        {            
-            var restoredObject = _storageFixture.Storage.RestoreObject<object>(collection, key);
 
-            Assert.Equal(expectedObejct, restoredObject);
+        private void ShouldRestoreExistingObject(
+            object expected,
+            string collection,
+            string key)
+        {
+            var restoredObject = _storageFixture.Storage
+                .RestoreObject<object>(collection, key);
+
+            Assert.Equal(expected, restoredObject);
         }
     }
 }
+

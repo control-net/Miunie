@@ -6,3 +6,4 @@ namespace Miunie.Configuration
         void SetValueFor(string key, string value);
     }
 }
+

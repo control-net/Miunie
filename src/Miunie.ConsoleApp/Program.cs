@@ -8,7 +8,10 @@ namespace Miunie.ConsoleApp
     {
         private static async Task Main(string[] args)
         {
-            await InversionOfControl.Container.GetInstance<MiunieBot>().RunAsync();
+            await InversionOfControl.Container
+                    .GetInstance<MiunieBot>()
+                    .RunAsync();
         }
     }
 }
+

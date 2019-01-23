@@ -24,3 +24,4 @@ namespace Miunie.Configuration.XUnit.Tests
         }
     }
 }
+

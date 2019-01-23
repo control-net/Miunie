@@ -6,3 +6,4 @@ namespace Miunie.Core
         public long Reputation { get; set; }
     }
 }
+

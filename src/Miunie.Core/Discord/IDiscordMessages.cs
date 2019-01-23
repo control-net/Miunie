@@ -7,3 +7,4 @@ namespace Miunie.Core
         Task SendMessage(string message, MiunieChannel targetChannel);
     }
 }
+

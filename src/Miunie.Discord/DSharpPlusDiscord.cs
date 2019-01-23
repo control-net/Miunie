@@ -6,6 +6,7 @@ using DSharpPlus.CommandsNext;
 using Miunie.Core;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
+using Miunie.Discord.CommandModules;
 
 namespace Miunie.Discord
 {
@@ -17,7 +18,9 @@ namespace Miunie.Discord
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
 
-        public DSharpPlusDiscord(IBotConfiguration botConfiguration, EntityConvertor entityConvertor)
+        public DSharpPlusDiscord(
+            IBotConfiguration botConfiguration, 
+            EntityConvertor entityConvertor)
         {
             _botConfiguration = botConfiguration;
             _entityConvertor = entityConvertor;
@@ -36,11 +39,11 @@ namespace Miunie.Discord
 
         private void InitializeDependencyCollection()
         {
-            using (var dependencyCollectionBuilder = new DependencyCollectionBuilder())
+            using (var builder = new DependencyCollectionBuilder())
             {
-                dependencyCollectionBuilder.AddInstance(_entityConvertor);
-                dependencyCollectionBuilder.AddInstance(new ProfileService(this));
-                _dependencyCollection = dependencyCollectionBuilder.Build();
+                builder.AddInstance(_entityConvertor);
+                builder.AddInstance(new ProfileService(this));
+                _dependencyCollection = builder.Build();
             }
         }
 
@@ -55,9 +58,9 @@ namespace Miunie.Discord
 
         private void InitializeCommandsNextModuleAsync()
         {
-            var commandsNextConfiguration = GetDefaultCommandsNextConfiguration();
-            _commandsNextModule = _discordClient.UseCommandsNext(commandsNextConfiguration);
-            _commandsNextModule.RegisterCommands<CommandModules.ProfileCommand>();
+            var config = GetDefaultCommandsNextConfiguration();
+            _commandsNextModule = _discordClient.UseCommandsNext(config);
+            _commandsNextModule.RegisterCommands<ProfileCommand>();
         }
 
         private DiscordConfiguration GetDefaultDiscordConfiguration()
@@ -81,10 +84,11 @@ namespace Miunie.Discord
             };
         }
 
-        public async Task SendMessage(string message, MiunieChannel targetChannel)
+        public async Task SendMessage(string message, MiunieChannel mc)
         {
-            var channel = await _discordClient.GetChannelAsync(targetChannel.ChannelId);
+            var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             await channel.SendMessageAsync(message);
         }
     }
 }
+

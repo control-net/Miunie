@@ -12,18 +12,24 @@ namespace Miunie.Discord.CommandModules
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
 
-        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService)
+        public ProfileCommand(
+            EntityConvertor entityConvertor,
+            ProfileService profileService)
         {
             _entityConvertor = entityConvertor;
             _profileService = profileService;
         }
 
         [Command("profile")]
-        public async Task ShowProfile(CommandContext context, DiscordMember member)
+        public async Task ShowProfile(CommandContext ctx, DiscordMember m)
         {
-            var miunieUser = _entityConvertor.DiscordMemberToMiunieUser(member);
-            var miunieChannel = _entityConvertor.DiscordChannelToMiunieUser(context.Channel);
+            var miunieUser = _entityConvertor
+                .DiscordMemberToMiunieUser(m);
+            var miunieChannel = _entityConvertor
+                .DiscordChannelToMiunieUser(ctx.Channel);
+
             await _profileService.ShowProfile(miunieUser, miunieChannel);
         }
     }
 }
+

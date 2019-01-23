@@ -12,3 +12,4 @@ namespace Miunie.Configuration.Entities
         }
     }
 }
+
