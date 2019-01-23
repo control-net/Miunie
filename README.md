@@ -1,4 +1,4 @@
-# Miunie the community developed Disord bot
+# Miunie the community developed Discord bot
 
 <p align="center">
   <a href="https://ci.appveyor.com/project/discord-bot-tutorial/miunie">
