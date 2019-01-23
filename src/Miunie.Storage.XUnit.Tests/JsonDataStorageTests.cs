@@ -7,23 +7,23 @@ namespace Miunie.Storage.XUnit.Tests
 {
     public class JsonDataStorageTests : IClassFixture<JsonDataStorageFixture>
     {
-        private JsonDataStorageFixture _storageFixture;
-        private readonly object objectToSave;
+        private JsonDataStorageFixture StorageFixture;
+        private readonly object ObjectToSave;
         private readonly string ResourcesFolder;
         private readonly string Collection;
 
         public JsonDataStorageTests(JsonDataStorageFixture storageFixture)
         {
-            _storageFixture = storageFixture;
-            ResourcesFolder = _storageFixture.ResourcesFolder;
-            objectToSave = "hello";
+            StorageFixture = storageFixture;
+            ResourcesFolder = StorageFixture.ResourcesFolder;
+            ObjectToSave = "hello";
             Collection = "Welcome";
         }
 
         [Fact]
         public void ShouldRestoreCollection()
         {
-            var objects = _storageFixture.Storage
+            var objects = StorageFixture.Storage
                 .RestoreCollection<object>(Collection);
 
             Assert.NotEmpty(objects);
@@ -34,7 +34,7 @@ namespace Miunie.Storage.XUnit.Tests
         {
             string file = GenerateFileName();
 
-            _storageFixture.Storage.StoreObject(objectToSave, Collection, file);
+            StorageFixture.Storage.StoreObject(ObjectToSave, Collection, file);
 
             Assert.True(ObjectExists(file));
         }
@@ -45,7 +45,7 @@ namespace Miunie.Storage.XUnit.Tests
             int expected = 53415;
 
             var file = SaveObjectInTestCollection(expected);
-            var actual = _storageFixture.Storage
+            var actual = StorageFixture.Storage
                 .RestoreObject<int>(Collection, file);
             
             Assert.Equal(expected, actual);
@@ -58,7 +58,7 @@ namespace Miunie.Storage.XUnit.Tests
             var file = SaveObjectInTestCollection(obj);
 
             var expected = ObjectExists(file);
-            var actual = _storageFixture.Storage.KeyExists(Collection, file);
+            var actual = StorageFixture.Storage.KeyExists(Collection, file);
 
             Assert.True(expected == actual);
         }
