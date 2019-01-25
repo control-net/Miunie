@@ -1,4 +1,3 @@
-using System;
 using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Storage;
