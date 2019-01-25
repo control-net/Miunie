@@ -16,9 +16,10 @@ namespace Miunie.Core
         public string GetPhrase(string key)
             => _storage.RestoreObject<string>(_collection, key);
 
-        public string GetFormatted(string key, params object[] args)
+        public string GetFormatted(string key, params object[] objs)
         {
-            throw new NotImplementedException();
+            var phrase = GetPhrase(key);
+            return String.Format(phrase, objs);
         }
     }
 }
