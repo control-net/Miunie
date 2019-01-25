@@ -1,51 +1,44 @@
-using Lamar;
+using System;
 using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Storage;
 using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.ConsoleApp
 {
     public static class InversionOfControl
     {
-        private static Container container;
+        private static ServiceProvider provider;
 
-        public static Container Container
+        public static ServiceProvider Provider
         {
             get
             {
-                return GetOrInitContainer();
+                return GetOrInitProvider();
             }
         }
 
-        private static Container GetOrInitContainer()
+        private static ServiceProvider GetOrInitProvider()
         {
-            if(container is null)
+            if(provider is null)
             {
-                InitializeContainer();
+                InitializeProvider();
             }
 
-            return container;
+            return provider;
         }
 
-        public static void InitializeContainer()
-        {
-            container = new Container(c =>
-            {
-                c.ForSingletonOf<IDiscord>()
-                    .UseIfNone<DSharpPlusDiscord>();
-                c.ForSingletonOf<IDiscordMessages>()
-                    .UseIfNone<DSharpPlusDiscord>();
-                c.ForSingletonOf<IBotConfiguration>()
-                    .UseIfNone<BotConfiguration>();
-                c.ForSingletonOf<IConfiguration>()
-                    .UseIfNone<ConfigManager>();
-                c.ForSingletonOf<IDataStorage>()
-                    .UseIfNone<JsonDataStorage>();
-            });
-        }
+        private static void InitializeProvider()
+            => provider = new ServiceCollection()
+                .AddSingleton<IDiscord, DSharpPlusDiscord>()
+                .AddSingleton<IDiscordMessages, DSharpPlusDiscord>()
+                .AddSingleton<IBotConfiguration, BotConfiguration>()
+                .AddSingleton<IConfiguration, ConfigManager>()
+                .AddSingleton<IDataStorage, JsonDataStorage>()
+                .BuildServiceProvider();
     }
 }
 

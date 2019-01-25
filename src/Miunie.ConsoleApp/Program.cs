@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Miunie.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.ConsoleApp
 {
@@ -8,9 +9,9 @@ namespace Miunie.ConsoleApp
     {
         private static async Task Main(string[] args)
         {
-            await InversionOfControl.Container
-                    .GetInstance<MiunieBot>()
-                    .RunAsync();
+             await ActivatorUtilities
+                 .CreateInstance<MiunieBot>(InversionOfControl.Provider)
+                 .RunAsync();
         }
     }
 }
