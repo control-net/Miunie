@@ -8,7 +8,7 @@ namespace Miunie.Core.XUnit.Tests
     {
         LanguageResources langResources;
         DataStorageMock storage;
-        string languageCollection = "Lang";
+        string langCollection = "Lang";
         string PhraseKey = "HELLO_WORLD";
         string PhraseValue = "Hello world";
         string FormattedKey = "WELCOME_MESSAGE";
@@ -23,8 +23,8 @@ namespace Miunie.Core.XUnit.Tests
 
         private void InitializeStorage()
         {
-            storage.StoreObject(PhraseValue, languageCollection, PhraseKey);
-            storage.StoreObject(FormattedValue, languageCollection, FormattedKey);
+            storage.StoreObject(PhraseValue, langCollection, PhraseKey);
+            storage.StoreObject(FormattedValue, langCollection, FormattedKey);
         }
         
         [Fact]
@@ -32,6 +32,15 @@ namespace Miunie.Core.XUnit.Tests
         {
             var actual = langResources.GetPhrase(PhraseKey);
             var expected = PhraseValue;
+            Assert.Equal(actual, expected);
+        }
+
+        [Fact]
+        public void ShouldGetFormattedPhraseWithSingleParameter()
+        {
+            string text = "Charly";
+            var actual = langResources.GetFormatted(FormattedKey, text);
+            var expected = String.Format(FormattedValue, text);
             Assert.Equal(actual, expected);
         }
     }
