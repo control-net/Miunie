@@ -5,6 +5,7 @@ using Miunie.Core.Storage;
 using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
+using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.ConsoleApp
@@ -33,6 +34,9 @@ namespace Miunie.ConsoleApp
 
         private static void InitializeProvider()
             => provider = new ServiceCollection()
+                .AddSingleton<ConfigurationFileEditor>()
+                .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
+                .AddSingleton<MiunieUserService>()
                 .AddSingleton<IDiscord, DSharpPlusDiscord>()
                 .AddSingleton<IDiscordMessages, DSharpPlusDiscord>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
