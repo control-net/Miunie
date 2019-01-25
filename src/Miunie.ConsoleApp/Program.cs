@@ -8,11 +8,9 @@ namespace Miunie.ConsoleApp
     class Program
     {
         private static async Task Main(string[] args)
-        {
-             await ActivatorUtilities
+             => await ActivatorUtilities
                  .CreateInstance<MiunieBot>(InversionOfControl.Provider)
                  .RunAsync();
-        }
     }
 }
 
