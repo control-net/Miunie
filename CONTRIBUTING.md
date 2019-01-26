@@ -36,7 +36,7 @@ Here are some tips to help you understand our style before you contribute your f
 
 ## Found a bug
 
-To report a :bug: bug, create a new [Issue](https://github.com/petrspelos/Community-Discord-BOT/issues/new) and try to describe it as much as possible. Here are some tips:
+To report a :bug: bug, create a new [Issue](https://github.com/discord-bot-tutorial/Miunie/issues) and try to describe it as much as possible. Here are some tips:
 
 * Write a guide to reproducing the problem if possible
 * Add some information about your system, such as OS, CPU, GPU, etc.
