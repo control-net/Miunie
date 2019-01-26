@@ -80,7 +80,7 @@ if(foo is null) { return; }
   
 #### Notes
 
-Below is am example of how to correctly. Note how you should include your name when quoting.
+Below is am example of how to correctly comment a note. Note how you should include your name when quoting.
 
 ```cs
 // NOTE (Peter) : Something happens here
@@ -88,7 +88,7 @@ Below is am example of how to correctly. Note how you should include your name w
 
 #### TODO
 
-Below is an example for a `TODO` comment. Notw how it follows the same idea as the `Notes` template. However remember to keep `TODO` comments as short and to the point as possible.
+Below is an example for a `TODO` comment. Note how it follows the same idea as the `Notes` template. Please remember to keep `TODO` comments as short and to the point as possible.
 
 ```cs
 // TODO (Peter): Your Todo Here
