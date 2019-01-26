@@ -87,7 +87,7 @@ To run the unit tests already inclduded in the project folow the directions that
 
 ## Contributing - TODO
 
-Please read [CONTRIBUTING.md](TODO) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
