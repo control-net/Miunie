@@ -41,7 +41,7 @@ namespace Miunie.Core.XUnit.Tests
         {
             var actual = langResources.GetPhrase(PhraseKey);
             var expected = PhraseValue;
-            Assert.True(expected.Contains(actual));
+            Assert.Contains(actual, expected);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace Miunie.Core.XUnit.Tests
             string text = "Charly";
             var actual = langResources.GetFormatted(FormattedKey, text);
             var expected = FormatPhrases(FormattedValue, text);
-            Assert.True(expected.Contains(actual));
+            Assert.Contains(actual, expected);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Miunie.Core.XUnit.Tests
             string[] text = {"Charly", "TDDing"};
             var actual = langResources.GetFormatted(FormattedMultipleKey, text);
             var expected = FormatPhrases(FormattedMultipleValue, text);
-            Assert.True(expected.Contains(actual));
+            Assert.Contains(actual, expected);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace Miunie.Core.XUnit.Tests
             string[] text = { "Charly", "TDDing", "extra param", "extra" };
             var actual = langResources.GetFormatted(FormattedMultipleKey, text);
             var expected = FormatPhrases(FormattedMultipleValue, text);
-            Assert.True(expected.Contains(actual));
+            Assert.Contains(actual, expected);
         }
 
         private string[] FormatPhrases(string[] phrases, params string[] values)
