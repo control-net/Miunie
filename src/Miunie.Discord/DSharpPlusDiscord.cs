@@ -20,38 +20,41 @@ namespace Miunie.Discord
         private readonly EntityConvertor _entityConvertor;
 
         public DSharpPlusDiscord(
-            IBotConfiguration botConfiguration, 
+            IBotConfiguration botConfiguration,
             EntityConvertor entityConvertor,
             IServiceProvider services)
         {
             _botConfiguration = botConfiguration;
-            _entityConvertor = entityConvertor;
             _services = services;
+            _entityConvertor = entityConvertor;
         }
 
         public async Task RunAsync()
         {
             await InitializeDiscordClientAsync();
-
-            InitializeCommandsNextModuleAsync();
-
+            InitializeCommandService();
             await Task.Delay(-1);
         }
 
         private async Task InitializeDiscordClientAsync()
         {
             var discordConfiguration = GetDefaultDiscordConfiguration();
-
             _discordClient = new DiscordClient(discordConfiguration);
-
             await _discordClient.ConnectAsync();
         }
 
-        private void InitializeCommandsNextModuleAsync()
+        private void InitializeCommandService()
         {
             var config = GetDefaultCommandsNextConfiguration();
             _commandService = _discordClient.UseCommandsNext(config);
             _commandService.RegisterCommands<ProfileCommand>();
+            RegisterConvertors();
+        }
+
+        private void RegisterConvertors()
+        {
+            _commandService.RegisterConverter(_entityConvertor.ChannelConvertor);
+            _commandService.RegisterConverter(_entityConvertor.UserConvertor);
         }
 
         private DiscordConfiguration GetDefaultDiscordConfiguration()
@@ -82,4 +85,3 @@ namespace Miunie.Discord
         }
     }
 }
-

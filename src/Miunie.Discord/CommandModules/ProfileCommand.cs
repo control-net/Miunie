@@ -21,14 +21,10 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("profile")]
-        public async Task ShowProfile(CommandContext ctx, DiscordMember m)
+        public async Task ShowProfile(CommandContext ctx, MiunieUser m)
         {
-            var miunieUser = _entityConvertor
-                .DiscordMemberToMiunieUser(m);
-            var miunieChannel = _entityConvertor
-                .DiscordChannelToMiunieUser(ctx.Channel);
-
-            await _profileService.ShowProfile(miunieUser, miunieChannel);
+            var miunieChannel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _profileService.ShowProfile(m, miunieChannel);
         }
     }
 }
