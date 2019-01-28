@@ -19,6 +19,10 @@ namespace Miunie.Core.Services
             {
                 return GetRootOf(channel);
             }
+            if(user.NavCursor.Count == 1)
+            {
+                return GetChannelsOf(channel);
+            }
 
             return string.Empty;
         }
@@ -27,6 +31,14 @@ namespace Miunie.Core.Services
         {
             var serverName = _discordServers.GetServerNameById(channel.GuildId);
             return $"Data\n{serverName}";
+        }
+
+        public string GetChannelsOf(MiunieChannel channel)
+        {
+            var channelNames = _discordServers
+                .GetChannelNamesFromServer(channel.GuildId);
+
+            return string.Join("\n", channelNames);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 using Miunie.Core;
 using Miunie.Core.Services;
@@ -14,7 +15,8 @@ namespace Miunie.Core.XUnit.Tests
         {
             var serversMock = new DiscordServersMock(
                 123456789,
-                "TestServer"
+                "TestServer",
+                new []{ "ChannelA", "ChannelB", "ChannelC" }
             );
 
             _ls = new ListDirectoryService(serversMock);
@@ -25,6 +27,22 @@ namespace Miunie.Core.XUnit.Tests
         {
             const string expected = "Data\nTestServer";
             var inputUser = new MiunieUser();
+            var inputChannel = new MiunieChannel
+            {
+                GuildId = 123456789
+            };
+            var actual = _ls.Of(inputUser, inputChannel);
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void InServerShouldOutputChannels()
+        {
+            const string expected = "ChannelA\nChannelB\nChannelC";
+            var inputUser = new MiunieUser
+            {
+                NavCursor = new List<ulong> { 123456789 }
+            };
             var inputChannel = new MiunieChannel
             {
                 GuildId = 123456789
