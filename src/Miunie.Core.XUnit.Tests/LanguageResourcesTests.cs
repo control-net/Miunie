@@ -6,7 +6,7 @@ namespace Miunie.Core.XUnit.Tests
 {
     public class LanguageResourcesTests
     {
-        private readonly LanguageResources langResources;
+        private readonly ILanguageResources langResources;
         private readonly DataStorageMock storage;
         private const string Collection = "Lang";
         private const string PhraseKey = "HELLO_WORLD";
@@ -56,6 +56,25 @@ namespace Miunie.Core.XUnit.Tests
             string[] text = {"Charly", "TDDing"};
             var actual = langResources.GetFormatted(FormattedMultipleKey, text);
             var expected = String.Format(FormattedMultipleValue, text);
+            Assert.Equal(actual, expected);
+        }
+
+        [Fact]
+        public void GetPhraseShouldReturnEmptyStringIfNotFound()
+        {
+            var key = DateTime.Now.ToLongTimeString();
+            var actual = langResources.GetPhrase(key);
+            var expected = String.Empty;
+            Assert.Equal(actual, expected);
+        }
+
+        [Fact]
+        public void GetFormattedShouldReturnEmptyStringIfNotFound()
+        {
+            var key = DateTime.Now.ToLongTimeString();
+            string[] args = {"hello", "world"};
+            var actual = langResources.GetFormatted(key, args);
+            var expected = String.Empty;
             Assert.Equal(actual, expected);
         }
     }
