@@ -27,7 +27,7 @@ namespace Miunie.Core.XUnit.Tests
             {
                 return (T) obj;
             }
-            throw new KeyNotFoundException($"The key {key} wasn't found");
+            return default(T);
         }
 
         public void StoreObject(object obj, string collection, string key)
