@@ -5,7 +5,7 @@ namespace Miunie.Core
     public class MiunieUserService
     {
         private const string KeyFormat = "u{0}";
-        private const string CollectionKey = "Users";
+        private const string CollectionFormat = "g{0}";
         private readonly IDataStorage _dataStorage;
 
         public MiunieUserService(IDataStorage dataStorage)
@@ -13,19 +13,28 @@ namespace Miunie.Core
             _dataStorage = dataStorage;
         }
 
-        public MiunieUser GetById(ulong userId)
+        public MiunieUser GetById(ulong userId, ulong guildId)
         {
-            var user = _dataStorage
-                .RestoreObject<MiunieUser>(CollectionKey, GetKeyById(userId));
+            var user = _dataStorage.RestoreObject<MiunieUser>(
+                GetCollectionById(guildId),
+                GetKeyById(userId)
+            );
 
-            return EnsureExistence(user, userId);
+            return EnsureExistence(user, userId, guildId);
         }
 
-        public MiunieUser EnsureExistence(MiunieUser user, ulong userId)
+        private MiunieUser EnsureExistence(
+            MiunieUser user, 
+            ulong userId, 
+            ulong guildId)
         {
             if(user is null)
             {
-                user = new MiunieUser{ Id = userId };
+                user = new MiunieUser
+                {
+                    GuildId = guildId,
+                    Id = userId
+                };
                 StoreUser(user);
             }
 
@@ -33,10 +42,15 @@ namespace Miunie.Core
         }
 
         public void StoreUser(MiunieUser u)
-            => _dataStorage.StoreObject(u, CollectionKey, GetKeyById(u.Id));
+            => _dataStorage.StoreObject(u,
+                GetCollectionById(u.GuildId),
+                GetKeyById(u.Id));
 
         private string GetKeyById(ulong userId)
             => string.Format(KeyFormat, userId);
+
+        private string GetCollectionById(ulong guildId)
+            => string.Format(CollectionFormat, guildId);
     }
 }
 
