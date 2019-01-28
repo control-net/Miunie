@@ -7,6 +7,7 @@ namespace Miunie.Core.Services
     public class ListDirectoryService
     {
         private readonly IDiscordServers _discordServers;
+        private const string Separator = "\n";
 
         public ListDirectoryService(IDiscordServers discordServers)
         {
@@ -30,7 +31,7 @@ namespace Miunie.Core.Services
         public string GetRootOf(MiunieChannel channel)
         {
             var serverName = _discordServers.GetServerNameById(channel.GuildId);
-            return $"Data\n{serverName}";
+            return $"Data{Separator}{serverName}";
         }
 
         public string GetChannelsOf(MiunieChannel channel)
@@ -38,7 +39,7 @@ namespace Miunie.Core.Services
             var channelNames = _discordServers
                 .GetChannelNamesFromServer(channel.GuildId);
 
-            return string.Join("\n", channelNames);
+            return string.Join(Separator, channelNames);
         }
     }
 }
