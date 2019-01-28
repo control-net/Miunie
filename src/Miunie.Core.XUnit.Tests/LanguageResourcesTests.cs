@@ -6,15 +6,15 @@ namespace Miunie.Core.XUnit.Tests
 {
     public class LanguageResourcesTests
     {
-        LanguageResources langResources;
-        DataStorageMock storage;
-        string Collection = "Lang";
-        string PhraseKey = "HELLO_WORLD";
-        string PhraseValue = "Hello world";
-        string FormattedKey = "WELCOME_MESSAGE";
-        string FormattedValue = "Hello, {0}";
-        string FormattedMultipleKey = "PERFORM_ACTION";
-        string FormattedMultipleValue = "{0} is {1}";
+        private readonly LanguageResources langResources;
+        private readonly DataStorageMock storage;
+        private const string Collection = "Lang";
+        private const string PhraseKey = "HELLO_WORLD";
+        private const string PhraseValue = "Hello world";
+        private const string FormattedKey = "WELCOME_MESSAGE";
+        private const string FormattedValue = "Hello, {0}";
+        private const string FormattedMultipleKey = "PERFORM_ACTION";
+        private const string FormattedMultipleValue = "{0} is {1}";
 
         public LanguageResourcesTests()
         {
