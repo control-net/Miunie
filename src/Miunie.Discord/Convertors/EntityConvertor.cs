@@ -17,7 +17,7 @@ namespace Miunie.Discord.Convertors
         }
 
         public MiunieUser DiscordMemberToMiunieUser(DiscordMember member)
-            => _miunieUserService.GetById(member.Id);
+            => _miunieUserService.GetById(member.Id, member.Guild.Id);
 
         public MiunieChannel DiscordChannelToMiunieUser(DiscordChannel c)
         {
