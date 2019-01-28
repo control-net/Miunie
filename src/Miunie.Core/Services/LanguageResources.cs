@@ -3,7 +3,7 @@ using Miunie.Core.Storage;
 
 namespace Miunie.Core
 {
-    public class LanguageResources
+    public class LanguageResources : ILanguageResources
     {
         private IDataStorage _storage;
         private readonly string _collection = "Lang";
