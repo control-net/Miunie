@@ -10,7 +10,6 @@ namespace Miunie.Core.XUnit.Tests
     public class ListDirectoryTest
     {
         private readonly ListDirectoryService _ls;
-        private readonly MiunieChannel _testChannel;
         private const ulong TestServerId = 123456789;
         private const string TestServerName = "TestServer";
 
@@ -23,18 +22,17 @@ namespace Miunie.Core.XUnit.Tests
             );
 
             _ls = new ListDirectoryService(serversMock);
-            _testChannel = new MiunieChannel
-            {
-                GuildId = TestServerId
-            };
         }
 
         [Fact]
         public void EmptyShouldOutputRoot()
         {
             string expected = $"Data\n{TestServerName}";
-            var inputUser = new MiunieUser();
-            var actual = _ls.Of(inputUser, _testChannel);
+            var inputUser = new MiunieUser
+            {
+                GuildId = TestServerId
+            };
+            var actual = _ls.Of(inputUser);
             Assert.Equal(expected, actual);
         }
 
@@ -44,9 +42,10 @@ namespace Miunie.Core.XUnit.Tests
             const string expected = "ChannelA\nChannelB\nChannelC";
             var inputUser = new MiunieUser
             {
+                GuildId = TestServerId,
                 NavCursor = new List<ulong> { TestServerId }
             };
-            var actual = _ls.Of(inputUser, _testChannel);
+            var actual = _ls.Of(inputUser);
             Assert.Equal(expected, actual);
         }
     }

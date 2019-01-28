@@ -14,30 +14,30 @@ namespace Miunie.Core.Services
             _discordServers = discordServers;
         }
 
-        public string Of(MiunieUser user, MiunieChannel channel)
+        public string Of(MiunieUser user)
         {
             if(!user.NavCursor.Any())
             {
-                return GetRootOf(channel);
+                return GetRootOf(user);
             }
             if(user.NavCursor.Count == 1)
             {
-                return GetChannelsOf(channel);
+                return GetChannelsOf(user);
             }
 
             return string.Empty;
         }
 
-        public string GetRootOf(MiunieChannel channel)
+        public string GetRootOf(MiunieUser user)
         {
-            var serverName = _discordServers.GetServerNameById(channel.GuildId);
+            var serverName = _discordServers.GetServerNameById(user.GuildId);
             return $"Data{Separator}{serverName}";
         }
 
-        public string GetChannelsOf(MiunieChannel channel)
+        public string GetChannelsOf(MiunieUser user)
         {
             var channelNames = _discordServers
-                .GetChannelNamesFromServer(channel.GuildId);
+                .GetChannelNamesFromServer(user.GuildId);
 
             return string.Join(Separator, channelNames);
         }
