@@ -15,14 +15,16 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         public bool KeyExists(string collection, string key)
-            => storage.ContainsKey(key);
+            => storage.ContainsKey($"{collection}/{key}");
 
         public IEnumerable<T> RestoreCollection<T>(string collection)
-            => storage.ToList().Cast<T>();
+            => storage.Where(p => p.Key.StartsWith($"{collection}/"))
+                    .ToList()
+                    .Cast<T>();
 
         public T RestoreObject<T>(string collection, string key)
         {
-            var result = storage.TryGetValue(key, out var obj);
+            var result = storage.TryGetValue($"{collection}/{key}", out var obj);
             if(result)
             {
                 return (T) obj;
@@ -31,6 +33,6 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         public void StoreObject(object obj, string collection, string key)
-            => storage.TryAdd(key, obj);
+            => storage.TryAdd($"{collection}/{key}", obj);
     }
 }

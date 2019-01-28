@@ -34,7 +34,7 @@ namespace Miunie.Discord.Convertors
             }
             else
             {
-                miunieUser = _userService.GetById(user.Id);
+                miunieUser = _userService.GetById(user.Id, user.Guild.Id);
             }
             return miunieUser;
         }
