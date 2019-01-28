@@ -6,6 +6,7 @@ using Miunie.Discord;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Miunie.ConsoleApp
 {
@@ -36,11 +37,13 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ConfigurationFileEditor>()
                 .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
                 .AddSingleton<MiunieUserService>()
+                .AddSingleton<ILanguageResources, LanguageResources>()
                 .AddSingleton<IDiscord, DSharpPlusDiscord>()
                 .AddSingleton<IDiscordMessages, DSharpPlusDiscord>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IDataStorage, JsonDataStorage>()
+                .AddSingleton<Random>()
                 .BuildServiceProvider();
     }
 }

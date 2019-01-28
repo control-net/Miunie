@@ -17,13 +17,17 @@ namespace Miunie.Discord
         private DependencyCollection _dependencyCollection;
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
+        //TODO(Charly): Remove once issue #27 is fixed
+        private readonly ProfileService _profileService;
 
         public DSharpPlusDiscord(
             IBotConfiguration botConfiguration, 
-            EntityConvertor entityConvertor)
+            EntityConvertor entityConvertor,
+            ProfileService profileService)
         {
             _botConfiguration = botConfiguration;
             _entityConvertor = entityConvertor;
+            _profileService = profileService;
         }
 
         public async Task RunAsync()
@@ -42,7 +46,7 @@ namespace Miunie.Discord
             using (var builder = new DependencyCollectionBuilder())
             {
                 builder.AddInstance(_entityConvertor);
-                builder.AddInstance(new ProfileService(this));
+                builder.AddInstance(_profileService);
                 _dependencyCollection = builder.Build();
             }
         }
