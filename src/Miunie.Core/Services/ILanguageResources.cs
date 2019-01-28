@@ -1,4 +1,3 @@
-
 namespace Miunie.Core
 {
     public interface ILanguageResources
