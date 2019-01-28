@@ -14,7 +14,14 @@ namespace Miunie.Core
         }
 
         public string GetPhrase(string key)
-            => _storage.RestoreObject<string>(_collection, key);
+        {
+            var phrase =_storage.RestoreObject<string>(_collection, key);
+            if(String.IsNullOrWhiteSpace(phrase))
+            {
+                return String.Empty;
+            }
+            return phrase;
+        }
 
         public string GetFormatted(string key, params object[] objs)
         {
