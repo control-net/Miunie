@@ -7,7 +7,7 @@ using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
 {
-    public class ProfileCommand
+    public class ProfileCommand : BaseCommandModule
     {
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
