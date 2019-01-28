@@ -37,6 +37,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ConfigurationFileEditor>()
                 .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
                 .AddSingleton<MiunieUserService>()
+                .AddSingleton<ProfileService>()
                 .AddSingleton<ILanguageResources, LanguageResources>()
                 .AddSingleton<IDiscord, DSharpPlusDiscord>()
                 .AddSingleton<IDiscordMessages, DSharpPlusDiscord>()
