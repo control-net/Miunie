@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 
 
@@ -10,16 +12,17 @@ namespace Miunie.Core.XUnit.Tests
         private readonly DataStorageMock storage;
         private const string Collection = "Lang";
         private const string PhraseKey = "HELLO_WORLD";
-        private const string PhraseValue = "Hello world";
+        private string[] PhraseValue = {"Hello world"};
         private const string FormattedKey = "WELCOME_MESSAGE";
-        private const string FormattedValue = "Hello, {0}";
+        private readonly string[] FormattedValue = {"Hello, {0}", "Hey, {0}"};
         private const string FormattedMultipleKey = "PERFORM_ACTION";
-        private const string FormattedMultipleValue = "{0} is {1}";
+        private readonly string[] FormattedMultipleValue = {"{0} is {1}"};
 
         public LanguageResourcesTests()
         {
             storage = new DataStorageMock();
-            langResources = new LanguageResources(storage);
+            var rand = new Random();
+            langResources = new LanguageResources(storage, rand);
             InitializeStorage();
         }
 
@@ -38,7 +41,7 @@ namespace Miunie.Core.XUnit.Tests
         {
             var actual = langResources.GetPhrase(PhraseKey);
             var expected = PhraseValue;
-            Assert.Equal(actual, expected);
+            Assert.True(expected.Contains(actual));
         }
 
         [Fact]
@@ -46,8 +49,8 @@ namespace Miunie.Core.XUnit.Tests
         {
             string text = "Charly";
             var actual = langResources.GetFormatted(FormattedKey, text);
-            var expected = String.Format(FormattedValue, text);
-            Assert.Equal(actual, expected);
+            var expected = FormatPhrases(FormattedValue, text);
+            Assert.True(expected.Contains(actual));
         }
 
         [Fact]
@@ -55,9 +58,21 @@ namespace Miunie.Core.XUnit.Tests
         {
             string[] text = {"Charly", "TDDing"};
             var actual = langResources.GetFormatted(FormattedMultipleKey, text);
-            var expected = String.Format(FormattedMultipleValue, text);
-            Assert.Equal(actual, expected);
+            var expected = FormatPhrases(FormattedMultipleValue, text);
+            Assert.True(expected.Contains(actual));
         }
+
+        [Fact]
+        public void ShouldGetFormattedWithTooManyParameters()
+        {
+            string[] text = { "Charly", "TDDing", "extra param", "extra" };
+            var actual = langResources.GetFormatted(FormattedMultipleKey, text);
+            var expected = FormatPhrases(FormattedMultipleValue, text);
+            Assert.True(expected.Contains(actual));
+        }
+
+        private string[] FormatPhrases(string[] phrases, params string[] values)
+            => phrases.Select(p => String.Format(p, values)).ToArray();
 
         [Fact]
         public void GetPhraseShouldReturnEmptyStringIfNotFound()
