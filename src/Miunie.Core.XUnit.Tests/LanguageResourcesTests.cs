@@ -10,13 +10,14 @@ namespace Miunie.Core.XUnit.Tests
     {
         private readonly ILanguageResources langResources;
         private readonly DataStorageMock storage;
-        private const string Collection = "Lang";
+        private const string Collection = "LangResources";
+        private Dictionary<string, string[]> Phrases;
         private const string PhraseKey = "HELLO_WORLD";
-        private string[] PhraseValue = {"Hello world"};
+        private string[] PhraseValue = { "Hello world" };
         private const string FormattedKey = "WELCOME_MESSAGE";
-        private readonly string[] FormattedValue = {"Hello, {0}", "Hey, {0}"};
+        private readonly string[] FormattedValue = { "Hello, {0}", "Hey, {0}" };
         private const string FormattedMultipleKey = "PERFORM_ACTION";
-        private readonly string[] FormattedMultipleValue = {"{0} is {1}"};
+        private readonly string[] FormattedMultipleValue = { "{0} is {1}" };
 
         public LanguageResourcesTests()
         {
@@ -25,15 +26,16 @@ namespace Miunie.Core.XUnit.Tests
             langResources = new LanguageResources(storage, rand);
             InitializeStorage();
         }
-
         private void InitializeStorage()
         {
-            storage.StoreObject(PhraseValue, Collection, PhraseKey);
-            storage.StoreObject(FormattedValue, Collection, FormattedKey);
-            storage.StoreObject(
-                FormattedMultipleValue, 
-                Collection,
-                FormattedMultipleKey);
+
+            Phrases = new Dictionary<string, string[]>()
+            {
+                {PhraseKey, PhraseValue},
+                {FormattedKey, FormattedValue},
+                {FormattedMultipleKey, FormattedMultipleValue}
+            };
+            storage.StoreObject(Phrases, Collection, "PhrasesEn");
         }
         
         [Fact]
@@ -45,10 +47,30 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         [Fact]
+        public void ShouldGetTranslatedPhrase()
+        {
+            var actual = langResources.GetPhrase(PhraseKey, "En");
+            var expected = PhraseValue;
+            Assert.Contains(actual, expected);
+        }
+
+        [Fact]
         public void ShouldGetFormattedPhraseWithSingleParameter()
         {
             string text = "Charly";
             var actual = langResources.GetFormatted(FormattedKey, text);
+            var expected = FormatPhrases(FormattedValue, text);
+            Assert.Contains(actual, expected);
+        }
+
+        [Fact]
+        public void ShouldGetTranslatedFormattedPhrase()
+        {
+            string text = "Charly";
+            var actual = langResources.GetTranslatedFormatted(
+                                                FormattedKey,
+                                                "En",
+                                                text);
             var expected = FormatPhrases(FormattedValue, text);
             Assert.Contains(actual, expected);
         }
