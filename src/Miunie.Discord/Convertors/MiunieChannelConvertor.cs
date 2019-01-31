@@ -15,6 +15,7 @@ namespace Miunie.Discord.Convertors
         {
             _dcConverter = new DiscordChannelConverter();
         }
+
         public async Task<Optional<MiunieChannel>> ConvertAsync(string userInput, CommandContext context)
         {
             var result = await _dcConverter.ConvertAsync(userInput, context);
