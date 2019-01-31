@@ -28,7 +28,7 @@ namespace Miunie.ConsoleApp
             {
                 InitializeProvider();
             }
-
+            
             return provider;
         }
 
@@ -37,9 +37,13 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ConfigurationFileEditor>()
                 .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
                 .AddSingleton<MiunieUserService>()
+                .AddSingleton<ProfileService>()
                 .AddSingleton<ILanguageResources, LanguageResources>()
-                .AddSingleton<IDiscord, DSharpPlusDiscord>()
-                .AddSingleton<IDiscordMessages, DSharpPlusDiscord>()
+                .AddSingleton<DSharpPlusDiscord>()
+                .AddSingleton<IDiscord>(s =>                
+                    s.GetRequiredService<DSharpPlusDiscord>())
+                .AddSingleton<IDiscordMessages>(s =>
+                    s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IDataStorage, JsonDataStorage>()

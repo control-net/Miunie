@@ -1,34 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.Entities;
 using Miunie.Core;
 
 namespace Miunie.Discord.Convertors
 {
-    /// <summary>
-    /// This class purpose is to convert DSharpPlus entities
-    /// to Miunie entities.
-    /// </summary>
     public class EntityConvertor
     {
-        private readonly MiunieUserService _miunieUserService;
+        public MiunieChannelConvertor ChannelConvertor { get; }
+        public MiunieUserConvertor UserConvertor { get; }
 
         public EntityConvertor(MiunieUserService miunieUserService)
         {
-            _miunieUserService = miunieUserService;
+            ChannelConvertor = new MiunieChannelConvertor();
+            UserConvertor = new MiunieUserConvertor(miunieUserService);
         }
 
-        public MiunieUser DiscordMemberToMiunieUser(DiscordMember member)
-            => _miunieUserService.GetById(member.Id, member.Guild.Id);
+        public MiunieUser ConvertUser(DiscordMember m)
+            => UserConvertor.DiscordMemberToMiunieUser(m);
 
-        public MiunieChannel DiscordChannelToMiunieUser(DiscordChannel c)
-        {
-            var miunieChannel = new MiunieChannel
-            {
-                ChannelId = c.Id,
-                GuildId = c.GuildId
-            };
-
-            return miunieChannel;
-        }
+        public MiunieChannel ConvertChannel(DiscordChannel c)
+            => ChannelConvertor.FromDiscordChannel(c);
     }
 }
-

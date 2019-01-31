@@ -7,64 +7,54 @@ using Miunie.Core;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.CommandModules;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.Discord
 {
     public class DSharpPlusDiscord : IDiscord, IDiscordMessages
     {
         private DiscordClient _discordClient;
-        private CommandsNextModule _commandsNextModule;
-        private DependencyCollection _dependencyCollection;
+        private CommandsNextExtension _commandService;
+        private IServiceProvider _services;
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
-        //TODO(Charly): Remove once issue #27 is fixed
-        private readonly ProfileService _profileService;
 
         public DSharpPlusDiscord(
-            IBotConfiguration botConfiguration, 
+            IBotConfiguration botConfiguration,
             EntityConvertor entityConvertor,
-            ProfileService profileService)
+            IServiceProvider services)
         {
             _botConfiguration = botConfiguration;
+            _services = services;
             _entityConvertor = entityConvertor;
-            _profileService = profileService;
         }
 
         public async Task RunAsync()
         {
-            InitializeDependencyCollection();
-
             await InitializeDiscordClientAsync();
-
-            InitializeCommandsNextModuleAsync();
-
+            InitializeCommandService();
             await Task.Delay(-1);
-        }
-
-        private void InitializeDependencyCollection()
-        {
-            using (var builder = new DependencyCollectionBuilder())
-            {
-                builder.AddInstance(_entityConvertor);
-                builder.AddInstance(_profileService);
-                _dependencyCollection = builder.Build();
-            }
         }
 
         private async Task InitializeDiscordClientAsync()
         {
             var discordConfiguration = GetDefaultDiscordConfiguration();
-
             _discordClient = new DiscordClient(discordConfiguration);
-
             await _discordClient.ConnectAsync();
         }
 
-        private void InitializeCommandsNextModuleAsync()
+        private void InitializeCommandService()
         {
             var config = GetDefaultCommandsNextConfiguration();
-            _commandsNextModule = _discordClient.UseCommandsNext(config);
-            _commandsNextModule.RegisterCommands<ProfileCommand>();
+            _commandService = _discordClient.UseCommandsNext(config);
+            _commandService.RegisterCommands<ProfileCommand>();
+            RegisterConvertors();
+        }
+
+        private void RegisterConvertors()
+        {
+            _commandService.RegisterConverter(_entityConvertor.ChannelConvertor);
+            _commandService.RegisterConverter(_entityConvertor.UserConvertor);
         }
 
         private DiscordConfiguration GetDefaultDiscordConfiguration()
@@ -84,7 +74,7 @@ namespace Miunie.Discord
             return new CommandsNextConfiguration()
             {
                 EnableMentionPrefix = true,
-                Dependencies = _dependencyCollection
+                Services = _services
             };
         }
 
@@ -95,4 +85,3 @@ namespace Miunie.Discord
         }
     }
 }
-
