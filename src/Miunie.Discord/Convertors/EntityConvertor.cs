@@ -22,6 +22,6 @@ namespace Miunie.Discord.Convertors
             => UserConvertor.DiscordMemberToMiunieUser(m);
 
         public MiunieChannel ConvertChannel(DiscordChannel c)
-            => ChannelConvertor.DiscordChannelToMiunieChannel(c);
+            => ChannelConvertor.FromDiscordChannel(c);
     }
 }
