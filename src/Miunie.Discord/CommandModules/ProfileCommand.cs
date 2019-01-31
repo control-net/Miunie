@@ -7,7 +7,7 @@ using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
 {
-    public class ProfileCommand
+    public class ProfileCommand : BaseCommandModule
     {
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
@@ -21,15 +21,10 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("profile")]
-        public async Task ShowProfile(CommandContext ctx, DiscordMember m)
+        public async Task ShowProfile(CommandContext ctx, MiunieUser m)
         {
-            var miunieUser = _entityConvertor
-                .DiscordMemberToMiunieUser(m);
-            var miunieChannel = _entityConvertor
-                .DiscordChannelToMiunieUser(ctx.Channel);
-
-            await _profileService.ShowProfile(miunieUser, miunieChannel);
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _profileService.ShowProfile(m, channel);
         }
     }
 }
-
