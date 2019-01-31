@@ -19,11 +19,10 @@ namespace Miunie.Discord.Convertors
         public async Task<Optional<MiunieChannel>> ConvertAsync(string userInput, CommandContext context)
         {
             var result = await _dcConverter.ConvertAsync(userInput, context);
-            return DiscordChannelToMiunieChannel(result.Value);
+            return FromDiscordChannel(result.Value);
         }
 
-        public MiunieChannel DiscordChannelToMiunieChannel(
-                                                        DiscordChannel channel)
+        public MiunieChannel FromDiscordChannel(DiscordChannel channel)
         {
             MiunieChannel miunieChannel;
             if (channel is default(DiscordChannel))
