@@ -4,7 +4,7 @@
 
 * [Setting up Miunie](https://github.com/discord-bot-tutorial/Miunie/blob/master/README.md#getting-started) - _Explains how to get a development version ready._
 * [First time contributing](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) - _Free course walking you through your first contribution._
-* [Discord Server](https://discord.gg/cGhEZuk) - _Contributors get a cool role._
+* [Discord Server](https://discord.gg/cGhEZuk) - _Always someone ready to help on our Discord Server._
 * [DSharpPlus Docs](https://dsharpplus.github.io/) - _Documentation for the library we're using._
 
 ## How to submit changes
