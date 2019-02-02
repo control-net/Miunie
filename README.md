@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 
-- Your favorite IDE/Code Edior
+- Your favorite IDE/Code Editor
   - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) - Ensure you have `.NET Core cross-platform development` installed.
   - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For Visual Studio Code - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 - The GIT CLI
@@ -37,7 +37,7 @@ These instructions will get you a copy of the project up and running on your loc
   - This is going to be used to both setup and deploy the project.
 - Dotnet Core
   - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2)
-  - Sometimes Dotnet Core 2.2 wont install by default. Use the above link to download then install it.
+  - Sometimes Dotnet Core 2.2 wont install by default. Use the link above to download then install it.
 
 ## Installing
 
@@ -60,34 +60,34 @@ This is a step by step guide to get Miunie ready on your machine and ready for d
 
 ### Setting up the environment - Visual Studio Code
 
-- Goto the location on your P.C where you cloned the forked repository to. [Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
-- Click on the folder named `src` right click in the whitespace and click `Git Bash Here`. [Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
-- The Git Terminal should now open. Run the following commands in the this order.
+- Go to the location on your PC where you cloned the forked repository to. [Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
+- Click on the folder named `src` right click on the whitespace and click `Git Bash Here`. [Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
+- The Git Terminal should now be open. Run the following commands in this specific order.
   - `dotnet restore` - Restores the project dependencies & Nuget Packages.
-  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build secceeded with no warnings or errors.
-  - `dotnet test` - This runs the unit tests for the project. You should see an completed output stating the all tests passed.
-- Now we know the project was forked and cloned correctly, you can type `code .` to open Visual Studio Code in that directory and get started on your project.
+  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build succeeded with no warnings or errors.
+  - `dotnet test` - This runs the unit tests for the project. You should see a completed output stating that all tests passed.
+- Now we know that the project was forked and cloned correctly, you can type `code .` to open Visual Studio Code in that directory and get started on your project.
 
 ## Running Tests
 
-To run the unit tests already inclduded in the project folow the directions that are relevent to you.
+To run the unit tests already inclduded in the project follow the directions that are relevent to you.
 
 - Visual Studio IDE
   - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests` [Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
 - Visual Studio Code
-  - `dotnet test` - From the terminal. Ensure you're in the working directory of the bot (The one that has Miunie.sln)
+  - `dotnet test` - From the terminal. Ensure you're in the working directory of the bot (The one that has Miunie.sln).
 
 ## Deployment - TODO
 
 ## Built With
 
-- [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Platformed Used
+- [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Platform Used
 - [DsharpPlus](https://github.com/DSharpPlus/DSharpPlus) - Discord API wrapper library
 - ❤️ Love and Care 💙
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process of submitting pull requests to us.
 
 ## Versioning
 
