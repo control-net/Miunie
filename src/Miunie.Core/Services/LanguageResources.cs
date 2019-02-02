@@ -44,7 +44,6 @@ namespace Miunie.Core
         private string PickRandom(string[] collection)
         {
             if (collection is null) { return String.Empty; }
-            if (collection.Length == 1) { return collection[0]; }
             var index = _rand.Next(collection.Length);
             return collection[index];
         }
