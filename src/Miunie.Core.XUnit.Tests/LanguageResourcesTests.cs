@@ -30,7 +30,6 @@ namespace Miunie.Core.XUnit.Tests
 
         private void InitializeStorage()
         {
-
             Phrases = new Dictionary<string, string[]>()
             {
                 {PhraseKey, PhraseValue},
@@ -107,7 +106,7 @@ namespace Miunie.Core.XUnit.Tests
         public void GetFormattedShouldReturnEmptyStringIfNotFound()
         {
             var key = DateTime.Now.ToLongTimeString();
-            string[] args = {"hello", "world"};
+            string[] args = { "hello", "world" };
             var actual = langResources.GetPhrase(key, args);
             var expected = String.Empty;
             Assert.Equal(actual, expected);
