@@ -27,6 +27,7 @@ namespace Miunie.Core.XUnit.Tests
             langResources = new LanguageResources(storage, rand);
             InitializeStorage();
         }
+
         private void InitializeStorage()
         {
 
