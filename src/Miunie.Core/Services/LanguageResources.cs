@@ -1,51 +1,59 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using Miunie.Core.Storage;
+using Miunie.Core.Assertion;
 
 namespace Miunie.Core
 {
     public class LanguageResources : ILanguageResources
     {
-        private IDataStorage _storage;
+        private readonly IDataStorage _storage;
+        private readonly Random _rand;
 
-        private Random _rand;
-        private readonly string _collection = "Lang";
-        private readonly string _langKeyFormat = "Phrases{0}";
         private string _langKey = "PhrasesEn";
+        private LangResource[] _resources;
+
+        private const string Collection = "Lang";
+        private const string LangKeyFormat = "Phrases{0}";
 
         public LanguageResources(IDataStorage storage, Random rand)
         {
             _storage = storage;
             _rand = rand;
         }
+
         public void SetLanguage(string langKey)
-            => _langKey = GetLangKey(langKey);
+        {
+            _langKey = GetFormattedLangKey(langKey);
+            FetchResources();
+        }
 
         public string GetPhrase(string key, params object[] objs)
         {
-            var phrases = GetFromStorage(key);
-            var phrase = PickRandom(phrases);
+            EnsureResourcesAreLoaded();
+            var resource = GetResourceByKey(key);
+            if(resource is null) { return string.Empty; }
+            var phrase = resource.GetValue(_rand);
             return String.Format(phrase, objs);
         }
 
-        private string[] GetFromStorage(string key)
+        private void EnsureResourcesAreLoaded()
         {
-            var phrases = _storage.RestoreObject<Dictionary<string, string[]>>(
-                                                                    _collection,
-                                                                    _langKey);
-
-            phrases.TryGetValue(key, out var values);
-            return values;
+           if(_resources is null) { FetchResources(); }
+           Assert.NotNull(_resources, "Lang Resources couldn't be fetched");
         }
 
-        private string GetLangKey(string langKey)
-            => String.Format(_langKeyFormat, langKey);
-
-        private string PickRandom(string[] collection)
+        private void FetchResources()
         {
-            if (collection is null) { return String.Empty; }
-            var index = _rand.Next(collection.Length);
-            return collection[index];
+            _resources = _storage
+                .RestoreObject<LangResource[]>(Collection, _langKey);
         }
+
+        private LangResource GetResourceByKey(string key)
+            => _resources.FirstOrDefault(r => r.Key == key);
+
+        private string GetFormattedLangKey(string langKey)
+            => String.Format(LangKeyFormat, langKey);
     }
 }
+

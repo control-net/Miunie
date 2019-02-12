@@ -1,0 +1,10 @@
+[
+    {
+        "Key": "SHOW_PROFILE",
+        "Pool": [
+            "**YOUR PROFILE**\n{0}",
+            "**SECOND PHRASE**\n{0}"
+        ]
+    }
+]
+

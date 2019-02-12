@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <Content Include="Resources/Lang/PhrasesEn.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
     <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
     <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
