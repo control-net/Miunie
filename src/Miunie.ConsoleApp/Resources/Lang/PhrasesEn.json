@@ -2,8 +2,8 @@
     {
         "Key": "SHOW_PROFILE",
         "Pool": [
-            "**YOUR PROFILE**\n{0}",
-            "**SECOND PHRASE**\n{0}"
+            "**YOUR PROFILE**\nReputation: {0}",
+            "**YOUR PROFILE**\nCoolness: {0}"
         ]
     }
 ]
