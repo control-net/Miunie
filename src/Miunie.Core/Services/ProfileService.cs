@@ -18,7 +18,7 @@ namespace Miunie.Core
 
         public async Task ShowProfile(MiunieUser u, MiunieChannel c)
         {            
-            var response = _lang.GetFormatted("SHOW_PROFILE", u.Reputation);
+            var response = _lang.GetPhrase("SHOW_PROFILE", u.Reputation);
             await _discordMessages.SendMessage(response, c);
         }
     }
