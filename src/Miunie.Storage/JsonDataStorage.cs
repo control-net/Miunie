@@ -43,9 +43,11 @@ namespace Miunie.Storage
         {
             EnsureCollectionDirectoryExists(collection);
             var collectionDir = GetCollectionDirectory(collection);
-            IEnumerable<string> fileKeys = Directory.GetFiles(collectionDir).Select(Path.GetFileNameWithoutExtension);
+            IEnumerable<string> fileKeys = Directory.GetFiles(collectionDir)
+                .Select(Path.GetFileNameWithoutExtension);
 
-            return fileKeys.Select(fileKey => RestoreObject<T>(collection, fileKey));
+            return fileKeys.Select(fileKey =>
+                RestoreObject<T>(collection, fileKey));
         }
 
         public bool KeyExists(string collection, string key)
@@ -70,12 +72,14 @@ namespace Miunie.Storage
             Directory.Delete(_resourcesFolder);
         }
 
-        private string KeyToFullFileName(string key) => String.Format(FileTemplate, key);
+        private string KeyToFullFileName(string key) 
+            => String.Format(FileTemplate, key);
 
-        private string GetFullFilePath(string collection, string key) =>
-            Path.Combine(_resourcesFolder, collection, KeyToFullFileName(key));
+        private string GetFullFilePath(string collection, string key)
+            => Path.Combine(_resourcesFolder, collection, KeyToFullFileName(key));
 
-        private string GetCollectionDirectory(string collection) => Path.Combine(_resourcesFolder, collection);
+        private string GetCollectionDirectory(string collection) 
+            => Path.Combine(_resourcesFolder, collection);
 
         private void EnsureCollectionDirectoryExists(string collection)
         {
@@ -85,7 +89,10 @@ namespace Miunie.Storage
 
         private string GetOrCreateFileContent(string filePath)
         {
-            if (File.Exists(filePath)) return File.ReadAllText(filePath);
+            if (File.Exists(filePath))
+            {
+                return File.ReadAllText(filePath);
+            }
             File.WriteAllText(filePath, "");
             return "";
         }
