@@ -43,7 +43,8 @@ namespace Miunie.Storage
         {
             EnsureCollectionDirectoryExists(collection);
             var collectionDir = GetCollectionDirectory(collection);
-            IEnumerable<string> fileKeys = Directory.GetFiles(collectionDir)
+            IEnumerable<string> fileKeys = Directory
+                .GetFiles(collectionDir)
                 .Select(Path.GetFileNameWithoutExtension);
 
             return fileKeys.Select(fileKey =>
