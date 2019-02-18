@@ -14,56 +14,50 @@ namespace Miunie.Storage
 
         public JsonDataStorage()
         {
-            var resourcesDirectory = Directory
-                .CreateDirectory(_resourcesFolder);
+            Directory.CreateDirectory(_resourcesFolder);
         }
 
         public JsonDataStorage(string resourcesFolder)
         {
             _resourcesFolder = resourcesFolder;
-            Directory.CreateDirectory(_resourcesFolder);
+            Directory.CreateDirectory(resourcesFolder);
         }
 
         public void StoreObject(object obj, string collection, string key)
         {
-            var file = GetFileNameByKey(key);
-            EnsureCollectionExists(collection);
-
-            string json = JsonConvert
-                .SerializeObject(obj, Formatting.Indented);
-
-            string filePath = Path.Combine(_resourcesFolder, collection, file);
+            EnsureCollectionDirectoryExists(collection);
+            var filePath = GetFullFilePath(collection, key);
+            var json = JsonConvert.SerializeObject(obj);
             File.WriteAllText(filePath, json);
         }
 
         public T RestoreObject<T>(string collection, string key)
         {
-            var file = GetFileNameByKey(key);
-            EnsureCollectionExists(collection);
-            var filePath = String.Concat(collection, "/", file);
-            return RestoreByPath<T>(filePath);
+            EnsureCollectionDirectoryExists(collection);
+            var filePath = GetFullFilePath(collection, key);
+            var json = GetOrCreateFileContent(filePath);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         public IEnumerable<T> RestoreCollection<T>(string collection)
         {
-            EnsureCollectionExists(collection);
-            var collectionPath = Path.Combine(_resourcesFolder, collection);
-            var filePaths =  Directory.GetFiles(collectionPath);
-            var files = new HashSet<T>();
-            foreach (var filePath in filePaths)
-            {
-                var fileName = Path.GetFileName(filePath);
-                var file = RestoreObject<T>(collection, fileName);
-                files.Add(file);
-            }
-            return files;
+            EnsureCollectionDirectoryExists(collection);
+            var collectionDir = GetCollectionDirectory(collection);
+            IEnumerable<string> fileKeys = Directory.GetFiles(collectionDir).Select(Path.GetFileNameWithoutExtension);
+
+            return fileKeys.Select(fileKey => RestoreObject<T>(collection, fileKey));
+        }
+
+        public bool KeyExists(string collection, string key)
+        {
+            return File.Exists(GetFullFilePath(collection, key));
         }
 
         public void WipeData()
         {
             var directories = Directory.GetDirectories(_resourcesFolder);
 
-            foreach(var directory in directories)
+            foreach (var directory in directories)
             {
                 var files = Directory.GetFiles(directory);
                 foreach (var file in files)
@@ -76,39 +70,24 @@ namespace Miunie.Storage
             Directory.Delete(_resourcesFolder);
         }
 
-        public bool KeyExists(string collection, string key)
-        {
-            var file = GetFileNameByKey(key);
-            return LocalFileExists(String.Concat(collection, "/", file));
-        }
+        private string KeyToFullFileName(string key) => String.Format(FileTemplate, key);
 
-        private bool LocalFileExists(string file)
-        {
-            string filePath = String.Concat(_resourcesFolder, "/", file);
-            return File.Exists(filePath);
-        }
+        private string GetFullFilePath(string collection, string key) =>
+            Path.Combine(_resourcesFolder, collection, KeyToFullFileName(key));
 
-        private string GetFileNameByKey(string key)
-            => String.Format(FileTemplate, key);
+        private string GetCollectionDirectory(string collection) => Path.Combine(_resourcesFolder, collection);
 
-        private T RestoreByPath<T>(string filePath)
-        {
-            string json = GetOrCreateFileContent(filePath);
-            return JsonConvert.DeserializeObject<T>(json);
-        }
-
-        private string GetOrCreateFileContent(string path)
-        {
-            var filePath = String.Concat(_resourcesFolder, "/", path);
-            if (File.Exists(filePath)) return File.ReadAllText(filePath);
-            File.WriteAllText(filePath, "");
-            return "";
-        }
-
-        private void EnsureCollectionExists(string collection)
+        private void EnsureCollectionDirectoryExists(string collection)
         {
             var collectionDir = Path.Combine(_resourcesFolder, collection);
             Directory.CreateDirectory(collectionDir);
+        }
+
+        private string GetOrCreateFileContent(string filePath)
+        {
+            if (File.Exists(filePath)) return File.ReadAllText(filePath);
+            File.WriteAllText(filePath, "");
+            return "";
         }
     }
 }
