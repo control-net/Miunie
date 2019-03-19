@@ -45,19 +45,23 @@ These instructions cover how to get a copy of the project running on your local 
 
 ## Prerequisites
 
-- Your favorite IDE/Code Editor
+- **Your favorite IDE/Code Editor**
   - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) - Ensure you have `.NET Core cross-platform development` installed.
-  - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For Visual Studio Code - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-- The GIT CLI
+  - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For VSCode - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+  - _Any other IDE/Code Editor you might want to use..._
+- **The GIT CLI**
   - [Git Command Line Interface (CLI)](https://git-scm.com/downloads)
   - This is going to be used to both setup and deploy the project.
-- Dotnet Core
-  - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2)
-  - Sometimes Dotnet Core 2.2 wont install by default. Use the link above to download then install it.
+- **.NET Core**
+  - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) (or newer)
+
+> :warning: .NET Core does not always come with the VSC 2017 "Cross-platform dev" package.
+>
+> You can always install it yourself [here](https://dotnet.microsoft.com/download).
 
 ## Installation
 
-This is a step by step guide to get Miunie ready on your machine and ready for development.
+This is a step by step guide to get Miunie up and running on your machine.
 
 ### Getting the source
 
