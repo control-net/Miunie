@@ -89,33 +89,51 @@ This is a step by step guide to get Miunie up and running on your machine.
 - Navigate to the cloned project's directory. _Should look similar to this:_
 
 ![Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
-- Click on the folder named `src` right click on the whitespace and click `Git Bash Here`. [Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
+- Open the `src` directory, then right click on the whitespace. From the context menu select `Git Bash Here`. _Should look similar to this:
+
+![Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
 - The Git Terminal should now be open. Run the following commands in this specific order.
   - `dotnet restore` - Restores the project dependencies & Nuget Packages.
-  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build succeeded with no warnings or errors.
-  - `dotnet test` - This runs the unit tests for the project. You should see a completed output stating that all tests passed.
-- Now we know that the project was forked and cloned correctly, you can type `code .` to open Visual Studio Code in that directory and get started on your project.
+  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build succeeded with no errors.
+  - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
+- You can type `code .` to open Visual Studio Code in that directory and get started making your changes to the project.
 
 ## Running Tests
 
 To run the unit tests already inclduded in the project follow the directions that are relevent to you.
 
 - Visual Studio IDE
-  - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests` [Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
+  - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests`. _The test explorer should look similar to this:_
+  
+![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
 - Visual Studio Code
-  - `dotnet test` - From the terminal. Ensure you're in the working directory of the bot (The one that has Miunie.sln).
+  - `dotnet test [Name of any .Tests directory]` - From the terminal. Ensure you're in the `src` directory of the project.
 
 ## Deployment
+TODO
 
 ## Built With
 
 - [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Platform Used
 - [DsharpPlus](https://github.com/DSharpPlus/DSharpPlus) - Discord API wrapper library
-- ❤️ Love and Care 💙
+- 💙 Collaborative spirit
+- ❤️ Love and Care
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process of submitting pull requests to us.
+There is a number of different tasks you can help with, including non-programming ones. This is a community project that wouldn't be possible without the help of **amazing people like yourself**. <3
+
+Your contributions might include:
+- Grammar/Spelling fixes to document files (such as this README)
+- Grammar/Spelling fixes to embedded text resources Miunie uses at runtime.
+- Improving documentation
+- New features you implement
+- Feature and Bug fixes
+- Suggestions & Ideas in form of a GitHub issue
+- Reviewing Pull Requests made by other contributors
+- _And more..._
+
+If you are interested, feel free to read a more detailed [CONTRIBUTING.md guide](CONTRIBUTING.md) that will walk you through your first contribution.
 
 ## Versioning
 
@@ -134,4 +152,3 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 ## Acknowledgments
 
 - Thank you to all people who contributed, especially those coming from my Discord-BOT-Tutorial Discord Server.
-- If you're still not sure about the way to contribute, there's a [simple tutorial](https://www.youtube.com/watch?v=85s_-i4hHbM) video I made.
