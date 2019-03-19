@@ -48,6 +48,7 @@ These instructions cover how to get a copy of the project running on your local 
 - **Your favorite IDE/Code Editor**
   - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) - Ensure you have `.NET Core cross-platform development` installed.
   - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For VSCode - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+  - (recommended for GNU/Linux :penguin:) [Rider: The Cross-Platform .NET IDE](https://www.jetbrains.com/rider/) from JetBrains
   - _Any other IDE/Code Editor you might want to use..._
 - **The GIT CLI**
   - [Git Command Line Interface (CLI)](https://git-scm.com/downloads)
@@ -58,6 +59,8 @@ These instructions cover how to get a copy of the project running on your local 
 > :warning: .NET Core does not always come with the VSC 2017 "Cross-platform dev" package.
 >
 > You can always install it yourself [here](https://dotnet.microsoft.com/download).
+
+
 
 ## Installation
 
@@ -71,12 +74,17 @@ This is a step by step guide to get Miunie up and running on your machine.
 
 ### Setting up the environment - Visual Studio IDE
 
-- The root directory of the project contains Miunie.sln, this is a Visual Studio solution file and you can open it with Visual Studio (See [Prerequisites](#Prerequisites))
-- Once Visual Studio is open, you should try build the project.
-  - Either use the shortcut `F6` or goto `Build` > `Build Solution`
-- The build should complete with any erorrs. Now you can run the unit tests.
-  - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests` [Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
-- **NOTE**: You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup below if you wish.
+- The root directory of the project contains Miunie.sln, this is a solution file and you can open it with Visual Studio (See [Prerequisites](#Prerequisites))
+- Once Visual Studio is open, you should try to [build the solution](https://docs.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2017).
+  - You can do so by using the shortcut `F6` or going to `Build` > `Build Solution`.
+- If the build fails due to some kind of error, make sure to fix it before continuing with this guide.
+- [Run the unit tests](https://docs.microsoft.com/en-us/visualstudio/test/getting-started-with-unit-testing?view=vs-2017#run-unit-tests).
+  - Either use the shortcut `CTRL+R, A` or go to `Test` > `Run` > `All Tests` 
+  - Test output Example:
+  
+![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
+
+> ℹ️ You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup.
 
 ### Setting up the environment - Visual Studio Code
 
