@@ -1,26 +1,22 @@
-# Miunie
+![Miunie](https://i.imgur.com/h2PjgF6.png)
+
+<a href="https://ci.appveyor.com/project/discord-bot-tutorial/miunie">
+  <img src="https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true" alt="build status">
+</a>
+<a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors">
+  <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license">
+</a>
+<a href="https://discord.gg/cGhEZuk">
+  <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
+</a>
+<a href="https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license">
+</a>
+<a href="https://discordbots.org/bot/411505318124847114" >
+  <img src="https://discordbots.org/api/widget/status/411505318124847114.svg" alt="Community-Bot" />
+</a>
 
 [![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/0)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/0)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/1)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/1)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/2)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/2)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/3)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/3)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/4)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/4)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/5)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/5)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/6)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/6)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/7)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/7)
-
-<p align="center">
-  <a href="https://ci.appveyor.com/project/discord-bot-tutorial/miunie">
-    <img src="https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true" alt="build status">
-  </a>
-  <a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license">
-  </a>
-  <a href="https://discord.gg/cGhEZuk">
-    <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
-  </a>
-  <a href="https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license">
-  </a>
-  <a href="https://discordbots.org/bot/411505318124847114" >
-    <img src="https://discordbots.org/api/widget/status/411505318124847114.svg" alt="Community-Bot" />
-  </a>
-  
-<img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png" alt = "Main Image"></a>
-</p>
 
 ## About
 
