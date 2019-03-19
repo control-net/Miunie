@@ -19,13 +19,28 @@
 <img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png" alt = "Main Image"></a>
 </p>
 
+* [About](#about)
+* [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+        * [Getting the source](#getting-the-source)
+
 ## About
 
-You might be familiar with Community-Bot, which is a previous version of this project. This greenfield version aims to improve architecture.
+**Miunie** is a community Discord bot project.
+
+The project's purpose is to connect people interested in 
+[free and Open Source software](https://en.wikipedia.org/wiki/Free_and_open-source_software) development, the 
+[C# programming language](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29), and/or 
+[Discord's bot API](https://discordapp.com/developers/docs/intro).
+
+You might be familiar with the [Community-Bot](https://github.com/discord-bot-tutorial/Community-Discord-BOT). This project is a complete rework of Community-Bot that improves the overall architecture.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions cover how to get a copy of the project running on your local machine for development and testing purposes.
+
+> See [deployment](#deployment) for notes on how to set the project up for hosting on a dedicated machine.
 
 ## Prerequisites
 
@@ -39,7 +54,7 @@ These instructions will get you a copy of the project up and running on your loc
   - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2)
   - Sometimes Dotnet Core 2.2 wont install by default. Use the link above to download then install it.
 
-## Installing
+## Installation
 
 This is a step by step guide to get Miunie ready on your machine and ready for development.
 
