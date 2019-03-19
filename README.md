@@ -19,12 +19,6 @@
 <img src="https://cdn.discordapp.com/attachments/530332932158783488/531892114041208863/MiunieThumb.png" alt = "Main Image"></a>
 </p>
 
-* [About](#about)
-* [Getting Started](#getting-started)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-        * [Getting the source](#getting-the-source)
-
 ## About
 
 **Miunie** is a community Discord bot project.
@@ -34,13 +28,21 @@ The project's purpose is to connect people interested in
 [C# programming language](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29), and/or 
 [Discord's bot API](https://discordapp.com/developers/docs/intro).
 
-You might be familiar with the [Community-Bot](https://github.com/discord-bot-tutorial/Community-Discord-BOT). This project is a complete rework of Community-Bot that improves the overall architecture.
+> You might be familiar with the [Community-Bot](https://github.com/discord-bot-tutorial/Community-Discord-BOT). This project is a complete rework of Community-Bot that improves the overall architecture.
+
+🤠 **Want to give us a hand? (doesn't have to be by writing code)** Have this cookie 🍪 and read more about how exactly you can help in our [Contributing section](#contributing).
+
+👩‍💻 **Just looking around?** Our [getting started guide](#getting-started) can get you up and running with your local Miunie in no-time.
+
+🐛 **Found a bug?** Let us know by creating a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new). If you are hardcore and can squash the bug yourself 😩👌 create the issue first, then create a [Pull Request](https://help.github.com/en/articles/about-pull-requests).
+
+💡 **Have an idea/suggestion?** Tell us all about it by creating a new [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
 
 ## Getting Started
 
 These instructions cover how to get a copy of the project running on your local machine for development and testing purposes.
 
-> See [deployment](#deployment) for notes on how to set the project up for hosting on a dedicated machine.
+> ℹ️ Checkout our [deployment section](#deployment) for notes on how to set the project up for hosting on a dedicated machine.
 
 ## Prerequisites
 
@@ -92,7 +94,7 @@ To run the unit tests already inclduded in the project follow the directions tha
 - Visual Studio Code
   - `dotnet test` - From the terminal. Ensure you're in the working directory of the bot (The one that has Miunie.sln).
 
-## Deployment - TODO
+## Deployment
 
 ## Built With
 
