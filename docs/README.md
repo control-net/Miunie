@@ -60,8 +60,6 @@ These instructions cover how to get a copy of the project running on your local 
 >
 > You can always install it yourself [here](https://dotnet.microsoft.com/download).
 
-
-
 ## Installation
 
 This is a step by step guide to get Miunie up and running on your machine.
@@ -88,7 +86,9 @@ This is a step by step guide to get Miunie up and running on your machine.
 
 ### Setting up the environment - Visual Studio Code
 
-- Go to the location on your PC where you cloned the forked repository to. [Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
+- Navigate to the cloned project's directory. _Should look similar to this:_
+
+![Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
 - Click on the folder named `src` right click on the whitespace and click `Git Bash Here`. [Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
 - The Git Terminal should now be open. Run the following commands in this specific order.
   - `dotnet restore` - Restores the project dependencies & Nuget Packages.
