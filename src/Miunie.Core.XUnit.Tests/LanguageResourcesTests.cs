@@ -7,18 +7,18 @@ namespace Miunie.Core.XUnit.Tests
 {
     public class LanguageResourcesTests
     {
-        private readonly ILanguageResources langResources;
-        private readonly DataStorageMock storage;
+        private readonly ILanguageResources _langResources;
+        private readonly DataStorageMock _storage;
 
-        private LangResource[] Phrases;
+        private LangResource[] _phrases;
 
         private const string PhraseKey = "HELLO_WORLD";
-        private string[] PhrasesEng = { "Hello world" };
-        private string[] PhrasesEs = { "Hola mundo" };
+        private readonly string[] _phrasesEng = { "Hello world" };
+        private readonly string[] _phrasesEs = { "Hola mundo" };
 
         private const string FormattedKey = "WELCOME_MESSAGE";
-        private readonly string[] FormattedMultipleValues = { "{0} is {1}" };
-        private readonly string[] FormattedValues = {
+        private readonly string[] _formattedMultipleValues = { "{0} is {1}" };
+        private readonly string[] _formattedValues = {
             "Hello, {0}",
             "Hey, {0}"
         };
@@ -28,82 +28,82 @@ namespace Miunie.Core.XUnit.Tests
 
         public LanguageResourcesTests()
         {
-            storage = new DataStorageMock();
-            langResources = new LanguageResources(storage, new Random());
+            _storage = new DataStorageMock();
+            _langResources = new LanguageResources(_storage, new Random());
             InitializeStorage();
         }
 
         private void InitializeStorage()
         {
-            Phrases = new List<LangResource>()
+            _phrases = new List<LangResource>()
             {
                 new LangResource {
                     Key = PhraseKey,
-                    Pool = PhrasesEng
+                    Pool = _phrasesEng
                 },
                 new LangResource {
                     Key = FormattedKey,
-                    Pool = FormattedValues
+                    Pool = _formattedValues
                 },
                 new LangResource {
                     Key = FormattedMultipleKey,
-                    Pool = FormattedMultipleValues
+                    Pool = _formattedMultipleValues
                 }
             }.ToArray();
 
-            var PhrasesInEs = new List<LangResource>()
+            var phrasesInEs = new List<LangResource>()
             {
                 new LangResource {
                     Key = PhraseKey,
-                    Pool = PhrasesEs
+                    Pool = _phrasesEs
                 }
             }.ToArray();
 
-            storage.StoreObject(Phrases, Collection, "PhrasesEn");
-            storage.StoreObject(PhrasesInEs, Collection, "PhrasesEs");
+            _storage.StoreObject(_phrases, Collection, "PhrasesEn");
+            _storage.StoreObject(phrasesInEs, Collection, "PhrasesEs");
         }
 
         [Fact]
         public void ShouldGetPhrase()
         {
-            var actual = langResources.GetPhrase(PhraseKey);
-            var expected = PhrasesEng;
+            var actual = _langResources.GetPhrase(PhraseKey);
+            var expected = _phrasesEng;
             Assert.Contains(actual, expected);
         }
 
         [Fact]
         public void ShouldGetTranslatedPhrase()
         {
-            langResources.SetLanguage("Es");
-            var actual = langResources.GetPhrase(PhraseKey);
-            var expected = PhrasesEs;
+            _langResources.SetLanguage("Es");
+            var actual = _langResources.GetPhrase(PhraseKey);
+            var expected = _phrasesEs;
             Assert.Contains(actual, expected);
         }
 
         [Fact]
         public void ShouldGetFormattedPhraseWithSingleParameter()
         {
-            string text = "Charly";
-            var actual = langResources.GetPhrase(FormattedKey, text);
-            var expected = FormatPhrases(FormattedValues, text);
+            const string text = "Charly";
+            var actual = _langResources.GetPhrase(FormattedKey, text);
+            var expected = FormatPhrases(_formattedValues, text);
             Assert.Contains(actual, expected);
         }
 
         [Fact]
         public void ShouldGetFormattedPhraseWithMultipleParameters()
         {
-            string[] text = {"Charly", "TDDing"};
-            var actual = langResources.GetPhrase(FormattedMultipleKey, text);
-            var expected = FormatPhrases(FormattedMultipleValues, text);
+            object[] text = {"Charly", "TDDing"};
+            var actual = _langResources.GetPhrase(FormattedMultipleKey, text);
+            var expected = FormatPhrases(_formattedMultipleValues, text);
             Assert.Contains(actual, expected);
         }
 
         [Fact]
         public void ShouldGetFormattedWithTooManyParameters()
         {
-            string[] text = { "Charly", "TDDing", "extra param", "extra" };
-            var actual = langResources.GetPhrase(FormattedMultipleKey, text);
-            var expected = FormatPhrases(FormattedMultipleValues, text);
+            object[] text = { "Charly", "TDDing", "extra param", "extra" };
+            var actual = _langResources.GetPhrase(FormattedMultipleKey, text);
+            var expected = FormatPhrases(_formattedMultipleValues, text);
             Assert.Contains(actual, expected);
         }
 
@@ -111,7 +111,7 @@ namespace Miunie.Core.XUnit.Tests
         public void GetPhraseShouldReturnEmptyStringIfNotFound()
         {
             var key = DateTime.Now.ToLongTimeString();
-            var actual = langResources.GetPhrase(key);
+            var actual = _langResources.GetPhrase(key);
             var expected = string.Empty;
             Assert.Equal(actual, expected);
         }
@@ -120,13 +120,13 @@ namespace Miunie.Core.XUnit.Tests
         public void GetFormattedShouldReturnEmptyStringIfNotFound()
         {
             var key = DateTime.Now.ToLongTimeString();
-            string[] args = { "hello", "world" };
-            var actual = langResources.GetPhrase(key, args);
+            object[] args = { "hello", "world" };
+            var actual = _langResources.GetPhrase(key, args);
             var expected = string.Empty;
             Assert.Equal(actual, expected);
         }
 
-        private string[] FormatPhrases(string[] phrases, params string[] values)
-            => phrases.Select(p => String.Format(p, values)).ToArray();
+        private static IEnumerable<string> FormatPhrases(IEnumerable<string> phrases, params object[] values)
+            => phrases.Select(p => string.Format(p, values)).ToArray();
     }
 }

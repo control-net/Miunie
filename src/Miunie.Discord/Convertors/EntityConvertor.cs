@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.Entities;
 using Miunie.Core;
 
@@ -22,6 +18,6 @@ namespace Miunie.Discord.Convertors
             => UserConvertor.DiscordMemberToMiunieUser(m);
 
         public MiunieChannel ConvertChannel(DiscordChannel c)
-            => ChannelConvertor.FromDiscordChannel(c);
+            => MiunieChannelConvertor.FromDiscordChannel(c);
     }
 }

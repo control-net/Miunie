@@ -6,9 +6,9 @@ namespace Miunie.Core.Assertion
     {
         public static void NotNull(object obj, string message)
         {
-            if(obj is null)
+            if (obj is null)
             {
-                throw new ArgumentException(message);
+                throw new ArgumentNullException(nameof(obj), message);
             }
         }
     }

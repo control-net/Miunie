@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
 

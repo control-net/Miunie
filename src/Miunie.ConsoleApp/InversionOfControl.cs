@@ -12,29 +12,22 @@ namespace Miunie.ConsoleApp
 {
     public static class InversionOfControl
     {
-        private static ServiceProvider provider;
+        private static ServiceProvider _provider;
 
-        public static ServiceProvider Provider
-        {
-            get
-            {
-                return GetOrInitProvider();
-            }
-        }
+        public static ServiceProvider Provider => GetOrInitProvider();
 
         private static ServiceProvider GetOrInitProvider()
         {
-            if(provider is null)
+            if(_provider is null)
             {
                 InitializeProvider();
             }
 
-            return provider;
+            return _provider;
         }
 
         private static void InitializeProvider()
-            => provider = new ServiceCollection()
-                .AddSingleton<ConfigurationFileEditor>()
+            => _provider = new ServiceCollection()
                 .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
                 .AddSingleton<MiunieUserService>()
                 .AddSingleton<ProfileService>()

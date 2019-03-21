@@ -41,15 +41,15 @@ namespace Miunie.Core
            return user;
         }
 
-        public void StoreUser(MiunieUser u)
+        private void StoreUser(MiunieUser u)
             => _dataStorage.StoreObject(u,
                 GetCollectionById(u.GuildId),
                 GetKeyById(u.Id));
 
-        private string GetKeyById(ulong userId)
+        private static string GetKeyById(ulong userId)
             => string.Format(KeyFormat, userId);
 
-        private string GetCollectionById(ulong guildId)
+        private static string GetCollectionById(ulong guildId)
             => string.Format(CollectionFormat, guildId);
     }
 }

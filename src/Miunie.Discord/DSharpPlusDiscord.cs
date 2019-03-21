@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
@@ -7,7 +6,6 @@ using Miunie.Core;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.CommandModules;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.Discord
 {
@@ -15,7 +13,7 @@ namespace Miunie.Discord
     {
         private DiscordClient _discordClient;
         private CommandsNextExtension _commandService;
-        private IServiceProvider _services;
+        private readonly IServiceProvider _services;
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
 

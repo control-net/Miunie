@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Miunie.Core.Storage;
@@ -43,7 +42,7 @@ namespace Miunie.Storage
         {
             EnsureCollectionDirectoryExists(collection);
             var collectionDir = GetCollectionDirectory(collection);
-            IEnumerable<string> fileKeys = Directory
+            var fileKeys = Directory
                 .GetFiles(collectionDir)
                 .Select(Path.GetFileNameWithoutExtension);
 
@@ -73,8 +72,8 @@ namespace Miunie.Storage
             Directory.Delete(_resourcesFolder);
         }
 
-        private string KeyToFullFileName(string key) 
-            => String.Format(FileTemplate, key);
+        private static string KeyToFullFileName(string key) 
+            => string.Format(FileTemplate, key);
 
         private string GetFullFilePath(string collection, string key)
             => Path.Combine(_resourcesFolder, collection, KeyToFullFileName(key));
@@ -88,7 +87,7 @@ namespace Miunie.Storage
             Directory.CreateDirectory(collectionDir);
         }
 
-        private string GetOrCreateFileContent(string filePath)
+        private static string GetOrCreateFileContent(string filePath)
         {
             if (File.Exists(filePath))
             {

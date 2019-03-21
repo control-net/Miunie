@@ -10,4 +10,3 @@ namespace Miunie.Core.Storage
         IEnumerable<T> RestoreCollection<T>(string collection);
     }
 }
-

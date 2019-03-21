@@ -1,4 +1,3 @@
-using Miunie.Core;
 using Miunie.Core.Discord;
 using System.Linq;
 
@@ -28,13 +27,13 @@ namespace Miunie.Core.Services
             return string.Empty;
         }
 
-        public string GetRootOf(MiunieUser user)
+        private string GetRootOf(MiunieUser user)
         {
             var serverName = _discordServers.GetServerNameById(user.GuildId);
             return $"Data{Separator}{serverName}";
         }
 
-        public string GetChannelsOf(MiunieUser user)
+        private string GetChannelsOf(MiunieUser user)
         {
             var channelNames = _discordServers
                 .GetChannelNamesFromServer(user.GuildId);

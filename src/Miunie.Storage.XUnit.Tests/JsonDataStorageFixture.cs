@@ -4,12 +4,12 @@ namespace Miunie.Storage.XUnit.Tests
 {
     public class JsonDataStorageFixture : IDisposable
     {
-        public string ResourcesFolder { get; set; }
+        public string ResourcesFolder { get; }
         public JsonDataStorage Storage { get; }
 
         public JsonDataStorageFixture()
         {
-            ResourcesFolder = String.Concat(
+            ResourcesFolder = string.Concat(
                     "ResourcesTests",
                     DateTimeOffset.Now.ToUnixTimeMilliseconds()
                 );
@@ -22,4 +22,3 @@ namespace Miunie.Storage.XUnit.Tests
         }
     }
 }
-
