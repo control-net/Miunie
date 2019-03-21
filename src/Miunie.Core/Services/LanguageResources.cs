@@ -34,7 +34,7 @@ namespace Miunie.Core
             var resource = GetResourceByKey(key);
             if(resource is null) { return string.Empty; }
             var phrase = resource.GetValue(_rand);
-            return String.Format(phrase, objs);
+            return string.Format(phrase, objs);
         }
 
         private void EnsureResourcesAreLoaded()
@@ -52,8 +52,8 @@ namespace Miunie.Core
         private LangResource GetResourceByKey(string key)
             => _resources.FirstOrDefault(r => r.Key == key);
 
-        private string GetFormattedLangKey(string langKey)
-            => String.Format(LangKeyFormat, langKey);
+        private static string GetFormattedLangKey(string langKey)
+            => string.Format(LangKeyFormat, langKey);
     }
 }
 

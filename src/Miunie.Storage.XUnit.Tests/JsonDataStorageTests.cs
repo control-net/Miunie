@@ -7,24 +7,24 @@ namespace Miunie.Storage.XUnit.Tests
 {
     public class JsonDataStorageTests : IClassFixture<JsonDataStorageFixture>
     {
-        private JsonDataStorageFixture StorageFixture;
-        private readonly object ObjectToSave;
-        private readonly string ResourcesFolder;
-        private readonly string Collection;
+        private readonly JsonDataStorageFixture _storageFixture;
+        private readonly object _objectToSave;
+        private readonly string _resourcesFolder;
+        private readonly string _collection;
 
         public JsonDataStorageTests(JsonDataStorageFixture storageFixture)
         {
-            StorageFixture = storageFixture;
-            ResourcesFolder = StorageFixture.ResourcesFolder;
-            ObjectToSave = "hello";
-            Collection = "Welcome";
+            _storageFixture = storageFixture;
+            _resourcesFolder = _storageFixture.ResourcesFolder;
+            _objectToSave = "hello";
+            _collection = "Welcome";
         }
 
         [Fact]
         public void ShouldRestoreCollection()
         {
-            var objects = StorageFixture.Storage
-                .RestoreCollection<object>(Collection);
+            var objects = _storageFixture.Storage
+                .RestoreCollection<object>(_collection);
 
             Assert.NotEmpty(objects);
         }
@@ -32,9 +32,9 @@ namespace Miunie.Storage.XUnit.Tests
         [Fact]
         public void ShouldStoreObject()
         {
-            string file = GenerateFileName();
+            var file = GenerateFileName();
 
-            StorageFixture.Storage.StoreObject(ObjectToSave, Collection, file);
+            _storageFixture.Storage.StoreObject(_objectToSave, _collection, file);
 
             Assert.True(ObjectExists(file));
         }
@@ -42,11 +42,11 @@ namespace Miunie.Storage.XUnit.Tests
         [Fact]
         public void ShouldRestoreExistingObject()
         {
-            int expected = 53415;
+            const int expected = 53415;
 
             var file = SaveObjectInTestCollection(expected);
-            var actual = StorageFixture.Storage
-                .RestoreObject<int>(Collection, file);
+            var actual = _storageFixture.Storage
+                .RestoreObject<int>(_collection, file);
             
             Assert.Equal(expected, actual);
         }
@@ -54,40 +54,40 @@ namespace Miunie.Storage.XUnit.Tests
         [Fact]
         private void KeyShouldExist()
         {
-            var obj = "a object";
+            const string obj = "a object";
             var file = SaveObjectInTestCollection(obj);
 
             var expected = ObjectExists(file);
-            var actual = StorageFixture.Storage.KeyExists(Collection, file);
+            var actual = _storageFixture.Storage.KeyExists(_collection, file);
 
             Assert.True(expected == actual);
         }
 
         private bool ObjectExists(string key)
         {
-            var file = String.Concat(key, ".json");
-            var path = Path.Combine(ResourcesFolder, Collection, file);
+            var file = string.Concat(key, ".json");
+            var path = Path.Combine(_resourcesFolder, _collection, file);
             return File.Exists(path);
         }
 
         private string SaveObjectInTestCollection(object obj)
         {
-            GenerateCollectionDirectory(Collection);
-            string file = GenerateFileName();
-            string json = JsonConvert.SerializeObject(obj);
-            string filePath = Path.Combine(ResourcesFolder, Collection, file);
-            string pathWithExtension = String.Concat(filePath, ".json");
+            GenerateCollectionDirectory(_collection);
+            var file = GenerateFileName();
+            var json = JsonConvert.SerializeObject(obj);
+            var filePath = Path.Combine(_resourcesFolder, _collection, file);
+            var pathWithExtension = string.Concat(filePath, ".json");
             File.WriteAllText(pathWithExtension, json);
             return file;
         }
 
         private void GenerateCollectionDirectory(string collection)
         {
-            var collectionDir = Path.Combine(ResourcesFolder, collection);
+            var collectionDir = Path.Combine(_resourcesFolder, collection);
             Directory.CreateDirectory(collectionDir);
         }
 
-        private string GenerateFileName()
+        private static string GenerateFileName()
             => DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
     }
 }

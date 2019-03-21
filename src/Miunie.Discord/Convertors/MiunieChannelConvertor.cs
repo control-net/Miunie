@@ -3,7 +3,6 @@ using DSharpPlus.Entities;
 using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.CommandsNext;
 using System.Threading.Tasks;
-using System;
 
 namespace Miunie.Discord.Convertors
 {
@@ -22,7 +21,7 @@ namespace Miunie.Discord.Convertors
             return FromDiscordChannel(result.Value);
         }
 
-        public MiunieChannel FromDiscordChannel(DiscordChannel channel)
+        public static MiunieChannel FromDiscordChannel(DiscordChannel channel)
         {
             MiunieChannel miunieChannel;
             if (channel is default(DiscordChannel))

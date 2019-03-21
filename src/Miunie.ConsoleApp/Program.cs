@@ -1,16 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Miunie.Core;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Miunie.ConsoleApp
 {
-    class Program
+    internal static class Program
     {
-        private static async Task Main(string[] args)
+        private static async Task Main()
              => await ActivatorUtilities
                  .CreateInstance<MiunieBot>(InversionOfControl.Provider)
                  .RunAsync();
     }
 }
-
