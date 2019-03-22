@@ -125,7 +125,14 @@ To run the unit tests already inclduded in the project follow the directions tha
 ![Unit Tests window](https://i.imgur.com/xmjEbK7.png)
 
 ## Deployment
-TODO
+
+- **Deploying to a Raspberry Pi**
+
+There is a two part video tutorial explaining how to deploy a .NET Core Bot onto a Raspberry Pi.
+  - [**[PART 1]** Self-Host Discord bot on Raspberry Pi - Setting up the device](https://www.youtube.com/watch?v=JWXbIUETYY8)
+  - [**[PART 2]** Self-Host Discord bot on Raspberry Pi - Deploying the bot](https://www.youtube.com/watch?v=O6ffnRcW9DM)
+
+> ℹ️ Know a way to deploy Miunie to a different target? We'd love to see your suggestion in form of a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
 
 ## Built With
 
