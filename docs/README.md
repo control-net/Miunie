@@ -100,6 +100,8 @@ This is a step by step guide to get Miunie up and running on your machine.
 
 - Navigate to your cloned Directory and select the `Miunie.sln` file.
 
+- To build the project, navigate to `Build` > `Build Solution` or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+
 ## Running Tests
 
 To run the unit tests already inclduded in the project follow the directions that are relevent to you.
