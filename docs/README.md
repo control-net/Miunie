@@ -112,6 +112,8 @@ To run the unit tests already inclduded in the project follow the directions tha
   - Open your terminal application and navigate into the project's `src` directory.
   - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
 
+![Running Unit Tests in VSC](https://cdn.discordapp.com/attachments/495545716773617676/558704760987844609/unknown.png)
+
 - **Rider IDE**
   - To run the Project's unit tests, navigate to `Tests` > `Run Unit Tests`.
   - You should see the test results in a "Unit Tests" window:
