@@ -81,16 +81,10 @@ This is a step by step guide to get Miunie up and running on your machine.
 
 ### Setting up the environment - Visual Studio Code
 
-- Navigate to the cloned project's directory. _Should look similar to this:_
-
-![Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
-- Open the `src` directory, then right click on the whitespace. From the context menu select `Git Bash Here`. _Should look similar to this:_
-
-![Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
-- The Git Terminal should now be open. Run the following commands in this specific order.
-  - `dotnet restore` - Restores the project dependencies & Nuget Packages.
-  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build succeeded with no errors.
-- You can type `code .` to open Visual Studio Code in that directory and get started making your changes to the project.
+- Open Visual Studio Code
+- Open the project's `src` folder (the one with `Miunie.sln` in it) in Visual Studio Code.
+- To build the application, open the [Integrated Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) and type `dotnet build`.
+- You should see the build succeeded with no errors.
 
 ### Setting up the environment - Rider IDE
 
