@@ -18,6 +18,8 @@
 
 [![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/0)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/0)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/1)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/1)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/2)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/2)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/3)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/3)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/4)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/4)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/5)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/5)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/6)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/6)[![](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/images/7)](https://sourcerer.io/fame/petrspelos/discord-bot-tutorial/Miunie/links/7)
 
+💖 **Made possible by these amazing people!** 🏆
+
 ## About
 
 **Miunie** is a community Discord bot project.
@@ -76,7 +78,29 @@ This is a step by step guide to get Miunie up and running on your machine.
 - Once Visual Studio is open, you should try to [build the solution](https://docs.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2017).
   - You can do so by using the shortcut `F6` or going to `Build` > `Build Solution`.
 - If the build fails due to some kind of error, make sure to fix it before continuing with this guide.
-- [Run the unit tests](https://docs.microsoft.com/en-us/visualstudio/test/getting-started-with-unit-testing?view=vs-2017#run-unit-tests).
+
+### Setting up the environment - Visual Studio Code
+
+- Open Visual Studio Code
+- Open the project's `src` folder (the one with `Miunie.sln` in it) in Visual Studio Code.
+- To build the application, open the [Integrated Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) and type `dotnet build`.
+- You should see the build succeeded with no errors.
+
+### Setting up the environment - Rider IDE
+
+- Open Rider IDE and on the "Welcome to JetBrains Rider" screen select the "Open Solution or Project" option.
+
+![Open Solution or Project](https://i.imgur.com/BcDD0AQ.png)
+
+- Navigate to your cloned Directory and select the `Miunie.sln` file.
+
+- To build the project, navigate to `Build` > `Build Solution` or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+
+## Running Tests
+
+To run the unit tests already inclduded in the project follow the directions that are relevent to you.
+
+- **Visual Studio IDE**
   - Either use the shortcut `CTRL+R, A` or go to `Test` > `Run` > `All Tests` 
   - Test output Example:
   
@@ -84,33 +108,25 @@ This is a step by step guide to get Miunie up and running on your machine.
 
 > ℹ️ You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup.
 
-### Setting up the environment - Visual Studio Code
-
-- Navigate to the cloned project's directory. _Should look similar to this:_
-
-![Example](https://i.gyazo.com/57b6aecdb110529c7e61cee7db5b0757.png)
-- Open the `src` directory, then right click on the whitespace. From the context menu select `Git Bash Here`. _Should look similar to this:
-
-![Example](https://i.gyazo.com/57f3233e7ca1a488fbdef8a855a750f9.png)
-- The Git Terminal should now be open. Run the following commands in this specific order.
-  - `dotnet restore` - Restores the project dependencies & Nuget Packages.
-  - `dotnet build` - Ensures your clone of the repo is complete by ensuring the project builds. You should see the build succeeded with no errors.
+- **Visual Studio Code**
+  - Open your terminal application and navigate into the project's `src` directory.
   - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
-- You can type `code .` to open Visual Studio Code in that directory and get started making your changes to the project.
 
-## Running Tests
+- **Rider IDE**
+  - To run the Project's unit tests, navigate to `Tests` > `Run Unit Tests`.
+  - You should see the test results in a "Unit Tests" window:
 
-To run the unit tests already inclduded in the project follow the directions that are relevent to you.
-
-- Visual Studio IDE
-  - Either use the shortcut `CTRL+R, A` or goto `Test` > `Run` > `All Tests`. _The test explorer should look similar to this:_
-  
-![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
-- Visual Studio Code
-  - `dotnet test [Name of any .Tests directory]` - From the terminal. Ensure you're in the `src` directory of the project.
+![Unit Tests window](https://i.imgur.com/xmjEbK7.png)
 
 ## Deployment
-TODO
+
+- **Deploying to a Raspberry Pi**
+
+There is a two part video tutorial explaining how to deploy a .NET Core Bot onto a Raspberry Pi.
+  - [**[PART 1]** Self-Host Discord bot on Raspberry Pi - Setting up the device](https://www.youtube.com/watch?v=JWXbIUETYY8)
+  - [**[PART 2]** Self-Host Discord bot on Raspberry Pi - Deploying the bot](https://www.youtube.com/watch?v=O6ffnRcW9DM)
+
+> ℹ️ Know a way to deploy Miunie to a different target? We'd love to see your suggestion in form of a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
 
 ## Built With
 
