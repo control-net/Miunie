@@ -114,8 +114,6 @@ To run the unit tests already inclduded in the project follow the directions tha
 
 > ℹ️ You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup.
 
-  
-![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
 - **Visual Studio Code**
   - Open your terminal application and navigate into the project's `src` directory.
   - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
