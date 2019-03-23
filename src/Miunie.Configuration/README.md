@@ -1,20 +1,30 @@
 # Miunie Configuration
 
-This project provides needed configuration to systems like `Miunie.Discord`.
+Configuration is a way of storing your connection information, such as the bot token, for Miunie to use.
 
-## When testing locally
+The `Miunie.Configuration` C# project is where the reading of configuration is implemented. You don't need to understand it, however, to use it.
 
-You might need to change the configuration to contain a testing bot account's token while developing.
+# How does configuration work?
+
+The configuration itself is stored in an [XML](https://en.wikipedia.org/wiki/XML) file.
+
+When you compile Miunie, the project uses the configuration from `Miunie.ConsoleApp/App.config`.
+
+The project comes with a configuration template: `Miunie.ConsoleApp/App.config.template`. To use the template:
+
+- Create a copy of the `App.config.template` file.
+- Rename it to `App.config`
+- Open the file for editing
+- Find the line with `key="DiscordToken"`
+- Replace the `Your-Token-Here` placeholder with your bot's token.
+
+> ℹ️ Our repository is setup to ignore `App.config` to prevent you from accidentally committing your token into the repository.
 
 ## Where is the configuration taken from?
 
-* Any project that has an `App.config` in it, will have a config be generated after a build for it.
+* Any project that has an `App.config` in it, will have a config generated after its build.
 
-* Note that `App.config` is not included in the repository (because it contains keys). You will have to create your config file yourself.
-
-> For example:
-> 
-> If there is an `App.config` inside `Miunie.Core` the resulting build will contain `Miunie.Core.dll.config`.
+> ℹ️ If there is an `App.config` inside `Miunie.ConsoleApp` the resulting build will contain `Miunie.ConsoleApp.dll.config`.
 
 ## What should be inside the configuration file?
 
