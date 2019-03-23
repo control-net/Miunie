@@ -101,7 +101,7 @@ This is a step by step guide to get Miunie up and running on your machine.
 To run the unit tests already inclduded in the project follow the directions that are relevent to you.
 
 - **Visual Studio IDE**
-  - Either use the shortcut `CTRL+R, A` or go to `Test` > `Run` > `All Tests` 
+  - Either use the shortcut <kbd>CTRL</kbd> + <kbd>R</kbd>, <kbd>A</kbd> or go to `Test` > `Run` > `All Tests` 
   - Test output Example:
   
 ![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
