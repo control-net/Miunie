@@ -66,6 +66,10 @@ These instructions cover how to get a copy of the project running on your local 
 
 This is a step by step guide to get Miunie up and running on your machine.
 
+1. [Get the source code](#getting-the-source)
+2. [Setup your IDE](#setting-up-the-environment---visual-studio-ide)
+3. [Setup a bot token](#setting-up-a-bot-token)
+
 ### Getting the source
 
 1. [Fork The Original Repository](https://help.github.com/articles/fork-a-repo/)
@@ -95,6 +99,25 @@ This is a step by step guide to get Miunie up and running on your machine.
 - Navigate to your cloned Directory and select the `Miunie.sln` file.
 
 - To build the project, navigate to `Build` > `Build Solution` or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+
+### Setting up a bot token
+
+The bot configuration is stored as an [XML](https://en.wikipedia.org/wiki/XML) file.
+
+When you compile Miunie, the project uses the configuration from `Miunie.ConsoleApp/App.config`.
+
+> ℹ️ In a compiled project, the configuration file is called `Miunie.ConsoleApp.dll.config`.
+
+The project comes with a configuration template: `Miunie.ConsoleApp/App.config.template`. To use the template:
+
+- Create a copy of the `App.config.template` file.
+- Rename it to `App.config`
+- Open the file for editing
+- Find the line with `key="DiscordToken"`
+- Replace the `Your-Token-Here` placeholder with your bot's token.
+
+> ℹ️ Our repository is setup to ignore `App.config` to prevent you from accidentally committing your token into the repository.
+
 
 ## Running Tests
 
