@@ -1,8 +1,7 @@
-namespace Miunie.Core
+namespace Miunie.Core.Language
 {
     public interface ILanguageResources
     {
         string GetPhrase(string key, params object[] objs);
-        void SetLanguage(string langKey);
     }
 }

@@ -1,6 +1,7 @@
 using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Storage;
+using Miunie.Core.Language;
 using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
