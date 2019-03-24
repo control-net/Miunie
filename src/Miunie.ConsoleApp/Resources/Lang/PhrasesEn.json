@@ -1,0 +1,10 @@
+[
+    {
+        "Key": "SHOW_PROFILE",
+        "Pool": [
+            "**YOUR PROFILE**\nReputation: {0}",
+            "**YOUR PROFILE**\nCoolness: {0}"
+        ]
+    }
+]
+

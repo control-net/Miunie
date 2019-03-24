@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Xunit;
-using Miunie.Core;
 using Miunie.Core.Services;
-using Miunie.Core.Discord;
 
 namespace Miunie.Core.XUnit.Tests
 {

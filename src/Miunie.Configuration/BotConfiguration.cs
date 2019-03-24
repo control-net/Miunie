@@ -4,7 +4,7 @@ namespace Miunie.Configuration
 {
     public class BotConfiguration : IBotConfiguration
     {
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
 
         private const string DiscordBotTokenKey = "DiscordToken";
 
@@ -13,8 +13,6 @@ namespace Miunie.Configuration
             _config = config;
         }
 
-        public string GetBotToken()
-        => _config.GetValueFor(DiscordBotTokenKey);
+        public string GetBotToken() => _config.GetValueFor(DiscordBotTokenKey);
     }
 }
-

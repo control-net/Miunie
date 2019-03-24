@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
 
@@ -21,8 +20,12 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("profile")]
-        public async Task ShowProfile(CommandContext ctx, MiunieUser m)
+        public async Task ShowProfile(CommandContext ctx, MiunieUser m = null)
         {
+            if (m is null)
+            {
+                m = _entityConvertor.ConvertUser(ctx.Member);
+            }
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _profileService.ShowProfile(m, channel);
         }

@@ -1,4 +1,3 @@
-using System;
 using Miunie.Discord.Configuration;
 using Xunit;
 
@@ -9,19 +8,17 @@ namespace Miunie.Configuration.XUnit.Tests
         private const string ExpectedTestToken = "TestToken123";
 
         [Fact]
-        public void ShouldRetreiveBotToken()
+        public void ShouldRetrieveBotToken()
         {
             var config = CreateConfigInstance();
             var actual = config.GetBotToken();
             Assert.Equal(ExpectedTestToken, actual);
         }
 
-        private IBotConfiguration CreateConfigInstance()
+        private static IBotConfiguration CreateConfigInstance()
         {
-            var fileEditor = new ConfigurationFileEditor();
-            var configManager = new ConfigManager(fileEditor);
+            var configManager = new ConfigManager();
             return new BotConfiguration(configManager);
         }
     }
 }
-
