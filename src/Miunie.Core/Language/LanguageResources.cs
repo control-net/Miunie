@@ -3,7 +3,7 @@ using System.Linq;
 using Miunie.Core.Storage;
 using Miunie.Core.Assertion;
 
-namespace Miunie.Core
+namespace Miunie.Core.Language
 {
     public class LanguageResources : ILanguageResources
     {

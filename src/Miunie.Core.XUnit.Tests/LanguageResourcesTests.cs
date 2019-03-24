@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Xunit;
+using Miunie.Core.Language;
 
 namespace Miunie.Core.XUnit.Tests
 {

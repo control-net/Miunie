@@ -1,4 +1,4 @@
-namespace Miunie.Core
+namespace Miunie.Core.Language
 {
     public interface ILanguageResources
     {
