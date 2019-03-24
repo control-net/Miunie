@@ -13,7 +13,7 @@
 
 > Forking is a way of collecting all of the code and other good stuff we have in this repository and making a new repository off of it that is just yours to play with.
 >
-> You are fully in charge of your fork and don't need to worry about making any change you have in mind.
+> You are fully in charge of your fork and don't need to worry about making any changes you have in mind.
 
 * To fork Miunie, you will need a GitHub account.
 
@@ -23,9 +23,9 @@
 
 Once you have forked the repository, you can view it on your profile page under "Repositories".
 
-If you're not sure whether you're looking at a fork or the original, look near the top of the page where the name of the repository is.
+If you're not sure whether you're looking at a fork or at the original, look near the top of the page where the name of the repository is.
 
-You can be sure you're looking at your fork if there is your name in front of ` / Miunie` and if it has a little "Forked from..." message under it.
+You can be sure you're looking at your fork if there is your name in front of ` / Miunie` and if it has a little "Forked from..." message underneath it.
 
 ![Fork message](https://i.imgur.com/gjJHKfQ.png)
 
@@ -33,12 +33,15 @@ After your fork is ready, you are free to [clone it to your local machine](https
 
 ![Keeping forks up to date](https://i.imgur.com/9XsurGf.png)
 
-What happens when the original repository gets updated with some sweet features you'd like in your own fork? (or if you want to avoid merge conflicts)
+What happens when the original repository gets updated with some sweet features you'd like in your own fork? (this can also be done to avoid merge conflicts)
 
-You can update your own fork. For that, you will need to have it [cloned to your local machine](https://help.github.com/en/articles/cloning-a-repository).
+You can in fact get your fork up-to-date with the original repository. For that, you will need to have it [cloned to your local machine](https://help.github.com/en/articles/cloning-a-repository).
 
-Using the command line, after you navigate to your cloned repository, you can first check if you have a remote reference to the upstream (original repo).
-
+You can do it by using the command line. You will have to navigate to your cloned repository using following command:
+```
+cd <filePath>
+```
+First thing to do is checking if you have a remote reference to the upstream (=original repository). This is done by executing:
 ```
 git remote -v
 ```
@@ -55,7 +58,7 @@ To setup an upstream remote run the following command in your cloned repo:
 git remote add origin https://github.com/discord-bot-tutorial/Miunie.git
 ```
 
-Verify the origin was added by running the `git remote -v` command again.
+You can verify if the origin has been added by running git remote -v command once again.
 
 - Updating your fork
 
@@ -81,9 +84,9 @@ and you're all set!
 
 ![Merging changes](https://i.imgur.com/lDKN1Gl.png)
 
-Once your fork is head of the upstream (original repository), you have an option to create a pull request (ask for your changes to be merged into the main repository).
+Once your fork is head of the upstream (original repository), you have an option to create a pull request (request for your changes to be merge into the main repository).
 
-To create a pull request open your forked repository on GitHub. You should see a Pull request button right above the list of files.
+To create a pull request, you have to open your forked repository on GitHub. You should see a Pull request button right above the list of files.
 
 ![Pull request button](https://i.imgur.com/eXb69te.png)
 
