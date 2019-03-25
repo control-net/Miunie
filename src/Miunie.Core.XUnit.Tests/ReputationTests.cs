@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using Moq;
 using System.Threading.Tasks;
+using Miunie.Core.Providers;
 
 namespace Miunie.Core.XUnit.Tests
 {
@@ -154,9 +155,9 @@ namespace Miunie.Core.XUnit.Tests
             Assert.Equal(ExpectedRep, Drax.Reputation.Value);
         }
 
-        private Mock<IMiunieUserService> GetUserServiceMock()
+        private Mock<IMiunieUserProvider> GetUserServiceMock()
         {
-            var miunieUserServiceMock = new Mock<IMiunieUserService>();
+            var miunieUserServiceMock = new Mock<IMiunieUserProvider>();
             miunieUserServiceMock
                 .Setup(us => us.GetById(Senne.Id, TestGuildId))
                 .Returns(Senne);

@@ -1,5 +1,6 @@
 using DSharpPlus.Entities;
 using Miunie.Core;
+using Miunie.Core.Providers;
 
 namespace Miunie.Discord.Convertors
 {
@@ -8,10 +9,10 @@ namespace Miunie.Discord.Convertors
         public MiunieChannelConvertor ChannelConvertor { get; }
         public MiunieUserConvertor UserConvertor { get; }
 
-        public EntityConvertor(IMiunieUserService miunieUserService)
+        public EntityConvertor(IMiunieUserProvider miunieUserProvider)
         {
             ChannelConvertor = new MiunieChannelConvertor();
-            UserConvertor = new MiunieUserConvertor(miunieUserService);
+            UserConvertor = new MiunieUserConvertor(miunieUserProvider);
         }
 
         public MiunieUser ConvertUser(DiscordMember m)

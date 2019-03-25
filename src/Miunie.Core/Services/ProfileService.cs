@@ -1,17 +1,17 @@
-using System;
 using System.Threading.Tasks;
+using Miunie.Core.Providers;
 
 namespace Miunie.Core
 {
     public class ProfileService
     {
         private readonly IDiscordMessages _discordMessages;
-        private readonly IMiunieUserService _userService;
+        private readonly IMiunieUserProvider _userProvider;
 
-        public ProfileService(IDiscordMessages discordMessages, IMiunieUserService userService)
+        public ProfileService(IDiscordMessages discordMessages, IMiunieUserProvider userProvider)
         {
             _discordMessages = discordMessages;
-            _userService = userService;
+            _userProvider = userProvider;
         }
 
         public async Task ShowProfile(MiunieUser u, MiunieChannel c) 
@@ -28,7 +28,7 @@ namespace Miunie.Core
             if(!target.Reputation.CanGetPlusRepFrom(source.Id)) { return; }
 
             target.Reputation.GiveRepFrom(source);
-            _userService.StoreUser(target);
+            _userProvider.StoreUser(target);
             await _discordMessages.SendMessage(c, "REPUTATION_GIVEN", target.Name, source.Name);
         }
 
@@ -43,7 +43,7 @@ namespace Miunie.Core
             }        
             
             target.Reputation.RemoveRepFrom(source);
-            _userService.StoreUser(target);
+            _userProvider.StoreUser(target);
             await _discordMessages.SendMessage(c, "REPUTATION_TAKEN", source.Name, target.Name);
         }
     }
