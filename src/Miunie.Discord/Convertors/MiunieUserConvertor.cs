@@ -9,9 +9,9 @@ namespace Miunie.Discord.Convertors
     public class MiunieUserConvertor : IArgumentConverter<MiunieUser>
     {
         private readonly DiscordMemberConverter _dmConverter;
-        private readonly MiunieUserService _userService;
+        private readonly IMiunieUserService _userService;
 
-        public MiunieUserConvertor(MiunieUserService userService)
+        public MiunieUserConvertor(IMiunieUserService userService)
         {
             _dmConverter = new DiscordMemberConverter();
             _userService = userService;
@@ -23,9 +23,12 @@ namespace Miunie.Discord.Convertors
             return DiscordMemberToMiunieUser(result.Value);
         }
 
-        public MiunieUser DiscordMemberToMiunieUser(DiscordMember user) =>
-            user is default(DiscordMember) 
-                ? default(MiunieUser) 
-                : _userService.GetById(user.Id, user.Guild.Id);
+        public MiunieUser DiscordMemberToMiunieUser(DiscordMember user)
+        {
+            var mUser = _userService.GetById(user.Id, user.Guild.Id);
+            mUser.Name = user.Nickname ?? user.Username;
+            _userService.StoreUser(mUser);
+            return mUser;
+        }
     }
 }

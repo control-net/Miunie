@@ -5,6 +5,25 @@
             "**YOUR PROFILE**\nReputation: {0}",
             "**YOUR PROFILE**\nCoolness: {0}"
         ]
+    },
+    {
+        "Key": "REPUTATION_GIVEN",
+        "Pool": [
+            "**{0}** just got reputation from {1}! :trophy:",
+            "**{0}** just got reputation from {1}! :fireworks:"
+        ]
+    },
+    {
+        "Key": "REPUTATION_TAKEN",
+        "Pool": [
+            "**{0}** just had reputation removed from {1} :(",
+            "**{0}** just had reputation removed from {1} :'("
+        ]
+    },
+    {
+        "Key": "CANNOT_SELF_REP",
+        "Pool": [
+            "Sorry {0} you can't give rep to yourself!"
+        ]
     }
 ]
-

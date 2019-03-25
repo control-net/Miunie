@@ -1,7 +1,7 @@
 using Miunie.Core.Discord;
 using System.Linq;
 
-namespace Miunie.Core.Services
+namespace Miunie.Core
 {
     public class ListDirectoryService
     {

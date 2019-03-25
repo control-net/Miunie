@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using Miunie.Core;
+using Miunie.Core.Language;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.CommandModules;
@@ -16,15 +17,14 @@ namespace Miunie.Discord
         private readonly IServiceProvider _services;
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
+        private readonly ILanguageResources _lang;
 
-        public DSharpPlusDiscord(
-            IBotConfiguration botConfiguration,
-            EntityConvertor entityConvertor,
-            IServiceProvider services)
+        public DSharpPlusDiscord(IBotConfiguration botConfiguration, EntityConvertor entityConvertor, IServiceProvider services, ILanguageResources lang)
         {
             _botConfiguration = botConfiguration;
             _services = services;
             _entityConvertor = entityConvertor;
+            _lang = lang;
         }
 
         public async Task RunAsync()
@@ -76,10 +76,11 @@ namespace Miunie.Discord
             };
         }
 
-        public async Task SendMessage(string message, MiunieChannel mc)
+        public async Task SendMessage(MiunieChannel mc, string phraseKey, params object[] parameters)
         {
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
-            await channel.SendMessageAsync(message);
+            var msg = _lang.GetPhrase(phraseKey, parameters); 
+            await channel.SendMessageAsync(msg);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Miunie.Discord.Convertors
         public MiunieChannelConvertor ChannelConvertor { get; }
         public MiunieUserConvertor UserConvertor { get; }
 
-        public EntityConvertor(MiunieUserService miunieUserService)
+        public EntityConvertor(IMiunieUserService miunieUserService)
         {
             ChannelConvertor = new MiunieChannelConvertor();
             UserConvertor = new MiunieUserConvertor(miunieUserService);
