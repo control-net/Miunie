@@ -6,45 +6,43 @@ namespace Miunie.Core
     public class ProfileService
     {
         private readonly IDiscordMessages _discordMessages;
-        private readonly IMiunieUserProvider _userProvider;
+        private readonly IUserReputationProvider _reputationProvider;
 
-        public ProfileService(IDiscordMessages discordMessages, IMiunieUserProvider userProvider)
+        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider)
         {
             _discordMessages = discordMessages;
-            _userProvider = userProvider;
+            _reputationProvider = reputationProvider;
         }
 
         public async Task ShowProfile(MiunieUser u, MiunieChannel c) 
             => await _discordMessages.SendMessage(c, "SHOW_PROFILE", u.Reputation.Value);
 
-        public async Task GiveReputation(MiunieUser source, MiunieUser target, MiunieChannel c)
+        public async Task GiveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
-            if (source.Id == target.Id)
+            if (invoker.Id == target.Id)
             {
-                await _discordMessages.SendMessage(c, "CANNOT_SELF_REP", source.Name);
+                await _discordMessages.SendMessage(c, "CANNOT_SELF_REP", invoker.Name);
                 return;
             }
 
-            if(!target.Reputation.CanGetPlusRepFrom(source.Id)) { return; }
+            if (_reputationProvider.AddReputationHasTimeout(invoker, target)) { return; }
 
-            target.Reputation.GiveRepFrom(source);
-            _userProvider.StoreUser(target);
-            await _discordMessages.SendMessage(c, "REPUTATION_GIVEN", target.Name, source.Name);
+            _reputationProvider.AddReputation(invoker, target);
+            await _discordMessages.SendMessage(c, "REPUTATION_GIVEN", target.Name, invoker.Name);
         }
 
-        public async Task RemoveReputation(MiunieUser source, MiunieUser target, MiunieChannel c)
+        public async Task RemoveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
-            if (!target.Reputation.CanGetMinusRepFrom(source.Id)) { return; }
-
-            if (source.Id == target.Id)
+            if (invoker.Id == target.Id)
             {
-                await _discordMessages.SendMessage(c, "CANNOT_SELF_REP", source.Name);
+                await _discordMessages.SendMessage(c, "CANNOT_SELF_REP", invoker.Name);
                 return;                
-            }        
+            }
+
+            if (_reputationProvider.RemoveReputationHasTimeout(invoker, target)) { return; }
             
-            target.Reputation.RemoveRepFrom(source);
-            _userProvider.StoreUser(target);
-            await _discordMessages.SendMessage(c, "REPUTATION_TAKEN", source.Name, target.Name);
+            _reputationProvider.RemoveReputation(invoker, target);
+            await _discordMessages.SendMessage(c, "REPUTATION_TAKEN", invoker.Name, target.Name);
         }
     }
 }

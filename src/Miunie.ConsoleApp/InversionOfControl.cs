@@ -43,6 +43,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<IDataStorage, JsonDataStorage>()
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
+                .AddTransient<IUserReputationProvider, UserReputationProvider>()
                 .BuildServiceProvider();
     }
 }
