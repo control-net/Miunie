@@ -4,9 +4,10 @@ namespace Miunie.Core
 {
     public class MiunieUser
     {
+        public string Name { get; set; }
         public ulong GuildId { get; set; }
         public ulong Id { get; set; }
-        public long Reputation { get; set; }
+        public Reputation Reputation { get; set; }
         public List<ulong> NavCursor { get; set; }
 
         public MiunieUser()

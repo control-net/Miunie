@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using Miunie.Core;
+using Miunie.Core.Language;
 using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
@@ -10,13 +11,16 @@ namespace Miunie.Discord.CommandModules
     {
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
+        private readonly ILanguageResources _lang;
+        private readonly IDiscordMessages _discordMessages;
 
-        public ProfileCommand(
-            EntityConvertor entityConvertor,
-            ProfileService profileService)
+        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService, ILanguageResources lang,
+            IDiscordMessages discordMessages)
         {
             _entityConvertor = entityConvertor;
             _profileService = profileService;
+            _lang = lang;
+            _discordMessages = discordMessages;
         }
 
         [Command("profile")]
@@ -28,6 +32,22 @@ namespace Miunie.Discord.CommandModules
             }
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _profileService.ShowProfile(m, channel);
+        }
+
+        [Command("+rep")]
+        public async Task AddReputation(CommandContext ctx, MiunieUser m)
+        {
+            var source = _entityConvertor.ConvertUser(ctx.Member);
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _profileService.GiveReputation(source, m, channel);
+        }
+
+        [Command("-rep")]
+        public async Task RemoveReputation(CommandContext ctx, MiunieUser m)
+        {
+            var source = _entityConvertor.ConvertUser(ctx.Member);
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _profileService.RemoveReputation(source, m, channel);
         }
     }
 }

@@ -29,8 +29,7 @@ namespace Miunie.ConsoleApp
 
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
-                .AddSingleton<EntityConvertor>() // TODO (Peter): Depricate
-                .AddSingleton<MiunieUserService>()
+                .AddSingleton<EntityConvertor>()
                 .AddSingleton<ProfileService>()
                 .AddTransient<ILanguageResources, LanguageResources>()
                 .AddSingleton<DSharpPlusDiscord>()
@@ -42,7 +41,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IDataStorage, JsonDataStorage>()
                 .AddSingleton<Random>()
+                .AddSingleton<IMiunieUserService, MiunieUserService>()
                 .BuildServiceProvider();
     }
 }
-

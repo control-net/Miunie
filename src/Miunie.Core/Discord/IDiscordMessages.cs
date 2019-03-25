@@ -4,7 +4,7 @@ namespace Miunie.Core
 {
     public interface IDiscordMessages
     {
-        Task SendMessage(string message, MiunieChannel targetChannel);
+        Task SendMessage(MiunieChannel targetChannel, string phraseKey, params object[] parameters);
     }
 }
 

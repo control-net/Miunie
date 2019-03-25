@@ -2,7 +2,7 @@ using Miunie.Core.Storage;
 
 namespace Miunie.Core
 {
-    public class MiunieUserService
+    public class MiunieUserService : IMiunieUserService
     {
         private const string KeyFormat = "u{0}";
         private const string CollectionFormat = "g{0}";
@@ -23,6 +23,11 @@ namespace Miunie.Core
             return EnsureExistence(user, userId, guildId);
         }
 
+        public void StoreUser(MiunieUser u)
+            => _dataStorage.StoreObject(u,
+                GetCollectionById(u.GuildId),
+                GetKeyById(u.Id));
+
         private MiunieUser EnsureExistence(
             MiunieUser user, 
             ulong userId, 
@@ -33,18 +38,14 @@ namespace Miunie.Core
                 user = new MiunieUser
                 {
                     GuildId = guildId,
-                    Id = userId
+                    Id = userId,
+                    Reputation = new Reputation()
                 };
                 StoreUser(user);
             }
 
            return user;
         }
-
-        private void StoreUser(MiunieUser u)
-            => _dataStorage.StoreObject(u,
-                GetCollectionById(u.GuildId),
-                GetKeyById(u.Id));
 
         private static string GetKeyById(ulong userId)
             => string.Format(KeyFormat, userId);

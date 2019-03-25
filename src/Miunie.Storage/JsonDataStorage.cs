@@ -26,7 +26,11 @@ namespace Miunie.Storage
         {
             EnsureCollectionDirectoryExists(collection);
             var filePath = GetFullFilePath(collection, key);
+#if DEBUG
+            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+#else
             var json = JsonConvert.SerializeObject(obj);
+#endif
             File.WriteAllText(filePath, json);
         }
 

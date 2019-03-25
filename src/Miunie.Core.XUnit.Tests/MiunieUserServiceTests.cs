@@ -5,7 +5,7 @@ namespace Miunie.Core.XUnit.Tests
 {
     public class MiunieUserServiceTests
     {
-        private readonly MiunieUserService _service;
+        private readonly IMiunieUserService _service;
         private readonly IDataStorage _dataStorage;
 
         public MiunieUserServiceTests()
