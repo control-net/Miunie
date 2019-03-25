@@ -1,6 +1,6 @@
-﻿namespace Miunie.Core
+﻿namespace Miunie.Core.Providers
 {
-    public interface IMiunieUserService
+    public interface IMiunieUserProvider
     {
         MiunieUser GetById(ulong userId, ulong guildId);
 

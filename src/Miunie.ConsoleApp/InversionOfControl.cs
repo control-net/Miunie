@@ -8,6 +8,7 @@ using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Miunie.Core.Providers;
 
 namespace Miunie.ConsoleApp
 {
@@ -41,7 +42,8 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IDataStorage, JsonDataStorage>()
                 .AddSingleton<Random>()
-                .AddSingleton<IMiunieUserService, MiunieUserService>()
+                .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
+                .AddTransient<IUserReputationProvider, UserReputationProvider>()
                 .BuildServiceProvider();
     }
 }

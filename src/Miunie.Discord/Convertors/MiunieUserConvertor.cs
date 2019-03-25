@@ -3,18 +3,19 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.Entities;
 using Miunie.Core;
+using Miunie.Core.Providers;
 
 namespace Miunie.Discord.Convertors
 {
     public class MiunieUserConvertor : IArgumentConverter<MiunieUser>
     {
         private readonly DiscordMemberConverter _dmConverter;
-        private readonly IMiunieUserService _userService;
+        private readonly IMiunieUserProvider _userProvider;
 
-        public MiunieUserConvertor(IMiunieUserService userService)
+        public MiunieUserConvertor(IMiunieUserProvider userProvider)
         {
             _dmConverter = new DiscordMemberConverter();
-            _userService = userService;
+            _userProvider = userProvider;
         }
 
         public async Task<Optional<MiunieUser>> ConvertAsync(string userInput, CommandContext context)
@@ -25,9 +26,9 @@ namespace Miunie.Discord.Convertors
 
         public MiunieUser DiscordMemberToMiunieUser(DiscordMember user)
         {
-            var mUser = _userService.GetById(user.Id, user.Guild.Id);
+            var mUser = _userProvider.GetById(user.Id, user.Guild.Id);
             mUser.Name = user.Nickname ?? user.Username;
-            _userService.StoreUser(mUser);
+            _userProvider.StoreUser(mUser);
             return mUser;
         }
     }
