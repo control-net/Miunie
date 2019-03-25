@@ -2,18 +2,103 @@
 
 ## Important resources
 
-* [Setting up Miunie](https://github.com/discord-bot-tutorial/Miunie/blob/master/docs/README.md#installation) - _Explains how to get a development version ready._
+* [Setting up Miunie](https://github.com/discord-bot-tutorial/Miunie#getting-started) - _Explains how to get a development version ready._
 * [First time contributing](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github) - _Free course walking you through your first contribution._
 * [Discord Server](https://discord.gg/cGhEZuk) - _Always someone ready to help on our Discord Server._
 * [DSharpPlus Docs](https://dsharpplus.github.io/) - _Documentation for the library we're using._
 
 ## How to submit changes
 
-If you're new to GitHub, we highly suggest you check out the **First time contributing** link in the [Important resources](#important-resources) section. It explains everything from committing your changes to creating a pull request.
+![Forking Miunie](https://i.imgur.com/mz93Muk.png)
+
+> Forking is a way of collecting all of the code and other good stuff we have in this repository and making a new repository off of it that is just yours to play with.
+>
+> You are fully in charge of your fork and don't need to worry about making any changes you have in mind.
+
+* To fork Miunie, you will need a GitHub account.
+
+* Once you are logged in, just click the "Fork" button near the top of the page:
+
+![Fork button](https://i.imgur.com/oNViGmX.png)
+
+Once you have forked the repository, you can view it on your profile page under "Repositories".
+
+If you're not sure whether you're looking at a fork or at the original, look near the top of the page where the name of the repository is.
+
+You can be sure you're looking at your fork if there is your name in front of ` / Miunie` and if it has a little "Forked from..." message underneath it.
+
+![Fork message](https://i.imgur.com/gjJHKfQ.png)
+
+After your fork is ready, you are free to [clone it to your local machine](https://help.github.com/en/articles/cloning-a-repository).
+
+![Keeping forks up to date](https://i.imgur.com/9XsurGf.png)
+
+What happens when the original repository gets updated with some sweet features you'd like in your own fork? (this can also be done to avoid merge conflicts)
+
+You can in fact get your fork up-to-date with the original repository. For that, you will need to have it [cloned to your local machine](https://help.github.com/en/articles/cloning-a-repository).
+
+You can do it by using the command line. You will have to navigate to your cloned repository using following command:
+```
+cd <filePath>
+```
+First thing to do is checking if you have a remote reference to the upstream (=original repository). This is done by executing:
+```
+git remote -v
+```
+
+This will output a list of remote locations your repository is connected to.
+
+If you only see entries starting with `origin`, you do not have an upstream link and will need to create it.
+
+- Setting up an upstream remote
+
+To setup an upstream remote run the following command in your cloned repo:
+
+```
+git remote add origin https://github.com/discord-bot-tutorial/Miunie.git
+```
+
+You can verify if the origin has been added by running git remote -v command once again.
+
+- Updating your fork
+
+Once you have the upstream remote setup, you can fetch and merge it with:
+
+```
+git fetch upstream
+```
+
+and
+
+```
+git merge upstream/master
+```
+
+This will update your local clone with the upstream changes. Now you just need to push these changes to your fork with
+
+```
+git push
+```
+
+and you're all set!
+
+![Merging changes](https://i.imgur.com/lDKN1Gl.png)
+
+Once your fork is head of the upstream (original repository), you have an option to create a pull request (request for your changes to be merge into the main repository).
+
+To create a pull request, you have to open your forked repository on GitHub. You should see a Pull request button right above the list of files.
+
+![Pull request button](https://i.imgur.com/eXb69te.png)
+
+Once you select to create the Pull request, GitHub will show you what changes you've made, if everything looks alright, click on "Create pull request".
+
+After that, you will see a form with a pull request template. Try to fill the description as best as you can, describe what changes you've made.
+
+Once you confirm your pull request, you just need to wait for the automated tests to finish and to get your changes reviewed by a staff member.
 
 With Miunie, a pull request must pass all Unit Tests and get a code review by a staff member. Once you create it, however, don't worry, we will check it as soon as possible.
 
-**NOTE:** While we do ask that you add Unit Tests it is not a requirement. If you're not sure how to do them yourself then simply say so on the pull request.
+**NOTE:** While we do ask that you add Unit Tests it is not a requirement. If you're not sure how to do them yourself then simply say so in the pull request.
 
 :blush: We all make mistakes, so don't worry about it. After all, it's a learning experience. If you have any questions, feel free to ask on our [Discord Server](https://discord.gg/cGhEZuk) or in the appropriate comment section. Nobody is here to mock anyone and we appreciate **any contribution** no matter how small.
 
