@@ -4,7 +4,7 @@ In here you will find a list of all Miunie's commands. They come with a small de
 (these are exceptions on when the command will not properly execute. N/A means there are no exceptions.)
 Each command will also be shown with a gif of the command being executed.
 
-Items between `<>` are mandatory and items between `[]` are optional
+Items between `<>` are mandatory and items between `[]` are optional.
 
 ### Commands
 | Name   | Description | Exceptions | Gif example |
