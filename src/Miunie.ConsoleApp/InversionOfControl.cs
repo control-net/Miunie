@@ -2,6 +2,7 @@ using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Storage;
 using Miunie.Core.Language;
+using Miunie.Core.Infrastructure;
 using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
@@ -44,6 +45,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddTransient<IUserReputationProvider, UserReputationProvider>()
+                .AddTransient<IDateTime, SystemDateTime>()
                 .BuildServiceProvider();
     }
 }
