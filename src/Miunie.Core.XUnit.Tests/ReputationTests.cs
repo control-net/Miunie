@@ -1,175 +1,83 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq.Expressions;
+using Xunit;
 using Moq;
 using System.Threading.Tasks;
+using Miunie.Core.Providers;
 
 namespace Miunie.Core.XUnit.Tests
 {
     public class ReputationTests
     {
-        private const ulong TestGuildId = 420;
+        private readonly Mock<IUserReputationProvider> _repProviderMock;
+        private readonly ProfileService _profileService;
+        private readonly DummyMiunieUsers _data;
 
-        private readonly MiunieUser Senne = new MiunieUser
+        private readonly Expression<Func<MiunieUser, bool>> _hasDraxId;
+        private readonly Expression<Func<MiunieUser, bool>> _hasPeterId;
+        private readonly Expression<Func<MiunieUser, bool>> _hasSenneId;
+        
+        public ReputationTests()
         {
-            Id = 69420911,
-            GuildId = TestGuildId,
-            Name = "Senne",
-            Reputation = new Reputation()
-        };
-
-        private readonly MiunieUser Peter = new MiunieUser
-        {
-            Id = 182941761801420802,
-            GuildId = TestGuildId,
-            Name = "Peter",
-            Reputation = new Reputation()
-        };
-
-        private readonly MiunieUser Drax = new MiunieUser
-        {
-            Id = 123456789,
-            GuildId = TestGuildId,
-            Name = "Drax",
-            Reputation = new Reputation()
-        };
-
-        private readonly MiunieChannel TestChannel = new MiunieChannel();
-
-        [Fact]
-        public async Task ShouldGiveReputationAndRespond()
-        {
-            const int ExpectedRep = 1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.GiveReputation(Drax, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotGiveReputationTwice()
-        {
-            const int ExpectedRep = 1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.GiveReputation(Peter, Senne, TestChannel);
-            await sut.GiveReputation(Peter, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotGiveReputationToSelf()
-        {
-            const int ExpectedRep = 0;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.GiveReputation(Senne, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotGiveReputationTwiceToOneUser()
-        {
-            const int ExpectedRep = 1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.GiveReputation(Peter, Senne, TestChannel);
-            await sut.GiveReputation(Peter, Senne, TestChannel);
-            await sut.GiveReputation(Peter, Drax, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-            Assert.Equal(ExpectedRep, Drax.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldRemoveReputationAndRespond()
-        {
-            const int ExpectedRep = -1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.RemoveReputation(Drax, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotRemoveReputationTwice()
-        {
-            const int ExpectedRep = -1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.RemoveReputation(Peter, Senne, TestChannel);
-            await sut.RemoveReputation(Peter, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotRemoveReputationFromSelf()
-        {
-            const int ExpectedRep = 0;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.RemoveReputation(Senne, Senne, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-        }
-
-        [Fact]
-        public async Task ShouldNotRemoveReputationTwiceFromOneUser()
-        {
-            const int ExpectedRep = -1;
-            var miunieUserServiceMock = GetUserServiceMock();
-            var discordMessageMock = new Mock<IDiscordMessages>();
-            var sut = new ProfileService(discordMessageMock.Object, miunieUserServiceMock.Object);
-
-            await sut.RemoveReputation(Peter, Senne, TestChannel);
-            await sut.RemoveReputation(Peter, Senne, TestChannel);
-            await sut.RemoveReputation(Peter, Drax, TestChannel);
-
-            discordMessageMock.Verify(dm => dm.SendMessage(It.IsAny<MiunieChannel>(), It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce());
-            Assert.Equal(ExpectedRep, Senne.Reputation.Value);
-            Assert.Equal(ExpectedRep, Drax.Reputation.Value);
-        }
-
-        private Mock<IMiunieUserService> GetUserServiceMock()
-        {
-            var miunieUserServiceMock = new Mock<IMiunieUserService>();
-            miunieUserServiceMock
-                .Setup(us => us.GetById(Senne.Id, TestGuildId))
-                .Returns(Senne);
-
-            miunieUserServiceMock
-                .Setup(us => us.GetById(Peter.Id, TestGuildId))
-                .Returns(Peter);
+            _repProviderMock = new Mock<IUserReputationProvider>();
+            var discordMsgMock = new Mock<IDiscordMessages>();
+            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object);
+            _data = new DummyMiunieUsers();
             
-            miunieUserServiceMock
-                .Setup(us => us.GetById(Drax.Id, TestGuildId))
-                .Returns(Drax);
+            _hasDraxId = u => u.Id == _data.Drax.Id;
+            _hasPeterId = u => u.Id == _data.Peter.Id;
+            _hasSenneId = u => u.Id == _data.Senne.Id;
+        }
 
-            return miunieUserServiceMock;
+        [Fact]
+        public async Task ShouldCheckForTimeoutBeforeAdding()
+        {
+            await _profileService.GiveReputation(_data.Drax, _data.Senne, new MiunieChannel());
+            
+            _repProviderMock.Verify(rp => rp.AddReputationHasTimeout(
+                It.Is<MiunieUser>(_hasDraxId),
+                It.Is<MiunieUser>(_hasSenneId)
+            ), Times.Once());
+            
+            _repProviderMock.Verify(rp => rp.AddReputation(
+                It.Is<MiunieUser>(_hasDraxId),
+                It.Is<MiunieUser>(_hasSenneId)
+            ), Times.Once());
+        }
+
+        [Fact]
+        public async Task ShouldNotAddRepToSelf()
+        {
+            await _profileService.GiveReputation(_data.Senne, _data.Senne, new MiunieChannel());
+            
+            // NOTE(Peter):
+            // Makes sure the service didn't add reputation to self
+            // and that it didn't bother with checking the timeout either.
+            _repProviderMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task ShouldCheckForTimeoutBeforeRemoving()
+        {
+            await _profileService.RemoveReputation(_data.Drax, _data.Senne, new MiunieChannel());
+            
+            _repProviderMock.Verify(rp => rp.RemoveReputationHasTimeout(
+                It.Is<MiunieUser>(_hasDraxId),
+                It.Is<MiunieUser>(_hasSenneId)
+            ), Times.Once());
+            
+            _repProviderMock.Verify(rp => rp.RemoveReputation(
+                It.Is<MiunieUser>(_hasDraxId),
+                It.Is<MiunieUser>(_hasSenneId)
+            ), Times.Once());
+        }
+
+        [Fact]
+        public async Task ShouldNotRemoveRepFromSelf()
+        {
+            await _profileService.RemoveReputation(_data.Senne, _data.Senne, new MiunieChannel());
+            
+            _repProviderMock.VerifyNoOtherCalls();
         }
     }
 }

@@ -1,14 +1,14 @@
 using Miunie.Core.Storage;
 
-namespace Miunie.Core
+namespace Miunie.Core.Providers
 {
-    public class MiunieUserService : IMiunieUserService
+    public class MiunieUserProvider : IMiunieUserProvider
     {
         private const string KeyFormat = "u{0}";
         private const string CollectionFormat = "g{0}";
         private readonly IDataStorage _dataStorage;
 
-        public MiunieUserService(IDataStorage dataStorage)
+        public MiunieUserProvider(IDataStorage dataStorage)
         {
             _dataStorage = dataStorage;
         }

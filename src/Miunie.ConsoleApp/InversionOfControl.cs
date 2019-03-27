@@ -2,12 +2,14 @@ using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Storage;
 using Miunie.Core.Language;
+using Miunie.Core.Infrastructure;
 using Miunie.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Miunie.Core.Providers;
 
 namespace Miunie.ConsoleApp
 {
@@ -41,7 +43,9 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IDataStorage, JsonDataStorage>()
                 .AddSingleton<Random>()
-                .AddSingleton<IMiunieUserService, MiunieUserService>()
+                .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
+                .AddTransient<IUserReputationProvider, UserReputationProvider>()
+                .AddTransient<IDateTime, SystemDateTime>()
                 .BuildServiceProvider();
     }
 }

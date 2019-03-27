@@ -23,7 +23,8 @@
     {
         "Key": "CANNOT_SELF_REP",
         "Pool": [
-            "Sorry {0} you can't give rep to yourself!"
+            "Sorry {0}, you cannot influence your own reputation! Try influencing other people instead. :smirk:",
+            "Aww, {0}... I can't do that. If you need your reputation to change, try blackmailing others to do it for you."
         ]
     }
 ]
