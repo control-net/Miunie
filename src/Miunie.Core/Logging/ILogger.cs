@@ -5,3 +5,4 @@ namespace Miunie.Core.Logging
         void Log(string message);
     }
 }
+

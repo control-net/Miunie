@@ -11,10 +11,11 @@ namespace Miunie.Logger
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            
+
             Console.WriteLine($"{DateTime.Now:G} - {message}");
-            
+
             Console.ResetColor();
         }
     }
 }
+

@@ -6,3 +6,4 @@ namespace Miunie.Storage.XUnit.Tests.Helpers
         public int Number { get; set; }
     }
 }
+

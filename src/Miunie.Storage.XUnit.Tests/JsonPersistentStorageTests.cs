@@ -89,3 +89,4 @@ namespace Miunie.Storage.XUnit.Tests
             => a.Text == b.Text && a.Number == b.Number;
     }
 }
+
