@@ -1,22 +1,33 @@
 using System;
+using System.Data;
 using System.Linq;
+using Miunie.Core.Logging;
 using Miunie.Core.Storage;
 
 namespace Miunie.Core.Language
 {
     public class LanguageResources : ILanguageResources
     {
-        private readonly LangResource[] _resources;
+        private readonly LanguageResourceCollection _langCollection;
         private readonly Random _rand;
+        private readonly ILogger _logger;
 
         private const string Collection = "Lang";
-        private const string LangKeyFormat = "Phrases{0}";
         private const string LangKey = "PhrasesEn";
 
-        public LanguageResources(IDataStorage storage, Random rand)
+        public LanguageResources(IPersistentStorage storage, Random rand, ILogger logger)
         {
-            _resources = storage.RestoreObject<LangResource[]>(Collection, LangKey);
+            _langCollection = storage.RestoreSingle<LanguageResourceCollection>(Collection, LangKey);
             _rand = rand;
+            _logger = logger;
+            AssertNotNull(_langCollection);
+        }
+
+        private void AssertNotNull(LanguageResourceCollection langCollection)
+        {
+            if (!(langCollection is null)) { return; }
+            _logger.Log("ERROR: LanguageResources could not restore the ResourceCollection from the Persistent Storage.");
+            throw new NoNullAllowedException("LanguageResourceCollection is null.");
         }
 
         public string GetPhrase(string key, params object[] objs)
@@ -28,9 +39,6 @@ namespace Miunie.Core.Language
         }
 
         private LangResource GetResourceByKey(string key)
-            => _resources.FirstOrDefault(r => r.Key == key);
-
-        private static string GetFormattedLangKey(string langKey)
-            => string.Format(LangKeyFormat, langKey);
+            => _langCollection.Resources.FirstOrDefault(r => r.Key == key);
     }
 }

@@ -9,7 +9,9 @@ using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Miunie.Core.Logging;
 using Miunie.Core.Providers;
+using Miunie.Logger;
 
 namespace Miunie.ConsoleApp
 {
@@ -41,11 +43,12 @@ namespace Miunie.ConsoleApp
                     s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
-                .AddSingleton<IDataStorage, JsonDataStorage>()
+                .AddSingleton<IPersistentStorage, JsonPersistentStorage>()
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddTransient<IUserReputationProvider, UserReputationProvider>()
                 .AddTransient<IDateTime, SystemDateTime>()
+                .AddSingleton<ILogger, ConsoleLogger>()
                 .BuildServiceProvider();
     }
 }

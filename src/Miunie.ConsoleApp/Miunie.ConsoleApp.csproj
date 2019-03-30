@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Resources/Lang/PhrasesEn.json">
+      <Content Include="Resources/LanguageResourceCollection/Lang/PhrasesEn.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
     <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
     <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
+    <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
     <ProjectReference Include="..\Miunie.Storage\Miunie.Storage.csproj" />
   </ItemGroup>
 

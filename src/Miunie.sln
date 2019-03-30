@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Storage.XUnit.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Core.XUnit.Tests", "Miunie.Core.XUnit.Tests\Miunie.Core.XUnit.Tests.csproj", "{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Logger", "Miunie.Logger\Miunie.Logger.csproj", "{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,5 +130,17 @@ Global
 		{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}.Release|x64.Build.0 = Release|Any CPU
 		{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}.Release|x86.ActiveCfg = Release|Any CPU
 		{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}.Release|x86.Build.0 = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x64.Build.0 = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

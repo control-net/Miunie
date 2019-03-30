@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 
 namespace Miunie.Core
@@ -7,11 +8,13 @@ namespace Miunie.Core
     {
         private readonly IDiscordMessages _discordMessages;
         private readonly IUserReputationProvider _reputationProvider;
+        private readonly ILogger _logger;
 
-        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider)
+        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogger logger)
         {
             _discordMessages = discordMessages;
             _reputationProvider = reputationProvider;
+            _logger = logger;
         }
 
         public async Task ShowProfile(MiunieUser u, MiunieChannel c) 
@@ -25,7 +28,11 @@ namespace Miunie.Core
                 return;
             }
 
-            if (_reputationProvider.AddReputationHasTimeout(invoker, target)) { return; }
+            if (_reputationProvider.AddReputationHasTimeout(invoker, target))
+            {
+                _logger.Log($"User '{invoker.Name}' has a reputation timeout for User '{target.Name}', ignoring...");
+                return;
+            }
 
             _reputationProvider.AddReputation(invoker, target);
             await _discordMessages.SendMessage(c, "REPUTATION_GIVEN", target.Name, invoker.Name);

@@ -343,4 +343,4 @@ healthchecksdb
 # Miunie specific
 App.config
 src/Miunie.ConsoleApp/Resources/*
-!src/Miunie.ConsoleApp/Resources/Lang
+!src/Miunie.ConsoleApp/Resources/LanguageResourceCollection

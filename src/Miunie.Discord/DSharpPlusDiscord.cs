@@ -62,7 +62,7 @@ namespace Miunie.Discord
                 Token = _botConfiguration.GetBotToken(),
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
-                LogLevel = LogLevel.Info,
+                LogLevel = LogLevel.Debug,
                 UseInternalLogHandler = true
             };
         }
