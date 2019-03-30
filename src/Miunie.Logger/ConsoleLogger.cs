@@ -7,13 +7,13 @@ namespace Miunie.Logger
     {
         public void Log(string message)
         {
-            if (message.StartsWith("ERROR"))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
-
             Console.WriteLine($"{DateTime.Now:G} - {message}");
+        }
 
+        public void LogError(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{DateTime.Now:G} - {message}");
             Console.ResetColor();
         }
     }

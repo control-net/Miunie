@@ -57,7 +57,7 @@ namespace Miunie.Storage
             }
             catch (JsonReaderException)
             {
-                _logger.Log($"ERROR: Json Storage could not read the following file's JSON:\n{filePath}");
+                _logger.LogError($"Json Storage could not read the following file's JSON:\n{filePath}");
                 throw new Exception("Failed to parse a JSON file.");
             }
         }
@@ -65,7 +65,7 @@ namespace Miunie.Storage
         private void AssertFileExists(string filePath)
         {
             if (File.Exists(filePath)) return;
-            _logger.Log($"ERROR: Persistent storage could not find the following file:\n{filePath}");
+            _logger.LogError($"Persistent storage could not find the following file:\n{filePath}");
             throw new FileNotFoundException();
         }
     }

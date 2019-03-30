@@ -26,7 +26,7 @@ namespace Miunie.Core.Language
         private void AssertNotNull(LanguageResourceCollection langCollection)
         {
             if (!(langCollection is null)) { return; }
-            _logger.Log("ERROR: LanguageResources could not restore the ResourceCollection from the Persistent Storage.");
+            _logger.LogError("LanguageResources could not restore the ResourceCollection from the Persistent Storage.");
             throw new NoNullAllowedException("LanguageResourceCollection is null.");
         }
 
