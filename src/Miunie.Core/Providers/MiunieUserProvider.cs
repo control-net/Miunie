@@ -6,16 +6,16 @@ namespace Miunie.Core.Providers
     {
         private const string KeyFormat = "u{0}";
         private const string CollectionFormat = "g{0}";
-        private readonly IDataStorage _dataStorage;
+        private readonly IPersistentStorage _persistentStorage;
 
-        public MiunieUserProvider(IDataStorage dataStorage)
+        public MiunieUserProvider(IPersistentStorage persistentStorage)
         {
-            _dataStorage = dataStorage;
+            _persistentStorage = persistentStorage;
         }
 
         public MiunieUser GetById(ulong userId, ulong guildId)
         {
-            var user = _dataStorage.RestoreObject<MiunieUser>(
+            var user = _persistentStorage.RestoreSingle<MiunieUser>(
                 GetCollectionById(guildId),
                 GetKeyById(userId)
             );
@@ -24,7 +24,7 @@ namespace Miunie.Core.Providers
         }
 
         public void StoreUser(MiunieUser u)
-            => _dataStorage.StoreObject(u,
+            => _persistentStorage.Store(u,
                 GetCollectionById(u.GuildId),
                 GetKeyById(u.Id));
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Miunie.Core.Language;
+using Miunie.Core.Logging;
 using Miunie.Core.Storage;
 using Xunit;
 using Moq;
@@ -23,7 +24,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 .ToLangResources()
             );
             
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random());
+            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(resourceKey);
             
@@ -39,7 +40,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 .ToLangResources()
             );
             
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random());
+            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase("UnknownKey");
             
@@ -60,7 +61,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 }
                 .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random());
+            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(key, parameter);
             
@@ -82,7 +83,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 }
                 .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random());
+            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(key, parameter1, parameter2);
             
@@ -103,22 +104,24 @@ namespace Miunie.Core.XUnit.Tests.Language
                     }
                     .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random());
+            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(key, parameter, "Extra", string.Empty, null);
 
             Assert.Equal(expected, actual);
         }
 
-        private static Mock<IDataStorage> GetMockedStorageFor(IEnumerable<LangResource> resources)
+        private static Mock<IPersistentStorage> GetMockedStorageFor(IEnumerable<LangResource> resources)
         {
-            var dataStorageMock = new Mock<IDataStorage>();
+            var dataStorageMock = new Mock<IPersistentStorage>();
             dataStorageMock
-                .Setup(ds => ds.RestoreObject<LangResource[]>(
+                .Setup(ds => ds.RestoreSingle<LanguageResourceCollection>(
                     It.IsAny<string>(), 
                     It.IsAny<string>())
                 )
-                .Returns(resources.ToArray());
+                .Returns(new LanguageResourceCollection{
+                    Resources = resources.ToArray()
+                });
             return dataStorageMock;
         }
     }

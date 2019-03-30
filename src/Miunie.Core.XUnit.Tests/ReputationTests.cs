@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Xunit;
 using Moq;
 using System.Threading.Tasks;
+using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 
 namespace Miunie.Core.XUnit.Tests
@@ -21,7 +22,7 @@ namespace Miunie.Core.XUnit.Tests
         {
             _repProviderMock = new Mock<IUserReputationProvider>();
             var discordMsgMock = new Mock<IDiscordMessages>();
-            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object);
+            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogger>().Object);
             _data = new DummyMiunieUsers();
             
             _hasDraxId = u => u.Id == _data.Drax.Id;
