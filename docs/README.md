@@ -155,11 +155,7 @@ There is a two part video tutorial explaining how to deploy a .NET Core Bot onto
 
 ## Known Bugs
 
-Currently there is only one known bug. When you try to execute Miunie from the Visual Studio IDE it will not properly run.
-Both in debug and non-debug mode. Miunie will start up just normally but anything that interacts with `LanguageResources` will not properly function.
-> :information_source: The workaround for this issue is to run `Miunie.ConsoleApp` with the `dotnet run` command from a command line.
-
-If you know how to solve this issue, feel free to mention so in issue #75 or by creating a pull request to fix it. Thanks.
+There are currently no known bugs! Hooray!
 
 ## Built With
 
