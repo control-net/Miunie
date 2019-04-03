@@ -13,7 +13,7 @@ namespace Miunie.Discord.CommandModules
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
 
-        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService, ILanguageResources lang, IDiscordMessages discordMessages, ILogger logger)
+        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService, IDiscordMessages discordMessages, ILogger logger)
         {
             _entityConvertor = entityConvertor;
             _profileService = profileService;

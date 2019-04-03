@@ -1,7 +1,7 @@
 using Miunie.Configuration;
 using Miunie.Core;
+using Miunie.Core.Providers;
 using Miunie.Core.Storage;
-using Miunie.Core.Language;
 using Miunie.Core.Infrastructure;
 using Miunie.Storage;
 using Miunie.Discord;
@@ -10,7 +10,6 @@ using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Miunie.Core.Logging;
-using Miunie.Core.Providers;
 using Miunie.Logger;
 
 namespace Miunie.ConsoleApp
@@ -35,7 +34,7 @@ namespace Miunie.ConsoleApp
             => _provider = new ServiceCollection()
                 .AddSingleton<EntityConvertor>()
                 .AddSingleton<ProfileService>()
-                .AddTransient<ILanguageResources, LanguageResources>()
+                .AddTransient<ILanguageProvider, LanguageProvider>()
                 .AddSingleton<DSharpPlusDiscord>()
                 .AddSingleton<IDiscord>(s =>
                     s.GetRequiredService<DSharpPlusDiscord>())
