@@ -1,38 +1,45 @@
 {
-    "Resources": 
-        [
-            {
-                "Key": "SHOW_PROFILE",
-                "Pool": [
-                    "**YOUR AWESOME PROFILE**\n{0}",
-                    "**YOUR COOL PROFILE**\n{0}",
-                    "**YOUR MAGNIFICENT PROFILE**\n{0}"
-                ]
-            },
-            {
-                "Key": "REPUTATION_GIVEN",
-                "Pool": [
-                    "**{0}** just got reputation from {1}! :trophy:",
-                    "**{0}** just got reputation from {1}! :fireworks:",
-                    "**{0}** just got reputation from {1}! :tada:"
-                ]
-            },
-            {
-                "Key": "REPUTATION_TAKEN",
-                "Pool": [
-                    "**{0}** just had reputation removed from {1} :(",
-                    "**{0}** just had reputation removed from {1} :'(",
-                    "**{0}** just had reputation removed from {1} :sob:"
-                ]
-            },
-            {
-                "Key": "CANNOT_SELF_REP",
-                "Pool": [
-                    "Sorry {0}, you cannot influence your own reputation! Try influencing other people instead. :smirk:",
-                    "Aww, {0}... I can't do that. If you need your reputation to change, try blackmailing others to do it for you.",
-                    "Hey {0}, did you really think you could influence yourself? Get some friends to do that for you.",
-                    "Did {0} just try to influence someone that isn't me! He tried doing it on himself? Geez."
-                ]
-            }
-        ]
+  "Resources": [
+    {
+      "Key": "SHOW_PROFILE",
+      "Pool": [
+        "**YOUR AWESOME PROFILE**\n{0}",
+        "**YOUR COOL PROFILE**\n{0}",
+        "**YOUR MAGNIFICENT PROFILE**\n{0}"
+      ]
+    },
+    {
+      "Key": "SHOW_GUILD_PROFILE",
+      "Pool": [
+        "**THIS AWESOME SERVER**\n{0}",
+        "**THIS COOL SERVER**\n{0}",
+        "**THIS MAGNIFICENT SERVER**\n{0}"
+      ]
+    },
+    {
+      "Key": "REPUTATION_GIVEN",
+      "Pool": [
+        "**{0}** just got reputation from {1}! :trophy:",
+        "**{0}** just got reputation from {1}! :fireworks:",
+        "**{0}** just got reputation from {1}! :tada:"
+      ]
+    },
+    {
+      "Key": "REPUTATION_TAKEN",
+      "Pool": [
+        "**{0}** just had reputation removed from {1} :(",
+        "**{0}** just had reputation removed from {1} :'(",
+        "**{0}** just had reputation removed from {1} :sob:"
+      ]
+    },
+    {
+      "Key": "CANNOT_SELF_REP",
+      "Pool": [
+        "Sorry {0}, you cannot influence your own reputation! Try influencing other people instead. :smirk:",
+        "Aww, {0}... I can't do that. If you need your reputation to change, try blackmailing others to do it for you.",
+        "Hey {0}, did you really think you could influence yourself? Get some friends to do that for you.",
+        "Did {0} just try to influence someone that isn't me! He tried doing it on himself? Geez."
+      ]
+    }
+  ]
 }

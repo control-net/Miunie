@@ -44,5 +44,13 @@ namespace Miunie.Discord.CommandModules
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _profileService.RemoveReputation(source, m, channel);
         }
+
+        [Command("guild")]
+        public async Task ShowGuildInfo(CommandContext ctx)
+        {
+            var guild = _entityConvertor.ConvertGuild(ctx.Guild);
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _profileService.ShowGuildProfile(guild, channel);
+        }
     }
 }

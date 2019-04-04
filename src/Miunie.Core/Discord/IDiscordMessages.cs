@@ -1,4 +1,4 @@
-using Miunie.Core.Entities;
+using Miunie.Core;
 using System.Threading.Tasks;
 
 namespace Miunie.Core

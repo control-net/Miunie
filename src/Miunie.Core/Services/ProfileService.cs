@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
-using Miunie.Core.Entities;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
+using System.Threading.Tasks;
 
 namespace Miunie.Core
 {
@@ -52,5 +51,8 @@ namespace Miunie.Core
             _reputationProvider.RemoveReputation(invoker, target);
             await _discordMessages.SendMessage(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);
         }
+
+        public async Task ShowGuildProfile(MiunieGuild g, MiunieChannel c)
+            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_GUILD_PROFILE, g);
     }
 }

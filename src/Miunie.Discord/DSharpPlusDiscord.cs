@@ -7,7 +7,6 @@ using Miunie.Core.Providers;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.CommandModules;
-using Miunie.Core.Entities;
 
 namespace Miunie.Discord
 {
