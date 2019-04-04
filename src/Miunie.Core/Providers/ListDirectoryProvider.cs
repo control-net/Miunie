@@ -1,14 +1,14 @@
-using Miunie.Core.Discord;
+﻿using Miunie.Core.Discord;
 using System.Linq;
 
-namespace Miunie.Core
+namespace Miunie.Core.Providers
 {
-    public class ListDirectoryService
+    public class ListDirectoryProvider : IListDirectoryProvider
     {
         private readonly IDiscordServers _discordServers;
         private const string Separator = "\n";
 
-        public ListDirectoryService(IDiscordServers discordServers)
+        public ListDirectoryProvider(IDiscordServers discordServers)
         {
             _discordServers = discordServers;
         }
@@ -42,4 +42,3 @@ namespace Miunie.Core
         }
     }
 }
-
