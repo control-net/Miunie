@@ -48,6 +48,7 @@ namespace Miunie.ConsoleApp
                 .AddTransient<IUserReputationProvider, UserReputationProvider>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<ILogger, ConsoleLogger>()
+                .AddTransient<IListDirectoryProvider, ListDirectoryProvider>()
                 .BuildServiceProvider();
     }
 }
