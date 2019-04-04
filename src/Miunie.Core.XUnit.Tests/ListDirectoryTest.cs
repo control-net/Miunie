@@ -52,4 +52,3 @@ namespace Miunie.Core.XUnit.Tests
         }
     }
 }
-
