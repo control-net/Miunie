@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using Miunie.Core;
-using Miunie.Core.Language;
 using Miunie.Core.Logging;
 using Miunie.Discord.Convertors;
 

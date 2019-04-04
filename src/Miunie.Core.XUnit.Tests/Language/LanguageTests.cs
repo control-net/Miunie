@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Miunie.Core.Language;
 using Miunie.Core.Logging;
 using Miunie.Core.Storage;
 using Xunit;
 using Moq;
+using Miunie.Core.Providers;
 
 namespace Miunie.Core.XUnit.Tests.Language
 {
     public class LanguageTests
     {
+        private const string Key = "TestKey";
+
         [Fact]
         public void ShouldReturnSimplePhrase()
         {
@@ -24,7 +26,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 .ToLangResources()
             );
 
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
+            var langResources = new LanguageProvider(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(resourceKey);
 
@@ -40,7 +42,7 @@ namespace Miunie.Core.XUnit.Tests.Language
                 .ToLangResources()
             );
 
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
+            var langResources = new LanguageProvider(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase("UnknownKey");
 
@@ -50,20 +52,19 @@ namespace Miunie.Core.XUnit.Tests.Language
         [Fact]
         public void ShouldFormatResult()
         {
-            const string key = "TestKey";
             const string template = "Hello, {0}!";
             const string parameter = "WORLD";
             const string expected = "Hello, WORLD!";
             var dataStorageMock = GetMockedStorageFor(
                 new Dictionary<string, string>
                 {
-                    { key, template }
+                    { Key, template }
                 }
                 .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
+            var langResources = new LanguageProvider(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
-            var actual = langResources.GetPhrase(key, parameter);
+            var actual = langResources.GetPhrase(Key, parameter);
 
             Assert.Equal(expected, actual);
         }
@@ -71,7 +72,6 @@ namespace Miunie.Core.XUnit.Tests.Language
         [Fact]
         public void ShouldFormatMultiple()
         {
-            const string key = "TestKey";
             const string template = "{0}, {1}!";
             const string parameter1 = "Hello";
             const string parameter2 = "WORLD";
@@ -79,13 +79,13 @@ namespace Miunie.Core.XUnit.Tests.Language
             var dataStorageMock = GetMockedStorageFor(
                 new Dictionary<string, string>
                 {
-                    { key, template }
+                    { Key, template }
                 }
                 .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
+            var langResources = new LanguageProvider(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
-            var actual = langResources.GetPhrase(key, parameter1, parameter2);
+            var actual = langResources.GetPhrase(Key, parameter1, parameter2);
 
             Assert.Equal(expected, actual);
         }
@@ -93,20 +93,19 @@ namespace Miunie.Core.XUnit.Tests.Language
         [Fact]
         public void ShouldIgnoreExtraParameters()
         {
-            const string key = "TestKey";
             const string template = "Hello, {0}!";
             const string parameter = "WORLD";
             const string expected = "Hello, WORLD!";
             var dataStorageMock = GetMockedStorageFor(
                 new Dictionary<string, string>
                     {
-                        {key, template}
+                        { Key, template }
                     }
                     .ToLangResources()
             );
-            var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
+            var langResources = new LanguageProvider(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
-            var actual = langResources.GetPhrase(key, parameter, "Extra", string.Empty, null);
+            var actual = langResources.GetPhrase(Key, parameter, "Extra", string.Empty, null);
 
             Assert.Equal(expected, actual);
         }
