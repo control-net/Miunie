@@ -10,8 +10,8 @@ namespace Miunie.Core.XUnit.Tests
         private readonly string[] _returnedChannelNames;
 
         public DiscordServersMock(
-                ulong acceptedId, 
-                string returnedName, 
+                ulong acceptedId,
+                string returnedName,
                 string[] returnedChannelNames)
         {
             _acceptedId = acceptedId;

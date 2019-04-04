@@ -68,7 +68,7 @@ namespace Miunie.Storage.XUnit.Tests.Helpers
 
         private void GenerateTestFiles()
         {
-            foreach(var pair in testKeyDataPairs)
+            foreach (var pair in testKeyDataPairs)
             {
                 GenerateJsonFileFor(pair.Value, pair.Key);
             }
@@ -89,7 +89,7 @@ namespace Miunie.Storage.XUnit.Tests.Helpers
             => Path.Combine(DummyDataPath, $"{key}.json");
 
         private void EnsurePathExists(string path)
-            => Directory.CreateDirectory(Path.GetDirectoryName(path));    
+            => Directory.CreateDirectory(Path.GetDirectoryName(path));
     }
 }
 

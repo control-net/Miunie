@@ -29,11 +29,11 @@ namespace Miunie.Core.Providers
                 GetKeyById(u.Id));
 
         private MiunieUser EnsureExistence(
-            MiunieUser user, 
-            ulong userId, 
+            MiunieUser user,
+            ulong userId,
             ulong guildId)
         {
-            if(user is null)
+            if (user is null)
             {
                 user = new MiunieUser
                 {
@@ -44,7 +44,7 @@ namespace Miunie.Core.Providers
                 StoreUser(user);
             }
 
-           return user;
+            return user;
         }
 
         private static string GetKeyById(ulong userId)

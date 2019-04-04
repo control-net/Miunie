@@ -9,7 +9,7 @@ namespace Miunie.Core.XUnit.Tests.Language
             => res.Select(r => new LangResource
             {
                 Key = r.Key,
-                Pool = new[] {r.Value}
+                Pool = new[] { r.Value }
             }).ToArray();
     }
 }

@@ -22,7 +22,7 @@ namespace Miunie.ConsoleApp
 
         private static ServiceProvider GetOrInitProvider()
         {
-            if(_provider is null)
+            if (_provider is null)
             {
                 InitializeProvider();
             }
