@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Miunie.Discord.Convertors
 {
-    public class MiunieUserConvertor : IArgumentConverter<MiunieUser>
+    public class MiunieUserConverter : IArgumentConverter<MiunieUser>
     {
         private readonly DiscordMemberConverter _dmConverter;
         private readonly IMiunieUserProvider _userProvider;
 
-        public MiunieUserConvertor(IMiunieUserProvider userProvider)
+        public MiunieUserConverter(IMiunieUserProvider userProvider)
         {
             _dmConverter = new DiscordMemberConverter();
             _userProvider = userProvider;
@@ -31,16 +31,9 @@ namespace Miunie.Discord.Convertors
             mUser.Name = user.Nickname ?? user.Username;
             mUser.JoinedAt = user.JoinedAt.UtcDateTime;
             mUser.IsBot = user.IsBot;
-            mUser.Roles = user.Roles.Select(DiscordRoleToMiunieRole);
+            mUser.Roles = user.Roles.Select(r => r.DiscordRoleToMiunieRole());
             _userProvider.StoreUser(mUser);
             return mUser;
         }
-
-        private MiunieRole DiscordRoleToMiunieRole(DiscordRole role)
-            => new MiunieRole
-            {
-                Id = role.Id,
-                Name = role.Name
-            };
     }
 }

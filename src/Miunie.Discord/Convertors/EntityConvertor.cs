@@ -7,12 +7,14 @@ namespace Miunie.Discord.Convertors
     public class EntityConvertor
     {
         public MiunieChannelConvertor ChannelConvertor { get; }
-        public MiunieUserConvertor UserConvertor { get; }
+        public MiunieUserConverter UserConvertor { get; }
+        public MiunieGuildConvertor GuildConvertor { get; }
 
         public EntityConvertor(IMiunieUserProvider miunieUserProvider)
         {
             ChannelConvertor = new MiunieChannelConvertor();
-            UserConvertor = new MiunieUserConvertor(miunieUserProvider);
+            UserConvertor = new MiunieUserConverter(miunieUserProvider);
+            GuildConvertor = new MiunieGuildConvertor();
         }
 
         public MiunieUser ConvertUser(DiscordMember m)
@@ -20,5 +22,8 @@ namespace Miunie.Discord.Convertors
 
         public MiunieChannel ConvertChannel(DiscordChannel c)
             => MiunieChannelConvertor.FromDiscordChannel(c);
+
+        internal MiunieGuild ConvertGuild(DiscordGuild g)
+            => GuildConvertor.DiscordGuildToMiunieGuild(g);
     }
 }
