@@ -18,7 +18,7 @@ namespace Miunie.Core
         }
 
         public async Task ShowProfile(MiunieUser u, MiunieChannel c) 
-            => await _discordMessages.SendMessage(c, "SHOW_PROFILE", u.Reputation.Value);
+            => await _discordMessages.SendMessage(c, "SHOW_PROFILE", u);
 
         public async Task GiveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
@@ -43,7 +43,7 @@ namespace Miunie.Core
             if (invoker.Id == target.Id)
             {
                 await _discordMessages.SendMessage(c, "CANNOT_SELF_REP", invoker.Name);
-                return;                
+                return;
             }
 
             if (_reputationProvider.RemoveReputationHasTimeout(invoker, target)) { return; }

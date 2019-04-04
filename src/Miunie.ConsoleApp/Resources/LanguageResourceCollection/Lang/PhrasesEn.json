@@ -4,8 +4,8 @@
             {
                 "Key": "SHOW_PROFILE",
                 "Pool": [
-                    "**YOUR PROFILE**\nReputation: {0}",
-                    "**YOUR PROFILE**\nCoolness: {0}"
+                    "**YOUR AWESOME PROFILE**\n{0}",
+                    "**YOUR COOL PROFILE**\n{0}"
                 ]
             },
             {
