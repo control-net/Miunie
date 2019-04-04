@@ -11,7 +11,7 @@ namespace Miunie.Core
         public ConcurrentDictionary<ulong, DateTime> MinusRepLog { get; set; }
 
         public Reputation()
-        {   
+        {
             PlusRepLog = new ConcurrentDictionary<ulong, DateTime>();
             MinusRepLog = new ConcurrentDictionary<ulong, DateTime>();
         }

@@ -17,7 +17,7 @@ namespace Miunie.Core
             _logger = logger;
         }
 
-        public async Task ShowProfile(MiunieUser u, MiunieChannel c) 
+        public async Task ShowProfile(MiunieUser u, MiunieChannel c)
             => await _discordMessages.SendMessage(c, "SHOW_PROFILE", u);
 
         public async Task GiveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
@@ -47,7 +47,7 @@ namespace Miunie.Core
             }
 
             if (_reputationProvider.RemoveReputationHasTimeout(invoker, target)) { return; }
-            
+
             _reputationProvider.RemoveReputation(invoker, target);
             await _discordMessages.SendMessage(c, "REPUTATION_TAKEN", invoker.Name, target.Name);
         }

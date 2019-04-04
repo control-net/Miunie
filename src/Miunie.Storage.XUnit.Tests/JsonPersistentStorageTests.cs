@@ -78,9 +78,9 @@ namespace Miunie.Storage.XUnit.Tests
         private void AssertDummyCollectionsMatch(IEnumerable<DummyDataHolder> expected, IEnumerable<DummyDataHolder> actual)
         {
             Assert.Equal(expected.Count(), actual.Count());
-            foreach(var expectedItem in expected)
+            foreach (var expectedItem in expected)
             {
-                Assert.Contains(actual, actualItem 
+                Assert.Contains(actual, actualItem
                         => DummyDataHoldersAreEqual(actualItem, expectedItem));
             }
         }

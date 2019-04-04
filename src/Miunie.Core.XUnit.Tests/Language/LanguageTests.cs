@@ -23,11 +23,11 @@ namespace Miunie.Core.XUnit.Tests.Language
                 }
                 .ToLangResources()
             );
-            
+
             var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(resourceKey);
-            
+
             Assert.Equal(expected, actual);
         }
 
@@ -39,11 +39,11 @@ namespace Miunie.Core.XUnit.Tests.Language
                 new Dictionary<string, string>()
                 .ToLangResources()
             );
-            
+
             var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase("UnknownKey");
-            
+
             Assert.Equal(expected, actual);
         }
 
@@ -64,7 +64,7 @@ namespace Miunie.Core.XUnit.Tests.Language
             var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(key, parameter);
-            
+
             Assert.Equal(expected, actual);
         }
 
@@ -86,7 +86,7 @@ namespace Miunie.Core.XUnit.Tests.Language
             var langResources = new LanguageResources(dataStorageMock.Object, new Random(), new Mock<ILogger>().Object);
 
             var actual = langResources.GetPhrase(key, parameter1, parameter2);
-            
+
             Assert.Equal(expected, actual);
         }
 
@@ -116,10 +116,11 @@ namespace Miunie.Core.XUnit.Tests.Language
             var dataStorageMock = new Mock<IPersistentStorage>();
             dataStorageMock
                 .Setup(ds => ds.RestoreSingle<LanguageResourceCollection>(
-                    It.IsAny<string>(), 
+                    It.IsAny<string>(),
                     It.IsAny<string>())
                 )
-                .Returns(new LanguageResourceCollection{
+                .Returns(new LanguageResourceCollection
+                {
                     Resources = resources.ToArray()
                 });
             return dataStorageMock;

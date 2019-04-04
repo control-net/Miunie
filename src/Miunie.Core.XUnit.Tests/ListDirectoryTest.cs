@@ -14,7 +14,7 @@ namespace Miunie.Core.XUnit.Tests
             var serversMock = new DiscordServersMock(
                 TestServerId,
                 TestServerName,
-                new []{ "ChannelA", "ChannelB", "ChannelC" }
+                new[] { "ChannelA", "ChannelB", "ChannelC" }
             );
 
             _ls = new ListDirectoryService(serversMock);

@@ -46,6 +46,6 @@ namespace Miunie.Core.Providers
             log.TryRemove(invoker.Id, out _);
             _userProvider.StoreUser(invoker);
             return false;
-        } 
+        }
     }
 }

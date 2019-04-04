@@ -3,7 +3,7 @@ namespace Miunie.Core.XUnit.Tests
     public class DummyMiunieUsers
     {
         public static readonly ulong DummyGuildId = 420;
-        
+
         public readonly MiunieUser Senne = new MiunieUser
         {
             Id = 69420911,

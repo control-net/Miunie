@@ -33,7 +33,7 @@ namespace Miunie.Core.Language
         public string GetPhrase(string key, params object[] objs)
         {
             var resource = GetResourceByKey(key);
-            if(resource is null) { return string.Empty; }
+            if (resource is null) { return string.Empty; }
             var phrase = resource.GetValue(_rand);
             return string.Format(phrase, objs);
         }

@@ -15,11 +15,11 @@ namespace Miunie.Core
 
         public string Of(MiunieUser user)
         {
-            if(!user.NavCursor.Any())
+            if (!user.NavCursor.Any())
             {
                 return GetRootOf(user);
             }
-            if(user.NavCursor.Count == 1)
+            if (user.NavCursor.Count == 1)
             {
                 return GetChannelsOf(user);
             }
