@@ -7,6 +7,7 @@ using Miunie.Core.Providers;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.CommandModules;
+using Miunie.Core.Entities;
 
 namespace Miunie.Discord
 {
@@ -76,10 +77,10 @@ namespace Miunie.Discord
             };
         }
 
-        public async Task SendMessage(MiunieChannel mc, string phraseKey, params object[] parameters)
+        public async Task SendMessage(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
         {
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
-            var msg = _lang.GetPhrase(phraseKey, parameters);
+            var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
             await channel.SendMessageAsync(msg);
         }
     }
