@@ -1,7 +1,7 @@
 ![Miunie](https://i.imgur.com/h2PjgF6.png)
 
-<a href="https://ci.appveyor.com/project/discord-bot-tutorial/miunie">
-  <img src="https://ci.appveyor.com/api/projects/status/cpaukw10ih35jl69?svg=true" alt="build status">
+<a href="https://dev.azure.com/spelos/miunie/_apis/build/status/discord-bot-tutorial.Miunie?branchName=master">
+  <img src="https://dev.azure.com/spelos/miunie/_apis/build/status/discord-bot-tutorial.Miunie?branchName=master" alt="build status">
 </a>
 <a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors">
   <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license">
