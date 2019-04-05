@@ -6,6 +6,8 @@
         SHOW_GUILD_PROFILE,
         REPUTATION_GIVEN,
         REPUTATION_TAKEN,
-        CANNOT_SELF_REP
+        CANNOT_SELF_REP,
+        SHOW_REMOTE_REPO
     }
 }
+

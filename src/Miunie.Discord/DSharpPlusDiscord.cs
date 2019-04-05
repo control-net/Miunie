@@ -46,6 +46,7 @@ namespace Miunie.Discord
             var config = GetDefaultCommandsNextConfiguration();
             _commandService = _discordClient.UseCommandsNext(config);
             _commandService.RegisterCommands<ProfileCommand>();
+            _commandService.RegisterCommands<RemoteRepositoryModule>();
             RegisterConvertors();
         }
 
