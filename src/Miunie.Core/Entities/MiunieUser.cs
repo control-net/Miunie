@@ -14,18 +14,12 @@ namespace Miunie.Core
         public DateTime JoinedAt { get; set; }
         public bool IsBot { get; set; }
         public IEnumerable<MiunieRole> Roles { get; set; }
+        public string AvatarUrl { get; set; }
 
         public MiunieUser()
         {
             NavCursor = new List<ulong>();
         }
-
-        public override string ToString()
-            => $"Name: {Name}\n" +
-            $"{(IsBot ? "Is a bot." : "A real human being.")}\n" +
-            $"Reputation: {Reputation.Value}\n" +
-            $"Roles:\n**{string.Join("\n", Roles.Select(r => r.Name))}**\n" +
-            $"Joined {JoinedAt:d} at {JoinedAt:t} UTC.";
     }
 }
 
