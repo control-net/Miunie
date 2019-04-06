@@ -1,19 +1,89 @@
 {
   "Resources": [
     {
-      "Key": "SHOW_PROFILE",
+      "Key": "USER_EMBED_TITLE",
       "Pool": [
-        "**YOUR AWESOME PROFILE**\n{0}",
-        "**YOUR COOL PROFILE**\n{0}",
-        "**YOUR MAGNIFICENT PROFILE**\n{0}"
+        "**YOUR AWESOME PROFILE**",
+        "**YOUR COOL PROFILE**",
+        "**YOUR MAGNIFICENT PROFILE**",
+        "**YOUR DANK PROFILE**"
       ]
     },
     {
-      "Key": "SHOW_GUILD_PROFILE",
+      "Key": "USER_EMBED_NAME_TITLE",
       "Pool": [
-        "**THIS AWESOME SERVER**\n{0}",
-        "**THIS COOL SERVER**\n{0}",
-        "**THIS MAGNIFICENT SERVER**\n{0}"
+        ":label: Name"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_REALNESS_TITLE",
+      "Pool": [
+        ":electric_plug: Bot or not",
+        ":electric_plug: Human/Bot"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_IS_BOT",
+      "Pool": [
+        "_A bot._ :robot:",
+        "_Soon to be our AI overlord._",
+        "_A software person._"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_IS_HUMAN",
+      "Pool": [
+        "_A real human being._",
+        "_Real flesh, bones,\nblood, all that._",
+        "_Passes ReCaptcha,\nso I guess they're real._"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_REP_TITLE",
+      "Pool": [
+        ":fleur_de_lis: Reputation"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_ROLES_TITLE",
+      "Pool": [
+        ":dolls: Roles"
+      ]
+    },
+    {
+      "Key": "USER_EMBED_JOINED_AT_TITLE",
+      "Pool": [
+        ":calendar: Joined"
+      ]
+    },
+    {
+      "Key": "GUILD_EMBED_TITLE",
+      "Pool": [
+        "**ABOUT THIS SERVER**"
+      ]
+    },
+    {
+      "Key": "GUILD_EMBED_NAME_TITLE",
+      "Pool": [
+        "Name"
+      ]
+    },
+    {
+      "Key": "GUILD_EMBED_STATS_TITLE",
+      "Pool": [
+        "Server stats"
+      ]
+    },
+    {
+      "Key": "GUILD_EMBED_ROLES_TITLE",
+      "Pool": [
+        "Roles"
+      ]
+    },
+    {
+      "Key": "GUILD_EMBED_CREATED_AT_TITLE",
+      "Pool": [
+        ":calendar: Creation date"
       ]
     },
     {
