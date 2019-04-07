@@ -29,6 +29,7 @@ namespace Miunie.Discord.Convertors
         {
             var mUser = _userProvider.GetById(user.Id, user.Guild.Id);
             mUser.Name = user.Nickname ?? user.Username;
+            mUser.AvatarUrl = user.AvatarUrl;
             mUser.JoinedAt = user.JoinedAt.UtcDateTime;
             mUser.IsBot = user.IsBot;
             mUser.Roles = user.Roles.Select(r => r.DiscordRoleToMiunieRole());

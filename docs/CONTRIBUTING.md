@@ -148,7 +148,7 @@ set cc=80
 highlight ColorColumn ctermbg=0
 ```
 
-### No body should be immited (Example Below)
+### No body should be ommitted (Example Below)
 
 This means, if you can add a body to an `if`, `else`, `foreach` or any other statement that can have a body `{ }` you should do it.
 

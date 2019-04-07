@@ -25,14 +25,6 @@ namespace Miunie.Discord.CommandModules
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _remoteRepoService.ShowRepository(channel);
         }
-
-        [Command("setRepository")]
-        [Description("Sets the remote repository. Requires administrator permissions")]
-        [RequirePermissions(Permissions.Administrator)]
-        public async Task SetRepository(CommandContext ctx, string repo)
-        {
-            _remoteRepoService.SetRepository(repo);
-        }
     }
 }
 

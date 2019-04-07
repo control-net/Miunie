@@ -1,12 +1,13 @@
-using System;
-using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using Miunie.Core;
 using Miunie.Core.Providers;
+using Miunie.Discord.CommandModules;
 using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
-using Miunie.Discord.CommandModules;
+using Miunie.Discord.Embeds;
+using System;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord
 {
@@ -82,6 +83,18 @@ namespace Miunie.Discord
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
             await channel.SendMessageAsync(msg);
+        }
+
+        public async Task SendMessage(MiunieChannel mc, MiunieUser mu)
+        {
+            var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
+            await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
+        }
+
+        public async Task SendMessage(MiunieChannel mc, MiunieGuild mg)
+        {
+            var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
+            await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
     }
 }

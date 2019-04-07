@@ -10,8 +10,9 @@ Items between `<>` are mandatory and items between `[]` are optional.
 | Name   | Description | Exceptions | Gif example |
 | :-----------: | :-----------------: | :---------: | ----------- |
 | Help          | This command will show you a list of all the available commands. | N/A | ![Gif couldn't load.](https://i.imgur.com/KUAlk7x.gif) |
-| Profile [@User]  | Shows the profile of the mentioned user, if no user is mentioned, it'll show the command invoker's profile. | N/A | ![Gif couldn't load.](https://i.imgur.com/NAKolUY.gif@miu) |
+| Profile [@User]  | Shows the profile of the mentioned user, if no user is mentioned, it'll show the command invoker's profile. | N/A | ![Gif couldn't load.](https://i.imgur.com/OWSBK0v.gif) |
 | +rep <@user> | This command will give 1 reputation to the mentioned user. | No self and a 30 minute cooldown. | ![Gif couldn't load.](https://i.imgur.com/8HUXR7P.gif) |
 | -rep <@user> | This command will remove 1 reputation of the mentioned user. | No self and a 30 minute cooldown. | ![Gif couldn't load.](https://i.imgur.com/kTWxNqj.gif) |
+| guild | Shows information about the current guild.  | N/A | ![Gif couldn't load.](https://i.imgur.com/6gtzWXD.gif) |
 
 *Tool used: ScreenToGif (Windows) - Capture size: 760x310 - Using white theme to better fit GitHub's design*

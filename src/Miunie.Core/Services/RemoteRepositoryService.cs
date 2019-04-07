@@ -6,19 +6,14 @@ namespace Miunie.Core
     public class RemoteRepositoryService
     {
         private readonly IDiscordMessages _discordMessages;
-        private readonly IRemoteRepositoryProvider _remoteProvider;
 
-        public RemoteRepositoryService(IDiscordMessages discordMessages, IRemoteRepositoryProvider remoteProvider)
+        public RemoteRepositoryService(IDiscordMessages discordMessages)
         {
             _discordMessages = discordMessages;
-            _remoteProvider = remoteProvider;
         }
 
         public async Task ShowRepository(MiunieChannel c)
-            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_REMOTE_REPO, _remoteProvider.GetRemoteUrl());
-
-        public void SetRepository(string repository)
-            => _remoteProvider.SetRemoteUrl(repository);
+            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_REMOTE_REPO);
     }
 }
 

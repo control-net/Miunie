@@ -17,8 +17,8 @@ namespace Miunie.Core
             _logger = logger;
         }
 
-        public async Task ShowProfile(MiunieUser u, MiunieChannel c)
-            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_PROFILE, u);
+        public async Task ShowProfile(MiunieUser user, MiunieChannel c)
+            => await _discordMessages.SendMessage(c, user);
 
         public async Task GiveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
@@ -52,7 +52,7 @@ namespace Miunie.Core
             await _discordMessages.SendMessage(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);
         }
 
-        public async Task ShowGuildProfile(MiunieGuild g, MiunieChannel c)
-            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_GUILD_PROFILE, g);
+        public async Task ShowGuildProfile(MiunieGuild guild, MiunieChannel c)
+            => await _discordMessages.SendMessage(c, guild);
     }
 }
