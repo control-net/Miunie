@@ -49,6 +49,7 @@ namespace Miunie.ConsoleApp
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<ILogger, ConsoleLogger>()
                 .AddTransient<IListDirectoryProvider, ListDirectoryProvider>()
+                .AddSingleton<RemoteRepositoryService>()
                 .BuildServiceProvider();
     }
 }

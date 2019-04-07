@@ -110,6 +110,13 @@
         "Hey {0}, did you really think you could influence yourself? Get some friends to do that for you.",
         "Did {0} just try to influence someone that isn't me! He tried doing it on himself? Geez."
       ]
+    },
+    {
+        "Key": "SHOW_REMOTE_REPO",
+        "Pool": [
+            "Here it is! https://github.com/discord-bot-tutorial/Miunie",
+            "Sure thing, https://github.com/discord-bot-tutorial/Miunie"
+        ]
     }
   ]
 }

@@ -5,6 +5,7 @@
         REPUTATION_GIVEN,
         REPUTATION_TAKEN,
         CANNOT_SELF_REP,
+        SHOW_REMOTE_REPO,
         USER_EMBED_TITLE,
         USER_EMBED_NAME_TITLE,
         USER_EMBED_IS_BOT,
@@ -20,3 +21,4 @@
         GUILD_EMBED_CREATED_AT_TITLE
     }
 }
+
