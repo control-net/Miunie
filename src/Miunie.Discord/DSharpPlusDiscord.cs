@@ -8,10 +8,13 @@ using Miunie.Discord.Convertors;
 using Miunie.Discord.Embeds;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
+using Miunie.Core.Discord;
+using System.Collections.Generic;
 
 namespace Miunie.Discord
 {
-    public class DSharpPlusDiscord : IDiscord, IDiscordMessages
+    public class DSharpPlusDiscord : IDiscord, IDiscordMessages, IDiscordServers
     {
         private DiscordClient _discordClient;
         private CommandsNextExtension _commandService;
@@ -47,7 +50,8 @@ namespace Miunie.Discord
             var config = GetDefaultCommandsNextConfiguration();
             _commandService = _discordClient.UseCommandsNext(config);
             _commandService.RegisterCommands<ProfileCommand>();
-            _commandService.RegisterCommands<RemoteRepositoryModule>();
+            _commandService.RegisterCommands<RemoteRepositoryCommand>();
+            _commandService.RegisterCommands<DirectoryCommand>();
             RegisterConvertors();
         }
 
@@ -96,6 +100,24 @@ namespace Miunie.Discord
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
+
+        public async Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl)
+        {
+            var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
+            var result = string.Join("\n", dl.Result.Select(s => $":file_folder: {s}"));
+            await channel.SendMessageAsync(result);
+        }
+
+        public async Task<string> GetServerNameById(ulong id)
+        {
+            var server = await _discordClient.GetGuildAsync(id);
+            return server.Name;
+        }
+
+        public async Task<string[]> GetChannelNamesFromServer(ulong id)
+        {
+            var guild = await _discordClient.GetGuildAsync(id);
+            return guild.Channels.Select(x => x.Name).ToArray();
+        }
     }
 }
-

@@ -1,5 +1,9 @@
 ﻿using Miunie.Core.Discord;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using Miunie.Core;
+using System.Threading.Tasks;
 
 namespace Miunie.Core.Providers
 {
@@ -13,32 +17,39 @@ namespace Miunie.Core.Providers
             _discordServers = discordServers;
         }
 
-        public string Of(MiunieUser user)
+        public async Task<DirectoryListing> Of(MiunieUser user)
         {
             if (!user.NavCursor.Any())
             {
-                return GetRootOf(user);
+                return await GetRootOf(user);
             }
+
             if (user.NavCursor.Count == 1)
             {
-                return GetChannelsOf(user);
+                return await GetChannelsOf(user);
             }
 
-            return string.Empty;
+            return null;
         }
 
-        private string GetRootOf(MiunieUser user)
+        private async Task<DirectoryListing> GetRootOf(MiunieUser user)
         {
-            var serverName = _discordServers.GetServerNameById(user.GuildId);
-            return $"Data{Separator}{serverName}";
+            var serverName = await _discordServers.GetServerNameById(user.GuildId);
+
+            return new DirectoryListing
+            {
+                Result = new ReadOnlyCollection<string>(new List<string> { "Data", serverName })
+            };
         }
 
-        private string GetChannelsOf(MiunieUser user)
+        private async Task<DirectoryListing> GetChannelsOf(MiunieUser user)
         {
-            var channelNames = _discordServers
-                .GetChannelNamesFromServer(user.GuildId);
+            var channelNames = await _discordServers.GetChannelNamesFromServer(user.GuildId);
 
-            return string.Join(Separator, channelNames);
+            return new DirectoryListing
+            {
+                Result = new ReadOnlyCollection<string>(channelNames)
+            };
         }
     }
 }

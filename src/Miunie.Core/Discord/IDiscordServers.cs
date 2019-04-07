@@ -1,9 +1,11 @@
+using System.Threading.Tasks;
+
 namespace Miunie.Core.Discord
 {
     public interface IDiscordServers
     {
-        string GetServerNameById(ulong id);
-        string[] GetChannelNamesFromServer(ulong id);
+        Task<string> GetServerNameById(ulong id);
+        Task<string[]> GetChannelNamesFromServer(ulong id);
     }
 }
 

@@ -344,3 +344,7 @@ healthchecksdb
 App.config
 src/Miunie.ConsoleApp/Resources/*
 !src/Miunie.ConsoleApp/Resources/LanguageResourceCollection
+
+# Vim swap files
+.swo
+.swp
