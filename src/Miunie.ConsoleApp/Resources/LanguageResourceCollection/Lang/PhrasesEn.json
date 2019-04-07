@@ -44,8 +44,8 @@
     {
         "Key": "SHOW_REMOTE_REPO",
         "Pool": [
-            "Here it is! {0}",
-            "Sure thing, {0}"
+            "Here it is! https://github.com/discord-bot-tutorial/Miunie",
+            "Sure thing, https://github.com/discord-bot-tutorial/Miunie"
         ]
     }
   ]
