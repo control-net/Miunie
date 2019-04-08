@@ -16,7 +16,7 @@ namespace Miunie.Core.Services
 
         public async Task ListDirectoryAsync(MiunieChannel c, MiunieUser u)
         {
-            var dl = await _directoryProvider.Of(u);
+            var dl = await _directoryProvider.OfAsync(u);
             await _messages.SendMessageAsync(c, dl);
         }
     }

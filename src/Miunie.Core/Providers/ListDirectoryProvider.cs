@@ -17,24 +17,24 @@ namespace Miunie.Core.Providers
             _discordServers = discordServers;
         }
 
-        public async Task<DirectoryListing> Of(MiunieUser user)
+        public async Task<DirectoryListing> OfAsync(MiunieUser user)
         {
             if (!user.NavCursor.Any())
             {
-                return await GetRootOf(user);
+                return await GetRootOfAsync(user);
             }
 
             if (user.NavCursor.Count == 1)
             {
-                return await GetChannelsOf(user);
+                return await GetChannelsOfAsync(user);
             }
 
             return null;
         }
 
-        private async Task<DirectoryListing> GetRootOf(MiunieUser user)
+        private async Task<DirectoryListing> GetRootOfAsync(MiunieUser user)
         {
-            var serverName = await _discordServers.GetServerNameById(user.GuildId);
+            var serverName = await _discordServers.GetServerNameByIdAsync(user.GuildId);
 
             return new DirectoryListing
             {
@@ -42,9 +42,9 @@ namespace Miunie.Core.Providers
             };
         }
 
-        private async Task<DirectoryListing> GetChannelsOf(MiunieUser user)
+        private async Task<DirectoryListing> GetChannelsOfAsync(MiunieUser user)
         {
-            var channelNames = await _discordServers.GetChannelNamesFromServer(user.GuildId);
+            var channelNames = await _discordServers.GetChannelNamesAsync(user.GuildId);
 
             return new DirectoryListing
             {

@@ -23,7 +23,7 @@ namespace Miunie.Discord.CommandModules
         public async Task ShowRepository(CommandContext ctx)
         {
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
-            await _remoteRepoService.ShowRepository(channel);
+            await _remoteRepoService.ShowRepositoryAsync(channel);
         }
     }
 }

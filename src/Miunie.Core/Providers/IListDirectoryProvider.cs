@@ -4,6 +4,6 @@ namespace Miunie.Core.Providers
 {
     public interface IListDirectoryProvider
     {
-        Task<DirectoryListing> Of(MiunieUser user);
+        Task<DirectoryListing> OfAsync(MiunieUser user);
     }
 }

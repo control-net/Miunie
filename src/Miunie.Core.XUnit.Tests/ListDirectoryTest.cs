@@ -18,11 +18,11 @@ namespace Miunie.Core.XUnit.Tests
         {
             var serversMock = new Mock<IDiscordServers>();
             serversMock
-                .Setup(s => s.GetChannelNamesFromServer(TestServerId))
+                .Setup(s => s.GetChannelNamesAsync(TestServerId))
                 .Returns(Task.FromResult(new[] { "ChannelA", "ChannelB", "ChannelC" }));
 
             serversMock
-                .Setup(s => s.GetServerNameById(TestServerId))
+                .Setup(s => s.GetServerNameByIdAsync(TestServerId))
                 .Returns(Task.FromResult(TestServerName));
 
             _ls = new ListDirectoryProvider(serversMock.Object);
@@ -37,7 +37,7 @@ namespace Miunie.Core.XUnit.Tests
             {
                 GuildId = TestServerId
             };
-            var actual = await _ls.Of(inputUser);
+            var actual = await _ls.OfAsync(inputUser);
 
             Assert.Equal(expectedData, actual.Result.First());
             Assert.Equal(TestServerName, actual.Result.ElementAt(1));
@@ -51,7 +51,7 @@ namespace Miunie.Core.XUnit.Tests
                 GuildId = TestServerId,
                 NavCursor = new List<ulong> { TestServerId }
             };
-            var actual = await _ls.Of(inputUser);
+            var actual = await _ls.OfAsync(inputUser);
             Assert.Equal("ChannelA", actual.Result.ElementAt(0));
             Assert.Equal("ChannelB", actual.Result.ElementAt(1));
             Assert.Equal("ChannelC", actual.Result.ElementAt(2));
