@@ -1,5 +1,7 @@
 using Miunie.Discord.Configuration;
 using Xunit;
+using Moq;
+using Miunie.Core.Logging;
 
 namespace Miunie.Configuration.XUnit.Tests
 {
@@ -17,7 +19,7 @@ namespace Miunie.Configuration.XUnit.Tests
 
         private static IBotConfiguration CreateConfigInstance()
         {
-            var configManager = new ConfigManager();
+            var configManager = new ConfigManager(new Mock<ILogger>().Object);
             return new BotConfiguration(configManager);
         }
     }
