@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
+using Miunie.Core;
 
 namespace Miunie.Core.Discord
 {
-    public interface IDiscordServers
+    public interface IDiscordGuilds
     {
-        Task<string> GetServerNameByIdAsync(ulong id);
-        Task<string[]> GetChannelNamesAsync(ulong id);
+        Task<MiunieGuild> FromAsync(MiunieUser user);
     }
 }
 

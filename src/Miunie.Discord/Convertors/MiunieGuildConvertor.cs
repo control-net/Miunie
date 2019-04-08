@@ -13,6 +13,7 @@ namespace Miunie.Discord.Convertors
                 Id = g.Id,
                 Name = g.Name,
                 MemberCount = g.MemberCount,
+                ChannelNames = g.Channels.Select(x => x.Name),
                 TextChannelCount = g.Channels.Count(x => x.Type == ChannelType.Text),
                 VoiceChannelCount = g.Channels.Count(x => x.Type == ChannelType.Voice),
                 CreationDate = g.CreationTimestamp.UtcDateTime,
