@@ -20,13 +20,13 @@ namespace Miunie.Core.XUnit.Tests
             _returnedChannelNames = returnedChannelNames;
         }
 
-        public Task<string> GetServerNameById(ulong id)
+        public Task<string> GetServerNameByIdAsync(ulong id)
         {
             Assert.Equal(_acceptedId, id);
             return Task.FromResult(_returnedName);
         }
 
-        public Task<string[]> GetChannelNamesFromServer(ulong id)
+        public Task<string[]> GetChannelNamesAsync(ulong id)
         {
             Assert.Equal(_acceptedId, id);
             return Task.FromResult(_returnedChannelNames);

@@ -4,8 +4,8 @@ namespace Miunie.Core.Discord
 {
     public interface IDiscordServers
     {
-        Task<string> GetServerNameById(ulong id);
-        Task<string[]> GetChannelNamesFromServer(ulong id);
+        Task<string> GetServerNameByIdAsync(ulong id);
+        Task<string[]> GetChannelNamesAsync(ulong id);
     }
 }
 

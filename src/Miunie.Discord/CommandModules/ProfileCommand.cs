@@ -26,7 +26,7 @@ namespace Miunie.Discord.CommandModules
                 m = _entityConvertor.ConvertUser(ctx.Member);
             }
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
-            await _profileService.ShowProfile(m, channel);
+            await _profileService.ShowProfileAsync(m, channel);
         }
 
         [Command("+rep")]
@@ -34,7 +34,7 @@ namespace Miunie.Discord.CommandModules
         {
             var source = _entityConvertor.ConvertUser(ctx.Member);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
-            await _profileService.GiveReputation(source, m, channel);
+            await _profileService.GiveReputationAsync(source, m, channel);
         }
 
         [Command("-rep")]
@@ -42,7 +42,7 @@ namespace Miunie.Discord.CommandModules
         {
             var source = _entityConvertor.ConvertUser(ctx.Member);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
-            await _profileService.RemoveReputation(source, m, channel);
+            await _profileService.RemoveReputationAsync(source, m, channel);
         }
 
         [Command("guild")]
@@ -50,7 +50,7 @@ namespace Miunie.Discord.CommandModules
         {
             var guild = _entityConvertor.ConvertGuild(ctx.Guild);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
-            await _profileService.ShowGuildProfile(guild, channel);
+            await _profileService.ShowGuildProfileAsync(guild, channel);
         }
     }
 }

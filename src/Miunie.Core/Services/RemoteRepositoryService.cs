@@ -12,8 +12,8 @@ namespace Miunie.Core
             _discordMessages = discordMessages;
         }
 
-        public async Task ShowRepository(MiunieChannel c)
-            => await _discordMessages.SendMessage(c, PhraseKey.SHOW_REMOTE_REPO);
+        public async Task ShowRepositoryAsync(MiunieChannel c)
+            => await _discordMessages.SendMessageAsync(c, PhraseKey.SHOW_REMOTE_REPO);
     }
 }
 

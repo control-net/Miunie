@@ -17,14 +17,14 @@ namespace Miunie.Core
             _logger = logger;
         }
 
-        public async Task ShowProfile(MiunieUser user, MiunieChannel c)
-            => await _discordMessages.SendMessage(c, user);
+        public async Task ShowProfileAsync(MiunieUser user, MiunieChannel c)
+            => await _discordMessages.SendMessageAsync(c, user);
 
-        public async Task GiveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
+        public async Task GiveReputationAsync(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
             if (invoker.Id == target.Id)
             {
-                await _discordMessages.SendMessage(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
+                await _discordMessages.SendMessageAsync(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
                 return;
             }
 
@@ -35,24 +35,24 @@ namespace Miunie.Core
             }
 
             _reputationProvider.AddReputation(invoker, target);
-            await _discordMessages.SendMessage(c, PhraseKey.REPUTATION_GIVEN, target.Name, invoker.Name);
+            await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_GIVEN, target.Name, invoker.Name);
         }
 
-        public async Task RemoveReputation(MiunieUser invoker, MiunieUser target, MiunieChannel c)
+        public async Task RemoveReputationAsync(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
             if (invoker.Id == target.Id)
             {
-                await _discordMessages.SendMessage(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
+                await _discordMessages.SendMessageAsync(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
                 return;
             }
 
             if (_reputationProvider.RemoveReputationHasTimeout(invoker, target)) { return; }
 
             _reputationProvider.RemoveReputation(invoker, target);
-            await _discordMessages.SendMessage(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);
+            await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);
         }
 
-        public async Task ShowGuildProfile(MiunieGuild guild, MiunieChannel c)
-            => await _discordMessages.SendMessage(c, guild);
+        public async Task ShowGuildProfileAsync(MiunieGuild guild, MiunieChannel c)
+            => await _discordMessages.SendMessageAsync(c, guild);
     }
 }

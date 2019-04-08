@@ -82,20 +82,20 @@ namespace Miunie.Discord
             };
         }
 
-        public async Task SendMessage(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
+        public async Task SendMessageAsync(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
         {
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
             await channel.SendMessageAsync(msg);
         }
 
-        public async Task SendMessage(MiunieChannel mc, MiunieUser mu)
+        public async Task SendMessageAsync(MiunieChannel mc, MiunieUser mu)
         {
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
         }
 
-        public async Task SendMessage(MiunieChannel mc, MiunieGuild mg)
+        public async Task SendMessageAsync(MiunieChannel mc, MiunieGuild mg)
         {
             var channel = await _discordClient.GetChannelAsync(mc.ChannelId);
             await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
@@ -108,13 +108,13 @@ namespace Miunie.Discord
             await channel.SendMessageAsync(result);
         }
 
-        public async Task<string> GetServerNameById(ulong id)
+        public async Task<string> GetServerNameByIdAsync(ulong id)
         {
             var server = await _discordClient.GetGuildAsync(id);
             return server.Name;
         }
 
-        public async Task<string[]> GetChannelNamesFromServer(ulong id)
+        public async Task<string[]> GetChannelNamesAsync(ulong id)
         {
             var guild = await _discordClient.GetGuildAsync(id);
             return guild.Channels.Select(x => x.Name).ToArray();
