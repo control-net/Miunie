@@ -53,7 +53,7 @@ namespace Miunie.Discord
 
         private void Log(object sender, DebugLogMessageEventArgs e)
         {
-            if(e.Level == LogLevel.Critical)
+            if (e.Level == LogLevel.Critical)
             {
                 _logger.LogError(e.Message);
             }

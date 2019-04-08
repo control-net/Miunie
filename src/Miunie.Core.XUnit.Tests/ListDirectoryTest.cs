@@ -19,12 +19,12 @@ namespace Miunie.Core.XUnit.Tests
             var serversMock = new Mock<IDiscordGuilds>();
             serversMock
                 .Setup(s => s.FromAsync(It.Is<MiunieUser>(u => u.GuildId == TestServerId)))
-                .Returns(Task.FromResult(new MiunieGuild 
-                    { 
-                        ChannelNames = new[] { "ChannelA", "ChannelB", "ChannelC" },
-                        Id = TestServerId,
-                        Name = TestServerName
-                    }));
+                .Returns(Task.FromResult(new MiunieGuild
+                {
+                    ChannelNames = new[] { "ChannelA", "ChannelB", "ChannelC" },
+                    Id = TestServerId,
+                    Name = TestServerName
+                }));
 
             _ls = new ListDirectoryProvider(serversMock.Object);
         }
