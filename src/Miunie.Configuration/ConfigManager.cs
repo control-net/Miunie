@@ -1,11 +1,18 @@
 using System.Configuration;
 using System;
 using System.Linq;
+using Miunie.Core.Logging;
 
 namespace Miunie.Configuration
 {
     public class ConfigManager : IConfiguration
     {
+        private readonly ILogger _logger;
+        public ConfigManager(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public string GetValueFor(string key)
         {
             var value = ConfigurationManager.AppSettings[key];
@@ -14,22 +21,21 @@ namespace Miunie.Configuration
             {
                 var editor = new ConfigurationFileEditor();
 
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Configuration Error:");
-                Console.WriteLine($"The configuration could not retrieve the item: '{key}'");
+                var configErrorMessage = $"Configuration Error:\n" +
+                    $"The configuration could not retrieve the item: '{key}'\n" +
+                    $"Enter your desired value: (or type EXIT)";
 
+                _logger.LogError(configErrorMessage);
                 editor.WriteSetting(key, "REPLACE-ME");
                 editor.Save();
 
-                Console.WriteLine("Enter your desired value: (or type EXIT)");
                 value = Console.ReadLine();
 
                 if (value.Trim().ToLower() == "exit") { Environment.Exit(0); }
                 if (value.Trim().ToLower() == "i'm feeling lucky")
                 {
-                    var rng = new Random();
                     value = $"{RandomString(24)}.{RandomString(6)}.{RandomString(27)}";
-                    Console.WriteLine($"Let's try {value}. I have a good feeling about this one.");
+                    _logger.Log($"Let's try {value}. I have a good feeling about this one.");
                 }
 
                 editor.WriteSetting(key, value);

@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Miunie.Core.Discord;
 using System.Collections.Generic;
+using Miunie.Core.Logging;
+using DSharpPlus.EventArgs;
 
 namespace Miunie.Discord
 {
@@ -22,13 +24,15 @@ namespace Miunie.Discord
         private readonly IBotConfiguration _botConfiguration;
         private readonly EntityConvertor _entityConvertor;
         private readonly ILanguageProvider _lang;
+        private readonly ILogger _logger;
 
-        public DSharpPlusDiscord(IBotConfiguration botConfiguration, EntityConvertor entityConvertor, IServiceProvider services, ILanguageProvider lang)
+        public DSharpPlusDiscord(IBotConfiguration botConfiguration, EntityConvertor entityConvertor, IServiceProvider services, ILanguageProvider lang, ILogger logger)
         {
             _botConfiguration = botConfiguration;
             _services = services;
             _entityConvertor = entityConvertor;
             _lang = lang;
+            _logger = logger;
         }
 
         public async Task RunAsync()
@@ -42,7 +46,21 @@ namespace Miunie.Discord
         {
             var discordConfiguration = GetDefaultDiscordConfiguration();
             _discordClient = new DiscordClient(discordConfiguration);
+            var discordLogger = _discordClient.DebugLogger;
+            discordLogger.LogMessageReceived += Log;
             await _discordClient.ConnectAsync();
+        }
+
+        private void Log(object sender, DebugLogMessageEventArgs e)
+        {
+            if (e.Level == LogLevel.Critical)
+            {
+                _logger.LogError(e.Message);
+            }
+            else
+            {
+                _logger.Log(e.Message);
+            }
         }
 
         private void InitializeCommandService()
@@ -69,7 +87,7 @@ namespace Miunie.Discord
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 LogLevel = LogLevel.Info,
-                UseInternalLogHandler = true
+                UseInternalLogHandler = false
             };
         }
 
