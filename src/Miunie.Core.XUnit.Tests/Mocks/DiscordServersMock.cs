@@ -1,4 +1,5 @@
 using Miunie.Core.Discord;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Miunie.Core.XUnit.Tests
@@ -19,16 +20,16 @@ namespace Miunie.Core.XUnit.Tests
             _returnedChannelNames = returnedChannelNames;
         }
 
-        public string GetServerNameById(ulong id)
+        public Task<string> GetServerNameById(ulong id)
         {
             Assert.Equal(_acceptedId, id);
-            return _returnedName;
+            return Task.FromResult(_returnedName);
         }
 
-        public string[] GetChannelNamesFromServer(ulong id)
+        public Task<string[]> GetChannelNamesFromServer(ulong id)
         {
             Assert.Equal(_acceptedId, id);
-            return _returnedChannelNames;
+            return Task.FromResult(_returnedChannelNames);
         }
     }
 }

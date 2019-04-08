@@ -3,6 +3,8 @@ using Xunit;
 using Moq;
 using Miunie.Core.Providers;
 using Miunie.Core.Discord;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Miunie.Core.XUnit.Tests
 {
@@ -17,38 +19,42 @@ namespace Miunie.Core.XUnit.Tests
             var serversMock = new Mock<IDiscordServers>();
             serversMock
                 .Setup(s => s.GetChannelNamesFromServer(TestServerId))
-                .Returns(new[] { "ChannelA", "ChannelB", "ChannelC" });
+                .Returns(Task.FromResult(new[] { "ChannelA", "ChannelB", "ChannelC" }));
 
             serversMock
                 .Setup(s => s.GetServerNameById(TestServerId))
-                .Returns(TestServerName);
+                .Returns(Task.FromResult(TestServerName));
 
             _ls = new ListDirectoryProvider(serversMock.Object);
         }
 
         [Fact]
-        public void EmptyShouldOutputRoot()
+        public async Task EmptyShouldOutputRoot()
         {
-            string expected = $"Data\n{TestServerName}";
+            const string expectedData = "Data";
+
             var inputUser = new MiunieUser
             {
                 GuildId = TestServerId
             };
-            var actual = _ls.Of(inputUser);
-            Assert.Equal(expected, actual);
+            var actual = await _ls.Of(inputUser);
+
+            Assert.Equal(expectedData, actual.Result.First());
+            Assert.Equal(TestServerName, actual.Result.ElementAt(1));
         }
 
         [Fact]
-        public void InServerShouldOutputChannels()
+        public async Task InServerShouldOutputChannels()
         {
-            const string expected = "ChannelA\nChannelB\nChannelC";
             var inputUser = new MiunieUser
             {
                 GuildId = TestServerId,
                 NavCursor = new List<ulong> { TestServerId }
             };
-            var actual = _ls.Of(inputUser);
-            Assert.Equal(expected, actual);
+            var actual = await _ls.Of(inputUser);
+            Assert.Equal("ChannelA", actual.Result.ElementAt(0));
+            Assert.Equal("ChannelB", actual.Result.ElementAt(1));
+            Assert.Equal("ChannelC", actual.Result.ElementAt(2));
         }
     }
 }

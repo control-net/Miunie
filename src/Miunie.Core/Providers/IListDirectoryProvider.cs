@@ -1,7 +1,9 @@
-﻿namespace Miunie.Core.Providers
+﻿using System.Threading.Tasks;
+
+namespace Miunie.Core.Providers
 {
     public interface IListDirectoryProvider
     {
-        string Of(MiunieUser user);
+        Task<DirectoryListing> Of(MiunieUser user);
     }
 }

@@ -7,12 +7,12 @@ using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
 {
-    public class RemoteRepositoryModule : BaseCommandModule
+    public class RemoteRepositoryCommand : BaseCommandModule
     {
         private readonly RemoteRepositoryService _remoteRepoService;
         private readonly EntityConvertor _entityConvertor;
 
-        public RemoteRepositoryModule(RemoteRepositoryService remoteRepoService, EntityConvertor entityConvertor)
+        public RemoteRepositoryCommand(RemoteRepositoryService remoteRepoService, EntityConvertor entityConvertor)
         {
             _remoteRepoService = remoteRepoService;
             _entityConvertor = entityConvertor;

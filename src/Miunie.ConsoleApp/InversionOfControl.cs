@@ -1,6 +1,7 @@
 using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Providers;
+using Miunie.Core.Services;
 using Miunie.Core.Storage;
 using Miunie.Core.Infrastructure;
 using Miunie.Storage;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using Miunie.Core.Logging;
 using Miunie.Logger;
+using Miunie.Core.Discord;
 
 namespace Miunie.ConsoleApp
 {
@@ -40,6 +42,8 @@ namespace Miunie.ConsoleApp
                     s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IDiscordMessages>(s =>
                     s.GetRequiredService<DSharpPlusDiscord>())
+                .AddSingleton<IDiscordServers>(s =>
+                    s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IPersistentStorage, JsonPersistentStorage>()
@@ -50,6 +54,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ILogger, ConsoleLogger>()
                 .AddTransient<IListDirectoryProvider, ListDirectoryProvider>()
                 .AddSingleton<RemoteRepositoryService>()
+                .AddSingleton<DirectoryService>()
                 .BuildServiceProvider();
     }
 }

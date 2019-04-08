@@ -19,7 +19,7 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("profile")]
-        public async Task ShowProfile(CommandContext ctx, MiunieUser m = null)
+        public async Task ShowProfileAsync(CommandContext ctx, MiunieUser m = null)
         {
             if (m is null)
             {
@@ -30,7 +30,7 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("+rep")]
-        public async Task AddReputation(CommandContext ctx, MiunieUser m)
+        public async Task AddReputationAsync(CommandContext ctx, MiunieUser m)
         {
             var source = _entityConvertor.ConvertUser(ctx.Member);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
@@ -38,7 +38,7 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("-rep")]
-        public async Task RemoveReputation(CommandContext ctx, MiunieUser m)
+        public async Task RemoveReputationAsync(CommandContext ctx, MiunieUser m)
         {
             var source = _entityConvertor.ConvertUser(ctx.Member);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
@@ -46,7 +46,7 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("guild")]
-        public async Task ShowGuildInfo(CommandContext ctx)
+        public async Task ShowGuildInfoAsync(CommandContext ctx)
         {
             var guild = _entityConvertor.ConvertGuild(ctx.Guild);
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
