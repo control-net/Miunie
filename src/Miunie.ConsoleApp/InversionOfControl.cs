@@ -42,7 +42,7 @@ namespace Miunie.ConsoleApp
                     s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IDiscordMessages>(s =>
                     s.GetRequiredService<DSharpPlusDiscord>())
-                .AddSingleton<IDiscordServers>(s =>
+                .AddSingleton<IDiscordGuilds>(s =>
                     s.GetRequiredService<DSharpPlusDiscord>())
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
@@ -54,7 +54,7 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ILogger, ConsoleLogger>()
                 .AddTransient<IListDirectoryProvider, ListDirectoryProvider>()
                 .AddSingleton<RemoteRepositoryService>()
-                .AddSingleton<DirectoryService>()
+                .AddTransient<DirectoryService>()
                 .BuildServiceProvider();
     }
 }

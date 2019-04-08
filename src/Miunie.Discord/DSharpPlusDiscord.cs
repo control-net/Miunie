@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Miunie.Discord
 {
-    public class DSharpPlusDiscord : IDiscord, IDiscordMessages, IDiscordServers
+    public class DSharpPlusDiscord : IDiscord, IDiscordMessages, IDiscordGuilds
     {
         private DiscordClient _discordClient;
         private CommandsNextExtension _commandService;
@@ -108,16 +108,11 @@ namespace Miunie.Discord
             await channel.SendMessageAsync(result);
         }
 
-        public async Task<string> GetServerNameByIdAsync(ulong id)
+        public async Task<MiunieGuild> FromAsync(MiunieUser user)
         {
-            var server = await _discordClient.GetGuildAsync(id);
-            return server.Name;
-        }
+            var guild = await _discordClient.GetGuildAsync(user.GuildId);
 
-        public async Task<string[]> GetChannelNamesAsync(ulong id)
-        {
-            var guild = await _discordClient.GetGuildAsync(id);
-            return guild.Channels.Select(x => x.Name).ToArray();
+            return _entityConvertor.ConvertGuild(guild);
         }
     }
 }

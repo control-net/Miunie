@@ -16,14 +16,15 @@ namespace Miunie.Core.XUnit.Tests
 
         public ListDirectoryTest()
         {
-            var serversMock = new Mock<IDiscordServers>();
+            var serversMock = new Mock<IDiscordGuilds>();
             serversMock
-                .Setup(s => s.GetChannelNamesAsync(TestServerId))
-                .Returns(Task.FromResult(new[] { "ChannelA", "ChannelB", "ChannelC" }));
-
-            serversMock
-                .Setup(s => s.GetServerNameByIdAsync(TestServerId))
-                .Returns(Task.FromResult(TestServerName));
+                .Setup(s => s.FromAsync(It.Is<MiunieUser>(u => u.GuildId == TestServerId)))
+                .Returns(Task.FromResult(new MiunieGuild 
+                    { 
+                        ChannelNames = new[] { "ChannelA", "ChannelB", "ChannelC" },
+                        Id = TestServerId,
+                        Name = TestServerName
+                    }));
 
             _ls = new ListDirectoryProvider(serversMock.Object);
         }

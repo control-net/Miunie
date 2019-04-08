@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Miunie.Core.Providers;
 
 namespace Miunie.Core
 {
@@ -16,4 +15,3 @@ namespace Miunie.Core
             => await _discordMessages.SendMessageAsync(c, PhraseKey.SHOW_REMOTE_REPO);
     }
 }
-

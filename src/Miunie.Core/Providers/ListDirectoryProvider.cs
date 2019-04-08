@@ -2,54 +2,47 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Miunie.Core;
 using System.Threading.Tasks;
 
 namespace Miunie.Core.Providers
 {
     public class ListDirectoryProvider : IListDirectoryProvider
     {
-        private readonly IDiscordServers _discordServers;
-        private const string Separator = "\n";
+        private readonly IDiscordGuilds _discordGuilds;
+        private MiunieGuild _currentGuild;
 
-        public ListDirectoryProvider(IDiscordServers discordServers)
+        public ListDirectoryProvider(IDiscordGuilds discordGuilds)
         {
-            _discordServers = discordServers;
+            _discordGuilds = discordGuilds;
         }
 
         public async Task<DirectoryListing> OfAsync(MiunieUser user)
         {
+            _currentGuild = await _discordGuilds.FromAsync(user);
+
             if (!user.NavCursor.Any())
             {
-                return await GetRootOfAsync(user);
+                return GetRootOf();
             }
 
             if (user.NavCursor.Count == 1)
             {
-                return await GetChannelsOfAsync(user);
+                return GetChannelsOf();
             }
 
             return null;
         }
 
-        private async Task<DirectoryListing> GetRootOfAsync(MiunieUser user)
-        {
-            var serverName = await _discordServers.GetServerNameByIdAsync(user.GuildId);
-
-            return new DirectoryListing
+        private DirectoryListing GetRootOf()
+            => new DirectoryListing
             {
-                Result = new ReadOnlyCollection<string>(new List<string> { "Data", serverName })
+                Result = new ReadOnlyCollection<string>(new List<string> { "Data", _currentGuild.Name })
             };
-        }
 
-        private async Task<DirectoryListing> GetChannelsOfAsync(MiunieUser user)
-        {
-            var channelNames = await _discordServers.GetChannelNamesAsync(user.GuildId);
-
-            return new DirectoryListing
+        private DirectoryListing GetChannelsOf()
+            => new DirectoryListing
             {
-                Result = new ReadOnlyCollection<string>(channelNames)
+                Result = new ReadOnlyCollection<string>(_currentGuild.ChannelNames.ToList())
             };
-        }
     }
 }

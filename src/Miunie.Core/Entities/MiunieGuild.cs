@@ -9,6 +9,7 @@ namespace Miunie.Core
         public ulong Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<MiunieRole> Roles { get; set; }
+        public IEnumerable<string> ChannelNames { get; set; }
         public DateTime CreationDate { get; set; }
         public int TextChannelCount { get; set; }
         public int VoiceChannelCount { get; set; }

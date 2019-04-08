@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Miunie.Core.XUnit.Tests
 {
-    public class DiscordServersMock : IDiscordServers
+    public class DiscordServersMock : IDiscordGuilds
     {
         private readonly ulong _acceptedId;
         private readonly string _returnedName;
@@ -20,16 +20,15 @@ namespace Miunie.Core.XUnit.Tests
             _returnedChannelNames = returnedChannelNames;
         }
 
-        public Task<string> GetServerNameByIdAsync(ulong id)
+        public Task<MiunieGuild> FromAsync(MiunieUser user)
         {
-            Assert.Equal(_acceptedId, id);
-            return Task.FromResult(_returnedName);
-        }
-
-        public Task<string[]> GetChannelNamesAsync(ulong id)
-        {
-            Assert.Equal(_acceptedId, id);
-            return Task.FromResult(_returnedChannelNames);
+            Assert.Equal(_acceptedId, user.GuildId);
+            return Task.FromResult(new MiunieGuild
+            {
+                Name = _returnedName,
+                Id = user.GuildId,
+                ChannelNames = _returnedChannelNames
+            });
         }
     }
 }
