@@ -14,11 +14,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
-    <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
+    <ProjectReference Include="..\Miunie.InversionOfControl\Miunie.InversionOfControl.csproj" />
     <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
-    <ProjectReference Include="..\Miunie.Storage\Miunie.Storage.csproj" />
   </ItemGroup>
 
 </Project>
