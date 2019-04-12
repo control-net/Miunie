@@ -2,9 +2,8 @@ using System.Threading.Tasks;
 
 namespace Miunie.Core
 {
-    public interface IDiscord
+    public interface IMiunieDiscord
     {
         Task RunAsync();
     }
 }
-

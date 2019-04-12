@@ -4,16 +4,17 @@ namespace Miunie.Core
 {
     public class MiunieBot
     {
-        private readonly IDiscord _discord;
+        private readonly IMiunieDiscord _miunieDiscord;
 
-        public MiunieBot(IDiscord discord)
+        public MiunieBot(IMiunieDiscord miunieDiscord)
         {
-            _discord = discord;
+            _miunieDiscord = miunieDiscord;
         }
 
         public async Task RunAsync()
         {
-            await _discord.RunAsync();
+            await _miunieDiscord.RunAsync();
+            await Task.Delay(-1);
         }
     }
 }
