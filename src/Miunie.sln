@@ -1,25 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.ConsoleApp", "Miunie.ConsoleApp\Miunie.ConsoleApp.csproj", "{2D2C1EE8-2476-4F03-B102-95FFD9010DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.ConsoleApp", "Miunie.ConsoleApp\Miunie.ConsoleApp.csproj", "{2D2C1EE8-2476-4F03-B102-95FFD9010DCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Core", "Miunie.Core\Miunie.Core.csproj", "{0E0150E2-6A28-4936-81B2-EB5A7349EFFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Core", "Miunie.Core\Miunie.Core.csproj", "{0E0150E2-6A28-4936-81B2-EB5A7349EFFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Discord", "Miunie.Discord\Miunie.Discord.csproj", "{E3CCF781-6D11-4815-8E4C-B74C750E1DEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Discord", "Miunie.Discord\Miunie.Discord.csproj", "{E3CCF781-6D11-4815-8E4C-B74C750E1DEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Configuration", "Miunie.Configuration\Miunie.Configuration.csproj", "{E09C0F2C-7BE9-45EA-AFA1-31E081EE0A59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Configuration", "Miunie.Configuration\Miunie.Configuration.csproj", "{E09C0F2C-7BE9-45EA-AFA1-31E081EE0A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Configuration.XUnit.Tests", "Miunie.Configuration.XUnit.Tests\Miunie.Configuration.XUnit.Tests.csproj", "{4E57E4C4-980E-4D07-B1A4-DFF3CB83D016}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Configuration.XUnit.Tests", "Miunie.Configuration.XUnit.Tests\Miunie.Configuration.XUnit.Tests.csproj", "{4E57E4C4-980E-4D07-B1A4-DFF3CB83D016}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Storage", "Miunie.Storage\Miunie.Storage.csproj", "{2A6EBA02-D10C-4E31-894E-3FC3C704CC33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Storage", "Miunie.Storage\Miunie.Storage.csproj", "{2A6EBA02-D10C-4E31-894E-3FC3C704CC33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Storage.XUnit.Tests", "Miunie.Storage.XUnit.Tests\Miunie.Storage.XUnit.Tests.csproj", "{2F193EFE-8E52-4B67-9BCE-A0682BFAE40C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Storage.XUnit.Tests", "Miunie.Storage.XUnit.Tests\Miunie.Storage.XUnit.Tests.csproj", "{2F193EFE-8E52-4B67-9BCE-A0682BFAE40C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Core.XUnit.Tests", "Miunie.Core.XUnit.Tests\Miunie.Core.XUnit.Tests.csproj", "{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Core.XUnit.Tests", "Miunie.Core.XUnit.Tests\Miunie.Core.XUnit.Tests.csproj", "{4B08DB7B-C0DE-4C04-9EB6-2ED404936CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Logger", "Miunie.Logger\Miunie.Logger.csproj", "{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Logger", "Miunie.Logger\Miunie.Logger.csproj", "{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.InversionOfControl", "Miunie.InversionOfControl\Miunie.InversionOfControl.csproj", "{9431EA7A-3676-4229-B8EB-650005C9734A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2D2C1EE8-2476-4F03-B102-95FFD9010DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -142,5 +141,23 @@ Global
 		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x64.Build.0 = Release|Any CPU
 		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x86.ActiveCfg = Release|Any CPU
 		{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}.Release|x86.Build.0 = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|x64.Build.0 = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Debug|x86.Build.0 = Debug|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|x64.ActiveCfg = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|x64.Build.0 = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|x86.ActiveCfg = Release|Any CPU
+		{9431EA7A-3676-4229-B8EB-650005C9734A}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {638DAD5F-3C9E-4AD1-AA8A-AA820E1535CC}
 	EndGlobalSection
 EndGlobal

@@ -1,20 +1,7 @@
-using Miunie.Configuration;
-using Miunie.Core;
-using Miunie.Core.Providers;
-using Miunie.Core.Services;
-using Miunie.Core.Storage;
-using Miunie.Core.Infrastructure;
-using Miunie.Storage;
-using Miunie.Discord;
-using Miunie.Discord.Configuration;
-using Miunie.Discord.Convertors;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Miunie.Core.Logging;
 using Miunie.Logger;
-using Miunie.Core.Discord;
-using Miunie.Discord.Adapters;
-using Miunie.Discord.Logging;
+using Miunie.InversionOfControl;
 
 namespace Miunie.ConsoleApp
 {
@@ -36,26 +23,8 @@ namespace Miunie.ConsoleApp
 
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
-                .AddSingleton<EntityConvertor>()
-                .AddSingleton<ProfileService>()
-                .AddScoped<ILanguageProvider, LanguageProvider>()
-                .AddSingleton<IDiscord, MiunieDiscordClient>()
-                .AddSingleton<IMiunieDiscord, MiunieDiscord>()
-                .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
-                .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
-                .AddSingleton<DiscordLogger>()
-                .AddScoped<CommandServiceFactory>()
-                .AddSingleton<IBotConfiguration, BotConfiguration>()
-                .AddSingleton<IConfiguration, ConfigManager>()
-                .AddSingleton<IPersistentStorage, JsonPersistentStorage>()
-                .AddSingleton<Random>()
-                .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
-                .AddScoped<IUserReputationProvider, UserReputationProvider>()
-                .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<ILogger, ConsoleLogger>()
-                .AddScoped<IListDirectoryProvider, ListDirectoryProvider>()
-                .AddSingleton<RemoteRepositoryService>()
-                .AddScoped<DirectoryService>()
+                .AddMiunieTypes()
                 .BuildServiceProvider();
     }
 }
