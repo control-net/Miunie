@@ -13,6 +13,8 @@ using System;
 using Miunie.Core.Logging;
 using Miunie.Logger;
 using Miunie.Core.Discord;
+using Miunie.Discord.Adapters;
+using Miunie.Discord.Logging;
 
 namespace Miunie.ConsoleApp
 {
@@ -36,25 +38,24 @@ namespace Miunie.ConsoleApp
             => _provider = new ServiceCollection()
                 .AddSingleton<EntityConvertor>()
                 .AddSingleton<ProfileService>()
-                .AddTransient<ILanguageProvider, LanguageProvider>()
-                .AddSingleton<DSharpPlusDiscord>()
-                .AddSingleton<IDiscord>(s =>
-                    s.GetRequiredService<DSharpPlusDiscord>())
-                .AddSingleton<IDiscordMessages>(s =>
-                    s.GetRequiredService<DSharpPlusDiscord>())
-                .AddSingleton<IDiscordGuilds>(s =>
-                    s.GetRequiredService<DSharpPlusDiscord>())
+                .AddScoped<ILanguageProvider, LanguageProvider>()
+                .AddSingleton<IDiscord, MiunieDiscordClient>()
+                .AddSingleton<IMiunieDiscord, MiunieDiscord>()
+                .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
+                .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
+                .AddSingleton<DiscordLogger>()
+                .AddScoped<CommandServiceFactory>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IPersistentStorage, JsonPersistentStorage>()
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
-                .AddTransient<IUserReputationProvider, UserReputationProvider>()
+                .AddScoped<IUserReputationProvider, UserReputationProvider>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<ILogger, ConsoleLogger>()
-                .AddTransient<IListDirectoryProvider, ListDirectoryProvider>()
+                .AddScoped<IListDirectoryProvider, ListDirectoryProvider>()
                 .AddSingleton<RemoteRepositoryService>()
-                .AddTransient<DirectoryService>()
+                .AddScoped<DirectoryService>()
                 .BuildServiceProvider();
     }
 }
