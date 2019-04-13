@@ -1,10 +1,11 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
 using Miunie.SystemInfrastructure;
+using Miunie.WindowsApp.Infrastructure;
 
-namespace Miunie.ConsoleApp
+namespace Miunie.WindowsApp
 {
     public static class InversionOfControl
     {
@@ -24,9 +25,9 @@ namespace Miunie.ConsoleApp
 
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
-                .AddSingleton<ILogger, ConsoleBottomLogger>()
+                .AddSingleton<ILogger, UwpLogger>()
                 .AddTransient<IDateTime, SystemDateTime>()
-                .AddSingleton<IFileSystem, SystemFileSystem>()
+                .AddSingleton<IFileSystem, UwpFileSystem>()
                 .AddMiunieTypes()
                 .BuildServiceProvider();
     }
