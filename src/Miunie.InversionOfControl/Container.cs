@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Miunie.Configuration;
 using Miunie.Core;
 using Miunie.Core.Discord;
-using Miunie.Core.Infrastructure;
 using Miunie.Core.Providers;
 using Miunie.Core.Services;
 using Miunie.Core.Storage;
@@ -27,7 +26,6 @@ namespace Miunie.InversionOfControl
                 .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
                 .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
                 .AddSingleton<DiscordLogger>()
-                .AddTransient<IDateTime, SystemDateTime>()
                 .AddScoped<CommandServiceFactory>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IConfiguration, ConfigManager>()

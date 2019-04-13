@@ -2,6 +2,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core.Logging;
 using Miunie.Logger;
 using Miunie.InversionOfControl;
+using Miunie.Core.Infrastructure;
+using Miunie.SystemInfrastructure;
 
 namespace Miunie.ConsoleApp
 {
@@ -24,6 +26,7 @@ namespace Miunie.ConsoleApp
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
                 .AddSingleton<ILogger, ConsoleLogger>()
+                .AddTransient<IDateTime, SystemDateTime>()
                 .AddMiunieTypes()
                 .BuildServiceProvider();
     }
