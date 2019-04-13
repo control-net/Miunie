@@ -44,22 +44,22 @@ namespace Miunie.WindowsApp
         private void LoggerOnLogReceived(object sender, EventArgs e)
         {
             var args = e as LogEventArgs;
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                LogListBox.Items?.Add(args?.Message);
-            });
+            //DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            //{
+            //    LogListBox.Items?.Add(args?.Message);
+            //});
         }
 
-        private void StartMiunieBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            _ = _miunie.StartAsync();
-            StartMiunieBtn.IsEnabled = false;
-        }
+        //private void StartMiunieBtn_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    _ = _miunie.StartAsync();
+        //    StartMiunieBtn.IsEnabled = false;
+        //}
 
-        private void ApplyTokenBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            var token = TokenPasswordBox.Password;
-            _miunie.BotConfiguration.DiscordToken = token;
-        }
+        //private void ApplyTokenBtn_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    var token = TokenPasswordBox.Password;
+        //    _miunie.BotConfiguration.DiscordToken = token;
+        //}
     }
 }

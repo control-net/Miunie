@@ -6,23 +6,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+    <NavigationView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition Width="2*"/>-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <!--<StackPanel>
+                <Button HorizontalAlignment="Stretch" Name="StartMiunieBtn" Click="StartMiunieBtn_OnClick" Style="{ThemeResource ButtonRevealStyle}" Content="Start Miunie" />
+                <Rectangle Height="20"></Rectangle>
+                <PasswordBox Name="TokenPasswordBox"></PasswordBox>
+                <Button HorizontalAlignment="Stretch" Name="ApplyTokenBtn" Click="ApplyTokenBtn_OnClick" Style="{ThemeResource ButtonRevealStyle}">Set Token</Button>
+            </StackPanel>-->
 
-        <StackPanel>
-            <Button HorizontalAlignment="Stretch" Name="StartMiunieBtn" Click="StartMiunieBtn_OnClick">Start Miunie</Button>
-            <Rectangle Height="20"></Rectangle>
-            <PasswordBox Name="TokenPasswordBox"></PasswordBox>
-            <Button HorizontalAlignment="Stretch" Name="ApplyTokenBtn" Click="ApplyTokenBtn_OnClick">Set Token</Button>
-        </StackPanel>
+            <StackPanel VerticalAlignment="Top">
+                <Grid Grid.Column="0" Margin="0, 60, 0, 0"  Width="175" Height="175">
+                    <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="175" Height="175"/>
+                    
+                    <Image Source="Assets/miunie-scarf-transparent.png" />
+                </Grid>
+                <TextBlock Margin="0, 20" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Stretch" TextAlignment="Center">Not connected</TextBlock>
+            </StackPanel>
 
-        <ListBox Grid.Column="1" Name="LogListBox">
-            <ListBoxItem>The log will appear here...</ListBoxItem>
-        </ListBox>
-    </Grid>
+
+            <!--<ListBox Grid.Column="1" Name="LogListBox">
+                <ListBoxItem>The log will appear here...</ListBoxItem>
+            </ListBox>-->
+        </Grid>
+    </NavigationView>
 </Page>

@@ -1,5 +1,4 @@
 ﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
 using Miunie.Core.Configuration;
 
 namespace Miunie.Discord
