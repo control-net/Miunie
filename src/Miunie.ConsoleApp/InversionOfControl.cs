@@ -25,7 +25,7 @@ namespace Miunie.ConsoleApp
 
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
-                .AddSingleton<ILogger, ConsoleLogger>()
+                .AddSingleton<ILogger, ConsoleBottomLogger>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<IFileSystem, SystemFileSystem>()
                 .AddMiunieTypes()
