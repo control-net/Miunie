@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
     <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
     <ProjectReference Include="..\Miunie.LiteDbStorage\Miunie.LiteDbStorage.csproj" />
   </ItemGroup>

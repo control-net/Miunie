@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Miunie.Configuration;
 using Miunie.Core;
+using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
 using Miunie.Core.Providers;
 using Miunie.Core.Services;
 using Miunie.Core.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Adapters;
-using Miunie.Discord.Configuration;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.Logging;
 using System;
@@ -27,7 +26,6 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<DiscordLogger>()
                 .AddScoped<CommandServiceFactory>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
-                .AddSingleton<IConfiguration, ConfigManager>()
                 .AddSingleton<IPersistentStorage, LiteDbStorage.PersistentStorage>()
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()

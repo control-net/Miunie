@@ -1,6 +1,6 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using Miunie.Discord.Configuration;
+using Miunie.Core.Configuration;
 
 namespace Miunie.Discord
 {
@@ -12,7 +12,7 @@ namespace Miunie.Discord
         {
             Client = new DiscordClient(new DiscordConfiguration
             {
-                Token = botConfig.GetBotToken(),
+                Token = botConfig.DiscordToken,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 LogLevel = LogLevel.Info,
