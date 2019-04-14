@@ -3,7 +3,6 @@ using Miunie.Core;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
 using Miunie.Core.Providers;
-using Miunie.Core.Services;
 using Miunie.Core.Storage;
 using Miunie.Discord;
 using Miunie.Discord.Adapters;
@@ -30,8 +29,6 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
-                .AddScoped<IListDirectoryProvider, ListDirectoryProvider>()
-                .AddSingleton<RemoteRepositoryService>()
-                .AddScoped<DirectoryService>();
+                .AddSingleton<RemoteRepositoryService>();
     }
 }
