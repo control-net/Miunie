@@ -1,0 +1,10 @@
+﻿<Application
+    x:Class="Miunie.WindowsApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Miunie.WindowsApp"
+    xmlns:vm="using:Miunie.WindowsApp.ViewModels">
+    <Application.Resources>
+        <vm:ViewModelLocator xmlns:vm="using:Miunie.WindowsApp.ViewModels" x:Key="Locator"/>
+    </Application.Resources>
+</Application>

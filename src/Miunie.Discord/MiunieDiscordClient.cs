@@ -1,21 +1,27 @@
 ﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using Miunie.Discord.Configuration;
+using Miunie.Core.Configuration;
 
 namespace Miunie.Discord
 {
     public class MiunieDiscordClient : IDiscord
     {
-        public DiscordClient Client { get; }
+        public DiscordClient Client { get; private set; }
+
+        private readonly IBotConfiguration _botConfig;
 
         public MiunieDiscordClient(IBotConfiguration botConfig)
         {
+            _botConfig = botConfig;
+        }
+
+        public void Initialize()
+        {
             Client = new DiscordClient(new DiscordConfiguration
             {
-                Token = botConfig.GetBotToken(),
+                Token = _botConfig.DiscordToken,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
-                LogLevel = LogLevel.Info,
+                LogLevel = LogLevel.Debug,
                 UseInternalLogHandler = false
             });
         }

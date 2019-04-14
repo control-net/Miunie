@@ -27,7 +27,6 @@ namespace Miunie.Discord
 
             commandService.RegisterCommands<ProfileCommand>();
             commandService.RegisterCommands<RemoteRepositoryCommand>();
-            commandService.RegisterCommands<DirectoryCommand>();
             commandService.RegisterConverter(_entityConvertor.ChannelConvertor);
             commandService.RegisterConverter(_entityConvertor.UserConvertor);
 

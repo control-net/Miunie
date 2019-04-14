@@ -1,44 +1,32 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
 using Miunie.Core.Logging;
-using Miunie.Core.Storage;
 
 namespace Miunie.Core.Providers
 {
     public class LanguageProvider : ILanguageProvider
     {
-        private readonly LanguageResourceCollection _langCollection;
-        private readonly Random _rand;
         private readonly ILogger _logger;
+        private readonly Random _random;
 
-        private const string Collection = "Lang";
-        private const string LangKey = "PhrasesEn";
+        private static readonly string[] ResourceSeparators = { "{{OR}}" };
 
-        public LanguageProvider(IPersistentStorage storage, Random rand, ILogger logger)
+        public LanguageProvider(ILogger logger, Random random)
         {
-            _langCollection = storage.RestoreSingle<LanguageResourceCollection>(Collection, LangKey);
-            _rand = rand;
             _logger = logger;
-            AssertNotNull(_langCollection);
-        }
-
-        private void AssertNotNull(LanguageResourceCollection langCollection)
-        {
-            if (!(langCollection is null)) { return; }
-            _logger.LogError("LanguageResources could not restore the ResourceCollection from the Persistent Storage.");
-            throw new NoNullAllowedException("LanguageResourceCollection is null.");
+            _random = random;
         }
 
         public string GetPhrase(string key, params object[] objs)
         {
-            var resource = GetResourceByKey(key);
-            if (resource is null) { return string.Empty; }
-            var phrase = resource.GetValue(_rand);
-            return string.Format(phrase, objs);
-        }
+            var resource = Strings.ResourceManager.GetString(key);
+            if (resource is null)
+            {
+                _logger.LogError($"Unable to find Language Resource with the following key: {key}");
+                return string.Empty;
+            }
 
-        private LangResource GetResourceByKey(string key)
-            => _langCollection.Resources.FirstOrDefault(r => r.Key == key);
+            var pool = resource.Split(ResourceSeparators, StringSplitOptions.RemoveEmptyEntries);
+            return string.Format(pool[_random.Next(0, pool.Length)], objs);
+        }
     }
 }

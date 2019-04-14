@@ -1,13 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Configuration\Miunie.Configuration.csproj" />
     <ProjectReference Include="..\Miunie.Discord\Miunie.Discord.csproj" />
-    <ProjectReference Include="..\Miunie.Storage\Miunie.Storage.csproj" />
+    <ProjectReference Include="..\Miunie.LiteDbStorage\Miunie.LiteDbStorage.csproj" />
   </ItemGroup>
 
 </Project>

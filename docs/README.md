@@ -24,124 +24,117 @@
 
 **Miunie** is a community Discord bot project.
 
-The project's purpose is to connect people interested in 
-[free and Open Source software](https://en.wikipedia.org/wiki/Free_and_open-source_software) development, the 
-[C# programming language](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29), and/or 
-[Discord's bot API](https://discordapp.com/developers/docs/intro).
+🎮 Run Miunie on your favorite platform!
 
-> You might be familiar with the [Community-Bot](https://github.com/discord-bot-tutorial/Community-Discord-BOT). This project is a complete rework of Community-Bot that improves the overall architecture.
+![platforms image](img/apps.png)
 
-🤠 **Want to give us a hand? (doesn't have to be by writing code)** Have this cookie 🍪 and read more about how exactly you can help in our [Contributing section](#contributing).
+Currently, Miunie can run on the following platforms:
 
-👩‍💻 **Just looking around?** Our [getting started guide](#getting-started) can get you up and running with your local Miunie in no-time.
+|                   | Miunie.ConsoleApp | Miunie.WindowsApp | Miunie.AspNet |
+|-------------------|:-----------------:|:-----------------:|--------------:|
+| Windows 7         | ✅                | ❌               | ✅            |
+| MacOS / Linux     | ✅                | ❌               | ✅           |
+| Windows 10        | ✅                | ✅               | ✅            |
+| IoT Devices       | ✅                | ✅               | ✅            |
+| Mobile            | ❌                | ✅               | ✅           |
+| Xbox              | ❌                | ✅               | ❔            |
+| HoloLens          | ❌                | ✅               | ❔            |
+| Surface Hub       | ❌                | ✅               | ❔            |
 
-🐛 **Found a bug?** Let us know by creating a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new). If you are hardcore and can squash the bug yourself 😩👌 create the issue first, then create a [Pull Request](https://help.github.com/en/articles/about-pull-requests).
+> ASP.NET implementation of Miunie is still under development.
 
-💡 **Have an idea/suggestion?** Tell us all about it by creating a new [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
+🤠 **Wanna help?** Checkout the [contributing section](#contributing).
+
+👩‍💻 **Wanna try it out?** See the [getting started guide](#getting-started).
+
+🐛 **Found a bug?** Let us know by creating a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
+
+💡 **Have an idea/suggestion?** Tell us all about it through a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
 
 ## Getting Started
 
-These instructions cover how to get a copy of the project running on your local machine for development and testing purposes.
+These instructions are going to walk you through downloading a copy of Miunie and running it.
+
+> 🔧 If you want to know how to setup your environment for development, see [this guide](CONTRIBUTING.md#setting-up-a-development-environment).
 
 > ℹ️ Checkout our [deployment section](#deployment) for notes on how to set the project up for hosting on a dedicated machine.
 
 ## Prerequisites
 
-- **Your favorite IDE/Code Editor**
-  - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) - Ensure you have `.NET Core cross-platform development` installed.
-  - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For VSCode - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-  - (recommended for GNU/Linux :penguin:) [Rider: The Cross-Platform .NET IDE](https://www.jetbrains.com/rider/) from JetBrains
-  - _Any other IDE/Code Editor you might want to use..._
-- **The GIT CLI**
-  - [Git Command Line Interface (CLI)](https://git-scm.com/downloads)
-  - This is going to be used to both setup and deploy the project.
-- **.NET Core**
-  - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) (or newer)
+- **IDE / Code Editor**
 
-> :warning: .NET Core does not always come with the VSC 2017 "Cross-platform dev" package.
->
-> You can always install it yourself [here](https://dotnet.microsoft.com/download).
+For picking which IDE to use, take a look at the following table.
 
-## Installation
+* ⭐ - Recommended for a given platform
+* ⚠ - Known issues for a given platform
+* ✅ - Will work for a given platform
 
-This is a step by step guide to get Miunie up and running on your machine.
+> _If you are a beginner, we suggest sticking to the ⭐ recommended options._
 
-1. [Get the source code](#getting-the-source)
-2. [Setup your IDE](#setting-up-the-environment---visual-studio-ide)
-3. [Setup a bot token](#setting-up-a-bot-token)
+|                   | Miunie.ConsoleApp | Miunie.WindowsApp | Miunie.AspNet |
+|-------------------|:-----------------:|:-----------------:|--------------:|
+| [Visual Studio **2019** (Community)](https://visualstudio.microsoft.com/downloads/)| ⭐ | ⭐ | ⭐ |
+| [Visual Studio 2017 (Community)](https://visualstudio.microsoft.com/downloads/)| ⚠ | ⚠ | ⚠ |
+| [Visual Studio Code](https://code.visualstudio.com/)                           | ✅ | ❌ | ⚠  |
+| [Rider: The Cross-Platform .NET IDE](https://www.jetbrains.com/rider/)         | ✅ | ❌ | ✅ |
 
-### Getting the source
+- **Visual Studio Prerequisites**
 
-1. [Fork The Original Repository](https://help.github.com/articles/fork-a-repo/)
-2. Navigate to your fork.
-3. [Clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
+During the installation process of Visual Studio, you should always include the following options:
 
-### Setting up the environment - Visual Studio IDE
+![visual studio base dependencies](img/vsdeps-base.png)
 
-- The root directory of the project contains Miunie.sln, this is a solution file and you can open it with Visual Studio (See [Prerequisites](#Prerequisites))
-- Once Visual Studio is open, you should try to [build the solution](https://docs.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2017).
-  - You can do so by using the shortcut `F6` or going to `Build` > `Build Solution`.
-- If the build fails due to some kind of error, make sure to fix it before continuing with this guide.
+If you would like to build the ASP.NET project, include the following option:
 
-### Setting up the environment - Visual Studio Code
+![visual studio asp dependencies](img/vsdeps-asp.png)
 
-- Open Visual Studio Code
-- Open the project's `src` folder (the one with `Miunie.sln` in it) in Visual Studio Code.
-- To build the application, open the [Integrated Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) and type `dotnet build`.
-- You should see the build succeeded with no errors.
+If you would like to build the Universal Windows Platform App, include the following option:
 
-### Setting up the environment - Rider IDE
+![visual studio UWP dependencies](img/vsdeps-win.png)
 
-- Open Rider IDE and on the "Welcome to JetBrains Rider" screen select the "Open Solution or Project" option.
+- **Ensuring .NET Core 2.2 (or higher) is installed**
 
-![Open Solution or Project](https://i.imgur.com/BcDD0AQ.png)
+To make sure you have the correct version of .NET Core, open your `command promt`/`Terminal`/`Powershell` and type in the following command:
 
-- Navigate to your cloned Directory and select the `Miunie.sln` file.
+```
+dotnet --list-sdks
+```
 
-- To build the project, navigate to `Build` > `Build Solution` or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+_Here is an example of this command's output on Windows:_
 
-### Setting up a bot token
+```
+2.1.602 [C:\Program Files\dotnet\sdk]
+2.2.202 [C:\Program Files\dotnet\sdk]
+3.0.100-preview3-010431 [C:\Program Files\dotnet\sdk]
+```
 
-The bot configuration is stored as an [XML](https://en.wikipedia.org/wiki/XML) file.
+Your output will most likely differ a bit.
 
-When you compile Miunie, the project uses the configuration from `Miunie.ConsoleApp/App.config`.
+If you see a version higher or equal to `2.2`, you can continue to the next step.
 
-> ℹ️ In a compiled project, the configuration file is called `Miunie.ConsoleApp.dll.config`.
+If you don't see the right version or if you got a response similar to `Command not found`, you need to download an install the latest version of .NET Core.
 
-The project comes with a configuration template: `Miunie.ConsoleApp/App.config.template`. To use the template:
+You can install it [here](https://dotnet.microsoft.com/).
 
-- Create a copy of the `App.config.template` file.
-- Rename it to `App.config`
-- Open the file for editing
-- Find the line with `key="DiscordToken"`
-- Replace the `Your-Token-Here` placeholder with your bot's token.
+- **Getting a copy of the project**
 
-> ℹ️ Our repository is setup to ignore `App.config` to prevent you from accidentally committing your token into the repository.
+> If you want to clone or fork this repository instead, please follow the [contributing guide](CONTRIBUTING.md).
 
+Download the project by pressing the green "Clone or download" button and selecting the "Download ZIP" option.
 
-## Running Tests
+![GitHub download repo](img/github-download.png)
 
-To run the unit tests already inclduded in the project follow the directions that are relevent to you.
+Unzip the directory and navigate into the `src` folder inside it.
 
-- **Visual Studio IDE**
-  - Either use the shortcut <kbd>CTRL</kbd> + <kbd>R</kbd>, <kbd>A</kbd> or go to `Test` > `Run` > `All Tests` 
-  - Test output Example:
-  
-![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
+Open the `Miunie.sln` in your IDE.
 
-> ℹ️ You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup.
+🎉 Congratulations, you are now set up for building and running Miunie.
 
-- **Visual Studio Code**
-  - Open your terminal application and navigate into the project's `src` directory.
-  - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
+If you need more information about how to build and run the project, please contact us on our Discord server:
 
-![Running Unit Tests in VSC](https://cdn.discordapp.com/attachments/495545716773617676/558704760987844609/unknown.png)
-
-- **Rider IDE**
-  - To run the Project's unit tests, navigate to `Tests` > `Run Unit Tests`.
-  - You should see the test results in a "Unit Tests" window:
-
-![Unit Tests window](https://i.imgur.com/xmjEbK7.png)
+<a href="https://discord.gg/cGhEZuk">
+  <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
+</a>
 
 ## Deployment
 

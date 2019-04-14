@@ -1,0 +1,43 @@
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Miunie.Core;
+using Miunie.WindowsApp.Utilities;
+
+namespace Miunie.WindowsApp.ViewModels
+{
+    public class ViewModelLocator
+    {
+        public ViewModelLocator()
+        {
+
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                // Create design time view services and models
+            }
+            else
+            {
+                // Create run time view services and models
+            }
+
+            SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            SimpleIoc.Default.Register<StartPageViewModel>();
+            SimpleIoc.Default.Register<StatusPageViewModel>();
+            SimpleIoc.Default.Register<SettingsPageViewModel>();
+            SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
+            SimpleIoc.Default.Register<TokenValidator>();
+        }
+
+        public StartPageViewModel StartPageInstance 
+            => ServiceLocator.Current.GetInstance<StartPageViewModel>();
+
+        public StatusPageViewModel StatusPageInstance
+            => ServiceLocator.Current.GetInstance<StatusPageViewModel>();
+
+        public SettingsPageViewModel SettingsPageInstance
+            => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
+    }
+}
