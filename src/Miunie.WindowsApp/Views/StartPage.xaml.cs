@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,25 +14,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Miunie.WindowsApp.ViewModels;
 
 namespace Miunie.WindowsApp.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class StartPage : Page
     {
-        // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
-        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        private readonly List<(string Tag, Type Page)> _navigationPages = new List<(string Tag, Type Page)>
         {
             ("home", typeof(StatusPage))
         };
 
+        private bool _shouldCheckForClipboardToken = true;
+        private readonly StartPageViewModel _vm;
+
         public StartPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            _vm = DataContext as StartPageViewModel;
         }
 
         private void MainNavigationView_OnLoaded(object sender, RoutedEventArgs e)
@@ -40,27 +40,9 @@ namespace Miunie.WindowsApp.Views
             NavView_Navigate("home", new EntranceNavigationTransitionInfo());
         }
 
-        private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
+        private void StartPage_OnGotFocus(object sender, RoutedEventArgs e)
         {
-            Type _page = null;
-            if (navItemTag == "settings")
-            {
-                _page = typeof(SettingsPage);
-            }
-            else
-            {
-                var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
-                _page = item.Page;
-            }
-            // Get the page type before navigation so you can prevent duplicate
-            // entries in the backstack.
-            var preNavPageType = MainFrame.CurrentSourcePageType;
-
-            // Only navigate if the selected page isn't currently loaded.
-            if (!(_page is null) && !Type.Equals(preNavPageType, _page))
-            {
-                MainFrame.Navigate(_page, null, transitionInfo);
-            }
+            CheckForTokenInClipboard();
         }
 
         private void MainNavigationView_OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -74,6 +56,54 @@ namespace Miunie.WindowsApp.Views
                 var navItemTag = args.InvokedItemContainer.Tag.ToString();
                 NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
             }
+        }
+
+        private async void CheckForTokenInClipboard()
+        {
+            if (!_shouldCheckForClipboardToken) { return; }
+            _shouldCheckForClipboardToken = false;
+
+            var clipboardContent = await Clipboard.GetContent().GetTextAsync();
+
+            if (!_vm.TokenValidator.StringHasValidTokenStructure(clipboardContent)) { return; }
+
+            var clipboardTokenDialog = new ContentDialog
+            {
+                Title = "Paste copied bot token?",
+                Content = "It looks like you have a bot token copied.\nDo you want to use it?",
+                PrimaryButtonText = "Sure",
+                CloseButtonText = "No, thanks"
+            };
+
+            var result = await clipboardTokenDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary) { _vm.ApplyToken(clipboardContent); }
+        }
+
+        private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
+        {
+            var newPage = GetPageTypeByNavItemTag(navItemTag);
+
+            if (newPage is null || MainFrame.CurrentSourcePageType == newPage) { return; }
+
+            MainFrame.Navigate(newPage, null, transitionInfo);
+        }
+
+        private Type GetPageTypeByNavItemTag(string navItemTag)
+        {
+            Type newPage;
+
+            if (navItemTag == "settings")
+            {
+                newPage = typeof(SettingsPage);
+            }
+            else
+            {
+                var (_, type) = _navigationPages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
+                newPage = type;
+            }
+
+            return newPage;
         }
     }
 }

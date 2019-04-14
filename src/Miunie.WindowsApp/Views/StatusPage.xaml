@@ -10,12 +10,34 @@
     DataContext="{Binding StatusPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
-        <StackPanel VerticalAlignment="Top">
-            <Grid Margin="0, 60, 0, 0"  Width="175" Height="175">
-                <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="175" Height="175"/>
-                <Image Source="../Assets/miunie-scarf-transparent.png" />
+        <StackPanel VerticalAlignment="Top" 
+                    HorizontalAlignment="Center">
+            <Grid Margin="0, 60, 0, 0"  
+                  Width="175" 
+                  Height="175">
+
+                <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" 
+                         Width="175" Height="175"/>
+
+                <Ellipse Width="175" Height="175">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
+                    </Ellipse.Fill>
+                </Ellipse>
             </Grid>
-            <TextBlock Margin="0, 20" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Stretch" TextAlignment="Center" Text="{Binding ConnectionStatus}" />
+
+            <TextBlock Margin="0, 20" 
+                       Style="{StaticResource TitleTextBlockStyle}" 
+                       HorizontalAlignment="Stretch" 
+                       TextAlignment="Center" 
+                       Text="{Binding ConnectionStatus}" />
+
+            <Button IsEnabled="{Binding ActionButtonEnabled}" 
+                    Name="ActionBtn" 
+                    Content="{Binding ActionButtonText}" 
+                    HorizontalAlignment="Stretch" 
+                    Style="{ThemeResource ButtonRevealStyle}" 
+                    Click="ActionBtn_OnClick"/>
         </StackPanel>
     </Grid>
 </Page>

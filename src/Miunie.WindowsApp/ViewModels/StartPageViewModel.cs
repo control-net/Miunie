@@ -1,37 +1,24 @@
 ﻿using GalaSoft.MvvmLight;
 using Miunie.Core;
+using Miunie.WindowsApp.Utilities;
 
 namespace Miunie.WindowsApp.ViewModels
 {
     public class StartPageViewModel : ViewModelBase
     {
-        private bool _isLoading = false;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set
-            {
-                _isLoading = value;
-                RaisePropertyChanged("IsLoading");
+        public TokenValidator TokenValidator { get; }
 
-            }
-        }
-        private string _title;
-        public string Title
-        {
+        private readonly MiunieBot _miunie;
 
-            get => _title;
-            set
-            {
-                if (value == _title) return;
-                _title = value;
-                RaisePropertyChanged("Title");
-            }
+        public StartPageViewModel(TokenValidator tokenValidator, MiunieBot miunie)
+        {
+            TokenValidator = tokenValidator;
+            _miunie = miunie;
         }
 
-        public StartPageViewModel(MiunieBot miunie)
+        internal void ApplyToken(string token)
         {
-            Title = "Not connected";
+            _miunie.BotConfiguration.DiscordToken = token;
         }
     }
 }

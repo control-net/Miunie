@@ -10,6 +10,13 @@
     DataContext="{Binding SettingsPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
-        <TextBlock Text="It is settings, my dudes." />
+        <StackPanel Margin="30">
+            <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding BotTokenBeginning}" />
+                <Rectangle Fill="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" Width="300"/>
+                <TextBlock Text="{Binding BotTokenEnd}" />
+            </StackPanel>    
+        </StackPanel>
     </Grid>
 </Page>

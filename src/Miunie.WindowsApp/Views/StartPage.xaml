@@ -7,17 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
-    DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}">
+    DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}"
+    GotFocus="StartPage_OnGotFocus">
 
-    <NavigationView Name="MainNavigationView"
-                    Loaded="MainNavigationView_OnLoaded"
-                    ItemInvoked="MainNavigationView_OnItemInvoked">
-        <NavigationView.MenuItems>
-            <NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
-            <NavigationViewItemSeparator/>
-        </NavigationView.MenuItems>
-        <Grid>
-            <Frame Name="MainFrame" />
-        </Grid>
-    </NavigationView>
+    <Grid>
+        <NavigationView Name="MainNavigationView"
+                        Loaded="MainNavigationView_OnLoaded"
+                        ItemInvoked="MainNavigationView_OnItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
+                <NavigationViewItemSeparator/>
+            </NavigationView.MenuItems>
+            <Grid>
+                <Frame Name="MainFrame" />
+            </Grid>
+        </NavigationView>
+    </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Linq;
+using GalaSoft.MvvmLight;
 using Miunie.Core;
 
 namespace Miunie.WindowsApp.ViewModels
@@ -17,6 +18,10 @@ namespace Miunie.WindowsApp.ViewModels
                 RaisePropertyChanged(nameof(BotToken));
             }
         }
+
+        public string BotTokenBeginning => new string(_botToken.Take(5).ToArray());
+
+        public string BotTokenEnd => new string(_botToken.TakeLast(5).ToArray());
 
         public SettingsPageViewModel(MiunieBot miunie)
         {
