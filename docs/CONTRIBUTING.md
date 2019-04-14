@@ -7,6 +7,87 @@
 * [Discord Server](https://discord.gg/cGhEZuk) - _Always someone ready to help on our Discord Server._
 * [DSharpPlus Docs](https://dsharpplus.github.io/) - _Documentation for the library we're using._
 
+## Setting up a development environment
+
+These instructions cover how to get a copy of the project running on your local machine for development and testing purposes.
+
+## Prerequisites
+
+You can find all prerequisites in the [prerequisites section of the main readme file](README.md#prerequisites).
+
+## Installation
+
+This is a step by step guide to get Miunie up and running on your machine.
+
+1. [Get the source code](#getting-the-source)
+2. [Setup your IDE](#setting-up-the-environment---visual-studio-ide)
+
+### Getting the source
+
+1. [Fork The Original Repository](https://help.github.com/articles/fork-a-repo/)
+2. Navigate to your fork.
+3. [Clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
+
+### Selecting a project
+
+Depending on what front-end you want to use, it is possible that you will have to select the project as a "StartUp project".
+
+You can do that by right clicking the project in Visual Studio and selecting the "Set as StartUp project" option.
+
+### Setting up the environment - Visual Studio 2019
+
+- The root directory of the project contains `Miunie.sln`, this is a solution file and you can open it with Visual Studio (See [Prerequisites](#Prerequisites))
+- Once Visual Studio is open, you should try to [build the solution](https://docs.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2017).
+  - You can do so by using the shortcut `F6` or going to `Build` > `Build Solution`.
+- If the build fails due to some kind of error, make sure to fix it before continuing with this guide.
+
+If you cannot figure out the cause of an error, feel free to contact us on our Discord server:
+
+<a href="https://discord.gg/cGhEZuk">
+  <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
+</a>
+
+### Setting up the environment - Visual Studio Code
+
+- Open Visual Studio Code
+- Open the project's `src` folder (the one with `Miunie.sln` in it) in Visual Studio Code.
+- To build the application, open the [Integrated Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) and type `dotnet build`.
+- You should see the build succeeded with no errors.
+
+### Setting up the environment - Rider IDE
+
+- Open Rider IDE and on the "Welcome to JetBrains Rider" screen select the "Open Solution or Project" option.
+
+![Open Solution or Project](https://i.imgur.com/BcDD0AQ.png)
+
+- Navigate to your cloned Directory and select the `Miunie.sln` file.
+
+- To build the project, navigate to `Build` > `Build Solution` or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+
+## Running Tests
+
+To run the unit tests already inclduded in the project follow the directions that are relevent to you.
+
+- **Visual Studio IDE**
+  - Either use the shortcut <kbd>CTRL</kbd> + <kbd>R</kbd>, <kbd>A</kbd> or go to `Test` > `Run` > `All Tests` 
+  - Test output Example:
+  
+![Example Output Of Tests](https://i.gyazo.com/da85fac25967d0f740cfa7c91a2fb182.png)
+
+> ℹ️ You can `Restore` > `Build` > `Test` via the CLI as shown below in Visual Studio Code setup.
+
+- **Visual Studio Code**
+  - Open your terminal application and navigate into the project's `src` directory.
+  - `dotnet test [Name of any .Tests directory]` - This runs the unit tests for specific modules. You should see a completed output stating that all tests passed.
+
+![Running Unit Tests in VSC](https://cdn.discordapp.com/attachments/495545716773617676/558704760987844609/unknown.png)
+
+- **Rider IDE**
+  - To run the Project's unit tests, navigate to `Tests` > `Run Unit Tests`.
+  - You should see the test results in a "Unit Tests" window:
+
+![Unit Tests window](https://i.imgur.com/xmjEbK7.png)
+
 ## How to submit changes
 
 ![Forking Miunie](https://i.imgur.com/mz93Muk.png)
@@ -135,28 +216,13 @@ And if you can fix the bug as well, that would be super stellar! :revolving_hear
 
 To make sure we all understand each other's code, we have a unified standard to follow.
 
-### **You promise to follow the clean code bible**
-
-### 80 Character Line Limit
-
-* This is already included in the `settings.json` for VSCode.
-* Below is an example `.vimrc` to follow this 80 character rule.
-
-```bash
-" 80 characters reminder
-set cc=80
-highlight ColorColumn ctermbg=0
-```
-
 ### No body should be ommitted (Example Below)
 
 This means, if you can add a body to an `if`, `else`, `foreach` or any other statement that can have a body `{ }` you should do it.
 
-```cs
-//Wrong way
-if(foo is null) return;
-//Correct way
-if(foo is null) { return; }
+```diff
+- if(foo is null) return;
++ if(foo is null) { return; }
 ```
 
 ### Commenting rules

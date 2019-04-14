@@ -24,43 +24,117 @@
 
 **Miunie** is a community Discord bot project.
 
-The project's purpose is to connect people interested in 
-[free and Open Source software](https://en.wikipedia.org/wiki/Free_and_open-source_software) development, the 
-[C# programming language](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29), and/or 
-[Discord's bot API](https://discordapp.com/developers/docs/intro).
+🎮 Run Miunie on your favorite platform!
 
-> You might be familiar with the [Community-Bot](https://github.com/discord-bot-tutorial/Community-Discord-BOT). This project is a complete rework of Community-Bot that improves the overall architecture.
+![platforms image](img/apps.png)
 
-🤠 **Want to give us a hand? (doesn't have to be by writing code)** Have this cookie 🍪 and read more about how exactly you can help in our [Contributing section](#contributing).
+Currently, Miunie can run on the following platforms:
 
-👩‍💻 **Just looking around?** Our [getting started guide](#getting-started) can get you up and running with your local Miunie in no-time.
+|                   | Miunie.ConsoleApp | Miunie.WindowsApp | Miunie.AspNet |
+|-------------------|:-----------------:|:-----------------:|--------------:|
+| Windows 7         | ✅                | ❌               | ✅            |
+| MacOS / Linux     | ✅                | ❌               | ✅           |
+| Windows 10        | ✅                | ✅               | ✅            |
+| IoT Devices       | ✅                | ✅               | ✅            |
+| Mobile            | ❌                | ✅               | ✅           |
+| Xbox              | ❌                | ✅               | ❔            |
+| HoloLens          | ❌                | ✅               | ❔            |
+| Surface Hub       | ❌                | ✅               | ❔            |
 
-🐛 **Found a bug?** Let us know by creating a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new). If you are hardcore and can squash the bug yourself 😩👌 create the issue first, then create a [Pull Request](https://help.github.com/en/articles/about-pull-requests).
+> ASP.NET implementation of Miunie is still under development.
 
-💡 **Have an idea/suggestion?** Tell us all about it by creating a new [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
+🤠 **Wanna help?** Checkout the [contributing section](#contributing).
+
+👩‍💻 **Wanna try it out?** See the [getting started guide](#getting-started).
+
+🐛 **Found a bug?** Let us know by creating a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
+
+💡 **Have an idea/suggestion?** Tell us all about it through a [GitHub issue](https://github.com/discord-bot-tutorial/Miunie/issues/new).
 
 ## Getting Started
 
-These instructions cover how to get a copy of the project running on your local machine for development and testing purposes.
+These instructions are going to walk you through downloading a copy of Miunie and running it.
+
+> 🔧 If you want to know how to setup your environment for development, see [this guide](CONTRIBUTING.md#setting-up-a-development-environment).
 
 > ℹ️ Checkout our [deployment section](#deployment) for notes on how to set the project up for hosting on a dedicated machine.
 
 ## Prerequisites
 
-- **Your favorite IDE/Code Editor**
-  - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) - Ensure you have `.NET Core cross-platform development` installed.
-  - [Visual Studio Code](https://code.visualstudio.com/) - Ensure you have the extension: [C# For VSCode - Omnisharp](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-  - (recommended for GNU/Linux :penguin:) [Rider: The Cross-Platform .NET IDE](https://www.jetbrains.com/rider/) from JetBrains
-  - _Any other IDE/Code Editor you might want to use..._
-- **The GIT CLI**
-  - [Git Command Line Interface (CLI)](https://git-scm.com/downloads)
-  - This is going to be used to both setup and deploy the project.
-- **.NET Core**
-  - [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) (or newer)
+- **IDE / Code Editor**
 
-> :warning: .NET Core does not always come with the VSC 2017 "Cross-platform dev" package.
->
-> You can always install it yourself [here](https://dotnet.microsoft.com/download).
+For picking which IDE to use, take a look at the following table.
+
+* ⭐ - Recommended for a given platform
+* ⚠ - Known issues for a given platform
+* ✅ - Will work for a given platform
+
+> _If you are a beginner, we suggest sticking to the ⭐ recommended options._
+
+|                   | Miunie.ConsoleApp | Miunie.WindowsApp | Miunie.AspNet |
+|-------------------|:-----------------:|:-----------------:|--------------:|
+| [Visual Studio **2019** (Community)](https://visualstudio.microsoft.com/downloads/)| ⭐ | ⭐ | ⭐ |
+| [Visual Studio 2017 (Community)](https://visualstudio.microsoft.com/downloads/)| ⚠ | ⚠ | ⚠ |
+| [Visual Studio Code](https://code.visualstudio.com/)                           | ✅ | ❌ | ⚠  |
+| [Rider: The Cross-Platform .NET IDE](https://www.jetbrains.com/rider/)         | ✅ | ❌ | ✅ |
+
+- **Visual Studio Prerequisites**
+
+During the installation process of Visual Studio, you should always include the following options:
+
+![visual studio base dependencies](img/vsdeps-base.png)
+
+If you would like to build the ASP.NET project, include the following option:
+
+![visual studio asp dependencies](img/vsdeps-asp.png)
+
+If you would like to build the Universal Windows Platform App, include the following option:
+
+![visual studio UWP dependencies](img/vsdeps-win.png)
+
+- **Ensuring .NET Core 2.2 (or higher) is installed**
+
+To make sure you have the correct version of .NET Core, open your `command promt`/`Terminal`/`Powershell` and type in the following command:
+
+```
+dotnet --list-sdks
+```
+
+_Here is an example of this command's output on Windows:_
+
+```
+2.1.602 [C:\Program Files\dotnet\sdk]
+2.2.202 [C:\Program Files\dotnet\sdk]
+3.0.100-preview3-010431 [C:\Program Files\dotnet\sdk]
+```
+
+Your output will most likely differ a bit.
+
+If you see a version higher or equal to `2.2`, you can continue to the next step.
+
+If you don't see the right version or if you got a response similar to `Command not found`, you need to download an install the latest version of .NET Core.
+
+You can install it [here](https://dotnet.microsoft.com/).
+
+- **Getting a copy of the project**
+
+> If you want to clone or fork this repository instead, please follow the [contributing guide](CONTRIBUTING.md).
+
+Download the project by pressing the green "Clone or download" button and selecting the "Download ZIP" option.
+
+![GitHub download repo](img/github-download.png)
+
+Unzip the directory and navigate into the `src` folder inside it.
+
+Open the `Miunie.sln` in your IDE.
+
+🎉 Congratulations, you are now set up for building and running Miunie.
+
+If you need more information about how to build and run the project, please contact us on our Discord server:
+
+<a href="https://discord.gg/cGhEZuk">
+  <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
+</a>
 
 ## Installation
 
@@ -142,6 +216,8 @@ To run the unit tests already inclduded in the project follow the directions tha
   - You should see the test results in a "Unit Tests" window:
 
 ![Unit Tests window](https://i.imgur.com/xmjEbK7.png)
+
+// --
 
 ## Deployment
 
