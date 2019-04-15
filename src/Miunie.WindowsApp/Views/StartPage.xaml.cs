@@ -63,9 +63,13 @@ namespace Miunie.WindowsApp.Views
             if (!_shouldCheckForClipboardToken) { return; }
             _shouldCheckForClipboardToken = false;
 
-            var clipboardContent = await Clipboard.GetContent().GetTextAsync();
+            var clipboardContent = Clipboard.GetContent();
 
-            if (!_vm.TokenValidator.StringHasValidTokenStructure(clipboardContent)) { return; }
+            if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
+
+            var possibleToken = await Clipboard.GetContent().GetTextAsync();
+
+            if (!_vm.TokenValidator.StringHasValidTokenStructure(possibleToken)) { return; }
 
             var clipboardTokenDialog = new ContentDialog
             {
@@ -77,7 +81,7 @@ namespace Miunie.WindowsApp.Views
 
             var result = await clipboardTokenDialog.ShowAsync();
 
-            if (result == ContentDialogResult.Primary) { _vm.ApplyToken(clipboardContent); }
+            if (result == ContentDialogResult.Primary) { _vm.ApplyToken(possibleToken); }
         }
 
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)

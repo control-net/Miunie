@@ -19,9 +19,9 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        public string BotTokenBeginning => new string(_botToken.Take(5).ToArray());
+        public string BotTokenBeginning => new string(_botToken?.Take(5).ToArray());
 
-        public string BotTokenEnd => new string(_botToken.TakeLast(5).ToArray());
+        public string BotTokenEnd => new string(_botToken?.TakeLast(5).ToArray());
 
         public SettingsPageViewModel(MiunieBot miunie)
         {
