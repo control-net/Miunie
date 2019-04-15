@@ -10,3 +10,11 @@ build_script:
   - dotnet build src -c Release
 test_script:
   - dotnet test src
+
+on_success:
+- ps: Invoke-RestMethod https://raw.githubusercontent.com/DraxCodes/Miunie/master/Veyorhook.ps1 -o VeyorHook.ps1
+- ps: ./VeyorHook.ps1 success $env:WEBHOOK_URL
+
+on_failure:
+- ps: Invoke-RestMethod https://raw.githubusercontent.com/DraxCodes/Miunie/master/Veyorhook.ps1 -o VeyorHook.ps1
+- ps: ./VeyorHook.ps1 failure $env:WEBHOOK_URL
