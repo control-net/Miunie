@@ -5,22 +5,37 @@
     xmlns:local="using:Miunie.WindowsApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
     DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}"
     GotFocus="StartPage_OnGotFocus">
 
     <Grid>
-        <NavigationView Name="MainNavigationView"
+        <muxc:NavigationView Name="MainNavigationView"
                         Loaded="MainNavigationView_OnLoaded"
                         ItemInvoked="MainNavigationView_OnItemInvoked">
-            <NavigationView.MenuItems>
-                <NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
-                <NavigationViewItemSeparator/>
-            </NavigationView.MenuItems>
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
+                <muxc:NavigationViewItemSeparator/>
+            </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame Name="MainFrame" />
             </Grid>
-        </NavigationView>
+        </muxc:NavigationView>
     </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState>
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger
+                        MinWindowWidth="{x:Bind MainNavigationView.CompactModeThresholdWidth}"/>
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="ContentFrame.Padding" Value="24,0,24,24"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </Page>
