@@ -9,26 +9,33 @@
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
     DataContext="{Binding SettingsPageInstance, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Grid Padding="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="MiunieSettingsAvatar" VerticalAlignment="Top" Margin="0, 16, 0, 0">
-            <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="100" Height="100"/>
-            <Ellipse Width="100" Height="100">
+
+        <TextBlock Grid.ColumnSpan="2" Text="Settings" TextAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource TitleTextBlockStyle}"/>
+
+        <Grid Grid.Row="1" x:Name="MiunieSettingsAvatar" Padding="0, 0, 20, 0">
+            <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="128" Height="128" VerticalAlignment="Top"/>
+            <Ellipse Width="128" Height="128" VerticalAlignment="Top">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <StackPanel Margin="12, 32" Grid.Column="1">
+        <StackPanel Margin="12, 32" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding BotTokenBeginning}" />
                 <Rectangle Fill="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" Width="300"/>
                 <TextBlock Text="{Binding BotTokenEnd}" />
-            </StackPanel>    
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
