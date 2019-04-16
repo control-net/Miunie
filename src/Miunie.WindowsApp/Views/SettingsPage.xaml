@@ -10,7 +10,19 @@
     DataContext="{Binding SettingsPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
-        <StackPanel Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="MiunieSettingsAvatar" VerticalAlignment="Top" Margin="0, 16, 0, 0">
+            <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="100" Height="100"/>
+            <Ellipse Width="100" Height="100">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <StackPanel Margin="12, 32" Grid.Column="1">
             <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding BotTokenBeginning}" />

@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace Miunie.WindowsApp.Views
@@ -20,6 +21,20 @@ namespace Miunie.WindowsApp.Views
         public SettingsPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("MiunieStatusToSettings");
+            if (animation is null) { return; }
+            animation.TryStart(MiunieSettingsAvatar);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            ConnectedAnimationService
+                .GetForCurrentView()
+                .PrepareToAnimate("MiunieSettingsToStatus", MiunieSettingsAvatar);
         }
     }
 }

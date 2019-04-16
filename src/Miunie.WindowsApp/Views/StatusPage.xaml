@@ -14,12 +14,13 @@
                     HorizontalAlignment="Center">
             <Grid Margin="0, 60, 0, 0"  
                   Width="175" 
-                  Height="175">
+                  Height="175"
+                  x:Name="MiunieAvatar">
 
                 <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" 
                          Width="175" Height="175"/>
 
-                <Ellipse Width="175" Height="175">
+                <Ellipse Width="175" Height="175" >
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
                     </Ellipse.Fill>
