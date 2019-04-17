@@ -5,6 +5,11 @@
     xmlns:local="using:Miunie.WindowsApp"
     xmlns:vm="using:Miunie.WindowsApp.ViewModels">
     <Application.Resources>
-        <vm:ViewModelLocator xmlns:vm="using:Miunie.WindowsApp.ViewModels" x:Key="Locator"/>
+        <ResourceDictionary>
+            <vm:ViewModelLocator xmlns:vm="using:Miunie.WindowsApp.ViewModels" x:Key="Locator"/>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

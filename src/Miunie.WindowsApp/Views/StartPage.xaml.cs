@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Miunie.WindowsApp.ViewModels;
+using muxc = Microsoft.UI.Xaml.Controls;
 
 namespace Miunie.WindowsApp.Views
 {
@@ -45,7 +46,7 @@ namespace Miunie.WindowsApp.Views
             CheckForTokenInClipboard();
         }
 
-        private void MainNavigationView_OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void MainNavigationView_OnItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
             {
