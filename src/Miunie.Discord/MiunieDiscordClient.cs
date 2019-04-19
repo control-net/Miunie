@@ -21,9 +21,11 @@ namespace Miunie.Discord
                 Token = _botConfig.DiscordToken,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
-                LogLevel = LogLevel.Debug,
+                LogLevel = LogLevel.Info,
                 UseInternalLogHandler = false
             });
         }
+
+        public void DisposeOfClient() => Client = null;
     }
 }

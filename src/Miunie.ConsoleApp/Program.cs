@@ -11,7 +11,7 @@ namespace Miunie.ConsoleApp
         private static void Main()
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
-            _miunie.ConnectionStateChanged += MiunieOnConnectionStateChanged;
+            _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             HandleInput();
         }
 
@@ -55,11 +55,11 @@ namespace Miunie.ConsoleApp
                     }
                     case 2:
                     {
-                        if (_miunie.IsRunning)
+                        if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
                         {
                             _miunie.Stop();
                         }
-                        else
+                        else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
                             _ = _miunie.StartAsync();
                         }
@@ -107,7 +107,7 @@ namespace Miunie.ConsoleApp
             var prevCursorLeft = Console.CursorLeft;
             var prevCursorTop = Console.CursorTop;
 
-            var msg = _miunie.IsRunning ? ConsoleStrings.BOT_IS_RUNNING : ConsoleStrings.BOT_IS_NOT_RUNNING;
+            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? ConsoleStrings.BOT_IS_RUNNING : ConsoleStrings.BOT_IS_NOT_RUNNING;
             var left = Math.Clamp(Console.WindowWidth - msg.Length, 0, Console.WindowWidth);
 
             Console.SetCursorPosition(left, 0);

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Threading;
 using Miunie.WindowsApp.Views;
 
 namespace Miunie.WindowsApp
@@ -72,6 +73,8 @@ namespace Miunie.WindowsApp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            DispatcherHelper.Initialize();
         }
 
         /// <summary>

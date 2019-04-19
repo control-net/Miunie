@@ -7,7 +7,8 @@ namespace Miunie.Core
     public interface IMiunieDiscord
     {
         Task RunAsync(CancellationToken cancellationToken);
-        bool IsRunning { get; }
+        string GetBotAvatarUrl();
+        ConnectionState ConnectionState { get; }
         event EventHandler ConnectionChanged;
     }
 }

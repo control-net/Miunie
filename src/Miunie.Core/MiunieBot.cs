@@ -1,36 +1,34 @@
-using System;
+using Miunie.Core.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
-using Miunie.Core.Configuration;
 
 namespace Miunie.Core
 {
     public class MiunieBot
     {
-        public event EventHandler ConnectionStateChanged;
-
         public IBotConfiguration BotConfiguration { get; }
-        public bool IsRunning => _miunieDiscord.IsRunning;
+        public IMiunieDiscord MiunieDiscord { get; }
 
-        private readonly IMiunieDiscord _miunieDiscord;
-        private readonly CancellationTokenSource _tokenSource;
+        private CancellationTokenSource _tokenSource;
 
         public MiunieBot(IMiunieDiscord miunieDiscord, IBotConfiguration botConfig)
         {
-            _miunieDiscord = miunieDiscord;
+            MiunieDiscord = miunieDiscord;
             BotConfiguration = botConfig;
-            _tokenSource = new CancellationTokenSource();
-
-            _miunieDiscord.ConnectionChanged += MiunieDiscordOnConnectionChanged;
         }
 
-        private void MiunieDiscordOnConnectionChanged(object sender, EventArgs e)
+        public async Task StartAsync()
         {
-            ConnectionStateChanged?.Invoke(sender, e);
+            _tokenSource = new CancellationTokenSource();
+            await MiunieDiscord.RunAsync(_tokenSource.Token);
         }
 
-        public async Task StartAsync() => await _miunieDiscord.RunAsync(_tokenSource.Token);
-
-        public void Stop() => _tokenSource.Cancel();
+        public void Stop()
+        {
+            if (_tokenSource is null) { return; }
+            _tokenSource.Cancel();
+            _tokenSource.Dispose();
+            _tokenSource = null;
+        }
     }
 }

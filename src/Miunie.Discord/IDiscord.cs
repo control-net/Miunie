@@ -6,5 +6,6 @@ namespace Miunie.Discord
     {
         DiscordClient Client { get; }
         void Initialize();
+        void DisposeOfClient();
     }
 }

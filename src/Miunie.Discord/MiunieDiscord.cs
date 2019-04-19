@@ -1,47 +1,75 @@
-﻿using System;
+﻿using DSharpPlus.EventArgs;
 using Miunie.Core;
 using Miunie.Discord.Logging;
-using System.Threading.Tasks;
-using System.Linq;
+using System;
 using System.Threading;
+using System.Threading.Tasks;
+using Miunie.Core.Logging;
 
 namespace Miunie.Discord
 {
     public class MiunieDiscord : IMiunieDiscord
     {
-        public bool IsRunning { get; private set; }
+        public string GetBotAvatarUrl()
+            => _discord.Client?.CurrentUser?.AvatarUrl;
+
+        private ConnectionState _connectionState;
+        public ConnectionState ConnectionState
+        {
+            get => _connectionState;
+            private set
+            {
+                _connectionState = value;
+                ConnectionChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
         public event EventHandler ConnectionChanged;
 
         private readonly IDiscord _discord;
         private readonly DiscordLogger _discordLogger;
         private readonly CommandServiceFactory _cmdServiceFactory;
+        private readonly ILogger _logger;
 
-        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, CommandServiceFactory cmdServiceFactory)
+        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, CommandServiceFactory cmdServiceFactory, ILogger logger)
         {
             _discord = discord;
             _discordLogger = discordLogger;
             _cmdServiceFactory = cmdServiceFactory;
+            _logger = logger;
+
+            _connectionState = ConnectionState.DISCONNECTED; 
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
+            ConnectionState = ConnectionState.CONNECTING;
             _discord.Initialize();
             _discord.Client.DebugLogger.LogMessageReceived += _discordLogger.Log;
+            _discord.Client.Ready += ClientOnReady;
             _cmdServiceFactory.Create(_discord.Client);
-            await _discord.Client.ConnectAsync();
-            IsRunning = true;
-            ConnectionChanged?.Invoke(this, EventArgs.Empty);
 
             try
             {
+                await _discord.Client.ConnectAsync();
                 await Task.Delay(-1, cancellationToken);
             }
-            catch (TaskCanceledException)
+            catch (Exception e)
             {
                 await _discord.Client.DisconnectAsync();
-                IsRunning = false;
-                ConnectionChanged?.Invoke(this, EventArgs.Empty);
+                _discord.DisposeOfClient();
             }
+            finally
+            {
+                ConnectionState = ConnectionState.DISCONNECTED;
+            }
+        }
+
+        private Task ClientOnReady(ReadyEventArgs e)
+        {
+            _logger.Log("Client Ready");
+            ConnectionState = ConnectionState.CONNECTED;
+            return Task.CompletedTask;
         }
     }
 }

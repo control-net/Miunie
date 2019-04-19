@@ -14,17 +14,20 @@
                     HorizontalAlignment="Center">
             <Grid Margin="0, 60, 0, 0"  
                   Width="175" 
-                  Height="175">
+                  Height="175"
+                  x:Name="MiunieAvatar">
 
                 <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" 
                          Width="175" Height="175"/>
 
-                <Ellipse Width="175" Height="175">
+                <Ellipse Width="175" Height="175" >
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
+                        <ImageBrush ImageSource="{Binding BotAvatar}" />
                     </Ellipse.Fill>
                 </Ellipse>
+
             </Grid>
+
 
             <TextBlock Margin="0, 20" 
                        Style="{StaticResource TitleTextBlockStyle}" 
@@ -32,12 +35,19 @@
                        TextAlignment="Center" 
                        Text="{Binding ConnectionStatus}" />
 
-            <Button IsEnabled="{Binding ActionButtonEnabled}" 
-                    Name="ActionBtn" 
-                    Content="{Binding ActionButtonText}" 
-                    HorizontalAlignment="Stretch" 
-                    Style="{ThemeResource ButtonRevealStyle}" 
-                    Click="ActionBtn_OnClick"/>
+            <Grid>
+                <ProgressBar IsIndeterminate="True" Margin="0, 20" Visibility="{Binding ProgressBarIsVisible}"/>
+
+                <Button Visibility="{Binding ActionButtonIsVisible}" 
+                        Name="ActionBtn" 
+                        Content="{Binding ActionButtonText}" 
+                        HorizontalAlignment="Stretch" 
+                        Style="{ThemeResource ButtonRevealStyle}" 
+                        Click="ActionBtn_OnClick"/>
+            </Grid>
+
+
+
         </StackPanel>
     </Grid>
 </Page>
