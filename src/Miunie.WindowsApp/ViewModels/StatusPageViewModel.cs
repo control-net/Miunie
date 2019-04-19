@@ -1,11 +1,15 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
 
 namespace Miunie.WindowsApp.ViewModels
 {
     public class StatusPageViewModel : ViewModelBase
     {
+        private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
+
         private string _connectedStatus;
         public string ConnectionStatus
         {
@@ -19,48 +23,54 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        private bool _actionButtonEnabled;
-        public bool ActionButtonEnabled
-        {
+        public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING 
+            ? Visibility.Visible 
+            : Visibility.Collapsed;
 
-            get => _actionButtonEnabled;
-            set
-            {
-                if (value == _actionButtonEnabled) return;
-                _actionButtonEnabled = value;
-                RaisePropertyChanged(nameof(ActionButtonEnabled));
-            }
-        }
+        public Visibility ProgressBarIsVisible => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING
+            ? Visibility.Visible
+            : Visibility.Collapsed;
 
-        public string ActionButtonText => _miunie.IsRunning ? "Stop" : "Start";
+        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
+
+        public string ActionButtonText => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? "Stop" : "Start";
 
         private readonly MiunieBot _miunie;
 
         public StatusPageViewModel(MiunieBot miunie)
         {
             _miunie = miunie;
-            miunie.ConnectionStateChanged += MiunieOnConnectionStateChanged;
+            miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
-            _actionButtonEnabled = true;
         }
 
         public async void ToggleBotStart()
         {
-            if (_miunie.IsRunning)
+            if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
             {
                 _miunie.Stop();
             }
-            else
+            else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
             {
                 await _miunie.StartAsync();
+            }
+            else
+            {
+                RaisePropertyChanged(nameof(ActionButtonText));
             }
         }
 
         private void MiunieOnConnectionStateChanged(object sender, EventArgs e)
         {
-            ConnectionStatus = _miunie.IsRunning ? "Connected" : "Not connected";
-            RaisePropertyChanged(nameof(ActionButtonText));
-            if (!_actionButtonEnabled) { ActionButtonEnabled = true; }
+            DispatcherHelper.CheckBeginInvokeOnUI(
+                () =>
+                {
+                    ConnectionStatus = _miunie.MiunieDiscord.ConnectionState.ToString();
+                    RaisePropertyChanged(nameof(ActionButtonText));
+                    RaisePropertyChanged(nameof(ActionButtonIsVisible));
+                    RaisePropertyChanged(nameof(ProgressBarIsVisible));
+                    RaisePropertyChanged(nameof(BotAvatar));
+                });
         }
     }
 }

@@ -20,14 +20,15 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.ColumnSpan="2" Text="Settings" TextAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource TitleTextBlockStyle}"/>
-
-        <Grid Grid.Row="1" x:Name="MiunieSettingsAvatar" Padding="0, 0, 20, 0">
-            <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="128" Height="128" VerticalAlignment="Top"/>
-            <Ellipse Width="128" Height="128" VerticalAlignment="Top">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="../Assets/miunie-scarf-transparent.png" />
-                </Ellipse.Fill>
-            </Ellipse>
+        <Grid Grid.Column="0" Grid.Row="1" Padding="0, 0, 20, 0">
+            <Grid x:Name="MiunieSettingsAvatar" VerticalAlignment="Top">
+                <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Width="128" Height="128" VerticalAlignment="Top"/>
+                <Ellipse Width="128" Height="128" VerticalAlignment="Top">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding BotAvatar}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
         </Grid>
         <StackPanel Margin="12, 32" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>

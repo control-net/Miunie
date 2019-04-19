@@ -31,7 +31,6 @@ namespace Miunie.WindowsApp.Views
 
         private void ActionBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            _vm.ActionButtonEnabled = false;
             _vm.ToggleBotStart();
         }
 
