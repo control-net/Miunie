@@ -11,12 +11,38 @@
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
-        <ListView ItemsSource="{Binding Channels}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="320" />
+            <ColumnDefinition x:Name="DetailColumn" Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Channels}" x:Name="MasterListView">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="core:TextChannelView">
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <ContentPresenter
+            x:Name="DetailContentPresenter"
+            Grid.Column="1"
+            Padding="24, 0"
+            Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="core:TextChannelView">
+                    <ListView ItemsSource="{Binding Messages}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="core:MessageView">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AuthorName}"/>
+                                    <TextBlock Text="{Binding Content}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
     </Grid>
 </Page>
