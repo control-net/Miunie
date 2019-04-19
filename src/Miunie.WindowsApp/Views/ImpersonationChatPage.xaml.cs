@@ -11,9 +11,8 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using Miunie.Core;
+using Miunie.WindowsApp.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,22 +21,17 @@ namespace Miunie.WindowsApp.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ServersPage : Page
+    public sealed partial class ImpersonationChatPage : Page
     {
-        public ServersPage()
+        private readonly ImpersonationChatPageViewModel _vm;
+
+        public ImpersonationChatPage()
         {
             this.InitializeComponent();
+            _vm = DataContext as ImpersonationChatPageViewModel;
         }
 
-        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (!(e.ClickedItem is GuildView guild)) { return; }
-
-            //ConnectedAnimationService
-            //    .GetForCurrentView()
-            //    .PrepareToAnimate("ServerExpandAnimation", (UIElement) e.OriginalSource);
-
-            Frame.Navigate(typeof(ImpersonationChatPage), guild.Id);
-        }
+        protected override void OnNavigatedTo(NavigationEventArgs e) 
+            => _vm.FetchInfo((ulong)e.Parameter);
     }
 }
