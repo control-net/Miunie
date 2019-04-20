@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Miunie.Server.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Miunie.Core;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
@@ -33,20 +34,15 @@ namespace Miunie.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddSingleton(s => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services
-                .AddSingleton<InMemoryLogger>()
-                .AddSingleton<ILogReader>(s => s.GetRequiredService<InMemoryLogger>())
-                .AddSingleton<ILogWriter>(s => s.GetRequiredService<InMemoryLogger>())
-                .AddTransient<IDateTime, SystemDateTime>()
-                .AddSingleton<IFileSystem, SystemFileSystem>()
-                .AddMiunieTypes();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

@@ -1,7 +1,39 @@
-﻿
+﻿@model BotStatusViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dashboard";
 }
 
-<h1>Bot Index</h1>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <img src="@Model.BotAvatarUrl" class="card-img-top" alt="Bot avatar image">
+                <div class="card-body">
+                    <p class="card-text"><b>Status:</b> @Model.Status.ToString()</p>
+                    @if (string.IsNullOrEmpty(Model.TokenHintStart))
+                    {
+                        <p class="card-text"><b>Token:</b> No bot token is set.</p>
+                    }
+                    else
+                    {
+                        <p class="card-text"><b>Token:</b> @(Model.TokenHintStart)...@(Model.TokenHintEnd)</p>
+                    }
+                    <a type="button" class="btn btn-success btn-block" asp-controller="Bot" asp-action="Start">Start</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-controller="Bot" asp-action="UpdateToken" method="post">
+                        <div class="form-group">
+                            <label for="BotToken">Bot Token</label>
+                            <input name="botToken" type="password" class="form-control" id="BotToken" placeholder="Your Bot token">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
