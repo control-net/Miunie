@@ -12,9 +12,9 @@ namespace Miunie.Discord
     public class Impersonation : IDiscordImpersonation
     {
         private readonly IDiscord _discord;
-        private readonly ILogger _logger;
+        private readonly ILogWriter _logger;
 
-        public Impersonation(IDiscord discord, ILogger logger)
+        public Impersonation(IDiscord discord, ILogWriter logger)
         {
             _discord = discord;
             _logger = logger;
