@@ -54,7 +54,7 @@ namespace Miunie.Discord
                 await _discord.Client.ConnectAsync();
                 await Task.Delay(-1, cancellationToken);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await _discord.Client.DisconnectAsync();
                 _discord.DisposeOfClient();

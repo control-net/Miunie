@@ -26,15 +26,17 @@ namespace Miunie.WindowsApp.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("MiunieStatusToSettings");
-            if (animation is null) { return; }
-            animation.TryStart(MiunieSettingsAvatar);
+            animation?.TryStart(MiunieSettingsAvatar);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ConnectedAnimationService
-                .GetForCurrentView()
-                .PrepareToAnimate("MiunieSettingsToStatus", MiunieSettingsAvatar);
+            if (e.SourcePageType == typeof(StatusPage))
+            {
+                ConnectedAnimationService
+                    .GetForCurrentView()
+                    .PrepareToAnimate("MiunieSettingsToStatus", MiunieSettingsAvatar);
+            }
         }
     }
 }

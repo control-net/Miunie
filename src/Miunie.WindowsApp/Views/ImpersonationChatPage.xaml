@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="Miunie.WindowsApp.Views.ImpersonationChatPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Miunie.WindowsApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Miunie.Core"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="320" />
+            <ColumnDefinition x:Name="DetailColumn" Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Channels}" x:Name="MasterListView">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="core:TextChannelView">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ContentPresenter
+            x:Name="DetailContentPresenter"
+            Grid.Column="1"
+            Padding="24, 0"
+            Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="core:TextChannelView">
+                    <ListView ItemsSource="{Binding Messages}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="core:MessageView">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AuthorName}"/>
+                                    <TextBlock Text="{Binding Content}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
+    </Grid>
+</Page>

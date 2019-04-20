@@ -8,13 +8,15 @@ namespace Miunie.Core
     {
         public IBotConfiguration BotConfiguration { get; }
         public IMiunieDiscord MiunieDiscord { get; }
+        public IDiscordImpersonation Impersonation { get; }
 
         private CancellationTokenSource _tokenSource;
 
-        public MiunieBot(IMiunieDiscord miunieDiscord, IBotConfiguration botConfig)
+        public MiunieBot(IMiunieDiscord miunieDiscord, IBotConfiguration botConfig, IDiscordImpersonation impersonation)
         {
             MiunieDiscord = miunieDiscord;
             BotConfiguration = botConfig;
+            Impersonation = impersonation;
         }
 
         public async Task StartAsync()

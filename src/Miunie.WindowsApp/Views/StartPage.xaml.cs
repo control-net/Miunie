@@ -23,7 +23,8 @@ namespace Miunie.WindowsApp.Views
     {
         private readonly List<(string Tag, Type Page)> _navigationPages = new List<(string Tag, Type Page)>
         {
-            ("home", typeof(StatusPage))
+            ("home", typeof(StatusPage)),
+            ("servers", typeof(ServersPage))
         };
 
         private bool _shouldCheckForClipboardToken = true;
