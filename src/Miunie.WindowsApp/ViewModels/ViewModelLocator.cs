@@ -28,6 +28,8 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register<StartPageViewModel>();
             SimpleIoc.Default.Register<StatusPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
+            SimpleIoc.Default.Register<ServersPageViewModel>();
+            SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogReader>());
             SimpleIoc.Default.Register<TokenValidator>();
@@ -41,5 +43,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         public SettingsPageViewModel SettingsPageInstance
             => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
+
+        public ServersPageViewModel ServersPageInstance
+            => ServiceLocator.Current.GetInstance<ServersPageViewModel>();
+
+        public ImpersonationChatPageViewModel ImpersonationChatPageInstance
+            => ServiceLocator.Current.GetInstance<ImpersonationChatPageViewModel>();
     }
 }

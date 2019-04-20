@@ -36,9 +36,12 @@ namespace Miunie.WindowsApp.Views
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ConnectedAnimationService
-                .GetForCurrentView()
-                .PrepareToAnimate("MiunieStatusToSettings", MiunieAvatar);
+            if (e.SourcePageType == typeof(SettingsPage))
+            {
+                ConnectedAnimationService
+                    .GetForCurrentView()
+                    .PrepareToAnimate("MiunieStatusToSettings", MiunieAvatar);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

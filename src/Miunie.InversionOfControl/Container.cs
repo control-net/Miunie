@@ -22,6 +22,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<IMiunieDiscord, MiunieDiscord>()
                 .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
                 .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
+                .AddSingleton<IDiscordImpersonation, Impersonation>()
                 .AddSingleton<DiscordLogger>()
                 .AddScoped<CommandServiceFactory>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()

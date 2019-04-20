@@ -18,6 +18,7 @@
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
                 <muxc:NavigationViewItemSeparator/>
+                <muxc:NavigationViewItem Tag="servers" Icon="People" Content="Servers" />
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame Name="MainFrame" />
