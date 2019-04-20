@@ -29,9 +29,9 @@ namespace Miunie.Discord
         private readonly IDiscord _discord;
         private readonly DiscordLogger _discordLogger;
         private readonly CommandServiceFactory _cmdServiceFactory;
-        private readonly ILogger _logger;
+        private readonly ILogWriter _logger;
 
-        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, CommandServiceFactory cmdServiceFactory, ILogger logger)
+        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, CommandServiceFactory cmdServiceFactory, ILogWriter logger)
         {
             _discord = discord;
             _discordLogger = discordLogger;

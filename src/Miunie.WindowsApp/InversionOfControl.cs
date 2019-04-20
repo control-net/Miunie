@@ -27,7 +27,7 @@ namespace Miunie.WindowsApp
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
                 .AddSingleton<ILogReader, InMemoryLogger>()
-                .AddSingleton<ILogger, InMemoryLogger>()
+                .AddSingleton<ILogWriter, InMemoryLogger>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<IFileSystem, UwpFileSystem>()
                 .AddMiunieTypes()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Miunie.Logger
 {
-    public class InMemoryLogger : ILogger, ILogReader
+    public class InMemoryLogger : ILogWriter, ILogReader
     {
         public event EventHandler LogRecieved;
         public List<string> Logs = new List<string>();

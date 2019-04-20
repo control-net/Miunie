@@ -1,6 +1,6 @@
 namespace Miunie.Core.Logging
 {
-    public interface ILogger
+    public interface ILogWriter
     {
         void Log(string message);
         void LogError(string message);

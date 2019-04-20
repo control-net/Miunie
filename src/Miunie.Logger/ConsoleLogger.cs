@@ -3,7 +3,7 @@ using Miunie.Core.Logging;
 
 namespace Miunie.Logger
 {
-    public class ConsoleLogger : ILogger
+    public class ConsoleLogger : ILogWriter
     {
         public void Log(string message)
         {

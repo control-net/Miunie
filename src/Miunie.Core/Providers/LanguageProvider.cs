@@ -5,12 +5,12 @@ namespace Miunie.Core.Providers
 {
     public class LanguageProvider : ILanguageProvider
     {
-        private readonly ILogger _logger;
+        private readonly ILogWriter _logger;
         private readonly Random _random;
 
         private static readonly string[] ResourceSeparators = { "{{OR}}" };
 
-        public LanguageProvider(ILogger logger, Random random)
+        public LanguageProvider(ILogWriter logger, Random random)
         {
             _logger = logger;
             _random = random;
