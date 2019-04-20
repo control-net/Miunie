@@ -40,7 +40,7 @@ namespace Miunie.Discord
                     result.Add(new TextChannelView
                     {
                         Id = channel.Id,
-                        Name = channel.Name,
+                        Name = $"# {channel.Name}",
                         Messages = await GetMessagesFrom(channel)
                     });
                 }
