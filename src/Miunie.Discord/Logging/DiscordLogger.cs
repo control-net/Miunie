@@ -6,9 +6,9 @@ namespace Miunie.Discord.Logging
 {
     public class DiscordLogger
     {
-        private readonly ILogger _logger;
+        private readonly ILogWriter _logger;
 
-        public DiscordLogger(ILogger logger)
+        public DiscordLogger(ILogWriter logger)
         {
             _logger = logger;
         }

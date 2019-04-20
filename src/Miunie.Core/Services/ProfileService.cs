@@ -8,9 +8,9 @@ namespace Miunie.Core
     {
         private readonly IDiscordMessages _discordMessages;
         private readonly IUserReputationProvider _reputationProvider;
-        private readonly ILogger _logger;
+        private readonly ILogWriter _logger;
 
-        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogger logger)
+        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogWriter logger)
         {
             _discordMessages = discordMessages;
             _reputationProvider = reputationProvider;
