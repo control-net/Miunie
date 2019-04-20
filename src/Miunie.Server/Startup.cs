@@ -19,6 +19,7 @@ using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
 using Miunie.Logger;
 using Miunie.SystemInfrastructure;
+using Miunie.Server.Hubs;
 
 namespace Miunie.Server
 {
@@ -36,6 +37,7 @@ namespace Miunie.Server
         {
             
             services.AddSingleton(s => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
+            services.AddSingleton<BotEvents>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -52,6 +54,8 @@ namespace Miunie.Server
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +76,10 @@ namespace Miunie.Server
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<BotStatusHub>("/statusHub");
+            });
 
             app.UseAuthentication();
 

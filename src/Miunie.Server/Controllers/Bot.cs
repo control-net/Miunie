@@ -12,8 +12,11 @@ namespace Miunie.Server.Controllers
 
         private readonly MiunieBot _miunie;
 
-        public Bot(MiunieBot miunie)
+        public Bot(BotEvents events, MiunieBot miunie)
         {
+            // BotEvents just need to be initiated here.
+            // That's why it's injected.
+
             _miunie = miunie;
         }
 

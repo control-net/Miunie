@@ -7,9 +7,9 @@
     <div class="row">
         <div class="col-3">
             <div class="card">
-                <img src="@Model.BotAvatarUrl" class="card-img-top" alt="Bot avatar image">
+                <img id="BotAvatar" src="@Model.BotAvatarUrl" class="card-img-top" alt="Bot avatar image">
                 <div class="card-body">
-                    <p class="card-text"><b>Status:</b> @Model.Status.ToString()</p>
+                    <p class="card-text"><b>Status:</b> <span id="StatusString">@Model.Status.ToString()</span></p>
                     @if (string.IsNullOrEmpty(Model.TokenHintStart))
                     {
                         <p class="card-text"><b>Token:</b> No bot token is set.</p>
@@ -18,7 +18,19 @@
                     {
                         <p class="card-text"><b>Token:</b> @(Model.TokenHintStart)...@(Model.TokenHintEnd)</p>
                     }
-                    <a type="button" class="btn btn-success btn-block" asp-controller="Bot" asp-action="Start">Start</a>
+
+                    @if (Model.Status == BotConnectionStatus.CONNECTED)
+                    {
+                        <button id="ActionButton" type="button" class="btn btn-danger btn-block">Stop</button>
+                    }
+                    else if (Model.Status == BotConnectionStatus.DISCONNECTED)
+                    {
+                        <button id="ActionButton" type="button" class="btn btn-success btn-block">Start</button>
+                    }
+                    else
+                    {
+                        <button id="ActionButton" type="button" class="btn btn-block" disabled>Connecting...</button>
+                    }
                 </div>
             </div>
         </div>
@@ -37,3 +49,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="~/js/botStatusSignalR.js"></script>
+}
