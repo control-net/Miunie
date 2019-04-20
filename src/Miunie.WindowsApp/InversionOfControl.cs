@@ -2,6 +2,7 @@
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
+using Miunie.Logger;
 using Miunie.SystemInfrastructure;
 using Miunie.WindowsApp.Infrastructure;
 
@@ -25,7 +26,8 @@ namespace Miunie.WindowsApp
 
         private static void InitializeProvider()
             => _provider = new ServiceCollection()
-                .AddSingleton<ILogger, UwpLogger>()
+                .AddSingleton<ILogReader, InMemoryLogger>()
+                .AddSingleton<ILogger, InMemoryLogger>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<IFileSystem, UwpFileSystem>()
                 .AddMiunieTypes()
