@@ -36,6 +36,14 @@
                 <TextBlock Text="{Binding BotTokenBeginning}" />
                 <Rectangle Fill="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" Width="300"/>
                 <TextBlock Text="{Binding BotTokenEnd}" />
+                <Rectangle Height="20"/>
+                <ListView ItemsSource="{Binding Logs}">
+                  <ListView.ItemTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding Message}"/>
+                    </DataTemplate>
+                  </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </StackPanel>
     </Grid>

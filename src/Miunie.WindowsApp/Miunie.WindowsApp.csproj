@@ -236,6 +236,10 @@
       <Project>{9431ea7a-3676-4229-b8eb-650005c9734a}</Project>
       <Name>Miunie.InversionOfControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj">
+      <Project>{0F4F2247-6D6C-400A-A95C-FDA46D5595D2}</Project>
+      <Name>Miunie.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Miunie.SystemInfrastructure\Miunie.SystemInfrastructure.csproj">
       <Project>{74CB95A4-146F-4582-91C1-6BC9E1FD42E1}</Project>
       <Name>Miunie.SystemInfrastructure</Name>

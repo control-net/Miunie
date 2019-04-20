@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core;
+using Miunie.Core.Logging;
 using Miunie.WindowsApp.Utilities;
 
 namespace Miunie.WindowsApp.ViewModels
@@ -30,6 +31,7 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register<ServersPageViewModel>();
             SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
+            SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogReader>());
             SimpleIoc.Default.Register<TokenValidator>();
         }
 
