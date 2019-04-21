@@ -60,7 +60,8 @@ namespace Miunie.Discord
             {
                 AuthorAvatarUrl = m.Author.AvatarUrl,
                 AuthorName = m.Author.Username,
-                Content = m.Content
+                Content = m.Content,
+                TimeStamp = m.CreationTimestamp.ToLocalTime()
             });
         }
     }
