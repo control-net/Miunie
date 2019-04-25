@@ -136,7 +136,10 @@ namespace Miunie.ConsoleApp
             var prevCursorLeft = Console.CursorLeft;
             var prevCursorTop = Console.CursorTop;
 
-            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? ConsoleStrings.BOT_IS_RUNNING : ConsoleStrings.BOT_IS_NOT_RUNNING;
+            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED 
+                ? ConsoleStrings.BOT_IS_RUNNING 
+                : ConsoleStrings.BOT_IS_NOT_RUNNING;
+
             var left = Math.Clamp(Console.WindowWidth - msg.Length, 0, Console.WindowWidth);
 
             Console.SetCursorPosition(left, 0);
