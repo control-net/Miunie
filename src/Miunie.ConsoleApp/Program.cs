@@ -2,6 +2,8 @@
 using Miunie.ConsoleApp.Configuration;
 using Miunie.Core;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Miunie.ConsoleApp
 {
@@ -11,13 +13,32 @@ namespace Miunie.ConsoleApp
         private static ConfigManager _configManager;
         private static ConfigurationFileEditor _editor;
 
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
+
+            if (args.Contains("-headless")) { await RunHeadless(args); }
+
             _configManager = InversionOfControl.Provider.GetRequiredService<ConfigManager>();
             _editor = InversionOfControl.Provider.GetRequiredService<ConfigurationFileEditor>();
             _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             HandleInput();
+        }
+
+        private static async Task RunHeadless(string[] args)
+        {
+            if (!args.Any(arg => arg.StartsWith("-token=")))
+            {
+                Console.WriteLine(ConsoleStrings.HEADLESS_REQUIRES_TOKEN);
+                Environment.Exit(0);
+            }
+
+            var token = args
+                .First(arg => arg.StartsWith("-token="))
+                .Substring(7);
+
+            _miunie.BotConfiguration.DiscordToken = token;
+            await _miunie.StartAsync();
         }
 
         private static void MiunieOnConnectionStateChanged(object sender, EventArgs e)

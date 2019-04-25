@@ -178,4 +178,7 @@ Enter your desired value: (or type EXIT)</value>
   <data name="MIUNIE_STARTED" xml:space="preserve">
     <value>Miunie has been started.</value>
   </data>
+  <data name="HEADLESS_REQUIRES_TOKEN" xml:space="preserve">
+    <value>When running Miunie headless, a token must be provided with a -token= argument.</value>
+  </data>
 </root>
