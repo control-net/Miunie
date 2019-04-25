@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Miunie.ConsoleApp.Configuration;
 using Miunie.Core;
 using System;
 
@@ -7,10 +8,14 @@ namespace Miunie.ConsoleApp
     internal static class Program
     {
         private static MiunieBot _miunie;
+        private static ConfigManager _configManager;
+        private static ConfigurationFileEditor _editor;
 
-        private static void Main()
+        private static void Main(string[] args)
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
+            _configManager = InversionOfControl.Provider.GetRequiredService<ConfigManager>();
+            _editor = InversionOfControl.Provider.GetRequiredService<ConfigurationFileEditor>();
             _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             HandleInput();
         }
@@ -50,6 +55,8 @@ namespace Miunie.ConsoleApp
                             Console.WriteLine(ConsoleStrings.YES_NO_PROMPT);
                         } while (Console.ReadKey().Key != ConsoleKey.Y);
 
+                        _editor.WriteSetting("DiscordToken", token);
+                        _editor.Save();
                         _miunie.BotConfiguration.DiscordToken = token;
                         break;
                     }
@@ -61,6 +68,7 @@ namespace Miunie.ConsoleApp
                         }
                         else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
+                            _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
                             _ = _miunie.StartAsync();
                         }
                         break;
