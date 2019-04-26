@@ -117,6 +117,15 @@ namespace Miunie.ConsoleApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When running Miunie headless, a token must be provided with a -token= argument..
+        /// </summary>
+        internal static string HEADLESS_REQUIRES_TOKEN {
+            get {
+                return ResourceManager.GetString("HEADLESS_REQUIRES_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Miunie is in the headless mode. The UI will not render for the lifetime of this application..
         /// </summary>
         internal static string HEADLESS_STARTED {

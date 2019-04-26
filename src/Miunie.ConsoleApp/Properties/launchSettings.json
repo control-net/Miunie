@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Miunie.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "-headless -token=NDgwMjgzOTcwMTc3NTk3NDUw.XMICdg.VC5gKCKPL_C7GqURAm8RnWeDqlM"
+    }
+  }
+}
