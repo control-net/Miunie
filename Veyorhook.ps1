@@ -6,8 +6,8 @@ if (!$WEBHOOK_URL) {
   Exit
 }
 
-$AVATAR = "https://i.imgur.com/cCh2naD.png"
-$USERNAME = "RaiderIOSharp"
+$AVATAR = "https://i.imgur.com/CUDxA61.png"
+$USERNAME = "Miunie"
 
 Switch ($STATUS) {
   "success" {
