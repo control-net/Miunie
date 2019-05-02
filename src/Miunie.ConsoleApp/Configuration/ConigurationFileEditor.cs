@@ -2,22 +2,22 @@
 
 namespace Miunie.ConsoleApp.Configuration
 {
-    class ConfigurationFileEditor
+    public class ConfigurationFileEditor
     {
         private readonly System.Configuration.Configuration _file;
 
-        internal ConfigurationFileEditor()
+        public ConfigurationFileEditor()
         {
             _file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         }
 
-        internal void Save()
+        public void Save()
         {
             _file.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(_file.AppSettings.SectionInformation.Name);
         }
 
-        internal void WriteSetting(string key, string value)
+        public void WriteSetting(string key, string value)
         {
             if (SettingExists(key))
             {

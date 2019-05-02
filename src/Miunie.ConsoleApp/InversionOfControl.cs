@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Miunie.ConsoleApp.Configuration;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
@@ -27,6 +28,8 @@ namespace Miunie.ConsoleApp
                 .AddSingleton<ILogWriter, ConsoleBottomLogger>()
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<IFileSystem, SystemFileSystem>()
+                .AddSingleton<ConfigManager>()
+                .AddSingleton<ConfigurationFileEditor>()
                 .AddMiunieTypes()
                 .BuildServiceProvider();
     }

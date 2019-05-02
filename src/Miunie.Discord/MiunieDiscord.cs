@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Miunie.Core.Logging;
+using DSharpPlus.Entities;
 
 namespace Miunie.Discord
 {
@@ -68,6 +69,13 @@ namespace Miunie.Discord
         private Task ClientOnReady(ReadyEventArgs e)
         {
             _logger.Log("Client Ready");
+#if DEBUG
+            _discord.Client.UpdateStatusAsync(new DiscordActivity
+            {
+                ActivityType = ActivityType.ListeningTo,
+                Name = "Herself being created."
+            });
+#endif
             ConnectionState = ConnectionState.CONNECTED;
             return Task.CompletedTask;
         }

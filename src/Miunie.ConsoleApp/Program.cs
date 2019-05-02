@@ -1,18 +1,44 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Miunie.ConsoleApp.Configuration;
 using Miunie.Core;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Miunie.ConsoleApp
 {
     internal static class Program
     {
         private static MiunieBot _miunie;
+        private static ConfigManager _configManager;
+        private static ConfigurationFileEditor _editor;
 
-        private static void Main()
+        private static async Task Main(string[] args)
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
+
+            if (args.Contains("-headless")) { await RunHeadless(args); }
+
+            _configManager = InversionOfControl.Provider.GetRequiredService<ConfigManager>();
+            _editor = InversionOfControl.Provider.GetRequiredService<ConfigurationFileEditor>();
             _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             HandleInput();
+        }
+
+        private static async Task RunHeadless(string[] args)
+        {
+            if (!args.Any(arg => arg.StartsWith("-token=")))
+            {
+                Console.WriteLine(ConsoleStrings.HEADLESS_REQUIRES_TOKEN);
+                Environment.Exit(0);
+            }
+
+            var token = args
+                .First(arg => arg.StartsWith("-token="))
+                .Substring(7);
+
+            _miunie.BotConfiguration.DiscordToken = token;
+            await _miunie.StartAsync();
         }
 
         private static void MiunieOnConnectionStateChanged(object sender, EventArgs e)
@@ -50,6 +76,8 @@ namespace Miunie.ConsoleApp
                             Console.WriteLine(ConsoleStrings.YES_NO_PROMPT);
                         } while (Console.ReadKey().Key != ConsoleKey.Y);
 
+                        _editor.WriteSetting("DiscordToken", token);
+                        _editor.Save();
                         _miunie.BotConfiguration.DiscordToken = token;
                         break;
                     }
@@ -61,6 +89,7 @@ namespace Miunie.ConsoleApp
                         }
                         else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
+                            _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
                             _ = _miunie.StartAsync();
                         }
                         break;
@@ -107,7 +136,10 @@ namespace Miunie.ConsoleApp
             var prevCursorLeft = Console.CursorLeft;
             var prevCursorTop = Console.CursorTop;
 
-            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? ConsoleStrings.BOT_IS_RUNNING : ConsoleStrings.BOT_IS_NOT_RUNNING;
+            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED 
+                ? ConsoleStrings.BOT_IS_RUNNING 
+                : ConsoleStrings.BOT_IS_NOT_RUNNING;
+
             var left = Math.Clamp(Console.WindowWidth - msg.Length, 0, Console.WindowWidth);
 
             Console.SetCursorPosition(left, 0);
