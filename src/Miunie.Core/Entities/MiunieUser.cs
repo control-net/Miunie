@@ -12,6 +12,7 @@ namespace Miunie.Core
         public Reputation Reputation { get; set; }
         public List<ulong> NavCursor { get; set; }
         public DateTime JoinedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
         public bool IsBot { get; set; }
         public IEnumerable<MiunieRole> Roles { get; set; }
         public string AvatarUrl { get; set; }

@@ -31,6 +31,7 @@ namespace Miunie.Discord.Convertors
             mUser.Name = user.Nickname ?? user.Username;
             mUser.AvatarUrl = user.AvatarUrl;
             mUser.JoinedAt = user.JoinedAt.UtcDateTime;
+            mUser.CreatedAt = user.CreationTimestamp.UtcDateTime;
             mUser.IsBot = user.IsBot;
             mUser.Roles = user.Roles.Select(r => r.DiscordRoleToMiunieRole());
             _userProvider.StoreUser(mUser);
