@@ -162,6 +162,9 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
 https://github.com/discord-bot-tutorial/Miunie</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
+    <value>:calendar_spiral: Creation date</value>
+  </data>
   <data name="USER_EMBED_IS_BOT" xml:space="preserve">
     <value>_A software person._{{OR}}
 _A bot._ :robot:{{OR}}
