@@ -55,10 +55,11 @@ namespace Miunie.Discord
                 await _discord.Client.ConnectAsync();
                 await Task.Delay(-1, cancellationToken);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await _discord.Client.DisconnectAsync();
                 _discord.DisposeOfClient();
+                _logger.LogError(ex.ToString());
             }
             finally
             {
