@@ -22,7 +22,7 @@ namespace Miunie.ConsoleApp
             _configManager = InversionOfControl.Provider.GetRequiredService<ConfigManager>();
             _editor = InversionOfControl.Provider.GetRequiredService<ConfigurationFileEditor>();
             _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
-            HandleInput();
+            await HandleInput();
         }
 
         private static async Task RunHeadless(string[] args)
@@ -46,7 +46,7 @@ namespace Miunie.ConsoleApp
             DrawMiunieState();
         }
 
-        private static void HandleInput()
+        private static async Task HandleInput()
         {
             while (true)
             {
@@ -90,7 +90,8 @@ namespace Miunie.ConsoleApp
                         else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
                             _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
-                            _ = _miunie.StartAsync();
+                            await _miunie.StartAsync();
+                            AnyKeyToContinue();
                         }
                         break;
                     }
