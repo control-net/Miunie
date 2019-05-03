@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Miunie.Core.Logging;
+using DSharpPlus.Entities;
 
 namespace Miunie.Discord
 {
@@ -44,20 +45,25 @@ namespace Miunie.Discord
         public async Task RunAsync(CancellationToken cancellationToken)
         {
             ConnectionState = ConnectionState.CONNECTING;
-            _discord.Initialize();
-            _discord.Client.DebugLogger.LogMessageReceived += _discordLogger.Log;
-            _discord.Client.Ready += ClientOnReady;
-            _cmdServiceFactory.Create(_discord.Client);
 
             try
             {
+                _discord.Initialize();
+                _discord.Client.DebugLogger.LogMessageReceived += _discordLogger.Log;
+                _discord.Client.Ready += ClientOnReady;
+                _cmdServiceFactory.Create(_discord.Client);
                 await _discord.Client.ConnectAsync();
                 await Task.Delay(-1, cancellationToken);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await _discord.Client.DisconnectAsync();
-                _discord.DisposeOfClient();
+                if (_discord.Client != null)
+                {
+                    await _discord.Client.DisconnectAsync();
+                    _discord.DisposeOfClient();
+                }
+
+                _logger.LogError(ex.Message);
             }
             finally
             {
@@ -68,6 +74,13 @@ namespace Miunie.Discord
         private Task ClientOnReady(ReadyEventArgs e)
         {
             _logger.Log("Client Ready");
+#if DEBUG
+            _discord.Client.UpdateStatusAsync(new DiscordActivity
+            {
+                ActivityType = ActivityType.ListeningTo,
+                Name = "Herself being created."
+            });
+#endif
             ConnectionState = ConnectionState.CONNECTED;
             return Task.CompletedTask;
         }

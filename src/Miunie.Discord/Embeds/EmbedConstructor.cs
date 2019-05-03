@@ -20,6 +20,7 @@ namespace Miunie.Discord.Embeds
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REP_TITLE.ToString()), mUser.Reputation.Value.ToString(), true)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_ROLES_TITLE.ToString()), string.Join("\n", mUser.Roles.Select(r => r.Name)), true)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_JOINED_AT_TITLE.ToString()), $"{mUser.JoinedAt:d} at {mUser.JoinedAt:t} UTC")
+                .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_CREATED_AT_TITLE.ToString()), $"{mUser.CreatedAt:d} at {mUser.CreatedAt:t} UTC", true)
                 .Build();
         }
 
