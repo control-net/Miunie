@@ -3,103 +3,107 @@ using Miunie.Core.Providers;
 using Miunie.Core.Infrastructure;
 using Xunit;
 using Moq;
+using Miunie.Core.XUnit.Tests.Mocks;
 
 namespace Miunie.Core.XUnit.Tests.Providers
 {
     public class UserReputationProviderTests
     {
-        private readonly IUserReputationProvider _reputationProvider;
+        private readonly IUserReputationProvider _repProvider;
         private readonly Mock<IDateTime> _dateTimeMock;
-        private readonly DummyMiunieUsers _data = new DummyMiunieUsers();
+        private readonly DummyMiunieUsers _users;
 
         public UserReputationProviderTests()
         {
             _dateTimeMock = new Mock<IDateTime>();
-            _reputationProvider = new UserReputationProvider(new Mock<IMiunieUserProvider>().Object, _dateTimeMock.Object);
+            _repProvider = new UserReputationProvider(new Mock<IMiunieUserProvider>().Object, _dateTimeMock.Object);
+            _users = new DummyMiunieUsers();
         }
 
         [Fact]
-        public void ShouldAddReputation()
+        public void AddReputation_ShouldIncrementReputation()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value + 1;
+            var expectedRep = _users.Senne.Reputation.Value + 1;
 
-            _reputationProvider.AddReputation(_data.Peter, _data.Senne);
+            _repProvider.AddReputation(_users.Peter, _users.Senne);
+            var actualRep = _users.Senne.Reputation.Value;
 
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.Equal(expectedRep, actualRep);
         }
 
         [Fact]
-        public void ShouldGetTimeoutAfterAddingReputation()
+        public void RemoveReputation_ShouldDecrementReputation()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value + 1;
+            var expectedRep = _users.Senne.Reputation.Value - 1;
 
-            Assert.False(_reputationProvider.AddReputationHasTimeout(_data.Peter, _data.Senne));
+            _repProvider.RemoveReputation(_users.Peter, _users.Senne);
+            var actualRep = _users.Senne.Reputation.Value;
 
-            _reputationProvider.AddReputation(_data.Peter, _data.Senne);
-
-            Assert.True(_reputationProvider.AddReputationHasTimeout(_data.Peter, _data.Senne));
-            Assert.False(_reputationProvider.AddReputationHasTimeout(_data.Senne, _data.Peter));
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.Equal(expectedRep, actualRep);
         }
 
         [Fact]
-        public void ShouldRemoveReputation()
+        public void TryAddReputation_ShouldGetTimeoutAfterAddingReputation()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value - 1;
 
-            _reputationProvider.RemoveReputation(_data.Peter, _data.Senne);
+            var peterHasTimeout = _repProvider.TryAddReputation(_users.Peter, _users.Senne);
+            _repProvider.AddReputation(_users.Peter, _users.Senne);
+            var peterHasTimeoutAgain = _repProvider.TryAddReputation(_users.Peter, _users.Senne);
+            var senneHasTimeout = _repProvider.TryAddReputation(_users.Senne, _users.Peter);
 
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.False(peterHasTimeout);
+            Assert.True(peterHasTimeoutAgain);
+            Assert.False(senneHasTimeout);
         }
 
         [Fact]
-        public void ShouldGetTimeoutAfterRemovingReputation()
+        public void TryRemoveReputation_ShouldGetTimeoutAfterRemovingReputation()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value - 1;
 
-            Assert.False(_reputationProvider.RemoveReputationHasTimeout(_data.Peter, _data.Senne));
+            var peterHasTimeout = _repProvider.TryRemoveReputation(_users.Peter, _users.Senne);
+            _repProvider.RemoveReputation(_users.Peter, _users.Senne);
+            var peterHasTimeoutAgain = _repProvider.TryRemoveReputation(_users.Peter, _users.Senne);
+            var senneHasTimeout = _repProvider.TryRemoveReputation(_users.Senne, _users.Peter);
 
-            _reputationProvider.RemoveReputation(_data.Peter, _data.Senne);
-
-            Assert.True(_reputationProvider.RemoveReputationHasTimeout(_data.Peter, _data.Senne));
-            Assert.False(_reputationProvider.RemoveReputationHasTimeout(_data.Senne, _data.Peter));
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.False(peterHasTimeout);
+            Assert.True(peterHasTimeoutAgain);
+            Assert.False(senneHasTimeout);
         }
 
         [Fact]
-        public void ShouldRemoveTimeoutForAddingEventually()
+        public void TryAddReputation_ShouldRemoveTimeoutEventually()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value + 1;
+            _users.Senne.Reputation.Value++;
 
-            _data.Senne.Reputation.Value = expectedReputation;
-            Assert.True(_data.Senne.Reputation.PlusRepLog.TryAdd(_data.Peter.Id, DateTime.Now));
+            var hasAddedRep = _users.Senne.Reputation.PlusRepLog.TryAdd(_users.Peter.Id, DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
+            var peterHasTimeout = _repProvider.TryAddReputation(_users.Peter, _users.Senne);
+            var senneHasTimeout = _repProvider.TryAddReputation(_users.Senne, _users.Peter);
 
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddHours(1));
-
-            Assert.False(_reputationProvider.AddReputationHasTimeout(_data.Peter, _data.Senne));
-            Assert.False(_reputationProvider.AddReputationHasTimeout(_data.Senne, _data.Peter));
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.True(hasAddedRep);
+            Assert.False(peterHasTimeout);
+            Assert.False(senneHasTimeout);
         }
 
         [Fact]
-        public void ShouldRemoveTimeoutForRemovingEventually()
+        public void TryRemoveReputation_ShouldRemoveTimeoutEventually()
         {
             _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
-            var expectedReputation = _data.Senne.Reputation.Value - 1;
+            _users.Senne.Reputation.Value--;
 
-            _data.Senne.Reputation.Value = expectedReputation;
-            Assert.True(_data.Senne.Reputation.MinusRepLog.TryAdd(_data.Peter.Id, DateTime.Now));
+            var hasRemovedRep = _users.Senne.Reputation.MinusRepLog.TryAdd(_users.Peter.Id, DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
+            var peterHasTimeout = _repProvider.TryRemoveReputation(_users.Peter, _users.Senne);
+            var senneHasTimeout = _repProvider.TryRemoveReputation(_users.Senne, _users.Peter);
 
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddHours(1));
-
-            Assert.False(_reputationProvider.RemoveReputationHasTimeout(_data.Peter, _data.Senne));
-            Assert.False(_reputationProvider.RemoveReputationHasTimeout(_data.Senne, _data.Peter));
-            Assert.Equal(expectedReputation, _data.Senne.Reputation.Value);
+            Assert.True(hasRemovedRep);
+            Assert.False(peterHasTimeout);
+            Assert.False(senneHasTimeout);
         }
     }
 }
