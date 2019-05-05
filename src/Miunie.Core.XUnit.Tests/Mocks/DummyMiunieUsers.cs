@@ -1,4 +1,4 @@
-namespace Miunie.Core.XUnit.Tests
+namespace Miunie.Core.XUnit.Tests.Mocks
 {
     public class DummyMiunieUsers
     {
