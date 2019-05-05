@@ -28,7 +28,7 @@ namespace Miunie.Core
                 return;
             }
 
-            if (_reputationProvider.AddReputationHasTimeout(invoker, target))
+            if (_reputationProvider.TryAddReputation(invoker, target))
             {
                 _logger.Log($"User '{invoker.Name}' has a reputation timeout for User '{target.Name}', ignoring...");
                 return;
@@ -46,7 +46,7 @@ namespace Miunie.Core
                 return;
             }
 
-            if (_reputationProvider.RemoveReputationHasTimeout(invoker, target)) { return; }
+            if (_reputationProvider.TryRemoveReputation(invoker, target)) { return; }
 
             _reputationProvider.RemoveReputation(invoker, target);
             await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);

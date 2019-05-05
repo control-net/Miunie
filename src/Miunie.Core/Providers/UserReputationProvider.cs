@@ -6,7 +6,7 @@ namespace Miunie.Core.Providers
 {
     public class UserReputationProvider : IUserReputationProvider
     {
-        private const int TimeoutInSeconds = 1800;
+        public int TimeoutInSeconds { get; } = 1800;
 
         private readonly IMiunieUserProvider _userProvider;
         private readonly IDateTime _dateTime;
@@ -31,10 +31,10 @@ namespace Miunie.Core.Providers
             _userProvider.StoreUser(target);
         }
 
-        public bool AddReputationHasTimeout(MiunieUser invoker, MiunieUser target)
+        public bool TryAddReputation(MiunieUser invoker, MiunieUser target)
             => HasTimeout(target.Reputation.PlusRepLog, invoker);
 
-        public bool RemoveReputationHasTimeout(MiunieUser invoker, MiunieUser target)
+        public bool TryRemoveReputation(MiunieUser invoker, MiunieUser target)
             => HasTimeout(target.Reputation.MinusRepLog, invoker);
 
         private bool HasTimeout(ConcurrentDictionary<ulong, DateTime> log, MiunieUser invoker)

@@ -8,35 +8,35 @@ namespace Miunie.Core.XUnit.Tests
 {
     public class ProfileServiceTests
     {
-        private readonly Mock<IDiscordMessages> msgMock;
-        private readonly ProfileService profileService;
+        private readonly Mock<IDiscordMessages> _msgMock;
+        private readonly ProfileService _profileService;
 
         public ProfileServiceTests()
         {
-            msgMock = new Mock<IDiscordMessages>();
-            profileService = new ProfileService(msgMock.Object, null, null);
+            _msgMock = new Mock<IDiscordMessages>();
+            _profileService = new ProfileService(_msgMock.Object, null, null);
         }
 
         [Fact]
         public async Task ShowProfileAsync_ShouldExecuteOnce()
         {
-            msgMock.Setup(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()))
+            _msgMock.Setup(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()))
                 .Returns(Task.CompletedTask);
             
-            await profileService.ShowProfileAsync(null, null);
+            await _profileService.ShowProfileAsync(null, null);
             
-            msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()), Times.Once);
+            _msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()), Times.Once);
         }
 
         [Fact]
         public async Task ShowGuildProfileAsync_ShouldExecuteOnce()
         {
-            msgMock.Setup(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieGuild>()))
+            _msgMock.Setup(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieGuild>()))
                 .Returns(Task.CompletedTask);
 
-            await profileService.ShowGuildProfileAsync(null, null);
+            await _profileService.ShowGuildProfileAsync(null, null);
             
-            msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieGuild>()), Times.Once);
+            _msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieGuild>()), Times.Once);
         }
     }
 }

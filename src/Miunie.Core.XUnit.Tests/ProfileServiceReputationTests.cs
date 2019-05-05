@@ -5,37 +5,38 @@ using Moq;
 using System.Threading.Tasks;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
+using Miunie.Core.XUnit.Tests.Mocks;
 
 namespace Miunie.Core.XUnit.Tests
 {
-    public class ReputationTests
+    public class ProfileServiceReputationTests
     {
         private readonly Mock<IUserReputationProvider> _repProviderMock;
         private readonly ProfileService _profileService;
-        private readonly DummyMiunieUsers _data;
+        private readonly DummyMiunieUsers _users;
 
         private readonly Expression<Func<MiunieUser, bool>> _hasDraxId;
         private readonly Expression<Func<MiunieUser, bool>> _hasPeterId;
         private readonly Expression<Func<MiunieUser, bool>> _hasSenneId;
 
-        public ReputationTests()
+        public ProfileServiceReputationTests()
         {
             _repProviderMock = new Mock<IUserReputationProvider>();
             var discordMsgMock = new Mock<IDiscordMessages>();
             _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object);
-            _data = new DummyMiunieUsers();
+            _users = new DummyMiunieUsers();
 
-            _hasDraxId = u => u.Id == _data.Drax.Id;
-            _hasPeterId = u => u.Id == _data.Peter.Id;
-            _hasSenneId = u => u.Id == _data.Senne.Id;
+            _hasDraxId = u => u.Id == _users.Drax.Id;
+            _hasPeterId = u => u.Id == _users.Peter.Id;
+            _hasSenneId = u => u.Id == _users.Senne.Id;
         }
 
         [Fact]
-        public async Task ShouldCheckForTimeoutBeforeAdding()
+        public async Task GiveReputationAsync_ShouldCheckForTimeoutBeforeAdding()
         {
-            await _profileService.GiveReputationAsync(_data.Drax, _data.Senne, new MiunieChannel());
+            await _profileService.GiveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.AddReputationHasTimeout(
+            _repProviderMock.Verify(rp => rp.TryAddReputation(
                 It.Is<MiunieUser>(_hasDraxId),
                 It.Is<MiunieUser>(_hasSenneId)
             ), Times.Once());
@@ -47,9 +48,9 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         [Fact]
-        public async Task ShouldNotAddRepToSelf()
+        public async Task GiveReputationAsync_ShouldNotAddRepToSelf()
         {
-            await _profileService.GiveReputationAsync(_data.Senne, _data.Senne, new MiunieChannel());
+            await _profileService.GiveReputationAsync(_users.Senne, _users.Senne, new MiunieChannel());
 
             // NOTE(Peter):
             // Makes sure the service didn't add reputation to self
@@ -58,11 +59,11 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         [Fact]
-        public async Task ShouldCheckForTimeoutBeforeRemoving()
+        public async Task GiveReputationAsync_ShouldCheckForTimeoutBeforeRemoving()
         {
-            await _profileService.RemoveReputationAsync(_data.Drax, _data.Senne, new MiunieChannel());
+            await _profileService.RemoveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.RemoveReputationHasTimeout(
+            _repProviderMock.Verify(rp => rp.TryRemoveReputation(
                 It.Is<MiunieUser>(_hasDraxId),
                 It.Is<MiunieUser>(_hasSenneId)
             ), Times.Once());
@@ -74,9 +75,9 @@ namespace Miunie.Core.XUnit.Tests
         }
 
         [Fact]
-        public async Task ShouldNotRemoveRepFromSelf()
+        public async Task GiveReputationAsync_ShouldNotRemoveRepFromSelf()
         {
-            await _profileService.RemoveReputationAsync(_data.Senne, _data.Senne, new MiunieChannel());
+            await _profileService.RemoveReputationAsync(_users.Senne, _users.Senne, new MiunieChannel());
 
             _repProviderMock.VerifyNoOtherCalls();
         }
