@@ -14,13 +14,24 @@ namespace Miunie.WindowsApp.ViewModels
         private string _botToken;
         public string BotToken
         {
-
             get => _botToken;
             set
             {
                 if (value == _botToken) return;
                 _botToken = value;
                 RaisePropertyChanged(nameof(BotToken));
+            }
+        }
+
+        private string _manualBotToken;
+        public string ManualBotToken
+        {
+            get => _manualBotToken;
+            set
+            {
+                if (value == _manualBotToken) return;
+                _botToken = value;
+                RaisePropertyChanged(nameof(ManualBotToken));
             }
         }
 
