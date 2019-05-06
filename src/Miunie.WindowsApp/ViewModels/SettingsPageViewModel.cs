@@ -4,6 +4,8 @@ using System;
 using GalaSoft.MvvmLight;
 using Miunie.Core;
 using Miunie.Core.Logging;
+using Miunie.WindowsApp.Utilities;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -11,35 +13,15 @@ namespace Miunie.WindowsApp.ViewModels
     {
         private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
 
-        private string _botToken;
-        public string BotToken
-        {
-            get => _botToken;
-            set
-            {
-                if (value == _botToken) return;
-                _botToken = value;
-                RaisePropertyChanged(nameof(BotToken));
-            }
-        }
+        public string BotToken => _miunieBot.BotConfiguration.DiscordToken;
 
-        private string _manualBotToken;
-        public string ManualBotToken
-        {
-            get => _manualBotToken;
-            set
-            {
-                if (value == _manualBotToken) return;
-                _botToken = value;
-                RaisePropertyChanged(nameof(ManualBotToken));
-            }
-        }
+        public TokenValidator TokenValidator { get; }
 
         public string BotAvatar => _miunieBot.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
-        public string BotTokenBeginning => new string(_botToken?.Take(5).ToArray());
+        public string BotTokenBeginning => new string(BotToken?.Take(5).ToArray());
 
-        public string BotTokenEnd => new string(_botToken?.TakeLast(5).ToArray());
+        public string BotTokenEnd => new string(BotToken?.TakeLast(5).ToArray());
 
         public IEnumerable<object> Logs => _logReader.RetrieveLogs(10).Select(m => new { Message = m });
 
@@ -47,17 +29,29 @@ namespace Miunie.WindowsApp.ViewModels
 
         private readonly ILogReader _logReader;
 
-        public SettingsPageViewModel(MiunieBot miunie, ILogReader logReader)
+        public SettingsPageViewModel(MiunieBot miunie, ILogReader logReader, TokenValidator tokenValidator)
         {
             _miunieBot = miunie;
             _logReader = logReader;
-            BotToken = miunie.BotConfiguration.DiscordToken;
             _logReader.LogRecieved += OnLogRecieved;
+            TokenValidator = tokenValidator;
+        }
+
+        internal void ApplyToken(string token)
+        {
+            _miunieBot.BotConfiguration.DiscordToken = token;
+            RaisePropertyChanged(nameof(BotToken));
+            RaisePropertyChanged(nameof(BotTokenBeginning));
+            RaisePropertyChanged(nameof(BotTokenEnd));
         }
 
         private void OnLogRecieved(object sender, EventArgs e)
         {
-            RaisePropertyChanged(nameof(Logs));
+            DispatcherHelper.CheckBeginInvokeOnUI(
+                () =>
+                {
+                    RaisePropertyChanged(nameof(Logs));
+                });
         }
     }
 }
