@@ -23,6 +23,20 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                if (value == _errorMessage) return;
+                _errorMessage = value;
+                RaisePropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+
         public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING 
             ? Visibility.Visible 
             : Visibility.Collapsed;
@@ -46,18 +60,22 @@ namespace Miunie.WindowsApp.ViewModels
 
         public async void ToggleBotStart()
         {
-            if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
+            if (_miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTED)
             {
-                _miunie.Stop();
-            }
-            else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
-            {
-                await _miunie.StartAsync();
+                if (_miunie.BotConfiguration.DiscordToken == null)
+                {
+                    ErrorMessage = "No key found, input your key inside Settings!";
+                    return;
+                }
+                
+                await _miunie?.StartAsync();
             }
             else
             {
-                RaisePropertyChanged(nameof(ActionButtonText));
+                _miunie.Stop();
             }
+
+            RaisePropertyChanged(nameof(ActionButtonText));
         }
 
         private void MiunieOnConnectionStateChanged(object sender, EventArgs e)
@@ -66,6 +84,8 @@ namespace Miunie.WindowsApp.ViewModels
                 () =>
                 {
                     ConnectionStatus = _miunie.MiunieDiscord.ConnectionState.ToString();
+                    ErrorMessage = "";
+                    RaisePropertyChanged(nameof(ErrorMessage));
                     RaisePropertyChanged(nameof(ActionButtonText));
                     RaisePropertyChanged(nameof(ActionButtonIsVisible));
                     RaisePropertyChanged(nameof(ProgressBarIsVisible));
