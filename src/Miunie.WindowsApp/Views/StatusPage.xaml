@@ -49,10 +49,5 @@
 
 
         </StackPanel>
-        <TextBlock HorizontalAlignment="Center"
-                   Style="{StaticResource TitleTextBlockStyle}"
-                   Margin="0,355,0,0" 
-                   VerticalAlignment="Top"
-                   Text="{Binding ErrorTextBlock}" />
     </Grid>
 </Page>

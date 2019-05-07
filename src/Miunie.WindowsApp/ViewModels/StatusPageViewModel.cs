@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
-using Miunie.WindowsApp.Views;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -15,25 +13,13 @@ namespace Miunie.WindowsApp.ViewModels
         private string _connectedStatus;
         public string ConnectionStatus
         {
+
             get => _connectedStatus;
             set
             {
                 if (value == _connectedStatus) return;
                 _connectedStatus = value;
                 RaisePropertyChanged(nameof(ConnectionStatus));
-            }
-        }
-
-        private string _errorMessage;
-
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set
-            {
-                if (value == _errorMessage) return;
-                _errorMessage = value;
-                RaisePropertyChanged(nameof(ErrorTextBlock));
             }
         }
 
@@ -49,8 +35,6 @@ namespace Miunie.WindowsApp.ViewModels
 
         public string ActionButtonText => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? "Stop" : "Start";
 
-        public object ErrorTextBlock => ErrorMessage;
-
         private readonly MiunieBot _miunie;
 
         public StatusPageViewModel(MiunieBot miunie)
@@ -62,27 +46,18 @@ namespace Miunie.WindowsApp.ViewModels
 
         public async void ToggleBotStart()
         {
-            if (_miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTED)
-            {
-                if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
-                {
-                    if (SettingsPage.GetTokenStorage() == "")
-                    {
-                         ErrorMessage = "No key found, input your key inside Settings!";
-                         return;
-                    }
-
-                    _miunie.BotConfiguration.DiscordToken = SettingsPage.GetTokenStorage();
-
-                    await _miunie?.StartAsync();
-                }
-            }
-            else
+            if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
             {
                 _miunie.Stop();
             }
-
-            RaisePropertyChanged(nameof(ActionButtonText));
+            else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
+            {
+                await _miunie.StartAsync();
+            }
+            else
+            {
+                RaisePropertyChanged(nameof(ActionButtonText));
+            }
         }
 
         private void MiunieOnConnectionStateChanged(object sender, EventArgs e)

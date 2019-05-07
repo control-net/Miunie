@@ -33,7 +33,9 @@
         <StackPanel Margin="12, 32" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
             <StackPanel Orientation="Horizontal">
-                <PasswordBox x:Name="TokenTxtBox"  Width="322" PlaceholderText="Token here" x:FieldModifier="public" />
+                <TextBlock Text="{Binding BotTokenBeginning}" />
+                <Rectangle Fill="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" Width="300"/>
+                <TextBlock Text="{Binding BotTokenEnd}" />
             </StackPanel>
             <Rectangle Height="20"/>
             <ListView ItemsSource="{Binding Logs}" MinHeight="100">
