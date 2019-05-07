@@ -85,7 +85,6 @@ namespace Miunie.WindowsApp.ViewModels
                 {
                     ConnectionStatus = _miunie.MiunieDiscord.ConnectionState.ToString();
                     ErrorMessage = "";
-                    RaisePropertyChanged(nameof(ErrorMessage));
                     RaisePropertyChanged(nameof(ActionButtonText));
                     RaisePropertyChanged(nameof(ActionButtonIsVisible));
                     RaisePropertyChanged(nameof(ProgressBarIsVisible));
