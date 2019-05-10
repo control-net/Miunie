@@ -21,7 +21,7 @@ namespace Miunie.Core.Providers
 
         public void StoreUser(MiunieUser user)
         {
-            if (_persistentStorage.Exists<MiunieUser>(u => u.Id == user.Id))
+            if (_persistentStorage.Exists<MiunieUser>(u => u.Id == user.Id && u.GuildId == user.GuildId))
             {
                 _persistentStorage.Update(user);
             }
