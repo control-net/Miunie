@@ -31,10 +31,10 @@ namespace Miunie.Core.Providers
             _userProvider.StoreUser(target);
         }
 
-        public bool TryAddReputation(MiunieUser invoker, MiunieUser target)
+        public bool CanAddReputation(MiunieUser invoker, MiunieUser target)
             => HasTimeout(target.Reputation.PlusRepLog, invoker);
 
-        public bool TryRemoveReputation(MiunieUser invoker, MiunieUser target)
+        public bool CanRemoveReputation(MiunieUser invoker, MiunieUser target)
             => HasTimeout(target.Reputation.MinusRepLog, invoker);
 
         private bool HasTimeout(ConcurrentDictionary<ulong, DateTime> log, MiunieUser invoker)

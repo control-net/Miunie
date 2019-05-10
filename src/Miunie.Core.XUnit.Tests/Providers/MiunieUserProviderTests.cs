@@ -1,6 +1,6 @@
 ﻿using Miunie.Core.Providers;
 using Miunie.Core.Storage;
-using Miunie.Core.XUnit.Tests.Mocks;
+using Miunie.Core.XUnit.Tests.Data;
 using Moq;
 using System;
 using System.Linq.Expressions;

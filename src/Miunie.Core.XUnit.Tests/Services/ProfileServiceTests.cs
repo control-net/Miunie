@@ -4,7 +4,7 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Miunie.Core.XUnit.Tests
+namespace Miunie.Core.XUnit.Tests.Services
 {
     public class ProfileServiceTests
     {
@@ -22,9 +22,9 @@ namespace Miunie.Core.XUnit.Tests
         {
             _msgMock.Setup(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()))
                 .Returns(Task.CompletedTask);
-            
+
             await _profileService.ShowProfileAsync(null, null);
-            
+
             _msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieUser>()), Times.Once);
         }
 
@@ -35,7 +35,7 @@ namespace Miunie.Core.XUnit.Tests
                 .Returns(Task.CompletedTask);
 
             await _profileService.ShowGuildProfileAsync(null, null);
-            
+
             _msgMock.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.IsAny<MiunieGuild>()), Times.Once);
         }
     }
