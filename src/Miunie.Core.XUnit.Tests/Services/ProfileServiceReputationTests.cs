@@ -5,9 +5,9 @@ using Moq;
 using System.Threading.Tasks;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
-using Miunie.Core.XUnit.Tests.Mocks;
+using Miunie.Core.XUnit.Tests.Data;
 
-namespace Miunie.Core.XUnit.Tests
+namespace Miunie.Core.XUnit.Tests.Services
 {
     public class ProfileServiceReputationTests
     {
@@ -36,14 +36,14 @@ namespace Miunie.Core.XUnit.Tests
         {
             await _profileService.GiveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.TryAddReputation(
-                It.Is<MiunieUser>(_hasDraxId),
-                It.Is<MiunieUser>(_hasSenneId)
+            _repProviderMock.Verify(rp => rp.CanAddReputation(
+                It.Is(_hasDraxId),
+                It.Is(_hasSenneId)
             ), Times.Once());
 
             _repProviderMock.Verify(rp => rp.AddReputation(
-                It.Is<MiunieUser>(_hasDraxId),
-                It.Is<MiunieUser>(_hasSenneId)
+                It.Is(_hasDraxId),
+                It.Is(_hasSenneId)
             ), Times.Once());
         }
 
@@ -63,14 +63,14 @@ namespace Miunie.Core.XUnit.Tests
         {
             await _profileService.RemoveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.TryRemoveReputation(
-                It.Is<MiunieUser>(_hasDraxId),
-                It.Is<MiunieUser>(_hasSenneId)
+            _repProviderMock.Verify(rp => rp.CanRemoveReputation(
+                It.Is(_hasDraxId),
+                It.Is(_hasSenneId)
             ), Times.Once());
 
             _repProviderMock.Verify(rp => rp.RemoveReputation(
-                It.Is<MiunieUser>(_hasDraxId),
-                It.Is<MiunieUser>(_hasSenneId)
+                It.Is(_hasDraxId),
+                It.Is(_hasSenneId)
             ), Times.Once());
         }
 
