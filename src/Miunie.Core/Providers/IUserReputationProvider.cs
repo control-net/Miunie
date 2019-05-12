@@ -5,7 +5,7 @@ namespace Miunie.Core.Providers
         int TimeoutInSeconds { get; }
         void AddReputation(MiunieUser invoker, MiunieUser target);
         void RemoveReputation(MiunieUser invoker, MiunieUser target);
-        bool TryAddReputation(MiunieUser invoker, MiunieUser target);
-        bool TryRemoveReputation(MiunieUser invoker, MiunieUser target);
+        bool CanAddReputation(MiunieUser invoker, MiunieUser target);
+        bool CanRemoveReputation(MiunieUser invoker, MiunieUser target);
     }
 }

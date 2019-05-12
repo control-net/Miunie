@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
 </a>
 <a href="https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license">
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="license">
 </a>
 <a href="https://discordbots.org/bot/411505318124847114" >
   <img src="https://discordbots.org/api/widget/status/411505318124847114.svg" alt="Community-Bot" />
