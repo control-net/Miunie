@@ -15,13 +15,13 @@ namespace Miunie.Core.Providers
 
         public MiunieUser GetById(ulong userId, ulong guildId)
         {
-            var user = _persistentStorage.RestoreSingle<MiunieUser>(u => u.Id == userId && u.GuildId == guildId);
+            var user = _persistentStorage.RestoreSingle<MiunieUser>(u => u.UserId == userId && u.GuildId == guildId);
             return EnsureExistence(user, userId, guildId);
         }
 
         public void StoreUser(MiunieUser user)
         {
-            if (_persistentStorage.Exists<MiunieUser>(u => u.Id == user.Id && u.GuildId == user.GuildId))
+            if (_persistentStorage.Exists<MiunieUser>(u => u.UserId == user.UserId && u.GuildId == user.GuildId))
             {
                 _persistentStorage.Update(user);
             }
@@ -41,7 +41,7 @@ namespace Miunie.Core.Providers
                 user = new MiunieUser
                 {
                     GuildId = guildId,
-                    Id = userId,
+                    UserId = userId,
                     Reputation = new Reputation()
                 };
                 StoreUser(user);

@@ -22,7 +22,7 @@ namespace Miunie.Core
 
         public async Task GiveReputationAsync(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
-            if (invoker.Id == target.Id)
+            if (invoker.UserId == target.UserId)
             {
                 await _discordMessages.SendMessageAsync(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
                 return;
@@ -40,7 +40,7 @@ namespace Miunie.Core
 
         public async Task RemoveReputationAsync(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
-            if (invoker.Id == target.Id)
+            if (invoker.UserId == target.UserId)
             {
                 await _discordMessages.SendMessageAsync(c, PhraseKey.CANNOT_SELF_REP, invoker.Name);
                 return;

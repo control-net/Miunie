@@ -20,7 +20,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
             _storageMock = new Mock<IPersistentStorage>();
             _userProvider = new MiunieUserProvider(_storageMock.Object);
             _users = new DummyMiunieUsers();
-            _hasDraxIdAndGuildId = u => u.Id == _users.Drax.Id && u.GuildId == _users.Drax.GuildId;
+            _hasDraxIdAndGuildId = u => u.UserId == _users.Drax.UserId && u.GuildId == _users.Drax.GuildId;
         }
 
         [Fact]
@@ -31,11 +31,11 @@ namespace Miunie.Core.XUnit.Tests.Providers
                 .Returns(expected);
             _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
 
-            var actual = _userProvider.GetById(expected.Id, expected.GuildId);
+            var actual = _userProvider.GetById(expected.UserId, expected.GuildId);
 
             _storageMock.Verify(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()), Times.Once);
             _storageMock.Verify(s => s.Store(It.Is<MiunieUser>(_hasDraxIdAndGuildId)), Times.Never);
-            Assert.True(expected.Id == actual.Id && expected.GuildId == actual.GuildId);
+            Assert.True(expected.UserId == actual.UserId && expected.GuildId == actual.GuildId);
         }
 
         [Theory]
@@ -51,8 +51,8 @@ namespace Miunie.Core.XUnit.Tests.Providers
             var newUser = _userProvider.GetById(userId, guildID);
 
             _storageMock.Verify(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()), Times.Once);
-            _storageMock.Verify(s => s.Store(It.Is<MiunieUser>(u => u.Id == userId && u.GuildId == guildID)), Times.Once);
-            Assert.True(newUser.Id == userId && newUser.GuildId == guildID);
+            _storageMock.Verify(s => s.Store(It.Is<MiunieUser>(u => u.UserId == userId && u.GuildId == guildID)), Times.Once);
+            Assert.True(newUser.UserId == userId && newUser.GuildId == guildID);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
             var user = new MiunieUser
             {
                 GuildId = 0,
-                Id = 0,
+                UserId = 0,
                 Reputation = new Reputation()
             };
             _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));

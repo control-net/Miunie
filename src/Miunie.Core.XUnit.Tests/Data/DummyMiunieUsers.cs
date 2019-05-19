@@ -6,7 +6,7 @@ namespace Miunie.Core.XUnit.Tests.Data
 
         public readonly MiunieUser Senne = new MiunieUser
         {
-            Id = 69420911,
+            UserId = 69420911,
             GuildId = DummyGuildId,
             Name = "Senne",
             Reputation = new Reputation
@@ -17,7 +17,7 @@ namespace Miunie.Core.XUnit.Tests.Data
 
         public readonly MiunieUser Peter = new MiunieUser
         {
-            Id = 182941761801420802,
+            UserId = 182941761801420802,
             GuildId = DummyGuildId,
             Name = "Peter",
             Reputation = new Reputation
@@ -28,7 +28,7 @@ namespace Miunie.Core.XUnit.Tests.Data
 
         public readonly MiunieUser Drax = new MiunieUser
         {
-            Id = 123456789,
+            UserId = 123456789,
             GuildId = DummyGuildId,
             Name = "Drax",
             Reputation = new Reputation

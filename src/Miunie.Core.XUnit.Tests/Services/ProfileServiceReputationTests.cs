@@ -26,9 +26,9 @@ namespace Miunie.Core.XUnit.Tests.Services
             _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object);
             _users = new DummyMiunieUsers();
 
-            _hasDraxId = u => u.Id == _users.Drax.Id;
-            _hasPeterId = u => u.Id == _users.Peter.Id;
-            _hasSenneId = u => u.Id == _users.Senne.Id;
+            _hasDraxId = u => u.UserId == _users.Drax.UserId;
+            _hasPeterId = u => u.UserId == _users.Peter.UserId;
+            _hasSenneId = u => u.UserId == _users.Senne.UserId;
         }
 
         [Fact]
