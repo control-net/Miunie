@@ -28,13 +28,13 @@
 
 ![platforms image](img/apps.png)
 
-## [🔗 Learn more about Miunie...](https://github.com/discord-bot-tutorial/Miunie/wiki/About-Miunie)
+## [🔗 Learn more about Miunie...](https://github.com/control-net/Miunie/wiki/About-Miunie)
 
-## [🔗 How you can help the project...](https://github.com/discord-bot-tutorial/Miunie/wiki/How-to-help)
+## [🔗 How you can help the project...](https://github.com/control-net/Miunie/wiki/How-to-help)
 
-## [🔗 How to install and use Miunie...](https://github.com/discord-bot-tutorial/Miunie/wiki/Getting-started-with-Miunie)
+## [🔗 How to install and use Miunie...](https://github.com/control-net/Miunie/wiki/Getting-started-with-Miunie)
 
-## [🔗 How to deploy Miunie...](https://github.com/discord-bot-tutorial/Miunie/wiki/Deploying-Miunie)
+## [🔗 How to deploy Miunie...](https://github.com/control-net/Miunie/wiki/Deploying-Miunie)
 
 ## Built With
 
@@ -49,11 +49,11 @@
 
 - Petr Sedláček - Initial work - [PetrSpelos](https://github.com/petrspelos)
 
-See also the list of [contributors](https://github.com/discord-bot-tutorial/Miunie/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/control-net/Miunie/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE) file for details
+This project is licensed under the GPL-3.0 License - see the [LICENSE](https://github.com/control-net/Miunie/blob/master/LICENSE) file for details
 
 ## Acknowledgments
 
