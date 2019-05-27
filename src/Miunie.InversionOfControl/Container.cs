@@ -30,6 +30,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
-                .AddSingleton<RemoteRepositoryService>();
+                .AddSingleton<RemoteRepositoryService>()
+                .AddSingleton<CurrencyService>();
     }
 }

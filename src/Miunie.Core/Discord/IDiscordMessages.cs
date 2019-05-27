@@ -1,4 +1,5 @@
 using Miunie.Core;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Miunie.Core
@@ -9,6 +10,7 @@ namespace Miunie.Core
         Task SendMessageAsync(MiunieChannel targetChannel, MiunieUser user);
         Task SendMessageAsync(MiunieChannel targetChannel, MiunieGuild guild);
         Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl);
+        Task SendMessageAsync(MiunieChannel channel, IEnumerable<CurrencyData> todaysCurrencyData);
     }
 }
 
