@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Miunie.Core
     public class CurrencyService
     {
         private const string DailyConversionApiUrl = @"https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml";
-        private const string DailyConversionApiUrlDateParam = @"?date="; // DD.MM.RRRR
+        private const string DailyConversionApiUrlDateParam = @"?date=";
         private const string RowElement = "radek";
         private const string AmountAttribute = "mnozstvi";
         private const string CodeAttribute = "kod";
@@ -18,18 +19,16 @@ namespace Miunie.Core
 
         private readonly IDiscordMessages _discordMessages;
 
-        private IEnumerable<CurrencyData> _todaysCurrencyData;
-
         public CurrencyService(IDiscordMessages discordMessages)
         {
             _discordMessages = discordMessages;
         }
 
-        private void FetchUpdatedData()
+        private IEnumerable<CurrencyData> FetchUpdatedData(DateTime dateTime)
         {
             string xml;
             using (var wc = new System.Net.WebClient())
-                xml = wc.DownloadString(DailyConversionApiUrl);
+                xml = wc.DownloadString($"{DailyConversionApiUrl}{DailyConversionApiUrlDateParam}{dateTime:dd.MM.yyyy}");
             var xDoc = XDocument.Parse(xml);
 
             var data =
@@ -37,7 +36,7 @@ namespace Miunie.Core
                 in xDoc.Descendants(RowElement)
                 select anyElement;
 
-            _todaysCurrencyData = data.Select(r => new CurrencyData
+            return data.Select(r => new CurrencyData
             {
                 Amount = int.Parse(r.Attribute(AmountAttribute)?.Value ?? "0"),
                 Code = r.Attribute(CodeAttribute)?.Value,
@@ -45,10 +44,18 @@ namespace Miunie.Core
             });
         }
 
+        private IEnumerable<CurrencyData> FetchUpdatedData() => FetchUpdatedData(DateTime.Now);
+
         public async Task ShowCzkStatus(MiunieChannel channel)
         {
-            FetchUpdatedData();
-            await _discordMessages.SendMessageAsync(channel, _todaysCurrencyData);
+            var data = FetchUpdatedData();
+            await _discordMessages.SendMessageAsync(channel, data);
+        }
+
+        public async Task ShowCzkStatus(MiunieChannel channel, DateTime dateTime)
+        {
+            var data = FetchUpdatedData();
+            await _discordMessages.SendMessageAsync(channel, data);
         }
     }
 }

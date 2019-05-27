@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using Miunie.Core;
@@ -22,6 +23,14 @@ namespace Miunie.Discord.CommandModules
         {
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _currencyService.ShowCzkStatus(channel);
+        }
+
+        [Command("CZK")]
+        public async Task AddReputationAsync(CommandContext ctx, string dateTime)
+        {
+            if (!DateTime.TryParse(dateTime, out var value)) { return; }
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            await _currencyService.ShowCzkStatus(channel, value);
         }
     }
 }
