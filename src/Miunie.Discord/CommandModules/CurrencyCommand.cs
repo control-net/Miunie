@@ -19,14 +19,14 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("CZK")]
-        public async Task AddReputationAsync(CommandContext ctx)
+        public async Task ShowCzkStatus(CommandContext ctx)
         {
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _currencyService.ShowCzkStatus(channel);
         }
 
         [Command("CZK")]
-        public async Task AddReputationAsync(CommandContext ctx, string dateTime)
+        public async Task ShowCzkStatusForDate(CommandContext ctx, string dateTime)
         {
             if (!DateTime.TryParse(dateTime, out var value)) { return; }
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
