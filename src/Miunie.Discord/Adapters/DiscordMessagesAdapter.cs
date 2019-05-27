@@ -50,5 +50,12 @@ namespace Miunie.Discord.Adapters
             var result = string.Join("\n", tc.Select(c => $"{c.Amount} {c.Code} = {c.CzechCrowns} CZK"));
             await channel.SendMessageAsync(result);
         }
+
+        public async Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr)
+        {
+            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var result = $"{ccr.FromValue} {ccr.FromCode} = {ccr.ToValue} {ccr.ToCode}";
+            await channel.SendMessageAsync(result);
+        }
     }
 }

@@ -32,5 +32,23 @@ namespace Miunie.Discord.CommandModules
             var channel = _entityConvertor.ConvertChannel(ctx.Channel);
             await _currencyService.ShowCzkStatus(channel, value);
         }
+
+        [Command("Convert")]
+        public async Task ConvertCurrency(CommandContext ctx, decimal value, string fromCode, string verb, string toCode)
+        {
+            if (verb != "to") { return; }
+
+            if (fromCode != "CZK" && toCode != "CZK") { return; } // Not supported
+
+            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+
+            if (fromCode.ToUpper() == "CZK")
+            {
+                await _currencyService.ShowConversionCzkToForeign(channel, toCode, value);
+                return;
+            }
+
+            await _currencyService.ShowConversionForeignToCzk(channel, fromCode, value);
+        }
     }
 }

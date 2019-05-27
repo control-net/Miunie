@@ -57,5 +57,41 @@ namespace Miunie.Core
             var data = FetchUpdatedData();
             await _discordMessages.SendMessageAsync(channel, data);
         }
+
+        public async Task ShowConversionCzkToForeign(MiunieChannel channel, string code, decimal amount)
+        {
+            var data = FetchUpdatedData();
+            var currency = data.FirstOrDefault(c => c.Code == code.ToUpper());
+
+            if(currency is null) { return; }
+
+            var result = new CurrencyConversionResult
+            {
+                FromCode = "CZK",
+                ToCode = code.ToUpper(),
+                FromValue = amount,
+                ToValue = amount / (currency.CzechCrowns / currency.Amount)
+            };
+
+            await _discordMessages.SendMessageAsync(channel, result);
+        }
+
+        public async Task ShowConversionForeignToCzk(MiunieChannel channel, string code, decimal amount)
+        {
+            var data = FetchUpdatedData();
+            var currency = data.FirstOrDefault(c => c.Code == code.ToUpper());
+
+            if (currency is null) { return; }
+
+            var result = new CurrencyConversionResult
+            {
+                FromCode = code.ToUpper(),
+                ToCode = "CZK",
+                FromValue = amount,
+                ToValue = (currency.CzechCrowns / currency.Amount) * amount
+            };
+
+            await _discordMessages.SendMessageAsync(channel, result);
+        }
     }
 }
