@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using Miunie.Core;
-using Miunie.Core.Logging;
 using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
@@ -12,7 +11,7 @@ namespace Miunie.Discord.CommandModules
         private readonly EntityConvertor _entityConvertor;
         private readonly ProfileService _profileService;
 
-        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService, IDiscordMessages discordMessages, ILogWriter logger)
+        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService)
         {
             _entityConvertor = entityConvertor;
             _profileService = profileService;
