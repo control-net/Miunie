@@ -1,6 +1,6 @@
-﻿using DSharpPlus;
-using DSharpPlus.EventArgs;
+﻿using Discord;
 using Miunie.Core.Logging;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord.Logging
 {
@@ -13,16 +13,18 @@ namespace Miunie.Discord.Logging
             _logger = logger;
         }
 
-        internal void Log(object sender, DebugLogMessageEventArgs e)
+        internal Task Log(LogMessage evt)
         {
-            if (e.Level == LogLevel.Critical)
+            if (evt.Severity == LogSeverity.Critical)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(evt.Message);
             }
             else
             {
-                _logger.Log(e.Message);
+                _logger.Log(evt.Message);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

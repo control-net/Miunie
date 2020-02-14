@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
@@ -20,40 +21,40 @@ namespace Miunie.Discord.Adapters
 
         public async Task SendMessageAsync(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
             await channel.SendMessageAsync(msg);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieUser mu)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieGuild mg)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var result = string.Join("\n", dl.Result.Select(s => $":file_folder: {s}"));
             await channel.SendMessageAsync(result);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, IEnumerable<CurrencyData> tc)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var result = string.Join("\n", tc.Select(c => $"{c.Amount} {c.Code} = {c.CzechCrowns} CZK"));
             await channel.SendMessageAsync(result);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr)
         {
-            var channel = await _discord.Client.GetChannelAsync(mc.ChannelId);
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var result = $"{ccr.FromValue} {ccr.FromCode} = {ccr.ToValue} {ccr.ToCode}";
             await channel.SendMessageAsync(result);
         }

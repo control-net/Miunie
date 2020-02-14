@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
+using Discord.Commands;
+using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
 {
-    public class CurrencyCommand : BaseCommandModule
+    public class CurrencyCommand : ModuleBase<SocketCommandContext>
     {
         private readonly EntityConvertor _entityConvertor;
         private readonly CurrencyService _currencyService;
@@ -19,28 +19,28 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("CZK")]
-        public async Task ShowCzkStatus(CommandContext ctx)
+        public async Task ShowCzkStatus()
         {
-            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
             await _currencyService.ShowCzkStatus(channel);
         }
 
         [Command("CZK")]
-        public async Task ShowCzkStatusForDate(CommandContext ctx, string dateTime)
+        public async Task ShowCzkStatusForDate(string dateTime)
         {
             if (!DateTime.TryParse(dateTime, out var value)) { return; }
-            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
             await _currencyService.ShowCzkStatus(channel, value);
         }
 
         [Command("Convert")]
-        public async Task ConvertCurrency(CommandContext ctx, decimal value, string fromCode, string verb, string toCode)
+        public async Task ConvertCurrency(decimal value, string fromCode, string verb, string toCode)
         {
             if (verb != "to") { return; }
 
             if (fromCode != "CZK" && toCode != "CZK") { return; } // Not supported
 
-            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
 
             if (fromCode.ToUpper() == "CZK")
             {

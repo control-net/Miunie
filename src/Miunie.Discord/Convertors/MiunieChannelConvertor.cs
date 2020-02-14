@@ -1,39 +1,23 @@
+using Discord.WebSocket;
 using Miunie.Core;
-using DSharpPlus.Entities;
-using DSharpPlus.CommandsNext.Converters;
-using DSharpPlus.CommandsNext;
-using System.Threading.Tasks;
 
 namespace Miunie.Discord.Convertors
 {
-    public class MiunieChannelConvertor : IArgumentConverter<MiunieChannel>
+    public class MiunieChannelConvertor
     {
-        private readonly DiscordChannelConverter _dcConverter;
-
-        public MiunieChannelConvertor()
-        {
-            _dcConverter = new DiscordChannelConverter();
-        }
-
-        public async Task<Optional<MiunieChannel>> ConvertAsync(string userInput, CommandContext context)
-        {
-            var result = await _dcConverter.ConvertAsync(userInput, context);
-            return FromDiscordChannel(result.Value);
-        }
-
-        public static MiunieChannel FromDiscordChannel(DiscordChannel channel)
+        public static MiunieChannel FromDiscordChannel(SocketGuildChannel channel)
         {
             MiunieChannel miunieChannel;
-            if (channel is default(DiscordChannel))
+            if (channel is default(SocketGuildChannel))
             {
-                miunieChannel = default(MiunieChannel);
+                miunieChannel = default;
             }
             else
             {
                 miunieChannel = new MiunieChannel()
                 {
                     ChannelId = channel.Id,
-                    GuildId = channel.GuildId
+                    GuildId = channel.Guild.Id
                 };
             }
             return miunieChannel;
