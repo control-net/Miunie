@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
+using Discord.Commands;
+using Discord.WebSocket;
 using Miunie.Core;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.CommandsNext;
-using DSharpPlus;
 using Miunie.Discord.Convertors;
 
 namespace Miunie.Discord.CommandModules
 {
-    public class RemoteRepositoryCommand : BaseCommandModule
+    public class RemoteRepositoryCommand : ModuleBase<SocketCommandContext>
     {
         private readonly RemoteRepositoryService _remoteRepoService;
         private readonly EntityConvertor _entityConvertor;
@@ -19,10 +18,10 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("repo")]
-        [Description("Shows the official remote repository hosting the code of this bot")]
-        public async Task ShowRepository(CommandContext ctx)
+        [Summary("Shows the official remote repository hosting the code of this bot")]
+        public async Task ShowRepository()
         {
-            var channel = _entityConvertor.ConvertChannel(ctx.Channel);
+            var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
             await _remoteRepoService.ShowRepositoryAsync(channel);
         }
     }

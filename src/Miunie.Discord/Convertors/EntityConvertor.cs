@@ -1,4 +1,4 @@
-using DSharpPlus.Entities;
+using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Providers;
 
@@ -17,13 +17,13 @@ namespace Miunie.Discord.Convertors
             GuildConvertor = new MiunieGuildConvertor();
         }
 
-        public MiunieUser ConvertUser(DiscordMember m)
+        public MiunieUser ConvertUser(SocketGuildUser m)
             => UserConvertor.DiscordMemberToMiunieUser(m);
 
-        public MiunieChannel ConvertChannel(DiscordChannel c)
+        public MiunieChannel ConvertChannel(SocketGuildChannel c)
             => MiunieChannelConvertor.FromDiscordChannel(c);
 
-        internal MiunieGuild ConvertGuild(DiscordGuild g)
+        internal MiunieGuild ConvertGuild(SocketGuild g)
             => GuildConvertor.DiscordGuildToMiunieGuild(g);
     }
 }

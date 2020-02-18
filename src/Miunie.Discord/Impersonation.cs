@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DSharpPlus;
-using DSharpPlus.Entities;
+using Discord;
+using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Logging;
 
@@ -23,15 +23,15 @@ namespace Miunie.Discord
         public IEnumerable<GuildView> GetAvailableGuilds()
             =>_discord.Client?.Guilds.Select(g => new GuildView
             {
-                Id = g.Value.Id,
-                IconUrl = g.Value.IconUrl,
-                Name = g.Value.Name
+                Id = g.Id,
+                IconUrl = g.IconUrl,
+                Name = g.Name
             });
 
         public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId)
         {
-            var guild = await _discord.Client.GetGuildAsync(guildId);
-            var textChannels = guild.Channels.Where(c => c.Type == ChannelType.Text);
+            var guild = _discord.Client.GetGuild(guildId);
+            var textChannels = guild.Channels.Where(c => c is SocketTextChannel);
             var result = new List<TextChannelView>();
             foreach (var channel in textChannels)
             {
@@ -41,7 +41,7 @@ namespace Miunie.Discord
                     {
                         Id = channel.Id,
                         Name = $"# {channel.Name}",
-                        Messages = await GetMessagesFrom(channel)
+                        Messages = await GetMessagesFrom(channel as SocketTextChannel)
                     });
                 }
                 catch (Exception)
@@ -53,15 +53,15 @@ namespace Miunie.Discord
             return result;
         }
 
-        public async Task<IEnumerable<MessageView>> GetMessagesFrom(DiscordChannel channel)
+        public async Task<IEnumerable<MessageView>> GetMessagesFrom(SocketTextChannel channel)
         {
-            var msgs = await channel.GetMessagesAsync(10);
+            var msgs = await channel.GetMessagesAsync(10).FlattenAsync();
             return msgs.Select(m => new MessageView
             {
-                AuthorAvatarUrl = m.Author.AvatarUrl,
+                AuthorAvatarUrl = m.Author.GetAvatarUrl(),
                 AuthorName = m.Author.Username,
                 Content = m.Content,
-                TimeStamp = m.CreationTimestamp.ToLocalTime()
+                TimeStamp = m.CreatedAt.ToLocalTime()
             });
         }
     }
