@@ -167,6 +167,13 @@ https://github.com/discord-bot-tutorial/Miunie</value>
 :question: {0} is one of **THOSE** people. He doesn't have his time set.</value>
     <comment>Target Username</comment>
   </data>
+  <data name="TIME_TIMEZONE_INFO" xml:space="preserve">
+    <value>:clock1: For {0} it's currently {1:HH:mm}{{OR}}
+:clock1: It's currently {1:HH:mm} where {0} is at.{{OR}}
+:clock1: Believe it or not, it's {1:HH:mm} right now in {0} land.{{OR}}
+:clock1: Time flies, but not so much for {0}, 'cause for them it's {1:HH:mm}.</value>
+    <comment>Target Username, Time string</comment>
+  </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
   </data>

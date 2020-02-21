@@ -161,6 +161,18 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to :clock1: For {0} it&apos;s currently {1:HH:mm}{{OR}}
+        ///:clock1: It&apos;s currently {1:HH:mm} where {0} is at.{{OR}}
+        ///:clock1: Believe it or not, it&apos;s {1:HH:mm} right now in {0} land.{{OR}}
+        ///:clock1: Time flies, but not so much for {0}, &apos;cause for them it&apos;s {1:HH:mm}..
+        /// </summary>
+        public static string TIME_TIMEZONE_INFO {
+            get {
+                return ResourceManager.GetString("TIME_TIMEZONE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :calendar_spiral: Creation date.
         /// </summary>
         public static string USER_EMBED_CREATED_AT_TITLE {
