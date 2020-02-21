@@ -15,11 +15,9 @@ namespace Miunie.Core.XUnit.Tests
         public void Initialize_ShouldThrowArgumentNullException_IfInvalidToken(string token)
         {
             var config = Mock.Of<IBotConfiguration>(c => c.DiscordToken == token);
-            var discord = new Mock<MiunieDiscordClient>(config);
+            var client = new MiunieDiscordClient(config);
 
-            var ex = Record.Exception(() => discord.Object.Initialize());
-
-            Assert.IsType<ArgumentNullException>(ex);
+            Assert.ThrowsAsync<ArgumentNullException>(client.InitializeAsync);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using Miunie.Core.Configuration;
+using System;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord
 {
@@ -15,8 +17,11 @@ namespace Miunie.Discord
             _botConfig = botConfig;
         }
 
-        public async void Initialize()
+        public async Task InitializeAsync()
         {
+            if (string.IsNullOrWhiteSpace(_botConfig.DiscordToken))
+                throw new ArgumentNullException(nameof(_botConfig.DiscordToken));
+
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Info,
