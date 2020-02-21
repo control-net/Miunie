@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
+using System;
 using System.Threading.Tasks;
 
 namespace Miunie.Discord.CommandModules
@@ -18,11 +19,19 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("time for")]
-        public async Task ShowProfileAsync(SocketGuildUser user)
+        public async Task ShowTimeForUser(SocketGuildUser user)
         {
-            var m = _entityConvertor.ConvertUser(user);
-            var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.OutputCurrentTimeForUserAsync(m, channel);
+            var u = _entityConvertor.ConvertUser(user);
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.OutputCurrentTimeForUserAsync(u, c);
+        }
+
+        [Command("time set")]
+        public async Task SetMyTimeOffset(DateTime currentTime)
+        {
+            var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.SetUtcOffsetForUserAsync(currentTime, u, c);
         }
     }
 }

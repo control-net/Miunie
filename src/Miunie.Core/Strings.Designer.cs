@@ -163,7 +163,7 @@ namespace Miunie.Core {
         
         /// <summary>
         ///   Looks up a localized string similar to :question: I have no idea what time it is for {0}.{{OR}}
-        ///:question: {0} is one of **THOSE** people. He doesn&apos;t have his time set..
+        ///:question: {0} is one of **THOSE** people. They don&apos;t have their time set..
         /// </summary>
         public static string TIME_NO_TIMEZONE_INFO {
             get {

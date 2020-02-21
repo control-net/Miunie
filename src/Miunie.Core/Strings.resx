@@ -170,7 +170,7 @@ Cool, if someone asks, this meeting didn't happen. (but I'll totally remember wh
   </data>
   <data name="TIME_NO_TIMEZONE_INFO" xml:space="preserve">
     <value>:question: I have no idea what time it is for {0}.{{OR}}
-:question: {0} is one of **THOSE** people. He doesn't have his time set.</value>
+:question: {0} is one of **THOSE** people. They don't have their time set.</value>
     <comment>Target Username</comment>
   </data>
   <data name="TIME_TIMEZONE_INFO" xml:space="preserve">
