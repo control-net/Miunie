@@ -19,7 +19,7 @@ namespace Miunie.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -147,6 +147,16 @@ namespace Miunie.Core {
         public static string SHOW_REMOTE_REPO {
             get {
                 return ResourceManager.GetString("SHOW_REMOTE_REPO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :question: I have no idea what time it is for {0}.
+        ///:question: {0} is one of **THOSE** people. He doesn&apos;t have his time set..
+        /// </summary>
+        public static string TIME_NO_TIMEZONE_INFO {
+            get {
+                return ResourceManager.GetString("TIME_NO_TIMEZONE_INFO", resourceCulture);
             }
         }
         

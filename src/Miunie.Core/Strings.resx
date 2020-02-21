@@ -162,6 +162,11 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
 https://github.com/discord-bot-tutorial/Miunie</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="TIME_NO_TIMEZONE_INFO" xml:space="preserve">
+    <value>:question: I have no idea what time it is for {0}.
+:question: {0} is one of **THOSE** people. He doesn't have his time set.</value>
+    <comment>Target Username</comment>
+  </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
   </data>

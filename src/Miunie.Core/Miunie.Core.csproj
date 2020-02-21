@@ -19,4 +19,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Time\" />
+  </ItemGroup>
+
 </Project>
