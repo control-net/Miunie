@@ -1,4 +1,5 @@
 ﻿using Miunie.Core.Infrastructure;
+using Miunie.Core.Providers;
 using Moq;
 using System;
 using System.Threading.Tasks;
@@ -10,13 +11,15 @@ namespace Miunie.Core.XUnit.Tests.Services
     {
         private readonly Mock<IDiscordMessages> _messages;
         private readonly Mock<IDateTime> _dateTime;
+        private readonly Mock<IMiunieUserProvider> _users;
         private readonly TimeService _service;
 
         public TimeServiceTests()
         {
             _messages = new Mock<IDiscordMessages>();
             _dateTime = new Mock<IDateTime>();
-            _service = new TimeService(_messages.Object, _dateTime.Object);
+            _users = new Mock<IMiunieUserProvider>();
+            _service = new TimeService(_messages.Object, _dateTime.Object, _users.Object);
         }
 
         [Fact]
@@ -45,6 +48,22 @@ namespace Miunie.Core.XUnit.Tests.Services
             AssertNoOtherMessages();
         }
 
+        [Fact]
+        public async Task SettingNewOffset_ShouldSaveAndOutputInfo()
+        {
+            SetCurrentTime(new DateTime(2020, 2, 22, 10, 59, 4));
+            var channel = CreateTestChannel();
+            var user = CreateUserWithoutOffset();
+            var enteredDateTime = new DateTime(1, 1, 1, 8, 0, 0);
+            var expectedOffset = TimeSpan.FromHours(-2);
+
+            await _service.SetUtcOffsetForUserAsync(enteredDateTime, user, channel);
+
+            AssertOffsetChangedInfoSent();
+            AssertUserWithOffsetSaved(expectedOffset);
+            AssertNoOtherMessages();
+        }
+
         private MiunieChannel CreateTestChannel()
         {
             return new MiunieChannel
@@ -70,6 +89,16 @@ namespace Miunie.Core.XUnit.Tests.Services
                 Name = "User",
                 UtcTimeOffset = offset
             };
+        }
+
+        private void AssertOffsetChangedInfoSent()
+        {
+            _messages.Verify(m => m.SendMessageAsync(It.IsAny<MiunieChannel>(), It.Is<PhraseKey>(pk => pk == PhraseKey.TIME_NEW_OFFSET_SET)));
+        }
+
+        private void AssertUserWithOffsetSaved(TimeSpan expectedOffset)
+        {
+            _users.Verify(u => u.StoreUser(It.Is<MiunieUser>(u => u.UtcTimeOffset == expectedOffset)));
         }
 
         private void AssertCorrectTimeInfoSent(DateTime expectedTime)

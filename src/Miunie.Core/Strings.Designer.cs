@@ -151,6 +151,17 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Congratulations! Your current time was stored!{{OR}}
+        ///Alright, I&apos;ll remember your time.{{OR}}
+        ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for you).
+        /// </summary>
+        public static string TIME_NEW_OFFSET_SET {
+            get {
+                return ResourceManager.GetString("TIME_NEW_OFFSET_SET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :question: I have no idea what time it is for {0}.{{OR}}
         ///:question: {0} is one of **THOSE** people. He doesn&apos;t have his time set..
         /// </summary>

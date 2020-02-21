@@ -162,6 +162,12 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
 https://github.com/discord-bot-tutorial/Miunie</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="TIME_NEW_OFFSET_SET" xml:space="preserve">
+    <value>Congratulations! Your current time was stored!{{OR}}
+Alright, I'll remember your time.{{OR}}
+Cool, if someone asks, this meeting didn't happen. (but I'll totally remember what time it is for you)</value>
+    <comment>No formatting options.</comment>
+  </data>
   <data name="TIME_NO_TIMEZONE_INFO" xml:space="preserve">
     <value>:question: I have no idea what time it is for {0}.{{OR}}
 :question: {0} is one of **THOSE** people. He doesn't have his time set.</value>
