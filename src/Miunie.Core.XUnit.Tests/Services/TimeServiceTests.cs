@@ -1,5 +1,4 @@
-﻿using Miunie.Core.Services;
-using Moq;
+﻿using Moq;
 using System;
 using System.Threading.Tasks;
 using Xunit;
