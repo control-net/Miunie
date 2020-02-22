@@ -19,7 +19,7 @@
 
                 <Ellipse Fill="{ThemeResource SystemAccentColor}" 
                          Width="174" Height="172" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                
+
                 <Ellipse Width="175" Height="175" x:Name="BotAvatarBrush">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{Binding BotAvatar}" />
