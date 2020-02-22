@@ -27,6 +27,19 @@ namespace Miunie.WindowsApp.Views
             this.InitializeComponent();
             _vm = DataContext as StatusPageViewModel;
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            _vm.AvatarChanged = OnAvatarChanged;
+        }
+
+        private void OnAvatarChanged()
+        {
+            FadeOutAvatarStoryboard.Begin();
+
+            if (_vm.IsConnecting) return;
+
+            FadeOutAvatarStoryboard.Completed += (object sbs, object sbe) =>
+            {
+                FadeInAvatarStoryboard.Begin();
+            };
         }
 
         private void ActionBtn_OnClick(object sender, RoutedEventArgs e)
