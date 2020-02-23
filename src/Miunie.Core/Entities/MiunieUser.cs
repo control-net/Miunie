@@ -32,6 +32,7 @@ namespace Miunie.Core
         public bool IsBot { get; set; }
         public IEnumerable<MiunieRole> Roles { get; set; }
         public string AvatarUrl { get; set; }
+        public TimeSpan? UtcTimeOffset { get; set; }
 
         public MiunieUser()
         {

@@ -32,6 +32,7 @@ namespace Miunie.InversionOfControl
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
                 .AddSingleton<RemoteRepositoryService>()
                 .AddSingleton<CurrencyService>()
+                .AddSingleton<TimeService>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>();
     }

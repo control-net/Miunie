@@ -20,14 +20,14 @@ namespace Miunie.Core.Providers
         public void AddReputation(MiunieUser invoker, MiunieUser target)
         {
             target.Reputation.Value++;
-            target.Reputation.PlusRepLog.TryAdd(invoker.UserId, _dateTime.Now);
+            target.Reputation.PlusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
             _userProvider.StoreUser(target);
         }
 
         public void RemoveReputation(MiunieUser invoker, MiunieUser target)
         {
             target.Reputation.Value--;
-            target.Reputation.MinusRepLog.TryAdd(invoker.UserId, _dateTime.Now);
+            target.Reputation.MinusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
             _userProvider.StoreUser(target);
         }
 
@@ -41,7 +41,7 @@ namespace Miunie.Core.Providers
         {
             log.TryGetValue(invoker.UserId, out var lastRepDateTime);
 
-            if ((_dateTime.Now - lastRepDateTime).TotalSeconds <= TimeoutInSeconds) { return true; }
+            if ((_dateTime.UtcNow - lastRepDateTime).TotalSeconds <= TimeoutInSeconds) { return true; }
 
             log.TryRemove(invoker.UserId, out _);
             _userProvider.StoreUser(invoker);
