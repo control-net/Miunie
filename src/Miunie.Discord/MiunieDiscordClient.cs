@@ -1,11 +1,12 @@
-﻿using DSharpPlus;
+﻿using Discord;
+using Discord.WebSocket;
 using Miunie.Core.Configuration;
 
 namespace Miunie.Discord
 {
     public class MiunieDiscordClient : IDiscord
     {
-        public DiscordClient Client { get; private set; }
+        public DiscordSocketClient Client { get; private set; }
 
         private readonly IBotConfiguration _botConfig;
 
@@ -14,16 +15,14 @@ namespace Miunie.Discord
             _botConfig = botConfig;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            Client = new DiscordClient(new DiscordConfiguration
+            Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                Token = _botConfig.DiscordToken,
-                TokenType = TokenType.Bot,
-                AutoReconnect = true,
-                LogLevel = LogLevel.Info,
-                UseInternalLogHandler = false
+                LogLevel = LogSeverity.Info,
             });
+
+            await Client.LoginAsync(TokenType.Bot, _botConfig.DiscordToken);
         }
 
         public void DisposeOfClient() => Client = null;

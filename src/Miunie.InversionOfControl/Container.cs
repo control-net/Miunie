@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Discord.Commands;
+using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
@@ -24,12 +25,14 @@ namespace Miunie.InversionOfControl
                 .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
                 .AddSingleton<IDiscordImpersonation, Impersonation>()
                 .AddSingleton<DiscordLogger>()
-                .AddScoped<CommandServiceFactory>()
                 .AddSingleton<IBotConfiguration, BotConfiguration>()
                 .AddSingleton<IPersistentStorage, LiteDbStorage.PersistentStorage>()
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
-                .AddSingleton<RemoteRepositoryService>();
+                .AddSingleton<RemoteRepositoryService>()
+                .AddSingleton<CurrencyService>()
+                .AddSingleton<CommandHandler>()
+                .AddSingleton<MiunieUserConverter>();
     }
 }

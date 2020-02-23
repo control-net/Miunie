@@ -16,11 +16,11 @@ namespace Miunie.Discord.Adapters
             _entityConvertor = entityConvertor;
         }
 
-        public async Task<MiunieGuild> FromAsync(MiunieUser user)
+        public Task<MiunieGuild> FromAsync(MiunieUser user)
         {
-            var guild = await _discord.Client.GetGuildAsync(user.GuildId);
+            var guild = _discord.Client.GetGuild(user.GuildId);
 
-            return _entityConvertor.ConvertGuild(guild);
+            return Task.FromResult(_entityConvertor.ConvertGuild(guild));
         }
     }
 }

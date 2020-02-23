@@ -1,21 +1,20 @@
-﻿using DSharpPlus.EventArgs;
-using Miunie.Core;
+﻿using Miunie.Core;
 using Miunie.Discord.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Miunie.Core.Logging;
-using DSharpPlus.Entities;
+using Discord;
 
 namespace Miunie.Discord
 {
     public class MiunieDiscord : IMiunieDiscord
     {
         public string GetBotAvatarUrl()
-            => _discord.Client?.CurrentUser?.AvatarUrl;
+            => _discord.Client?.CurrentUser?.GetAvatarUrl();
 
-        private ConnectionState _connectionState;
-        public ConnectionState ConnectionState
+        private Core.ConnectionState _connectionState;
+        public Core.ConnectionState ConnectionState
         {
             get => _connectionState;
             private set
@@ -29,37 +28,37 @@ namespace Miunie.Discord
 
         private readonly IDiscord _discord;
         private readonly DiscordLogger _discordLogger;
-        private readonly CommandServiceFactory _cmdServiceFactory;
         private readonly ILogWriter _logger;
+        private readonly CommandHandler _commandHandler;
 
-        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, CommandServiceFactory cmdServiceFactory, ILogWriter logger)
+        public MiunieDiscord(IDiscord discord, DiscordLogger discordLogger, ILogWriter logger, CommandHandler commandHandler)
         {
             _discord = discord;
             _discordLogger = discordLogger;
-            _cmdServiceFactory = cmdServiceFactory;
             _logger = logger;
+            _commandHandler = commandHandler;
 
-            _connectionState = ConnectionState.DISCONNECTED; 
+            _connectionState = Core.ConnectionState.DISCONNECTED; 
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
-            ConnectionState = ConnectionState.CONNECTING;
+            ConnectionState = Core.ConnectionState.CONNECTING;
 
             try
             {
                 _discord.Initialize();
-                _discord.Client.DebugLogger.LogMessageReceived += _discordLogger.Log;
+                _discord.Client.Log += _discordLogger.Log;
                 _discord.Client.Ready += ClientOnReady;
-                _cmdServiceFactory.Create(_discord.Client);
-                await _discord.Client.ConnectAsync();
+                await _commandHandler.InitializeAsync();
+                await _discord.Client.StartAsync();
                 await Task.Delay(-1, cancellationToken);
             }
             catch (Exception ex)
             {
                 if (_discord.Client != null)
                 {
-                    await _discord.Client.DisconnectAsync();
+                    await _discord.Client.LogoutAsync();
                     _discord.DisposeOfClient();
                 }
 
@@ -67,21 +66,17 @@ namespace Miunie.Discord
             }
             finally
             {
-                ConnectionState = ConnectionState.DISCONNECTED;
+                ConnectionState = Core.ConnectionState.DISCONNECTED;
             }
         }
 
-        private Task ClientOnReady(ReadyEventArgs e)
+        private Task ClientOnReady()
         {
             _logger.Log("Client Ready");
 #if DEBUG
-            _discord.Client.UpdateStatusAsync(new DiscordActivity
-            {
-                ActivityType = ActivityType.ListeningTo,
-                Name = "Herself being created."
-            });
+            _discord.Client.SetGameAsync("Herself being created.", type: ActivityType.Watching);
 #endif
-            ConnectionState = ConnectionState.CONNECTED;
+            ConnectionState = Core.ConnectionState.CONNECTED;
             return Task.CompletedTask;
         }
     }

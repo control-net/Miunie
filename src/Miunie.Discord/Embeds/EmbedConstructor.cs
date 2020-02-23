@@ -1,4 +1,4 @@
-﻿using DSharpPlus.Entities;
+﻿using Discord;
 using Miunie.Core;
 using Miunie.Core.Providers;
 using System.Linq;
@@ -7,12 +7,12 @@ namespace Miunie.Discord.Embeds
 {
     internal static class EmbedConstructor
     {
-        public static DiscordEmbed ToEmbed(this MiunieUser mUser, ILanguageProvider lang)
+        public static Embed ToEmbed(this MiunieUser mUser, ILanguageProvider lang)
         {
             var realnessPhrase = lang.GetPhrase((mUser.IsBot ? PhraseKey.USER_EMBED_IS_BOT : PhraseKey.USER_EMBED_IS_HUMAN).ToString());
 
-            return new DiscordEmbedBuilder()
-                .WithColor(new DiscordColor("#EC407A"))
+            return new EmbedBuilder()
+                .WithColor(new Color(236, 64, 122))
                 .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString()))
                 .WithThumbnailUrl(mUser.AvatarUrl)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
@@ -24,9 +24,9 @@ namespace Miunie.Discord.Embeds
                 .Build();
         }
 
-        public static DiscordEmbed ToEmbed(this MiunieGuild mGuild, ILanguageProvider lang)
-            => new DiscordEmbedBuilder()
-                .WithColor(new DiscordColor("#EC407A"))
+        public static Embed ToEmbed(this MiunieGuild mGuild, ILanguageProvider lang)
+            => new EmbedBuilder()
+                .WithColor(new Color(236, 64, 122))
                 .WithTitle(lang.GetPhrase(PhraseKey.GUILD_EMBED_TITLE.ToString()))
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_NAME_TITLE.ToString()), mGuild.Name)
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_STATS_TITLE.ToString()), mGuild.GetStats(), true)
