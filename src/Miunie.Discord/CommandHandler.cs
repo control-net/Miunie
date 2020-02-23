@@ -1,6 +1,9 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
+using Miunie.Core;
 using Miunie.Core.Logging;
+using Miunie.Discord.TypeReaders;
+using Miunie.Discord.Convertors;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -13,17 +16,21 @@ namespace Miunie.Discord
         private readonly IDiscord _discord;
         private readonly IServiceProvider _services;
         private readonly ILogWriter _logger;
+        private readonly EntityConvertor _convertor;
 
-        public CommandHandler(IDiscord discord, IServiceProvider services, ILogWriter logger)
+        public CommandHandler(IDiscord discord, IServiceProvider services, ILogWriter logger, EntityConvertor convertor)
         {
             _discord = discord;
             _commandService = new CommandService();
             _services = services;
             _logger = logger;
+            _convertor = convertor;
         }
 
         public async Task InitializeAsync()
         {
+            _commandService.AddTypeReader(typeof(MiunieUser), new MiunieUserTypeReader(_convertor));
+            
             _discord.Client.MessageReceived += HandleCommandAsync;
             await _commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), _services);
         }

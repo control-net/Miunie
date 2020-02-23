@@ -20,33 +20,30 @@ namespace Miunie.Discord.CommandModules
         }
 
         [Command("profile")]
-        public async Task ShowProfileAsync(SocketGuildUser user = null)
+        public async Task ShowProfileAsync(MiunieUser user = null)
         {
-            var m = _userConverter.DiscordMemberToMiunieUser(user ?? (Context.User as SocketGuildUser));
-            if (m is null)
+            if (user is null)
             {
-                m = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
+                user = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             }
             var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _profileService.ShowProfileAsync(m, channel);
+            await _profileService.ShowProfileAsync(user, channel);
         }
 
         [Command("+rep")]
-        public async Task AddReputationAsync(SocketGuildUser user)
+        public async Task AddReputationAsync(MiunieUser user)
         {
-            var m = _userConverter.DiscordMemberToMiunieUser(user);
             var source = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _profileService.GiveReputationAsync(source, m, channel);
+            await _profileService.GiveReputationAsync(source, user, channel);
         }
 
         [Command("-rep")]
-        public async Task RemoveReputationAsync(SocketGuildUser user)
+        public async Task RemoveReputationAsync(MiunieUser user)
         {
-            var m = _userConverter.DiscordMemberToMiunieUser(user);
             var source = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _profileService.RemoveReputationAsync(source, m, channel);
+            await _profileService.RemoveReputationAsync(source, user, channel);
         }
 
         [Command("guild")]
