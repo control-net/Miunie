@@ -23,7 +23,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void AddReputation_ShouldIncrementReputation()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
             var expectedRep = _users.Senne.Reputation.Value + 1;
 
             _repProvider.AddReputation(_users.Peter, _users.Senne);
@@ -35,7 +35,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void RemoveReputation_ShouldDecrementReputation()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
             var expectedRep = _users.Senne.Reputation.Value - 1;
 
             _repProvider.RemoveReputation(_users.Peter, _users.Senne);
@@ -47,7 +47,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void TryAddReputation_ShouldGetTimeoutAfterAddingReputation()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
 
             var peterHasTimeout = _repProvider.CanAddReputation(_users.Peter, _users.Senne);
             _repProvider.AddReputation(_users.Peter, _users.Senne);
@@ -62,7 +62,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void TryRemoveReputation_ShouldGetTimeoutAfterRemovingReputation()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
 
             var peterHasTimeout = _repProvider.CanRemoveReputation(_users.Peter, _users.Senne);
             _repProvider.RemoveReputation(_users.Peter, _users.Senne);
@@ -77,11 +77,11 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void TryAddReputation_ShouldRemoveTimeoutEventually()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
             _users.Senne.Reputation.Value++;
 
             var hasAddedRep = _users.Senne.Reputation.PlusRepLog.TryAdd(_users.Peter.UserId, DateTime.Now);
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
             var peterHasTimeout = _repProvider.CanAddReputation(_users.Peter, _users.Senne);
             var senneHasTimeout = _repProvider.CanAddReputation(_users.Senne, _users.Peter);
 
@@ -93,11 +93,11 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void TryRemoveReputation_ShouldRemoveTimeoutEventually()
         {
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now);
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
             _users.Senne.Reputation.Value--;
 
             var hasRemovedRep = _users.Senne.Reputation.MinusRepLog.TryAdd(_users.Peter.UserId, DateTime.Now);
-            _dateTimeMock.Setup(dt => dt.Now).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
+            _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now.AddSeconds(_repProvider.TimeoutInSeconds + 1));
             var peterHasTimeout = _repProvider.CanRemoveReputation(_users.Peter, _users.Senne);
             var senneHasTimeout = _repProvider.CanRemoveReputation(_users.Senne, _users.Peter);
 

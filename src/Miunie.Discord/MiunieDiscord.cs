@@ -47,7 +47,7 @@ namespace Miunie.Discord
 
             try
             {
-                _discord.Initialize();
+                await _discord.InitializeAsync();
                 _discord.Client.Log += _discordLogger.Log;
                 _discord.Client.Ready += ClientOnReady;
                 await _commandHandler.InitializeAsync();

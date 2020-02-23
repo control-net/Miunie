@@ -19,7 +19,7 @@ namespace Miunie.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -147,6 +147,39 @@ namespace Miunie.Core {
         public static string SHOW_REMOTE_REPO {
             get {
                 return ResourceManager.GetString("SHOW_REMOTE_REPO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congratulations! Your current time was stored!{{OR}}
+        ///Alright, I&apos;ll remember your time.{{OR}}
+        ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for you).
+        /// </summary>
+        public static string TIME_NEW_OFFSET_SET {
+            get {
+                return ResourceManager.GetString("TIME_NEW_OFFSET_SET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :question: I have no idea what time it is for {0}.{{OR}}
+        ///:question: {0} is one of **THOSE** people. They don&apos;t have their time set..
+        /// </summary>
+        public static string TIME_NO_TIMEZONE_INFO {
+            get {
+                return ResourceManager.GetString("TIME_NO_TIMEZONE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :clock1: For {0} it&apos;s currently {1:HH:mm}{{OR}}
+        ///:clock1: It&apos;s currently {1:HH:mm} where {0} is at.{{OR}}
+        ///:clock1: Believe it or not, it&apos;s {1:HH:mm} right now in {0} land.{{OR}}
+        ///:clock1: Time flies, but not so much for {0}, &apos;cause for them it&apos;s {1:HH:mm}..
+        /// </summary>
+        public static string TIME_TIMEZONE_INFO {
+            get {
+                return ResourceManager.GetString("TIME_TIMEZONE_INFO", resourceCulture);
             }
         }
         
