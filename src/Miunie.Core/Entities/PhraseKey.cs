@@ -25,7 +25,7 @@
         TIME_NEW_OFFSET_SET,
         USER_EMBED_TIME_TITLE,
         USER_EMBED_TIME_NOSET,
-        USER_EMBED_TIME
+        USER_EMBED_TIME,
         YES_NO_MAYBE
     }
 }
