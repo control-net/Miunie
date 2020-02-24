@@ -38,10 +38,10 @@
 
 ## Built With
 
-- [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Platform Used
+- [.Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core) - Platform Used
 - .NET Standard 2.0
 - .NET Framework
-- [DsharpPlus](https://github.com/DSharpPlus/DSharpPlus) - Discord API wrapper library
+- [Discord.NET](https://github.com/discord-net/Discord.Net) - Discord API wrapper library
 - 💙 Collaborative spirit
 - ❤️ Love and Care
 
