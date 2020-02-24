@@ -273,5 +273,16 @@ namespace Miunie.Core {
                 return ResourceManager.GetString("USER_EMBED_TITLE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chances are good{{OR}}
+        ///No looking good{{OR}}
+        ///Try again later.
+        /// </summary>
+        public static string YES_NO_MAYBE {
+            get {
+                return ResourceManager.GetString("YES_NO_MAYBE", resourceCulture);
+            }
+        }
     }
 }
