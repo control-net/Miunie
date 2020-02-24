@@ -21,7 +21,6 @@ namespace Miunie.Core
         public async Task SendRandomYesNoAnswer(MiunieChannel channel)
         {
             await _messages.SendMessageAsync(channel, PhraseKey.YES_NO_MAYBE);
-            return;
         }
     }
 }
