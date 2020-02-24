@@ -30,6 +30,14 @@ namespace Miunie.Core
             await _messages.SendMessageAsync(channel, PhraseKey.TIME_TIMEZONE_INFO, user.Name, targetDateTime);
         }
 
+        public async Task OutputCurrentTimeComparedToInputForUserAsync(DateTime inputTime, MiunieUser user, MiunieChannel channel)
+        {
+
+            var userOffSet = user.UtcTimeOffset;
+            var userTime = inputTime + (user.UtcTimeOffset ?? new TimeSpan());
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, inputTime.ToShortTimeString(), user.Name, userTime.ToShortTimeString());
+        }
+
         public async Task SetUtcOffsetForUserAsync(DateTime userTime, MiunieUser user, MiunieChannel channel)
         {
             var offset = TimeSpan.FromHours(userTime.Hour - _dateTime.UtcNow.Hour);

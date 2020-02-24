@@ -184,6 +184,16 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Awesome it&apos;s {0} for you and {2} for {1}{{OR}}
+        ///Far out it&apos;s {0} locally and {2} where {1} is at!.
+        /// </summary>
+        public static string TIME_USERTIME_FROM_LOCAL {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_FROM_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :calendar_spiral: Creation date.
         /// </summary>
         public static string USER_EMBED_CREATED_AT_TITLE {

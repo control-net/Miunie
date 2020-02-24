@@ -23,7 +23,8 @@
         TIME_NO_TIMEZONE_INFO,
         TIME_TIMEZONE_INFO,
         TIME_NEW_OFFSET_SET,
-        YES_NO_MAYBE
+        YES_NO_MAYBE,
+        TIME_USERTIME_FROM_LOCAL
     }
 }
 

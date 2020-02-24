@@ -180,6 +180,10 @@ Cool, if someone asks, this meeting didn't happen. (but I'll totally remember wh
 :clock1: Time flies, but not so much for {0}, 'cause for them it's {1:HH:mm}.</value>
     <comment>Target Username, Time string</comment>
   </data>
+  <data name="TIME_USERTIME_FROM_LOCAL" xml:space="preserve">
+    <value>Awesome it's {0} for you and {2} for {1}{{OR}}
+Far out it's {0} locally and {2} where {1} is at!</value>
+  </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
   </data>
