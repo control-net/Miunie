@@ -225,4 +225,9 @@ blood, all that._</value>
 **YOUR DANK PROFILE**</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="YES_NO_MAYBE" xml:space="preserve">
+    <value>Chances are good{{OR}}
+No looking good{{OR}}
+Try again later</value>
+  </data>
 </root>
