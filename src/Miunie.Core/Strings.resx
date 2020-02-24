@@ -238,4 +238,9 @@ User didnt seem to have enough time on their hands, no time set for us ;-;</valu
 **YOUR DANK PROFILE**</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="YES_NO_MAYBE" xml:space="preserve">
+    <value>Chances are good{{OR}}
+No looking good{{OR}}
+Try again later</value>
+  </data>
 </root>
