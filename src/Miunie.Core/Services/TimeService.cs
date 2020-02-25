@@ -38,15 +38,15 @@ namespace Miunie.Core
             var requestUtcTime = requestTime - requesterOffset;
             var otherUserTime = requestUtcTime + otherUserOffSet;
 
-            var formattedRequestTIme = requestTime.ToShortTimeString();
+            var formattedRequestTime = requestTime.ToShortTimeString();
             var formattedOtherUserTime = otherUserTime.ToShortTimeString();
 
-            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, formattedRequestTIme, user.Name, formattedOtherUserTime);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, formattedRequestTime, user.Name, formattedOtherUserTime);
         }
 
         public async Task OutputMessageTimeAsLocalAsync(ulong messageId, DateTimeOffset? createdTimeOffset, DateTimeOffset? editTimeOffset, MiunieUser user, MiunieChannel channel)
         {
-            if (createdTimeOffset == null)
+            if (createdTimeOffset is null)
             {
                 await _messages.SendMessageAsync(channel, PhraseKey.TIME_NO_MESSAGE, messageId.ToString());
                 return;
