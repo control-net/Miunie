@@ -308,6 +308,34 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It&apos;s currently {0:HH:mm} over there :).
+        /// </summary>
+        public static string USER_EMBED_TIME {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User seem to be a time lord, no time set :thonk:{{OR}}
+        ///User didnt seem to have enough time on their hands, no time set for us ;-;.
+        /// </summary>
+        public static string USER_EMBED_TIME_NOSET {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME_NOSET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :clock4: Local time.
+        /// </summary>
+        public static string USER_EMBED_TIME_TITLE {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to **YOUR AWESOME PROFILE**{{OR}}
         ///**YOUR COOL PROFILE**{{OR}}
         ///**YOUR MAGNIFICENT PROFILE**{{OR}}

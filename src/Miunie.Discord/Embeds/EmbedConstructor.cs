@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Miunie.Core;
 using Miunie.Core.Providers;
+using System;
 using System.Linq;
 
 namespace Miunie.Discord.Embeds
@@ -21,6 +22,7 @@ namespace Miunie.Discord.Embeds
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_ROLES_TITLE.ToString()), string.Join("\n", mUser.Roles.Select(r => r.Name)), true)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_JOINED_AT_TITLE.ToString()), $"{mUser.JoinedAt:d} at {mUser.JoinedAt:t} UTC")
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_CREATED_AT_TITLE.ToString()), $"{mUser.CreatedAt:d} at {mUser.CreatedAt:t} UTC", true)
+                .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_TIME_TITLE.ToString()), mUser.UtcTimeOffset.HasValue ? lang.GetPhrase(PhraseKey.USER_EMBED_TIME.ToString(), DateTime.UtcNow + mUser.UtcTimeOffset) : lang.GetPhrase(PhraseKey.USER_EMBED_TIME_NOSET.ToString()), true)
                 .Build();
         }
 

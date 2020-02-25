@@ -244,6 +244,19 @@ blood, all that._</value>
     <value>:dolls: Roles</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="USER_EMBED_TIME" xml:space="preserve">
+    <value>It's currently {0:HH:mm} over there :)</value>
+    <comment>Time string</comment>
+  </data>
+  <data name="USER_EMBED_TIME_NOSET" xml:space="preserve">
+    <value>User seem to be a time lord, no time set :thonk:{{OR}}
+User didnt seem to have enough time on their hands, no time set for us ;-;</value>
+    <comment>No formatting options.</comment>
+  </data>
+  <data name="USER_EMBED_TIME_TITLE" xml:space="preserve">
+    <value>:clock4: Local time</value>
+    <comment>No formatting options.</comment>
+  </data>
   <data name="USER_EMBED_TITLE" xml:space="preserve">
     <value>**YOUR AWESOME PROFILE**{{OR}}
 **YOUR COOL PROFILE**{{OR}}
