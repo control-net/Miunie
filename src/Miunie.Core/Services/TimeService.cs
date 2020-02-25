@@ -45,6 +45,36 @@ namespace Miunie.Core
             await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, formattedRequestTime, user.Name, formattedOtherUserTime);
         }
 
+        public async Task OutputFutureTimeForUserAsync(MiunieUser user, int units, string timeframe, MiunieChannel channel)
+        {
+            var timeFromUtc = new TimeSpan();
+            timeframe = timeframe.Trim().ToLower();
+            var parsable = true;
+
+            if (timeframe == "hours" || timeframe == "hour" || timeframe == "hrs" || timeframe == "hr")            
+                timeFromUtc = new TimeSpan(units, 0, 0);            
+            else if (timeframe == "minutes" || timeframe == "minute" || timeframe == "mins" || timeframe == "min")            
+                timeFromUtc = new TimeSpan(0, units, 0);            
+            else if (timeframe == "seconds" || timeframe == "second" || timeframe == "secs" || timeframe == "sec")            
+                timeFromUtc = new TimeSpan(0, 0, units);            
+            else
+                parsable = false;            
+
+            if (!parsable)
+            {
+                await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE_UNPARSABLE, units.ToString(), timeframe);
+                return;
+            }
+
+            var usersOffset = user.UtcTimeOffset ?? new TimeSpan();
+            var usersLocalTime = _dateTime.UtcNow + usersOffset;
+            var usersFutureTime = usersLocalTime + timeFromUtc;
+
+            var formattedUsersTime = usersFutureTime.ToShortTimeString();
+
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE, user.Name, formattedUsersTime, units.ToString(), timeframe);
+        }
+
         public async Task OutputMessageTimeAsLocalAsync(ulong messageId, DateTimeOffset? createdTimeOffset, DateTimeOffset? editTimeOffset, MiunieUser user, MiunieChannel channel)
         {
             if (createdTimeOffset is null)

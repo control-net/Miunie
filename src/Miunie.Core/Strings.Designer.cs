@@ -229,6 +229,28 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It will be {1} for {0} in {2} {3}{{OR}}
+        ///In {2} {3} it&apos;s {1} at {0}&apos;s house!{{OR}}
+        ///{1} in {0} land in about {2} {3}.
+        /// </summary>
+        public static string TIME_USERTIME_IN_FUTURE {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_IN_FUTURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t understand what in {0} {1} means{{OR}}
+        ///Me no understand {0} {1}!{{OR}}
+        ///What are you trying to say with {0} {1}.
+        /// </summary>
+        public static string TIME_USERTIME_IN_FUTURE_UNPARSABLE {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_IN_FUTURE_UNPARSABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :calendar_spiral: Creation date.
         /// </summary>
         public static string USER_EMBED_CREATED_AT_TITLE {

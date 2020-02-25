@@ -205,6 +205,18 @@ No way it's {0} and for {1} it's {2}{{OR}}
 It's {2} at {1} house, when it's {0} for you!</value>
     <comment>Input Time string, Target Username, Target Time string</comment>
   </data>
+  <data name="TIME_USERTIME_IN_FUTURE" xml:space="preserve">
+    <value>It will be {1} for {0} in {2} {3}{{OR}}
+In {2} {3} it's {1} at {0}'s house!{{OR}}
+{1} in {0} land in about {2} {3}</value>
+    <comment>Target Username, Target Time string, Time Units int, Timeframe string</comment>
+  </data>
+  <data name="TIME_USERTIME_IN_FUTURE_UNPARSABLE" xml:space="preserve">
+    <value>I don't understand what in {0} {1} means{{OR}}
+Me no understand {0} {1}!{{OR}}
+What are you trying to say with {0} {1}</value>
+    <comment>Time Units int, Timeframe string</comment>
+  </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
     <comment>No formatting options.</comment>
