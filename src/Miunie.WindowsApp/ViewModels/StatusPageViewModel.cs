@@ -36,6 +36,7 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
+        public Action AvatarChanged;
 
         public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING 
             ? Visibility.Visible 
@@ -57,6 +58,8 @@ namespace Miunie.WindowsApp.ViewModels
             miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
         }
+
+        public bool IsConnecting { get => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING; }
 
         public async void ToggleBotStart()
         {
@@ -89,6 +92,7 @@ namespace Miunie.WindowsApp.ViewModels
                     RaisePropertyChanged(nameof(ActionButtonIsVisible));
                     RaisePropertyChanged(nameof(ProgressBarIsVisible));
                     RaisePropertyChanged(nameof(BotAvatar));
+                    AvatarChanged?.Invoke();
                 });
         }
     }

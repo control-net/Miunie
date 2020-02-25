@@ -17,15 +17,47 @@
                   Height="175"
                   x:Name="MiunieAvatar">
 
-                <Ellipse Fill="{ThemeResource SystemControlBackgroundAccentBrush}" 
-                         Width="175" Height="175"/>
+                <Ellipse Fill="{ThemeResource SystemAccentColor}" 
+                         Width="174" Height="172" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <Ellipse Width="175" Height="175" >
+                <Ellipse Width="175" Height="175" x:Name="BotAvatarBrush">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{Binding BotAvatar}" />
                     </Ellipse.Fill>
                 </Ellipse>
 
+                <Grid x:Name="AvatarLoadingFacade" Opacity="0">
+                    <Ellipse Fill="{ThemeResource SystemControlBaseHighAcrylicElementMediumBrush}" 
+                             Width="175" Height="175"/>
+
+                    <ProgressRing IsActive="True" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" />
+                </Grid>
+
+                <Grid.Resources>
+                    <Storyboard x:Name="FadeOutAvatarStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="AvatarLoadingFacade"
+                                         Storyboard.TargetProperty="Opacity"
+                                         To="1"
+                                         Duration="0:0:0.2"/>
+                        <DoubleAnimation Storyboard.TargetName="BotAvatarBrush"
+                                         Storyboard.TargetProperty="Opacity"
+                                         BeginTime="0:0:0.2"
+                                         To="0"
+                                         Duration="0:0:0.2"/>
+                    </Storyboard>
+                    <Storyboard x:Name="FadeInAvatarStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="BotAvatarBrush"
+                                         Storyboard.TargetProperty="Opacity"
+                                         To="1"
+                                         BeginTime="0:0:0.5"
+                                         Duration="0:0:0.5"/>
+                        <DoubleAnimation Storyboard.TargetName="AvatarLoadingFacade"
+                                         Storyboard.TargetProperty="Opacity"
+                                         BeginTime="0:0:1.0"
+                                         To="0"
+                                         Duration="0:0:0.2"/>
+                    </Storyboard>
+                </Grid.Resources>
             </Grid>
 
 
@@ -45,8 +77,6 @@
                         Style="{ThemeResource ButtonRevealStyle}" 
                         Click="ActionBtn_OnClick"/>
             </Grid>
-
-
 
         </StackPanel>
         <TextBlock HorizontalAlignment="Center"
