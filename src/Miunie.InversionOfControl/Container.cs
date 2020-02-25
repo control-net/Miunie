@@ -10,6 +10,8 @@ using Miunie.Discord.Adapters;
 using Miunie.Discord.Convertors;
 using Miunie.Discord.Logging;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Miunie.InversionOfControl
 {
@@ -17,7 +19,6 @@ namespace Miunie.InversionOfControl
     {
         public static IServiceCollection AddMiunieTypes(this IServiceCollection collection)
             => collection.AddSingleton<EntityConvertor>()
-                .AddSingleton<ProfileService>()
                 .AddScoped<ILanguageProvider, LanguageProvider>()
                 .AddSingleton<IDiscord, MiunieDiscordClient>()
                 .AddSingleton<IMiunieDiscord, MiunieDiscord>()
@@ -30,11 +31,20 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
-                .AddSingleton<RemoteRepositoryService>()
-                .AddSingleton<CurrencyService>()
-                .AddSingleton<TimeService>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>()
-                .AddSingleton<MiscService>();
+                .AddMiunieServices();
+
+        private static IServiceCollection AddMiunieServices(this IServiceCollection collection)
+        {
+            var serviceAttributeType = typeof(ServiceAttribute);
+            var serviceTypes = Assembly.GetAssembly(serviceAttributeType)
+                                       .GetTypes()
+                                       .Where(x => x.GetCustomAttributes(serviceAttributeType, true).Length > 0).ToList();
+
+            serviceTypes.ForEach((x) => collection.AddSingleton(x));
+
+            return collection;
+        }
     }
 }

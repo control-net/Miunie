@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Miunie.Core
 {
+    [Service]
     public class MiscService
     {
         private readonly IDiscordMessages _messages;
