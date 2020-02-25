@@ -34,6 +34,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<CurrencyService>()
                 .AddSingleton<TimeService>()
                 .AddSingleton<CommandHandler>()
-                .AddSingleton<MiunieUserConverter>();
+                .AddSingleton<MiunieUserConverter>()
+                .AddSingleton<MiscService>();
     }
 }
