@@ -47,16 +47,16 @@ namespace Miunie.Core
 
         public async Task OutputFutureTimeForUserAsync(MiunieUser user, int units, string timeframe, MiunieChannel channel)
         {
-            var timeFromUtc = new TimeSpan();
+            var timeFromLocal = new TimeSpan();
             timeframe = timeframe.Trim().ToLower();
             var parsable = true;
 
             if (timeframe == "hours" || timeframe == "hour" || timeframe == "hrs" || timeframe == "hr")            
-                timeFromUtc = new TimeSpan(units, 0, 0);            
+                timeFromLocal = new TimeSpan(units, 0, 0);            
             else if (timeframe == "minutes" || timeframe == "minute" || timeframe == "mins" || timeframe == "min")            
-                timeFromUtc = new TimeSpan(0, units, 0);            
+                timeFromLocal = new TimeSpan(0, units, 0);            
             else if (timeframe == "seconds" || timeframe == "second" || timeframe == "secs" || timeframe == "sec")            
-                timeFromUtc = new TimeSpan(0, 0, units);            
+                timeFromLocal = new TimeSpan(0, 0, units);            
             else
                 parsable = false;            
 
@@ -68,7 +68,7 @@ namespace Miunie.Core
 
             var usersOffset = user.UtcTimeOffset ?? new TimeSpan();
             var usersLocalTime = _dateTime.UtcNow + usersOffset;
-            var usersFutureTime = usersLocalTime + timeFromUtc;
+            var usersFutureTime = usersLocalTime + timeFromLocal;
 
             var formattedUsersTime = usersFutureTime.ToShortTimeString();
 
