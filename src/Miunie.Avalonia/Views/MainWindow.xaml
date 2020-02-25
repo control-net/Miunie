@@ -6,12 +6,15 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Miunie.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Miunie.Avalonia">
+        Title="Avalonia Tests">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <StackPanel>
+        <TextBlock Text="{Binding Text, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Button Width="160" Command="{Binding OnClickCommand}">My Button</Button>
+	</StackPanel>
 
 </Window>
