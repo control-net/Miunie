@@ -151,6 +151,20 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You better start making sense...{{OR}}
+        ///Come again, not sure I understood that{{OR}}
+        ///Who you gonna call? Someone else!{{OR}}
+        ///Sorry there is nobody at the extension{{OR}}
+        ///I&apos;m on break! Try again later{{OR}}
+        ///Are you speaking my language, because I can&apos;t understand you.
+        /// </summary>
+        public static string SILLY_RESPONSE {
+            get {
+                return ResourceManager.GetString("SILLY_RESPONSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congratulations! Your current time was stored!{{OR}}
         ///Alright, I&apos;ll remember your time.{{OR}}
         ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for you).
@@ -185,7 +199,10 @@ namespace Miunie.Core {
         
         /// <summary>
         ///   Looks up a localized string similar to Awesome it&apos;s {0} for you and {2} for {1}{{OR}}
-        ///Far out it&apos;s {0} locally and {2} where {1} is at!.
+        ///Far out it&apos;s {0} locally and {2} where {1} is at!{{OR}}
+        ///No way it&apos;s {0} and for {1} it&apos;s {2}{{OR}}
+        ///{0} somewhere but for {1} it&apos;s {2}{{OR}}
+        ///It&apos;s {2} at {1} house, when it&apos;s {0} for you!.
         /// </summary>
         public static string TIME_USERTIME_FROM_LOCAL {
             get {

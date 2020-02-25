@@ -25,11 +25,12 @@ namespace Miunie.Discord.CommandModules
             await _service.OutputCurrentTimeForUserAsync(user, c);
         }
 
-        [Command("time")]
-        public async Task ShowTimeForUserComparedToCurrentUser(DateTime time, string verb, MiunieUser u)
+        [Command("time get")]
+        public async Task ShowTimeForUserComparedToCurrentUser(DateTime requestTime, string verb, MiunieUser user)
         {
+            var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.OutputCurrentTimeComparedToInputForUserAsync(time, u, c);
+            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, user, c);
         }
 
         [Command("time set")]
