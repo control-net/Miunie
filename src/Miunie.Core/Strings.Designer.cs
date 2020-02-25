@@ -151,20 +151,6 @@ namespace Miunie.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You better start making sense...{{OR}}
-        ///Come again, not sure I understood that{{OR}}
-        ///Who you gonna call? Someone else!{{OR}}
-        ///Sorry there is nobody at the extension{{OR}}
-        ///I&apos;m on break! Try again later{{OR}}
-        ///Are you speaking my language, because I can&apos;t understand you.
-        /// </summary>
-        public static string SILLY_RESPONSE {
-            get {
-                return ResourceManager.GetString("SILLY_RESPONSE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Oh yeah, message {0} was created {1} but was also edited on {2}{{OR}}
         ///{1} was when {0} was created, but it was edited {2}.
         /// </summary>

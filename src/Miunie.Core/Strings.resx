@@ -162,22 +162,16 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
 https://github.com/discord-bot-tutorial/Miunie</value>
     <comment>No formatting options.</comment>
   </data>
-  <data name="SILLY_RESPONSE" xml:space="preserve">
-    <value>You better start making sense...{{OR}}
-Come again, not sure I understood that{{OR}}
-Who you gonna call? Someone else!{{OR}}
-Sorry there is nobody at the extension{{OR}}
-I'm on break! Try again later{{OR}}
-Are you speaking my language, because I can't understand you</value>
-  </data>
   <data name="TIME_MESSAGE_INFO_EDIT" xml:space="preserve">
     <value>Oh yeah, message {0} was created {1} but was also edited on {2}{{OR}}
 {1} was when {0} was created, but it was edited {2}</value>
+    <comment>Message Id ulong, Message Created DateTime, Message Edited DateTime</comment>
   </data>
   <data name="TIME_MESSAGE_INFO_NO_EDIT" xml:space="preserve">
     <value>Found it! {0} was first seen {1}{{OR}}
 Sneaky, sneaky, {0} was first spotted {1}{{OR}}
 {0} was launched {1}</value>
+    <comment>Message Id ulong. Message Created DateTime</comment>
   </data>
   <data name="TIME_NEW_OFFSET_SET" xml:space="preserve">
     <value>Congratulations! Your current time was stored!{{OR}}
@@ -189,6 +183,7 @@ Cool, if someone asks, this meeting didn't happen. (but I'll totally remember wh
     <value>Nope! Nobody by that name here{{OR}}
 I asked everyone, but nobody knows...{{OR}}
 Sorry, couldn't find what you are looking for!</value>
+    <comment>No formatting options.</comment>
   </data>
   <data name="TIME_NO_TIMEZONE_INFO" xml:space="preserve">
     <value>:question: I have no idea what time it is for {0}.{{OR}}
@@ -208,9 +203,11 @@ Far out it's {0} locally and {2} where {1} is at!{{OR}}
 No way it's {0} and for {1} it's {2}{{OR}}
 {0} somewhere but for {1} it's {2}{{OR}}
 It's {2} at {1} house, when it's {0} for you!</value>
+    <comment>Input Time string, Target Username, Target Time string</comment>
   </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
+    <comment>No formatting options.</comment>
   </data>
   <data name="USER_EMBED_IS_BOT" xml:space="preserve">
     <value>_A software person._{{OR}}
@@ -258,5 +255,6 @@ blood, all that._</value>
     <value>Chances are good{{OR}}
 No looking good{{OR}}
 Try again later</value>
+    <comment>No formatting options.</comment>
   </data>
 </root>
