@@ -201,9 +201,9 @@ namespace Miunie.Core {
         ///I asked everyone, but nobody knows...{{OR}}
         ///Sorry, couldn&apos;t find what you are looking for!.
         /// </summary>
-        public static string TIME_NO_MESSAGE {
+        public static string TIME_NO_MESSAGE_INFO {
             get {
-                return ResourceManager.GetString("TIME_NO_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("TIME_NO_MESSAGE_INFO", resourceCulture);
             }
         }
         

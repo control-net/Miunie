@@ -185,7 +185,7 @@ Alright, I'll remember your time.{{OR}}
 Cool, if someone asks, this meeting didn't happen. (but I'll totally remember what time it is for you)</value>
     <comment>No formatting options.</comment>
   </data>
-  <data name="TIME_NO_MESSAGE" xml:space="preserve">
+  <data name="TIME_NO_MESSAGE_INFO" xml:space="preserve">
     <value>Nope! Nobody by that name here{{OR}}
 I asked everyone, but nobody knows...{{OR}}
 Sorry, couldn't find what you are looking for!</value>
