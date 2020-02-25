@@ -1,8 +1,9 @@
 ![Miunie](https://i.imgur.com/h2PjgF6.png)
 
-<a href="https://dev.azure.com/spelos/miunie/_apis/build/status/discord-bot-tutorial.Miunie?branchName=master">
-  <img src="https://dev.azure.com/spelos/miunie/_apis/build/status/discord-bot-tutorial.Miunie?branchName=master" alt="build status">
+<a href="https://github.com/control-net/Miunie/actions">
+  <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/control-net/miunie/.NET%20Core%20and%20UWP/master?style=plastic">
 </a>
+
 <a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors">
   <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license">
 </a>
