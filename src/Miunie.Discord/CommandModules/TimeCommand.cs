@@ -25,6 +25,25 @@ namespace Miunie.Discord.CommandModules
             await _service.OutputCurrentTimeForUserAsync(user, c);
         }
 
+        [Command("time get")]
+        public async Task ShowTimeForUserComparedToCurrentUser(DateTime requestTime, string verb, MiunieUser user)
+        {
+            var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, user, c);
+        }
+
+        [Command("time of")]
+        public async Task ShowTimeForMessage(ulong messageId)
+        {
+            var m = await Context.Channel.GetMessageAsync(messageId);
+            var ct = m?.CreatedAt;
+            var et = m?.EditedTimestamp;
+            var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);            
+            await _service.OutputMessageTimeAsLocalAsync(messageId, ct, et, u, c);
+        }
+
         [Command("time set")]
         public async Task SetMyTimeOffset(DateTime currentTime)
         {

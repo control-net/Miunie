@@ -151,6 +151,27 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oh yeah, message {0} was created {1} but was also edited on {2}{{OR}}
+        ///{1} was when {0} was created, but it was edited {2}.
+        /// </summary>
+        public static string TIME_MESSAGE_INFO_EDIT {
+            get {
+                return ResourceManager.GetString("TIME_MESSAGE_INFO_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found it! {0} was first seen {1}{{OR}}
+        ///Sneaky, sneaky, {0} was first spotted {1}{{OR}}
+        ///{0} was launched {1}.
+        /// </summary>
+        public static string TIME_MESSAGE_INFO_NO_EDIT {
+            get {
+                return ResourceManager.GetString("TIME_MESSAGE_INFO_NO_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congratulations! Your current time was stored!{{OR}}
         ///Alright, I&apos;ll remember your time.{{OR}}
         ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for you).
@@ -158,6 +179,17 @@ namespace Miunie.Core {
         public static string TIME_NEW_OFFSET_SET {
             get {
                 return ResourceManager.GetString("TIME_NEW_OFFSET_SET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nope! Nobody by that name here{{OR}}
+        ///I asked everyone, but nobody knows...{{OR}}
+        ///Sorry, couldn&apos;t find what you are looking for!.
+        /// </summary>
+        public static string TIME_NO_MESSAGE_INFO {
+            get {
+                return ResourceManager.GetString("TIME_NO_MESSAGE_INFO", resourceCulture);
             }
         }
         
@@ -180,6 +212,19 @@ namespace Miunie.Core {
         public static string TIME_TIMEZONE_INFO {
             get {
                 return ResourceManager.GetString("TIME_TIMEZONE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awesome it&apos;s {0} for you and {2} for {1}{{OR}}
+        ///Far out it&apos;s {0} locally and {2} where {1} is at!{{OR}}
+        ///No way it&apos;s {0} and for {1} it&apos;s {2}{{OR}}
+        ///{0} somewhere but for {1} it&apos;s {2}{{OR}}
+        ///It&apos;s {2} at {1} house, when it&apos;s {0} for you!.
+        /// </summary>
+        public static string TIME_USERTIME_FROM_LOCAL {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_FROM_LOCAL", resourceCulture);
             }
         }
         
@@ -259,6 +304,36 @@ namespace Miunie.Core {
         public static string USER_EMBED_ROLES_TITLE {
             get {
                 return ResourceManager.GetString("USER_EMBED_ROLES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s currently {0:HH:mm} over there :){{OR}}
+        ///Their clock shows {0:HH:mm} right now..
+        /// </summary>
+        public static string USER_EMBED_TIME {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I have no idea what time it is for them.{{OR}}
+        ///No time set :cry:{{OR}}
+        ///Twelve... ten... -ish... Yeah I have no idea..
+        /// </summary>
+        public static string USER_EMBED_TIME_NOSET {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME_NOSET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :clock4: Local time.
+        /// </summary>
+        public static string USER_EMBED_TIME_TITLE {
+            get {
+                return ResourceManager.GetString("USER_EMBED_TIME_TITLE", resourceCulture);
             }
         }
         
