@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Miunie.Core
 {
+    [Service]
     public class ProfileService
     {
         private readonly IDiscordMessages _discordMessages;

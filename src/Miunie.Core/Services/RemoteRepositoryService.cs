@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 
 namespace Miunie.Core
 {
+    [Service]
     public class RemoteRepositoryService
     {
         private readonly IDiscordMessages _discordMessages;

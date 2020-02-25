@@ -8,6 +8,7 @@ using System.Xml.Linq;
 
 namespace Miunie.Core
 {
+    [Service]
     public class CurrencyService
     {
         private const string DailyConversionApiUrl = @"https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml";
