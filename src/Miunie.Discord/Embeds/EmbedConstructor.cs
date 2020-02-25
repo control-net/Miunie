@@ -11,6 +11,7 @@ namespace Miunie.Discord.Embeds
         public static Embed ToEmbed(this MiunieUser mUser, ILanguageProvider lang)
         {
             var realnessPhrase = lang.GetPhrase((mUser.IsBot ? PhraseKey.USER_EMBED_IS_BOT : PhraseKey.USER_EMBED_IS_HUMAN).ToString());
+
             return new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
                 .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString()))
@@ -24,6 +25,7 @@ namespace Miunie.Discord.Embeds
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_TIME_TITLE.ToString()), mUser.UtcTimeOffset.HasValue ? lang.GetPhrase(PhraseKey.USER_EMBED_TIME.ToString(), DateTime.UtcNow + mUser.UtcTimeOffset) : lang.GetPhrase(PhraseKey.USER_EMBED_TIME_NOSET.ToString()), true)
                 .Build();
         }
+
         public static Embed ToEmbed(this MiunieGuild mGuild, ILanguageProvider lang)
             => new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
