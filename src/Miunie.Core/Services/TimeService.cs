@@ -44,6 +44,36 @@ namespace Miunie.Core
             await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, formattedRequestTIme, user.Name, formattedOtherUserTime);
         }
 
+        public async Task OutputMessageTimeAsLocalAsync(ulong messageId, DateTimeOffset? createdTimeOffset, DateTimeOffset? editTimeOffset, MiunieUser user, MiunieChannel channel)
+        {
+            if (createdTimeOffset == null)
+            {
+                await _messages.SendMessageAsync(channel, PhraseKey.TIME_NO_MESSAGE, messageId.ToString());
+                return;
+            }
+
+            var createdTime = createdTimeOffset.Value.UtcDateTime;
+            var editTime = editTimeOffset?.UtcDateTime;
+
+            if (user.UtcTimeOffset.HasValue)
+            {
+                createdTime += user.UtcTimeOffset.Value;
+
+                if (editTime.HasValue)
+                {
+                    editTime += user.UtcTimeOffset.Value;
+                }
+            }
+
+            if (editTime.HasValue)
+            {
+                await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_EDIT, messageId.ToString(), createdTime, editTime);
+                return;
+            }
+
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_NO_EDIT, messageId.ToString(), createdTime);
+        }
+
         public async Task SetUtcOffsetForUserAsync(DateTime userTime, MiunieUser user, MiunieChannel channel)
         {
             var offset = TimeSpan.FromHours(userTime.Hour - _dateTime.UtcNow.Hour);

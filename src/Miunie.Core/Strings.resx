@@ -170,11 +170,25 @@ Sorry there is nobody at the extension{{OR}}
 I'm on break! Try again later{{OR}}
 Are you speaking my language, because I can't understand you</value>
   </data>
+  <data name="TIME_MESSAGE_INFO_EDIT" xml:space="preserve">
+    <value>Oh yeah, message {0} was created {1} but was also edited on {2}{{OR}}
+{1} was when {0} was created, but it was edited {2}</value>
+  </data>
+  <data name="TIME_MESSAGE_INFO_NO_EDIT" xml:space="preserve">
+    <value>Found it! {0} was first seen {1}{{OR}}
+Sneaky, sneaky, {0} was first spotted {1}{{OR}}
+{0} was launched {1}</value>
+  </data>
   <data name="TIME_NEW_OFFSET_SET" xml:space="preserve">
     <value>Congratulations! Your current time was stored!{{OR}}
 Alright, I'll remember your time.{{OR}}
 Cool, if someone asks, this meeting didn't happen. (but I'll totally remember what time it is for you)</value>
     <comment>No formatting options.</comment>
+  </data>
+  <data name="TIME_NO_MESSAGE" xml:space="preserve">
+    <value>Nope! Nobody by that name here{{OR}}
+I asked everyone, but nobody knows...{{OR}}
+Sorry, couldn't find what you are looking for!</value>
   </data>
   <data name="TIME_NO_TIMEZONE_INFO" xml:space="preserve">
     <value>:question: I have no idea what time it is for {0}.{{OR}}

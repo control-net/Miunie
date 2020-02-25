@@ -165,6 +165,27 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oh yeah, message {0} was created {1} but was also edited on {2}{{OR}}
+        ///{1} was when {0} was created, but it was edited {2}.
+        /// </summary>
+        public static string TIME_MESSAGE_INFO_EDIT {
+            get {
+                return ResourceManager.GetString("TIME_MESSAGE_INFO_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found it! {0} was first seen {1}{{OR}}
+        ///Sneaky, sneaky, {0} was first spotted {1}{{OR}}
+        ///{0} was launched {1}.
+        /// </summary>
+        public static string TIME_MESSAGE_INFO_NO_EDIT {
+            get {
+                return ResourceManager.GetString("TIME_MESSAGE_INFO_NO_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congratulations! Your current time was stored!{{OR}}
         ///Alright, I&apos;ll remember your time.{{OR}}
         ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for you).
@@ -172,6 +193,17 @@ namespace Miunie.Core {
         public static string TIME_NEW_OFFSET_SET {
             get {
                 return ResourceManager.GetString("TIME_NEW_OFFSET_SET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nope! Nobody by that name here{{OR}}
+        ///I asked everyone, but nobody knows...{{OR}}
+        ///Sorry, couldn&apos;t find what you are looking for!.
+        /// </summary>
+        public static string TIME_NO_MESSAGE {
+            get {
+                return ResourceManager.GetString("TIME_NO_MESSAGE", resourceCulture);
             }
         }
         
