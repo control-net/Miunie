@@ -204,17 +204,17 @@ Sorry, couldn't find what you are looking for!</value>
     <comment>Target Username, Time string</comment>
   </data>
   <data name="TIME_USERTIME_FROM_LOCAL" xml:space="preserve">
-    <value>Awesome it's {0} for you and {2} for {1}{{OR}}
-Far out it's {0} locally and {2} where {1} is at!{{OR}}
-No way it's {0} and for {1} it's {2}{{OR}}
-{0} somewhere but for {1} it's {2}{{OR}}
-It's {2} at {1} house, when it's {0} for you!</value>
+    <value>Awesome it's {0:HH:mm} for you and {2:HH:mm} for {1}{{OR}}
+Far out it's {0:HH:mm} locally and {2:HH:mm} where {1} is at!{{OR}}
+No way it's {0:HH:mm} and for {1} it's {2:HH:mm}{{OR}}
+{0:HH:mm} somewhere but for {1} it's {2:HH:mm}{{OR}}
+It's {2:HH:mm} at {1}'s house, when it's {0:HH:mm} for you!</value>
     <comment>Input Time string, Target Username, Target Time string</comment>
   </data>
   <data name="TIME_USERTIME_IN_FUTURE" xml:space="preserve">
-    <value>It will be {1} for {0} in {2} {3}{{OR}}
-In {2} {3} it's {1} at {0}'s house!{{OR}}
-{1} in {0} land in about {2} {3}</value>
+    <value>It will be {1:HH:mm} for {0} in {2} {3}{{OR}}
+In {2} {3} it's {1:HH:mm} at {0}'s house!{{OR}}
+{1:HH:mm} in {0} land in about {2} {3}</value>
     <comment>Target Username, Target Time string, Time Units int, Timeframe string</comment>
   </data>
   <data name="TIME_USERTIME_IN_FUTURE_UNPARSABLE" xml:space="preserve">

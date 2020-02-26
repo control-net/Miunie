@@ -41,10 +41,7 @@ namespace Miunie.Core
             var requestUtcTime = requestTime - requesterOffset;
             var otherUserTime = requestUtcTime + otherUserOffSet;
 
-            var formattedRequestTime = requestTime.ToShortTimeString();
-            var formattedOtherUserTime = otherUserTime.ToShortTimeString();
-
-            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, formattedRequestTime, user.Name, formattedOtherUserTime);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_FROM_LOCAL, requestTime, user.Name, otherUserTime);
         }
 
         public async Task OutputFutureTimeForUserAsync(MiunieUser user, int units, string timeframe, MiunieChannel channel)
@@ -61,9 +58,7 @@ namespace Miunie.Core
             var usersLocalTime = _dateTime.UtcNow + usersOffset;
             var usersFutureTime = usersLocalTime + timeFromLocal;
 
-            var formattedUsersTime = usersFutureTime?.ToShortTimeString();
-
-            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE, user.Name, formattedUsersTime, units.ToString(), timeframe);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE, user.Name, usersFutureTime, units.ToString(), timeframe);
         }
 
         public async Task OutputMessageTimeAsLocalAsync(ulong messageId, DateTimeOffset? createdTimeOffset, DateTimeOffset? editTimeOffset, MiunieUser user, MiunieChannel channel)
@@ -74,26 +69,15 @@ namespace Miunie.Core
                 return;
             }
 
-            var createdTime = createdTimeOffset.Value.UtcDateTime;
-            var editTime = editTimeOffset?.UtcDateTime;
+            var (createdLocalTime, editedLocalTime) = _timeManipulator.GetMessageTimesLocalToUser(createdTimeOffset.Value.UtcDateTime, editTimeOffset?.UtcDateTime, user);
 
-            if (user.UtcTimeOffset.HasValue)
+            if (editedLocalTime.HasValue)
             {
-                createdTime += user.UtcTimeOffset.Value;
-
-                if (editTime.HasValue)
-                {
-                    editTime += user.UtcTimeOffset.Value;
-                }
-            }
-
-            if (editTime.HasValue)
-            {
-                await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_EDIT, messageId.ToString(), createdTime, editTime);
+                await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_EDIT, messageId.ToString(), createdLocalTime, editedLocalTime);
                 return;
             }
 
-            await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_NO_EDIT, messageId.ToString(), createdTime);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_NO_EDIT, messageId.ToString(), createdLocalTime);
         }
 
         public async Task SetUtcOffsetForUserAsync(DateTime userTime, MiunieUser user, MiunieChannel channel)

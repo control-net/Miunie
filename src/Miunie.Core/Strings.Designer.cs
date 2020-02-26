@@ -227,11 +227,11 @@ namespace Miunie.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Awesome it&apos;s {0} for you and {2} for {1}{{OR}}
-        ///Far out it&apos;s {0} locally and {2} where {1} is at!{{OR}}
-        ///No way it&apos;s {0} and for {1} it&apos;s {2}{{OR}}
-        ///{0} somewhere but for {1} it&apos;s {2}{{OR}}
-        ///It&apos;s {2} at {1} house, when it&apos;s {0} for you!.
+        ///   Looks up a localized string similar to Awesome it&apos;s {0:HH:mm} for you and {2:HH:mm} for {1}{{OR}}
+        ///Far out it&apos;s {0:HH:mm} locally and {2:HH:mm} where {1} is at!{{OR}}
+        ///No way it&apos;s {0:HH:mm} and for {1} it&apos;s {2:HH:mm}{{OR}}
+        ///{0:HH:mm} somewhere but for {1} it&apos;s {2:HH:mm}{{OR}}
+        ///It&apos;s {2:HH:mm} at {1}&apos;s house, when it&apos;s {0:HH:mm} for you!.
         /// </summary>
         public static string TIME_USERTIME_FROM_LOCAL {
             get {
@@ -240,9 +240,9 @@ namespace Miunie.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It will be {1} for {0} in {2} {3}{{OR}}
-        ///In {2} {3} it&apos;s {1} at {0}&apos;s house!{{OR}}
-        ///{1} in {0} land in about {2} {3}.
+        ///   Looks up a localized string similar to It will be {1:HH:mm} for {0} in {2} {3}{{OR}}
+        ///In {2} {3} it&apos;s {1:HH:mm} at {0}&apos;s house!{{OR}}
+        ///{1:HH:mm} in {0} land in about {2} {3}.
         /// </summary>
         public static string TIME_USERTIME_IN_FUTURE {
             get {

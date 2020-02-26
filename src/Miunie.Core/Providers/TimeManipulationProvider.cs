@@ -22,5 +22,19 @@ namespace Miunie.Core.Providers
             else
                 return null;
         }
-    }
-}
+
+        public (DateTime createdLocalTime, DateTime? editedLocalTime) GetMessageTimesLocalToUser(DateTime createdTime, DateTime? editedTime, MiunieUser user)
+        {
+            if (user.UtcTimeOffset.HasValue)
+            {
+                createdTime += user.UtcTimeOffset.Value;
+
+                if (editedTime.HasValue)
+                {
+                    editedTime += user.UtcTimeOffset.Value;
+                }
+            }
+
+            return (createdTime, editedTime);
+        }
+    }}
