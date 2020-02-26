@@ -22,7 +22,7 @@ namespace Miunie.ConsoleApp
             _configManager = InversionOfControl.Provider.GetRequiredService<ConfigManager>();
             _editor = InversionOfControl.Provider.GetRequiredService<ConfigurationFileEditor>();
             _miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
-            await HandleInput();
+            HandleInput();
         }
 
         private static async Task RunHeadless(string[] args)
@@ -46,7 +46,7 @@ namespace Miunie.ConsoleApp
             DrawMiunieState();
         }
 
-        private static async Task HandleInput()
+        private static void HandleInput()
         {
             while (true)
             {
