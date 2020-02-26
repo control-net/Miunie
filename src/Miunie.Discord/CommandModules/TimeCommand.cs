@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
@@ -57,6 +58,14 @@ namespace Miunie.Discord.CommandModules
             var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
             await _service.SetUtcOffsetForUserAsync(currentTime, u, c);
+        }
+
+        [RequireUserPermission(GuildPermission.Administrator)]
+        [Command("time set for")]
+        public async Task SetMyTimeOffset(MiunieUser user, DateTime currentTime)
+        {
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.SetUtcOffsetForUserByAdminAsync(currentTime, user, c);
         }
     }
 }

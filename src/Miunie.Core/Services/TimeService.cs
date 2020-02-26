@@ -103,5 +103,13 @@ namespace Miunie.Core
             _users.StoreUser(user);
             await _messages.SendMessageAsync(channel, PhraseKey.TIME_NEW_OFFSET_SET);
         }
+
+        public async Task SetUtcOffsetForUserByAdminAsync(DateTime userTime, MiunieUser user, MiunieChannel channel)
+        {
+            var offset = TimeSpan.FromHours(userTime.Hour - _dateTime.UtcNow.Hour);
+            user.UtcTimeOffset = offset;
+            _users.StoreUser(user);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_NEW_OFFSET_SET_ADMIN, user.Name);
+        }
     }
 }

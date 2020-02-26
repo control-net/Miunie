@@ -183,6 +183,17 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Congratulations! {0}&apos;s current time was stored!{{OR}}
+        ///Alright, I&apos;ll remember {0}&apos;s time.{{OR}}
+        ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for {0}).
+        /// </summary>
+        public static string TIME_NEW_OFFSET_SET_ADMIN {
+            get {
+                return ResourceManager.GetString("TIME_NEW_OFFSET_SET_ADMIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nope! Nobody by that name here{{OR}}
         ///I asked everyone, but nobody knows...{{OR}}
         ///Sorry, couldn&apos;t find what you are looking for!.
