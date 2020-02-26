@@ -81,15 +81,16 @@ namespace Miunie.Core
                 return;
             }
 
-            var messageTimes = _timeManipulator.GetMessageTimesLocalToUser(createdTimeOffset.Value.UtcDateTime, editTimeOffset?.UtcDateTime, user);
+            var messageCreated = _timeManipulator.GetDateTimeLocalToUser(createdTimeOffset?.UtcDateTime, user);
+            var messageEdited = _timeManipulator.GetDateTimeLocalToUser(editTimeOffset?.UtcDateTime, user);
 
-            if (messageTimes.Edited.HasValue)
+            if (messageEdited.HasValue)
             {
-                await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_EDIT, messageId.ToString(), messageTimes.Created, messageTimes.Edited);
+                await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_EDIT, messageId.ToString(), messageCreated, messageEdited);
                 return;
             }
 
-            await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_NO_EDIT, messageId.ToString(), messageTimes.Created);
+            await _messages.SendMessageAsync(channel, PhraseKey.TIME_MESSAGE_INFO_NO_EDIT, messageId.ToString(), messageCreated);
         }
 
         public async Task SetUtcOffsetForUserAsync(DateTime userTime, MiunieUser user, MiunieChannel channel)
