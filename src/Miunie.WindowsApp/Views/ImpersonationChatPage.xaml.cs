@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Miunie.WindowsApp.ViewModels;
+using Miunie.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,5 +34,25 @@ namespace Miunie.WindowsApp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e) 
             => _vm.FetchInfo((ulong)e.Parameter);
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = e.OriginalSource as Button;
+                var panel = button.Parent as StackPanel;
+                var textBox = panel.Children.FirstOrDefault(element => element is TextBox) as TextBox;
+                var text = textBox.Text;
+
+                object i = ((FrameworkElement)sender).DataContext;
+                var vm = i as TextChannelView;
+
+                await _vm.SendMessageAsMiunieAsync(text, vm.Id);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace Miunie.Core
     {
         IEnumerable<GuildView> GetAvailableGuilds();
         Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId);
+        Task SendTextToChannelAsync(string text, ulong id);
     }
 }

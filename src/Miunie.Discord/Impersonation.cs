@@ -64,5 +64,13 @@ namespace Miunie.Discord
                 TimeStamp = m.CreatedAt.ToLocalTime()
             });
         }
+
+        public async Task SendTextToChannelAsync(string text, ulong id)
+        {
+            var textChannel = _discord.Client.GetChannel(id) as SocketTextChannel;
+            if(textChannel is null) { return; }
+
+            await textChannel.SendMessageAsync(text);
+        }
     }
 }

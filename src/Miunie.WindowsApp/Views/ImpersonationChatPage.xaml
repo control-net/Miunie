@@ -31,22 +31,28 @@
             Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate x:DataType="core:TextChannelView">
-                    <ListView ItemsSource="{Binding Messages}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="core:MessageView">
-                                <StackPanel Orientation="Horizontal" Padding="10">
-                                    <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                            <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="MessageTextBox" PlaceholderText="Type a message..."/>
+                            <Button Click="Button_Click">Send</Button>
+                        </StackPanel>
+                        <ListView ItemsSource="{Binding Messages}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="core:MessageView">
+                                    <StackPanel Orientation="Horizontal" Padding="10">
+                                        <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                                <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Content}"/>
+                                            <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
                                         </StackPanel>
-                                        <TextBlock Text="{Binding Content}"/>
-                                        <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
                                     </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
                 </DataTemplate>
             </ContentPresenter.ContentTemplate>
         </ContentPresenter>
