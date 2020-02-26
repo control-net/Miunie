@@ -11,12 +11,14 @@ namespace Miunie.Core
         private readonly IDiscordMessages _messages;
         private readonly IDateTime _dateTime;
         private readonly IMiunieUserProvider _users;
+        private readonly ITimeManipulationProvider _timeManipulator;
 
-        public TimeService(IDiscordMessages messages, IDateTime dateTime, IMiunieUserProvider users)
+        public TimeService(IDiscordMessages messages, IDateTime dateTime, IMiunieUserProvider users, ITimeManipulationProvider timeManipulator)
         {
             _messages = messages;
             _dateTime = dateTime;
             _users = users;
+            _timeManipulator = timeManipulator;
         }
 
         public async Task OutputCurrentTimeForUserAsync(MiunieUser user, MiunieChannel channel)
@@ -47,20 +49,9 @@ namespace Miunie.Core
 
         public async Task OutputFutureTimeForUserAsync(MiunieUser user, int units, string timeframe, MiunieChannel channel)
         {
-            var timeFromLocal = new TimeSpan();
-            timeframe = timeframe.Trim().ToLower();
-            var parsable = true;
+            var timeFromLocal = _timeManipulator.GetTimeSpanFromString(timeframe, units);           
 
-            if (timeframe == "hours" || timeframe == "hour" || timeframe == "hrs" || timeframe == "hr")            
-                timeFromLocal = new TimeSpan(units, 0, 0);            
-            else if (timeframe == "minutes" || timeframe == "minute" || timeframe == "mins" || timeframe == "min")            
-                timeFromLocal = new TimeSpan(0, units, 0);            
-            else if (timeframe == "seconds" || timeframe == "second" || timeframe == "secs" || timeframe == "sec")            
-                timeFromLocal = new TimeSpan(0, 0, units);            
-            else
-                parsable = false;            
-
-            if (!parsable)
+            if (timeFromLocal is null)
             {
                 await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE_UNPARSABLE, units.ToString(), timeframe);
                 return;
@@ -70,7 +61,7 @@ namespace Miunie.Core
             var usersLocalTime = _dateTime.UtcNow + usersOffset;
             var usersFutureTime = usersLocalTime + timeFromLocal;
 
-            var formattedUsersTime = usersFutureTime.ToShortTimeString();
+            var formattedUsersTime = usersFutureTime?.ToShortTimeString();
 
             await _messages.SendMessageAsync(channel, PhraseKey.TIME_USERTIME_IN_FUTURE, user.Name, formattedUsersTime, units.ToString(), timeframe);
         }

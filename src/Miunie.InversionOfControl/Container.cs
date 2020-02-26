@@ -31,6 +31,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
+                .AddSingleton<ITimeManipulationProvider, TimeManipulationProvider>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>()
                 .AddMiunieServices();
