@@ -42,7 +42,9 @@ namespace Miunie.Avalonia.ViewModels
 
         private void ConectionStateChanged(object sender, EventArgs e)
         {
-            if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTED)
+            if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTING)
+                Text = "Connecting";
+            else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTED)
                 Text = "Connected";
             else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.DISCONNECTED)
                 Text = "Disconnected";
