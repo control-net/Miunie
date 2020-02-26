@@ -23,18 +23,22 @@ namespace Miunie.Core.Providers
                 return null;
         }
 
-        public (DateTime createdLocalTime, DateTime? editedLocalTime) GetMessageTimesLocalToUser(DateTime createdTime, DateTime? editedTime, MiunieUser user)
+        public MessageTimes GetMessageTimesLocalToUser(DateTime createdUtcTime, DateTime? editedUtcTime, MiunieUser user)
         {
+            var createdLocalTime = createdUtcTime;
+            var editedLocalTime = editedUtcTime;
+
             if (user.UtcTimeOffset.HasValue)
             {
-                createdTime += user.UtcTimeOffset.Value;
+                createdLocalTime = createdUtcTime.Add(user.UtcTimeOffset.Value);
 
-                if (editedTime.HasValue)
+                if (editedUtcTime.HasValue)
                 {
-                    editedTime += user.UtcTimeOffset.Value;
+                    editedLocalTime = editedUtcTime.Value.Add(user.UtcTimeOffset.Value);
                 }
             }
 
-            return (createdTime, editedTime);
+            return new MessageTimes { Created = createdLocalTime, Edited = editedLocalTime };
         }
-    }}
+    }
+}

@@ -144,6 +144,13 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
     <value>**ABOUT THIS SERVER**</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="INCORRECT_VERB" xml:space="preserve">
+    <value>You better start making sense with other than '{0}'{{OR}}
+Come again, I don't understand '{0}'{{OR}}
+Let's try that one more time and try something different than '{0}'{{OR}}
+What does '{0}' mean here?</value>
+    <comment>Verb string</comment>
+  </data>
   <data name="REPUTATION_GIVEN" xml:space="preserve">
     <value>**{0}** just got reputation from {1}! :trophy:{{OR}}
 **{0}** just got reputation from {1}! :fireworks:{{OR}}

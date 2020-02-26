@@ -47,13 +47,13 @@ namespace Miunie.InversionOfControl
                 var attribute = x.GetCustomAttribute(serviceAttributeType) as ServiceAttribute;
                 switch (attribute.ServiceType)
                 {
-                    case ServiceType.Scoped:
+                    case ServiceType.SCOPED:
                         collection.AddScoped(x);
                         break;
-                    case ServiceType.Singleton:
+                    case ServiceType.SINGLETON:
                         collection.AddSingleton(x);
                         break;
-                    case ServiceType.Transient:
+                    case ServiceType.TRANSIENT:
                         collection.AddTransient(x);
                         break;
                     default:

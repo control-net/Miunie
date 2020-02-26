@@ -118,6 +118,18 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You better start making sense with other than &apos;{0}&apos;{{OR}}
+        ///Come again, I don&apos;t understand &apos;{0}&apos;{{OR}}
+        ///Let&apos;s try that one more time and try something different than &apos;{0}&apos;{{OR}}
+        ///What does &apos;{0}&apos; mean here?.
+        /// </summary>
+        public static string INCORRECT_VERB {
+            get {
+                return ResourceManager.GetString("INCORRECT_VERB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to **{0}** just got reputation from {1}! :trophy:{{OR}}
         ///**{0}** just got reputation from {1}! :fireworks:{{OR}}
         ///**{0}** just got reputation from {1}! :tada:{{OR}}

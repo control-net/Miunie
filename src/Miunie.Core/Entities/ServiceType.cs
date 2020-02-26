@@ -2,8 +2,8 @@
 {
     public enum ServiceType
     {
-        Scoped,
-        Singleton,        
-        Transient
+        SCOPED,
+        SINGLETON,        
+        TRANSIENT
     }
 }

@@ -30,7 +30,7 @@ namespace Miunie.Discord.CommandModules
         public async Task ShowTimeForUserWithOffset(MiunieUser user, string verb, int units, string timeframe)
         {
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.OutputFutureTimeForUserAsync(user, units, timeframe, c);
+            await _service.OutputFutureTimeForUserAsync(user, verb, units, timeframe, c);
         }
 
         [Command("time get")]
@@ -38,7 +38,7 @@ namespace Miunie.Discord.CommandModules
         {
             var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, user, c);
+            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, verb, user, c);
         }
 
         [Command("time of")]
