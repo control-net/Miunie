@@ -13,8 +13,9 @@
     </Design.DataContext>
 
     <StackPanel>
-        <TextBlock Text="{Binding Text, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Button Width="160" Command="{Binding OnClickCommand}">My Button</Button>
+        <TextBlock Text="{Binding Text, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
+        <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
 	</StackPanel>
 
 </Window>
