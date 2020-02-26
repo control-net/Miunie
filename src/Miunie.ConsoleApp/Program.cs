@@ -86,11 +86,12 @@ namespace Miunie.ConsoleApp
                         if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
                         {
                             _miunie.Stop();
+                            AnyKeyToContinue();
                         }
                         else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
                             _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
-                            await _miunie.StartAsync();
+                            _ = _miunie.StartAsync();
                             AnyKeyToContinue();
                         }
                         break;
