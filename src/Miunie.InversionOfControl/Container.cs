@@ -42,7 +42,23 @@ namespace Miunie.InversionOfControl
                                        .GetTypes()
                                        .Where(x => x.GetCustomAttributes(serviceAttributeType, true).Length > 0).ToList();
 
-            serviceTypes.ForEach((x) => collection.AddSingleton(x));
+            serviceTypes.ForEach((x) => {
+                var attribute = x.GetCustomAttribute(serviceAttributeType) as ServiceAttribute;
+                switch (attribute.ServiceType)
+                {
+                    case ServiceType.Scoped:
+                        collection.AddScoped(x);
+                        break;
+                    case ServiceType.Singleton:
+                        collection.AddSingleton(x);
+                        break;
+                    case ServiceType.Transient:
+                        collection.AddTransient(x);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
             return collection;
         }
