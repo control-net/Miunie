@@ -44,7 +44,7 @@ namespace Miunie.Core.Providers
                 rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Minus));
             }
 
-            return rep;
+            return rep.OrderByDescending(x => x.GivenAt).ToList();
         }
 
         public void AddReputation(MiunieUser invoker, MiunieUser target)
