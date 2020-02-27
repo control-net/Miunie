@@ -19,7 +19,7 @@ namespace Miunie.Discord.Adapters
             _lang = lang;
         }
 
-        public async Task SendMessageAsync(MiunieChannel mc, List<ReputationEntry> repEntries, int index)
+        public async Task SendMessageAsync(MiunieChannel mc, IEnumerable<ReputationEntry> repEntries, int index)
         {
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var embed = EmbedConstructor.CreateReputationLog(repEntries, index, _lang);

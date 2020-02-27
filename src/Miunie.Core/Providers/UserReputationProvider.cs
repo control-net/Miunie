@@ -19,7 +19,7 @@ namespace Miunie.Core.Providers
             _dateTime = dateTime;
         }
 
-        public List<ReputationEntry> GetReputation(MiunieUser invoker)
+        public IEnumerable<ReputationEntry> GetReputation(MiunieUser invoker)
         {
             var rep = new List<ReputationEntry>();
 
@@ -44,7 +44,7 @@ namespace Miunie.Core.Providers
                 rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Minus));
             }
 
-            return rep.OrderByDescending(x => x.GivenAt).ToList();
+            return rep.OrderByDescending(x => x.GivenAt);
         }
 
         public void AddReputation(MiunieUser invoker, MiunieUser target)
