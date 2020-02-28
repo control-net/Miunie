@@ -14,7 +14,7 @@ namespace Miunie.Core.XUnit.Tests.Services
         public ProfileServiceTests()
         {
             _msgMock = new Mock<IDiscordMessages>();
-            _profileService = new ProfileService(_msgMock.Object, null, null);
+            _profileService = new ProfileService(_msgMock.Object, null, null, null);
         }
 
         [Fact]
