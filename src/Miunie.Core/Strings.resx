@@ -158,11 +158,21 @@ What does '{0}' mean here?</value>
 **{0}** was given some reputation by {1}! What's in it for me, though? :thinking:</value>
     <comment>Target Username, Invoker Username</comment>
   </data>
+  <data name="REPUTATION_GIVEN_BOT" xml:space="preserve">
+    <value>What a nice gesture {0}... giving me +rep!{{OR}}
+I'll remember this {0}. Thanks for the +rep!{{OR}}
+Wow, check out {0} they just gave me +rep!</value>
+  </data>
   <data name="REPUTATION_TAKEN" xml:space="preserve">
     <value>**{0}** just had reputation removed from {1} :({{OR}}
 **{0}** just had reputation removed from {1} :'({{OR}}
 **{0}** just had reputation removed from {1} :sob:</value>
     <comment>Target Username, Invoker Username</comment>
+  </data>
+  <data name="REPUTATION_TAKEN_BOT" xml:space="preserve">
+    <value>{0} you are not nice! Taking my rep...{{OR}}
+{0} you better watch your back, I got your number now!{{OR}}
+{0} taking things that don't belong to you is not nice. I miss my rep!</value>
   </data>
   <data name="SHOW_REMOTE_REPO" xml:space="preserve">
     <value>You can find my source code on GitHub:
