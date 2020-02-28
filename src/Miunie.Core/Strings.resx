@@ -144,6 +144,13 @@ Did {0} just try to influence someone that isn't me?! Wait, they tried to self-r
     <value>**ABOUT THIS SERVER**</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="INCORRECT_VERB" xml:space="preserve">
+    <value>You better start making sense with other than '{0}'{{OR}}
+Come again, I don't understand '{0}'{{OR}}
+Let's try that one more time and try something different than '{0}'{{OR}}
+What does '{0}' mean here?</value>
+    <comment>Verb string</comment>
+  </data>
   <data name="REPUTATION_GIVEN" xml:space="preserve">
     <value>**{0}** just got reputation from {1}! :trophy:{{OR}}
 **{0}** just got reputation from {1}! :fireworks:{{OR}}
@@ -179,6 +186,12 @@ Alright, I'll remember your time.{{OR}}
 Cool, if someone asks, this meeting didn't happen. (but I'll totally remember what time it is for you)</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="TIME_NEW_OFFSET_SET_ADMIN" xml:space="preserve">
+    <value>Congratulations! {0}'s current time was stored!{{OR}}
+Alright, I'll remember {0}'s time.{{OR}}
+Cool, if someone asks, this meeting didn't happen. (but I'll totally remember what time it is for {0})</value>
+    <comment>Target Username</comment>
+  </data>
   <data name="TIME_NO_MESSAGE_INFO" xml:space="preserve">
     <value>Nope! Nobody by that name here{{OR}}
 I asked everyone, but nobody knows...{{OR}}
@@ -198,12 +211,24 @@ Sorry, couldn't find what you are looking for!</value>
     <comment>Target Username, Time string</comment>
   </data>
   <data name="TIME_USERTIME_FROM_LOCAL" xml:space="preserve">
-    <value>Awesome it's {0} for you and {2} for {1}{{OR}}
-Far out it's {0} locally and {2} where {1} is at!{{OR}}
-No way it's {0} and for {1} it's {2}{{OR}}
-{0} somewhere but for {1} it's {2}{{OR}}
-It's {2} at {1} house, when it's {0} for you!</value>
+    <value>Awesome it's {0:HH:mm} for you and {2:HH:mm} for {1}{{OR}}
+Far out it's {0:HH:mm} locally and {2:HH:mm} where {1} is at!{{OR}}
+No way it's {0:HH:mm} and for {1} it's {2:HH:mm}{{OR}}
+{0:HH:mm} somewhere but for {1} it's {2:HH:mm}{{OR}}
+It's {2:HH:mm} at {1}'s house, when it's {0:HH:mm} for you!</value>
     <comment>Input Time string, Target Username, Target Time string</comment>
+  </data>
+  <data name="TIME_USERTIME_IN_FUTURE" xml:space="preserve">
+    <value>It will be {1:HH:mm} for {0} in {2} {3}{{OR}}
+In {2} {3} it's {1:HH:mm} at {0}'s house!{{OR}}
+{1:HH:mm} in {0} land in about {2} {3}</value>
+    <comment>Target Username, Target Time string, Time Units int, Timeframe string</comment>
+  </data>
+  <data name="TIME_USERTIME_IN_FUTURE_UNPARSABLE" xml:space="preserve">
+    <value>I don't understand what in {0} {1} means{{OR}}
+Me no understand {0} {1}!{{OR}}
+What are you trying to say with {0} {1}</value>
+    <comment>Time Units int, Timeframe string</comment>
   </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
