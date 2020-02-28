@@ -40,9 +40,10 @@ namespace Miunie.WindowsApp.Views
             try
             {
                 var button = e.OriginalSource as Button;
-                var panel = button.Parent as StackPanel;
+                var panel = button.Parent as Grid;
                 var textBox = panel.Children.FirstOrDefault(element => element is TextBox) as TextBox;
                 var text = textBox.Text;
+                textBox.Text = string.Empty;
 
                 object i = ((FrameworkElement)sender).DataContext;
                 var vm = i as TextChannelView;
