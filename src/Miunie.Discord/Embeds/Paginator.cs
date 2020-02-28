@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Miunie.Discord.Embeds
 {
-    // This handles selecting portions of a list to display as a page.
     internal static class Paginator
     {
         public static IEnumerable<T> GroupAt<T>(IEnumerable<T> set, int index, int pageSize, bool defaultOnOverflow = false)
@@ -45,7 +44,6 @@ namespace Miunie.Discord.Embeds
                 .WithFooter($"{(string.IsNullOrWhiteSpace(embed.Footer?.Text) ? "" : $"{embed.Footer?.Text} | ")}{GetPageFooter(index, set.Count(), pageSize)}");
         }
 
-        // TODO: Correlate with ILanguageProvider
         private static string GetPageFooter(int index, int collectionSize, int pageSize)
         {
             return $"Page {index + 1} of {GetPageCount(collectionSize, pageSize)}";

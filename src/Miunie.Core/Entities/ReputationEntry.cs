@@ -4,13 +4,13 @@ namespace Miunie.Core
 {
     public class ReputationEntry
     {
-        public ReputationEntry(ulong targetId, string targetName, DateTime givenAt, ReputationType type, bool fromInvoker = false)
+        public ReputationEntry(ulong targetId, string targetName, DateTime givenAt, ReputationType type, bool isfromInvoker = false)
         {
             TargetId = targetId;
             TargetName = targetName;
             GivenAt = givenAt;
             Type = type;
-            FromInvoker = fromInvoker;
+            IsFromInvoker = isfromInvoker;
         }
 
         public ulong TargetId { get; set; }
@@ -18,7 +18,7 @@ namespace Miunie.Core
         public DateTime GivenAt { get; set; }
         public ReputationType Type { get; set; }
 
-        public bool FromInvoker { get; set; }
+        public bool IsFromInvoker { get; set; }
         
     }
 }

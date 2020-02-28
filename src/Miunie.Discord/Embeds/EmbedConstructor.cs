@@ -32,7 +32,7 @@ namespace Miunie.Discord.Embeds
                 .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_REP_LOG_TITLE.ToString())),
                 index,
                 REP_LOG_PAGE_SIZE,
-                x => $"{(x.FromInvoker ? "**To:**" : "**From:**")} {x.TargetName} (**{FormatReputationType(x.Type)}**) {x.GivenAt:d} at {x.GivenAt:t} UTC");
+                x => $"{(x.IsFromInvoker ? "**To:**" : "**From:**")} {x.TargetName} (**{FormatReputationType(x.Type)}**) {x.GivenAt:d} at {x.GivenAt:t} UTC");
 
             if (string.IsNullOrWhiteSpace(embed.Description))
                 embed.WithDescription(lang.GetPhrase(PhraseKey.USER_EMBED_REP_LOG_EMPTY.ToString()));
@@ -52,7 +52,6 @@ namespace Miunie.Discord.Embeds
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REALNESS_TITLE.ToString()), realnessPhrase, true)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REP_TITLE.ToString()), mUser.Reputation.Value.ToString(), true)
-                //.AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REP_GIVEN_TITLE.ToString()), "", true) // This needs to refer to all users and calculate the best info
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_ROLES_TITLE.ToString()), string.Join("\n", mUser.Roles.Select(r => r.Name)), true)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_JOINED_AT_TITLE.ToString()), $"{mUser.JoinedAt:d} at {mUser.JoinedAt:t} UTC")
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_CREATED_AT_TITLE.ToString()), $"{mUser.CreatedAt:d} at {mUser.CreatedAt:t} UTC", true)

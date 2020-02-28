@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Miunie.Core.Providers
 {
-    // TODO: Provide a way to read all users, or store repGiven as a property in MinuieUser.
     public class MiunieUserProvider : IMiunieUserProvider
     {
         private const string KeyFormat = "u{0}";
@@ -18,7 +17,7 @@ namespace Miunie.Core.Providers
         public MiunieUser GetById(ulong userId, ulong guildId)
         {
             var user = _persistentStorage.RestoreSingle<MiunieUser>(u => u.UserId == userId && u.GuildId == guildId);
-            return Exists(user, userId, guildId);
+            return EnsureExists(user, userId, guildId);
         }
 
         public void StoreUser(MiunieUser user)
@@ -34,11 +33,9 @@ namespace Miunie.Core.Providers
         }
 
         public IEnumerable<MiunieUser> GetAllUsers()
-        {
-            return _persistentStorage.RestoreAll<MiunieUser>();
-        }
+            => _persistentStorage.RestoreAll<MiunieUser>();
 
-        private MiunieUser Exists(
+        private MiunieUser EnsureExists(
             MiunieUser user,
             ulong userId,
             ulong guildId)
