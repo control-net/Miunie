@@ -13,7 +13,8 @@
     </Design.DataContext>
 
     <StackPanel>
-        <TextBlock Text="{Binding Text, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
+        <TextBlock Text="{Binding ConnectionStatus, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		<Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
         <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
 	</StackPanel>

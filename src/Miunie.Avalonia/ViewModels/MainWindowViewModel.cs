@@ -21,33 +21,46 @@ namespace Miunie.Avalonia.ViewModels
             _miunie.MiunieDiscord.ConnectionChanged += ConectionStateChanged;
         }
 
-        private string _text = "0";
+        private string _connectionStatus = "0";
+        private string _discordToken = "";
 
-        public string Text 
+        public string ConnectionStatus 
         { 
-            get { return _text; }
-            set { this.RaiseAndSetIfChanged(ref _text, value); }
+            get { return _connectionStatus; }
+            set { this.RaiseAndSetIfChanged(ref _connectionStatus, value); }
+        }
+
+        public string DiscordToken 
+        { 
+            get { return _discordToken; }
+            set { this.RaiseAndSetIfChanged(ref _discordToken, value); }
         }
 
         public async Task StartButton_ClickCommand()
         {
-            _miunie.BotConfiguration.DiscordToken = "NTU5MDU4NzQ4NTkzOTMwMjUx.XlbErA.Y7Zl5AimV9TzVg5a_1UkuuZ9bT4";
-            await _miunie.StartAsync();
+            if (!string.IsNullOrWhiteSpace(DiscordToken))
+            {
+                _miunie.BotConfiguration.DiscordToken = DiscordToken;
+                await _miunie.StartAsync();
+            }
         }
 
         public void StopButton_ClickCommand()
         {
-            _miunie.Stop();
+            if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTED)
+            {
+                _miunie.Stop();
+            }
         }
 
         private void ConectionStateChanged(object sender, EventArgs e)
         {
             if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTING)
-                Text = "Connecting";
+                ConnectionStatus = "Connecting";
             else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTED)
-                Text = "Connected";
+                ConnectionStatus = "Connected";
             else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.DISCONNECTED)
-                Text = "Disconnected";
+                ConnectionStatus = "Disconnected";
         }
     }
 }
