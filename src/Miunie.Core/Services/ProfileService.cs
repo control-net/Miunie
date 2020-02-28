@@ -39,7 +39,7 @@ namespace Miunie.Core
 
             _reputationProvider.AddReputation(invoker, target);
 
-            if (target.UserId == _miunieDiscord.GetBotId())
+            if (_miunieDiscord.UserIsMiunie(target))
             {
                 await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_GIVEN_BOT, invoker.Name);
                 return;
@@ -60,7 +60,7 @@ namespace Miunie.Core
 
             _reputationProvider.RemoveReputation(invoker, target);
 
-            if (target.UserId == _miunieDiscord.GetBotId())
+            if (_miunieDiscord.UserIsMiunie(target))
             {
                 await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_TAKEN_BOT, invoker.Name);
                 return;

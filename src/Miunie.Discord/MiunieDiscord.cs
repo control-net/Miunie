@@ -10,8 +10,8 @@ namespace Miunie.Discord
 {
     public class MiunieDiscord : IMiunieDiscord
     {
-        public ulong GetBotId()
-            => _discord.Client.CurrentUser.Id;
+        public bool UserIsMiunie(MiunieUser user)
+            => user.UserId == _discord.Client?.CurrentUser?.Id;
         public string GetBotAvatarUrl()
             => _discord.Client?.CurrentUser?.GetAvatarUrl();
 

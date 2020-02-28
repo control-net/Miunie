@@ -6,7 +6,7 @@ namespace Miunie.Core
 {
     public interface IMiunieDiscord
     {
-        ulong GetBotId();
+        bool UserIsMiunie(MiunieUser user);
         Task RunAsync(CancellationToken cancellationToken);
         string GetBotAvatarUrl();
         ConnectionState ConnectionState { get; }
