@@ -118,6 +118,18 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You better start making sense with other than &apos;{0}&apos;{{OR}}
+        ///Come again, I don&apos;t understand &apos;{0}&apos;{{OR}}
+        ///Let&apos;s try that one more time and try something different than &apos;{0}&apos;{{OR}}
+        ///What does &apos;{0}&apos; mean here?.
+        /// </summary>
+        public static string INCORRECT_VERB {
+            get {
+                return ResourceManager.GetString("INCORRECT_VERB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to **{0}** just got reputation from {1}! :trophy:{{OR}}
         ///**{0}** just got reputation from {1}! :fireworks:{{OR}}
         ///**{0}** just got reputation from {1}! :tada:{{OR}}
@@ -183,6 +195,17 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Congratulations! {0}&apos;s current time was stored!{{OR}}
+        ///Alright, I&apos;ll remember {0}&apos;s time.{{OR}}
+        ///Cool, if someone asks, this meeting didn&apos;t happen. (but I&apos;ll totally remember what time it is for {0}).
+        /// </summary>
+        public static string TIME_NEW_OFFSET_SET_ADMIN {
+            get {
+                return ResourceManager.GetString("TIME_NEW_OFFSET_SET_ADMIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nope! Nobody by that name here{{OR}}
         ///I asked everyone, but nobody knows...{{OR}}
         ///Sorry, couldn&apos;t find what you are looking for!.
@@ -216,15 +239,37 @@ namespace Miunie.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Awesome it&apos;s {0} for you and {2} for {1}{{OR}}
-        ///Far out it&apos;s {0} locally and {2} where {1} is at!{{OR}}
-        ///No way it&apos;s {0} and for {1} it&apos;s {2}{{OR}}
-        ///{0} somewhere but for {1} it&apos;s {2}{{OR}}
-        ///It&apos;s {2} at {1} house, when it&apos;s {0} for you!.
+        ///   Looks up a localized string similar to Awesome it&apos;s {0:HH:mm} for you and {2:HH:mm} for {1}{{OR}}
+        ///Far out it&apos;s {0:HH:mm} locally and {2:HH:mm} where {1} is at!{{OR}}
+        ///No way it&apos;s {0:HH:mm} and for {1} it&apos;s {2:HH:mm}{{OR}}
+        ///{0:HH:mm} somewhere but for {1} it&apos;s {2:HH:mm}{{OR}}
+        ///It&apos;s {2:HH:mm} at {1}&apos;s house, when it&apos;s {0:HH:mm} for you!.
         /// </summary>
         public static string TIME_USERTIME_FROM_LOCAL {
             get {
                 return ResourceManager.GetString("TIME_USERTIME_FROM_LOCAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It will be {1:HH:mm} for {0} in {2} {3}{{OR}}
+        ///In {2} {3} it&apos;s {1:HH:mm} at {0}&apos;s house!{{OR}}
+        ///{1:HH:mm} in {0} land in about {2} {3}.
+        /// </summary>
+        public static string TIME_USERTIME_IN_FUTURE {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_IN_FUTURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t understand what in {0} {1} means{{OR}}
+        ///Me no understand {0} {1}!{{OR}}
+        ///What are you trying to say with {0} {1}.
+        /// </summary>
+        public static string TIME_USERTIME_IN_FUTURE_UNPARSABLE {
+            get {
+                return ResourceManager.GetString("TIME_USERTIME_IN_FUTURE_UNPARSABLE", resourceCulture);
             }
         }
         

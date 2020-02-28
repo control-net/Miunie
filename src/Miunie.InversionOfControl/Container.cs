@@ -31,6 +31,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
+                .AddSingleton<ITimeManipulationProvider, TimeManipulationProvider>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>()
                 .AddMiunieServices();
@@ -42,7 +43,23 @@ namespace Miunie.InversionOfControl
                                        .GetTypes()
                                        .Where(x => x.GetCustomAttributes(serviceAttributeType, true).Length > 0).ToList();
 
-            serviceTypes.ForEach((x) => collection.AddSingleton(x));
+            serviceTypes.ForEach((x) => {
+                var attribute = x.GetCustomAttribute(serviceAttributeType) as ServiceAttribute;
+                switch (attribute.ServiceType)
+                {
+                    case ServiceType.SCOPED:
+                        collection.AddScoped(x);
+                        break;
+                    case ServiceType.SINGLETON:
+                        collection.AddSingleton(x);
+                        break;
+                    case ServiceType.TRANSIENT:
+                        collection.AddTransient(x);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
             return collection;
         }
