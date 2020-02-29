@@ -14,7 +14,8 @@
     <Grid>
         <muxc:NavigationView Name="MainNavigationView"
                         Loaded="MainNavigationView_OnLoaded"
-                        ItemInvoked="MainNavigationView_OnItemInvoked">
+                        ItemInvoked="MainNavigationView_OnItemInvoked"
+                        IsBackButtonVisible="Collapsed">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Tag="home" Icon="Emoji" Content="Bot status" />
                 <muxc:NavigationViewItemSeparator/>
