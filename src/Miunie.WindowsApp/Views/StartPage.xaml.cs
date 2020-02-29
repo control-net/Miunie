@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Miunie.WindowsApp.ViewModels;
 using muxc = Microsoft.UI.Xaml.Controls;
+using CommonServiceLocator;
 
 namespace Miunie.WindowsApp.Views
 {
@@ -110,6 +111,12 @@ namespace Miunie.WindowsApp.Views
             }
 
             return newPage;
+        }
+
+        private async void AboutViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var service = ServiceLocator.Current.GetInstance<IDialogService>();
+            await service.ShowAboutPage();
         }
     }
 }
