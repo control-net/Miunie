@@ -27,7 +27,7 @@ namespace Miunie.Core.Providers
             {
                 if (user.Reputation.PlusRepLog.ContainsKey(invoker.UserId))
                     rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Plus, true));
-                else if (user.Reputation.MinusRepLog.ContainsKey(invoker.UserId))
+                if (user.Reputation.MinusRepLog.ContainsKey(invoker.UserId))
                     rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Minus, true));
             }
 
