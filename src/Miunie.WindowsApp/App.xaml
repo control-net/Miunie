@@ -3,9 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Miunie.WindowsApp"
+    xmlns:cv="using:Miunie.WindowsApp.Converters"
     xmlns:vm="using:Miunie.WindowsApp.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
+            <cv:SortedListConverter x:Key="SortedListConverter" />
             <vm:ViewModelLocator xmlns:vm="using:Miunie.WindowsApp.ViewModels" x:Key="Locator"/>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>

@@ -9,6 +9,9 @@ namespace Miunie.Core.Storage
         void Store<T>(T item);
         void Update<T>(T item);
         IEnumerable<T> RestoreMany<T>(Expression<Func<T, bool>> predicate);
+
+        IEnumerable<T> RestoreAll<T>();
+
         T RestoreSingle<T>(Expression<Func<T, bool>> predicate);
         bool Exists<T>(Expression<Func<T, bool>> predicate);
     }

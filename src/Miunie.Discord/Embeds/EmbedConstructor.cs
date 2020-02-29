@@ -2,12 +2,45 @@
 using Miunie.Core;
 using Miunie.Core.Providers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Miunie.Discord.Embeds
 {
+
     internal static class EmbedConstructor
     {
+        private static readonly int REP_LOG_PAGE_SIZE = 10;
+
+        private static string FormatReputationType(ReputationType type)
+        {
+            switch(type)
+            {
+                case ReputationType.Plus:
+                    return "+1";
+                case ReputationType.Minus:
+                    return "-1";
+                default:
+                    throw new ArgumentException("Unknown ReputationType.");
+            }
+        }
+
+        public static Embed CreateReputationLog(IEnumerable<ReputationEntry> entries, int index, ILanguageProvider lang)
+        {
+            var embed = Paginator.PaginateEmbed(entries, new EmbedBuilder()
+                .WithColor(new Color(236, 64, 122))
+                .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_REP_LOG_TITLE.ToString())),
+                index,
+                REP_LOG_PAGE_SIZE,
+                x => $"{(x.IsFromInvoker ? "**To:**" : "**From:**")} {x.TargetName} (**{FormatReputationType(x.Type)}**) {x.GivenAt:d} at {x.GivenAt:t} UTC");
+
+            if (string.IsNullOrWhiteSpace(embed.Description))
+                embed.WithDescription(lang.GetPhrase(PhraseKey.USER_EMBED_REP_LOG_EMPTY.ToString()));
+
+            return embed.Build();
+
+        }
+
         public static Embed ToEmbed(this MiunieUser mUser, ILanguageProvider lang)
         {
             var realnessPhrase = lang.GetPhrase((mUser.IsBot ? PhraseKey.USER_EMBED_IS_BOT : PhraseKey.USER_EMBED_IS_HUMAN).ToString());

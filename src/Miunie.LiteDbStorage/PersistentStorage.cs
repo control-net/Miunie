@@ -27,6 +27,15 @@ namespace Miunie.LiteDbStorage
             }
         }
 
+        public IEnumerable<T> RestoreAll<T>()
+        {
+            using (var db = new LiteDatabase(_dbFileName))
+            {
+                var collection = db.GetCollection<T>();
+                return collection.FindAll();
+            }
+        }
+
         public T RestoreSingle<T>(Expression<Func<T, bool>> predicate)
             => RestoreMany(predicate).FirstOrDefault();
 
