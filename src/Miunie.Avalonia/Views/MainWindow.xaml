@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Miunie.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Avalonia Tests">
+        Title="Miunie">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
