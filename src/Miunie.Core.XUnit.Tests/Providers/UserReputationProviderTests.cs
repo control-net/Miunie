@@ -30,6 +30,26 @@ namespace Miunie.Core.XUnit.Tests.Providers
         }
 
         [Fact]
+        public void ReputationLog_NullReputationObject_ShouldReturnEmptyCollection()
+        {
+            var user = CreateUserWithNullReputation();
+
+            var result = _repProvider.GetReputation(user);
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void ReputationLog_NoReputation_ShouldReturnEmptyCollection()
+        {
+            var user = CreateUserWithoutReputation();
+
+            var result = _repProvider.GetReputation(user);
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
         public void AddReputation_ShouldIncrementReputation()
         {
             _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
@@ -113,6 +133,24 @@ namespace Miunie.Core.XUnit.Tests.Providers
             Assert.True(hasRemovedRep);
             Assert.False(peterHasTimeout);
             Assert.False(senneHasTimeout);
+        }
+
+        private static MiunieUser CreateUserWithoutReputation()
+        {
+            return new MiunieUser
+            {
+                Name = "User",
+                Reputation = new Reputation()
+            };
+        }
+
+        private static MiunieUser CreateUserWithNullReputation()
+        {
+            return new MiunieUser
+            {
+                Name = "User",
+                Reputation = null
+            };
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Miunie.Core.Providers
         {
             var rep = new List<ReputationEntry>();
 
-            if(invoker is null) { return rep; }
+            if(invoker is null || invoker.Reputation is null) { return rep; }
 
             foreach (MiunieUser user in _userProvider.GetAllUsers().Where(x => x.Id != invoker.Id))
             {
