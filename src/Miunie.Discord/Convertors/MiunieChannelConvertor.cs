@@ -1,5 +1,6 @@
 using Discord.WebSocket;
 using Miunie.Core;
+using System;
 
 namespace Miunie.Discord.Convertors
 {
@@ -7,6 +8,8 @@ namespace Miunie.Discord.Convertors
     {
         public static MiunieChannel FromDiscordChannel(SocketGuildChannel channel)
         {
+            if (channel is null) throw new ArgumentNullException(nameof(channel));
+
             MiunieChannel miunieChannel;
             if (channel is default(SocketGuildChannel))
             {
