@@ -23,6 +23,8 @@ namespace Miunie.Core.Providers
         {
             var rep = new List<ReputationEntry>();
 
+            if(invoker is null) { return rep; }
+
             foreach (MiunieUser user in _userProvider.GetAllUsers().Where(x => x.Id != invoker.Id))
             {
                 if (user.Reputation.PlusRepLog.ContainsKey(invoker.UserId))

@@ -21,6 +21,15 @@ namespace Miunie.Core.XUnit.Tests.Providers
         }
 
         [Fact]
+        public void ReputationLog_NullUser_ShouldReturnEmptyCollection()
+        {
+            var result = _repProvider.GetReputation(null);
+            
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
+        [Fact]
         public void AddReputation_ShouldIncrementReputation()
         {
             _dateTimeMock.Setup(dt => dt.UtcNow).Returns(DateTime.Now);
