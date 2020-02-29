@@ -26,7 +26,7 @@ namespace Miunie.WindowsApp.Views
     {
         public ServersPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
