@@ -12,9 +12,9 @@ namespace Miunie.WindowsApp.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is IEnumerable<MessageView>)
+            if (value is IEnumerable<MessageView> messages)
             {
-                value = (value as IEnumerable<MessageView>).OrderBy(x => x.TimeStamp);
+                value = messages.OrderBy(x => x.TimeStamp);
             }
 
             return value;
