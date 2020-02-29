@@ -22,7 +22,7 @@
                 <muxc:NavigationViewItem Tag="servers" Icon="People" Content="Servers" />
             </muxc:NavigationView.MenuItems>
             <muxc:NavigationView.PaneFooter>
-                <muxc:NavigationViewItem Tag="about" Icon="Help" Content="About" Tapped="AboutViewItem_Tapped" />
+                <muxc:NavigationViewItem Tag="about" Icon="Help" Content="About" Tapped="AboutView_Navigate" />
             </muxc:NavigationView.PaneFooter>
             <Grid>
                 <Frame Name="MainFrame" />

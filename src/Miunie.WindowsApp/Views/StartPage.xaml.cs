@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Navigation;
 using Miunie.WindowsApp.ViewModels;
 using muxc = Microsoft.UI.Xaml.Controls;
 using CommonServiceLocator;
+using Miunie.Core.Providers;
+using Miunie.Core;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 namespace Miunie.WindowsApp.Views
 {
@@ -113,10 +117,14 @@ namespace Miunie.WindowsApp.Views
             return newPage;
         }
 
-        private async void AboutViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void AboutView_Navigate(object sender, TappedRoutedEventArgs e)
         {
-            var service = ServiceLocator.Current.GetInstance<IDialogService>();
-            await service.ShowAboutPage();
+            var aboutDialog = new MessageDialog(_vm.MiunieAboutText, "Miunie");
+
+            aboutDialog.Commands.Add(new UICommand("Close"));
+
+            aboutDialog.CancelCommandIndex = 0;
+            await aboutDialog.ShowAsync();
         }
     }
 }

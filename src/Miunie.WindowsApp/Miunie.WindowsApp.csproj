@@ -123,8 +123,6 @@
     <Compile Include="Infrastructure\UwpFileSystem.cs" />
     <Compile Include="InversionOfControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Utilities\TokenValidator.cs" />
     <Compile Include="ViewModels\ImpersonationChatPageViewModel.cs" />
     <Compile Include="ViewModels\ServersPageViewModel.cs" />
