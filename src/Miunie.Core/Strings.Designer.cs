@@ -357,6 +357,26 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reputation? What&apos;s that?{{OR}}
+        ///I don&apos;t see any reputation here...{{OR}}
+        ///I&apos;ve caught you empty-repped!.
+        /// </summary>
+        public static string USER_EMBED_REP_LOG_EMPTY {
+            get {
+                return ResourceManager.GetString("USER_EMBED_REP_LOG_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to **REPUTATION LOG**.
+        /// </summary>
+        public static string USER_EMBED_REP_LOG_TITLE {
+            get {
+                return ResourceManager.GetString("USER_EMBED_REP_LOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :fleur_de_lis: Reputation.
         /// </summary>
         public static string USER_EMBED_REP_TITLE {
