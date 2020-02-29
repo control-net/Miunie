@@ -10,12 +10,14 @@ namespace Miunie.Core
         private readonly IDiscordMessages _discordMessages;
         private readonly IUserReputationProvider _reputationProvider;
         private readonly ILogWriter _logger;
+        private readonly IMiunieDiscord _miunieDiscord;
 
-        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogWriter logger)
+        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogWriter logger, IMiunieDiscord miunieDiscord)
         {
             _discordMessages = discordMessages;
             _reputationProvider = reputationProvider;
             _logger = logger;
+            _miunieDiscord = miunieDiscord;
         }
 
         public async Task ShowProfileAsync(MiunieUser user, MiunieChannel c)
@@ -36,6 +38,13 @@ namespace Miunie.Core
             }
 
             _reputationProvider.AddReputation(invoker, target);
+
+            if (_miunieDiscord.UserIsMiunie(target))
+            {
+                await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_GIVEN_BOT, invoker.Name);
+                return;
+            }
+
             await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_GIVEN, target.Name, invoker.Name);
         }
 
@@ -50,6 +59,13 @@ namespace Miunie.Core
             if (_reputationProvider.CanRemoveReputation(invoker, target)) { return; }
 
             _reputationProvider.RemoveReputation(invoker, target);
+
+            if (_miunieDiscord.UserIsMiunie(target))
+            {
+                await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_TAKEN_BOT, invoker.Name);
+                return;
+            }
+
             await _discordMessages.SendMessageAsync(c, PhraseKey.REPUTATION_TAKEN, invoker.Name, target.Name);
         }
 
