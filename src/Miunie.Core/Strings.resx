@@ -271,6 +271,16 @@ blood, all that._</value>
 :electric_plug: Human/Bot</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="USER_EMBED_REP_LOG_EMPTY" xml:space="preserve">
+    <value>Reputation? What's that?{{OR}}
+I don't see any reputation here...{{OR}}
+I've caught you empty-repped!</value>
+    <comment>No formatting options.</comment>
+  </data>
+  <data name="USER_EMBED_REP_LOG_TITLE" xml:space="preserve">
+    <value>**REPUTATION LOG**</value>
+    <comment>No formatting options.</comment>
+  </data>
   <data name="USER_EMBED_REP_TITLE" xml:space="preserve">
     <value>:fleur_de_lis: Reputation</value>
     <comment>No formatting options.</comment>

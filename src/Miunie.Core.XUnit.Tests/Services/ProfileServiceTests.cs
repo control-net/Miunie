@@ -1,6 +1,4 @@
-﻿using Miunie.Core.Logging;
-using Miunie.Core.Providers;
-using Moq;
+﻿using Moq;
 using System.Threading.Tasks;
 using Xunit;
 

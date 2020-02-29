@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using Miunie.Core.Infrastructure;
 
 namespace Miunie.Core.Providers
@@ -15,6 +17,35 @@ namespace Miunie.Core.Providers
         {
             _userProvider = userProvider;
             _dateTime = dateTime;
+        }
+
+        public IEnumerable<ReputationEntry> GetReputation(MiunieUser invoker)
+        {
+            var rep = new List<ReputationEntry>();
+
+            if(invoker is null || invoker.Reputation is null) { return rep; }
+
+            foreach (MiunieUser user in _userProvider.GetAllUsers().Where(x => x.Id != invoker.Id))
+            {
+                if (user.Reputation.PlusRepLog.ContainsKey(invoker.UserId))
+                    rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Plus, true));
+                if (user.Reputation.MinusRepLog.ContainsKey(invoker.UserId))
+                    rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Minus, true));
+            }
+
+            foreach(KeyValuePair<ulong, DateTime> entry in invoker.Reputation.PlusRepLog)
+            {
+                var user = _userProvider.GetById(entry.Key, invoker.GuildId);
+                rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Plus));
+            }
+
+            foreach(KeyValuePair<ulong, DateTime> entry in invoker.Reputation.MinusRepLog)
+            {
+                var user = _userProvider.GetById(entry.Key, invoker.GuildId);
+                rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Minus));
+            }
+
+            return rep.OrderByDescending(x => x.GivenAt);
         }
 
         public void AddReputation(MiunieUser invoker, MiunieUser target)

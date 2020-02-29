@@ -1,4 +1,5 @@
 using Miunie.Core.Storage;
+using System.Collections.Generic;
 
 namespace Miunie.Core.Providers
 {
@@ -16,7 +17,7 @@ namespace Miunie.Core.Providers
         public MiunieUser GetById(ulong userId, ulong guildId)
         {
             var user = _persistentStorage.RestoreSingle<MiunieUser>(u => u.UserId == userId && u.GuildId == guildId);
-            return EnsureExistence(user, userId, guildId);
+            return EnsureExists(user, userId, guildId);
         }
 
         public void StoreUser(MiunieUser user)
@@ -31,7 +32,10 @@ namespace Miunie.Core.Providers
             }
         }
 
-        private MiunieUser EnsureExistence(
+        public IEnumerable<MiunieUser> GetAllUsers()
+            => _persistentStorage.RestoreAll<MiunieUser>();
+
+        private MiunieUser EnsureExists(
             MiunieUser user,
             ulong userId,
             ulong guildId)

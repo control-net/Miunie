@@ -12,6 +12,7 @@ namespace Miunie.Core
         Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl);
         Task SendMessageAsync(MiunieChannel channel, IEnumerable<CurrencyData> cd);
         Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr);
+        Task SendMessageAsync(MiunieChannel mc, IEnumerable<ReputationEntry> repEntries, int index);
     }
 }
 
