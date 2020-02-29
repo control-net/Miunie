@@ -31,7 +31,7 @@
             Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate x:DataType="core:TextChannelView">
-                    <ListView ItemsSource="{Binding Messages}">
+                    <ListView ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="core:MessageView">
                                 <StackPanel Orientation="Horizontal" Padding="10">
