@@ -142,6 +142,17 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to What a nice gesture {0}... giving me +rep!{{OR}}
+        ///I&apos;ll remember this {0}. Thanks for the +rep!{{OR}}
+        ///Wow, check out {0} they just gave me +rep!.
+        /// </summary>
+        public static string REPUTATION_GIVEN_BOT {
+            get {
+                return ResourceManager.GetString("REPUTATION_GIVEN_BOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to **{0}** just had reputation removed from {1} :({{OR}}
         ///**{0}** just had reputation removed from {1} :&apos;({{OR}}
         ///**{0}** just had reputation removed from {1} :sob:.
@@ -149,6 +160,17 @@ namespace Miunie.Core {
         public static string REPUTATION_TAKEN {
             get {
                 return ResourceManager.GetString("REPUTATION_TAKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} you are not nice! Taking my rep...{{OR}}
+        ///{0} you better watch your back, I got your number now!{{OR}}
+        ///{0} taking things that don&apos;t belong to you is not nice. I miss my rep!.
+        /// </summary>
+        public static string REPUTATION_TAKEN_BOT {
+            get {
+                return ResourceManager.GetString("REPUTATION_TAKEN_BOT", resourceCulture);
             }
         }
         

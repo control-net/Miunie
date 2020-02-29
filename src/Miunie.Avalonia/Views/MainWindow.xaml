@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Miunie.Avalonia.ViewModels;assembly=Miunie.Avalonia"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Miunie.Avalonia.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Miunie">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel>
+        <TextBox PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
+        <TextBlock Text="{Binding ConnectionStatusText, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
+        <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
+    </StackPanel>
+
+</Window>
