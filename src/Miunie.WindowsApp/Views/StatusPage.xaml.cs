@@ -24,7 +24,7 @@ namespace Miunie.WindowsApp.Views
 
         public StatusPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _vm = DataContext as StatusPageViewModel;
             NavigationCacheMode = NavigationCacheMode.Enabled;
             _vm.AvatarChanged = OnAvatarChanged;
