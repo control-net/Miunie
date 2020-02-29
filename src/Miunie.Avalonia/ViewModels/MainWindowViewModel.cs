@@ -12,23 +12,22 @@ namespace Miunie.Avalonia.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly MiunieBot _miunie;
-        private readonly ILogReader _logReader;
 
         public MainWindowViewModel()
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
-            _logReader = InversionOfControl.Provider.GetRequiredService<ILogReader>();
             _miunie.MiunieDiscord.ConnectionChanged += ConectionStateChanged;
         }
 
-        private string _connectionStatus = "0";
-        private string _discordToken = "";
+        private string _connectionStatusText = "Disconnected";
 
-        public string ConnectionStatus 
+        public string ConnectionStatusText 
         { 
-            get { return _connectionStatus; }
-            set { this.RaiseAndSetIfChanged(ref _connectionStatus, value); }
+            get { return _connectionStatusText; }
+            set { this.RaiseAndSetIfChanged(ref _connectionStatusText, value); }
         }
+
+        private string _discordToken = "";
 
         public string DiscordToken 
         { 
@@ -38,11 +37,11 @@ namespace Miunie.Avalonia.ViewModels
 
         public async Task StartButton_ClickCommand()
         {
-            if (!string.IsNullOrWhiteSpace(DiscordToken))
-            {
-                _miunie.BotConfiguration.DiscordToken = DiscordToken;
-                await _miunie.StartAsync();
-            }
+            if (string.IsNullOrWhiteSpace(DiscordToken))
+                return;
+
+            _miunie.BotConfiguration.DiscordToken = DiscordToken;
+            await _miunie.StartAsync();
         }
 
         public void StopButton_ClickCommand()
@@ -55,12 +54,13 @@ namespace Miunie.Avalonia.ViewModels
 
         private void ConectionStateChanged(object sender, EventArgs e)
         {
-            if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTING)
-                ConnectionStatus = "Connecting";
-            else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.CONNECTED)
-                ConnectionStatus = "Connected";
-            else if (_miunie.MiunieDiscord.ConnectionState is ConnectionState.DISCONNECTED)
-                ConnectionStatus = "Disconnected";
+            _connectionStatusText = _miunie.MiunieDiscord.ConnectionState switch
+            {
+                ConnectionState.CONNECTED => "Connecting",
+                ConnectionState.CONNECTING => "Connected",
+                ConnectionState.DISCONNECTED => "Disconnected",
+                _ => "Unknown State"
+            };
         }
     }
 }
