@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="Miunie.WindowsApp.App">
       <uap:VisualElements
-        DisplayName="Miunie.WindowsApp"
+        DisplayName="Miunie"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Miunie.WindowsApp"
+        Description="Have you met Miunie? She is the best Discord server bot you&apos;ll ever meet. Use this application to serve, configure, and control Miunie."
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#00a1f1"/>
