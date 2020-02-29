@@ -54,10 +54,10 @@ namespace Miunie.Avalonia.ViewModels
 
         private void ConectionStateChanged(object sender, EventArgs e)
         {
-            _connectionStatusText = _miunie.MiunieDiscord.ConnectionState switch
+            ConnectionStatusText = _miunie.MiunieDiscord.ConnectionState switch
             {
-                ConnectionState.CONNECTED => "Connecting",
-                ConnectionState.CONNECTING => "Connected",
+                ConnectionState.CONNECTING => "Connecting",
+                ConnectionState.CONNECTED => "Connected",
                 ConnectionState.DISCONNECTED => "Disconnected",
                 _ => "Unknown State"
             };
