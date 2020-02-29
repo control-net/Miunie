@@ -23,7 +23,7 @@ namespace Miunie.Core.XUnit.Tests.Services
         {
             _repProviderMock = new Mock<IUserReputationProvider>();
             var discordMsgMock = new Mock<IDiscordMessages>();
-            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object);
+            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object, new Mock<IMiunieDiscord>().Object);
             _users = new DummyMiunieUsers();
 
             _hasDraxId = u => u.UserId == _users.Drax.UserId;

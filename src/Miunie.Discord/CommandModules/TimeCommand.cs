@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Discord.Convertors;
@@ -25,12 +26,19 @@ namespace Miunie.Discord.CommandModules
             await _service.OutputCurrentTimeForUserAsync(user, c);
         }
 
+        [Command("time for")]
+        public async Task ShowTimeForUserWithOffset(MiunieUser user, string verb, int units, string timeframe)
+        {
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.OutputFutureTimeForUserAsync(user, verb, units, timeframe, c);
+        }
+
         [Command("time get")]
         public async Task ShowTimeForUserComparedToCurrentUser(DateTime requestTime, string verb, MiunieUser user)
         {
             var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, user, c);
+            await _service.OutputCurrentTimeComparedToInputForUserAsync(u, requestTime, verb, user, c);
         }
 
         [Command("time of")]
@@ -50,6 +58,14 @@ namespace Miunie.Discord.CommandModules
             var u = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
             await _service.SetUtcOffsetForUserAsync(currentTime, u, c);
+        }
+
+        [RequireUserPermission(GuildPermission.Administrator)]
+        [Command("time set for")]
+        public async Task SetMyTimeOffset(MiunieUser user, DateTime currentTime)
+        {
+            var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
+            await _service.SetUtcOffsetForUserByAdminAsync(currentTime, user, c);
         }
     }
 }

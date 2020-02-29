@@ -12,6 +12,7 @@ namespace Miunie.Core.XUnit.Tests.Services
         private readonly Mock<IDiscordMessages> _messages;
         private readonly Mock<IDateTime> _dateTime;
         private readonly Mock<IMiunieUserProvider> _users;
+        private readonly Mock<ITimeManipulationProvider> _timeManipulator;
         private readonly TimeService _service;
 
         public TimeServiceTests()
@@ -19,7 +20,8 @@ namespace Miunie.Core.XUnit.Tests.Services
             _messages = new Mock<IDiscordMessages>();
             _dateTime = new Mock<IDateTime>();
             _users = new Mock<IMiunieUserProvider>();
-            _service = new TimeService(_messages.Object, _dateTime.Object, _users.Object);
+            _timeManipulator = new Mock<ITimeManipulationProvider>();
+            _service = new TimeService(_messages.Object, _dateTime.Object, _users.Object, _timeManipulator.Object);
         }
 
         [Fact]
