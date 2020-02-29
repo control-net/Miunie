@@ -15,8 +15,8 @@
     <StackPanel>
         <TextBox PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
         <TextBlock Text="{Binding ConnectionStatusText, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
+        <Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
         <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
-	</StackPanel>
+    </StackPanel>
 
 </Window>
