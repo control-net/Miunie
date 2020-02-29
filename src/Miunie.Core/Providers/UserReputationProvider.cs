@@ -39,7 +39,6 @@ namespace Miunie.Core.Providers
 
             foreach(KeyValuePair<ulong, DateTime> entry in invoker.Reputation.MinusRepLog)
             {
-
                 var user = _userProvider.GetById(entry.Key, invoker.GuildId);
                 rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Minus));
             }
