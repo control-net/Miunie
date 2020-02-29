@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SortedListConverter.cs" />
     <Compile Include="Infrastructure\UwpFileSystem.cs" />
     <Compile Include="InversionOfControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
