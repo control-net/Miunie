@@ -6,15 +6,13 @@ namespace Miunie.Avalonia
 {
     class Program
     {
-        public static void Main(string[] args) => BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+        public static void Main(string[] args) 
+            => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
 
         public static AppBuilder BuildAvaloniaApp()
-        {
-            return AppBuilder.Configure<App>()
+            => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .LogToDebug()
                 .UseReactiveUI();
-        }
     }
 }
