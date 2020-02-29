@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.LiteDbStorage", "Miu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.WindowsApp", "Miunie.WindowsApp\Miunie.WindowsApp.csproj", "{1850BE21-FA48-4E67-8649-A39BAE6947A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Avalonia", "Miunie.Avalonia\Miunie.Avalonia.csproj", "{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +225,26 @@ Global
 		{1850BE21-FA48-4E67-8649-A39BAE6947A1}.Release|x86.ActiveCfg = Release|x86
 		{1850BE21-FA48-4E67-8649-A39BAE6947A1}.Release|x86.Build.0 = Release|x86
 		{1850BE21-FA48-4E67-8649-A39BAE6947A1}.Release|x86.Deploy.0 = Release|x86
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|x64.Build.0 = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Debug|x86.Build.0 = Debug|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|ARM.Build.0 = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|ARM64.Build.0 = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|x64.ActiveCfg = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|x64.Build.0 = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|x86.ActiveCfg = Release|Any CPU
+		{FEC99E1A-1CB3-4FEE-886E-12D7AA132564}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
