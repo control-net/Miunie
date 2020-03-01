@@ -31,7 +31,7 @@ namespace Miunie.Discord
         public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId)
         {
             var guild = _discord.Client.GetGuild(guildId);
-            var textChannels = guild.Channels.Where(c => c is SocketTextChannel);
+            var textChannels = guild.Channels.Where(c => c is SocketTextChannel).Cast<SocketTextChannel>();
             var result = new List<TextChannelView>();
             foreach (var channel in textChannels)
             {
@@ -41,7 +41,7 @@ namespace Miunie.Discord
                     {
                         Id = channel.Id,
                         Name = $"# {channel.Name}",
-                        Messages = await GetMessagesFrom(channel as SocketTextChannel)
+                        Messages = await GetMessagesFrom(channel)
                     });
                 }
                 catch (Exception)

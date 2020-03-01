@@ -1,5 +1,6 @@
 using Discord.WebSocket;
 using Miunie.Core;
+using System;
 using System.Linq;
 
 namespace Miunie.Discord.Convertors
@@ -7,7 +8,7 @@ namespace Miunie.Discord.Convertors
     public class MiunieGuildConvertor
     {
         public MiunieGuild DiscordGuildToMiunieGuild(SocketGuild g)
-            => new MiunieGuild
+            => g != null ? new MiunieGuild
             {
                 Id = g.Id,
                 Name = g.Name,
@@ -17,6 +18,6 @@ namespace Miunie.Discord.Convertors
                 VoiceChannelCount = g.Channels.Count(x => x is SocketVoiceChannel),
                 CreationDate = g.CreatedAt.UtcDateTime,
                 Roles = g.Roles.Select(r => r.DiscordRoleToMiunieRole())
-            };
+            } : throw new ArgumentNullException(nameof(g));
     }
 }
