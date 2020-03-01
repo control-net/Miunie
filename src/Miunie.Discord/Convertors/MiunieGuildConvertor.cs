@@ -18,7 +18,7 @@ namespace Miunie.Discord.Convertors
                 VoiceChannelCount = g.Channels.Count(x => x is SocketVoiceChannel),
                 CreationDate = g.CreatedAt.UtcDateTime,
                 Roles = g.Roles.Select(r => r.DiscordRoleToMiunieRole()),
-                AvatarUrl = g.IconUrl
+                IconUrl = g.IconUrl
             } : throw new ArgumentNullException(nameof(g));
     }
 }
