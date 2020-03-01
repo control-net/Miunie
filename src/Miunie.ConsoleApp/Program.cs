@@ -91,6 +91,7 @@ namespace Miunie.ConsoleApp
                         else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                         {
                             _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
+                            _miunie.BotConfiguration.CommandsEnabled = true;
                             _ = _miunie.StartAsync();
                             AnyKeyToContinue();
                         }
