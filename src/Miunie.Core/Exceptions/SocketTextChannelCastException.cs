@@ -9,7 +9,6 @@ namespace Miunie.Core
     {
         public SocketTextChannelCastException([CallerMemberName] string caller = "") : base($"Invalid SocketTextChannel cast. Attempted by: {caller}")
         {
-
         }
     }
 }
