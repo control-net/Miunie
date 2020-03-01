@@ -17,7 +17,7 @@ namespace Miunie.Discord.Convertors
 
         public MiunieUser DiscordMemberToMiunieUser(SocketGuildUser user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (user is null) throw new ArgumentNullException(nameof(user));
 
             var mUser = _userProvider.GetById(user.Id, user.Guild.Id);
             mUser.Name = user.Nickname ?? user.Username;
