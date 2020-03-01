@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Miunie.Core
 {
@@ -14,6 +13,7 @@ namespace Miunie.Core
         public int TextChannelCount { get; set; }
         public int VoiceChannelCount { get; set; }
         public int MemberCount { get; set; }
+        public string IconUrl { get; set; }
 
         public string GetStats()
             => $"{MemberCount} members chatting in \n" +
