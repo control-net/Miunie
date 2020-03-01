@@ -77,7 +77,7 @@ namespace Miunie.Core.XUnit.Tests.Providers
         }
 
         [Fact]
-        public void EneteredDateTimeIsNull_ReturnsNull()
+        public void EnteredDateTimeIsNull_ReturnsNull()
         {            
             var result = _provider.GetDateTimeLocalToUser(null, _dummyUsers.DraxWithUtcTimeOffSet);
 
