@@ -31,17 +31,17 @@
             Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}" HorizontalAlignment="Stretch">
             <ContentPresenter.ContentTemplate>
                 <DataTemplate x:DataType="core:TextChannelView">
-                    <ScrollViewer>
-                        <StackPanel HorizontalAlignment="Stretch">
-                            <Grid Height="40">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="8*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="MessageTextBox" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" Click="Button_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0"/>
-                            </Grid>
-                            <ListView ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer Grid.ColumnSpan="2">
+                            <ListView Height="Auto" ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="core:MessageView">
                                         <StackPanel Orientation="Horizontal" Padding="10">
@@ -57,8 +57,10 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-                        </StackPanel>
-                    </ScrollViewer>
+                        </ScrollViewer>
+                        <TextBox Grid.Row="1" x:Name="MessageTextBox" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10"/>
+                        <Button Grid.Row="1" Grid.Column="1" Click="Button_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
+                    </Grid>
                 </DataTemplate>
             </ContentPresenter.ContentTemplate>
         </ContentPresenter>
