@@ -73,6 +73,20 @@ namespace Miunie.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Miunie, the community driven Discord bot with an attitude.
+        ///Copyright (C) {0:yyyy}  [control-net](https://github.com/control-net)
+        ///
+        ///This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+        ///
+        ///This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTA [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string GPL3_NOTICE {
+            get {
+                return ResourceManager.GetString("GPL3_NOTICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to :calendar: Creation date.
         /// </summary>
         public static string GUILD_EMBED_CREATED_AT_TITLE {
@@ -353,6 +367,26 @@ namespace Miunie.Core {
         public static string USER_EMBED_REALNESS_TITLE {
             get {
                 return ResourceManager.GetString("USER_EMBED_REALNESS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reputation? What&apos;s that?{{OR}}
+        ///I don&apos;t see any reputation here...{{OR}}
+        ///I&apos;ve caught you empty-repped!.
+        /// </summary>
+        public static string USER_EMBED_REP_LOG_EMPTY {
+            get {
+                return ResourceManager.GetString("USER_EMBED_REP_LOG_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to **REPUTATION LOG**.
+        /// </summary>
+        public static string USER_EMBED_REP_LOG_TITLE {
+            get {
+                return ResourceManager.GetString("USER_EMBED_REP_LOG_TITLE", resourceCulture);
             }
         }
         

@@ -28,7 +28,7 @@ namespace Miunie.WindowsApp.Views
 
         public ImpersonationChatPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _vm = DataContext as ImpersonationChatPageViewModel;
         }
 

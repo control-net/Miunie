@@ -124,6 +124,20 @@ Hey {0}, did you really think you could influence yourself? Get some friends to 
 Did {0} just try to influence someone that isn't me?! Wait, they tried to self-rep? Hah!</value>
     <comment>Invoker Username</comment>
   </data>
+  <data name="GPL3_NOTICE" xml:space="preserve">
+    <value>Miunie, the community driven Discord bot with an attitude.
+Copyright (C) {0:yyyy}  [control-net](https://github.com/control-net)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+
+
+Source code available at: {1}</value>
+    <comment>Target Copyright Year string, Muinie Repo URL string</comment>
+  </data>
   <data name="GUILD_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar: Creation date</value>
     <comment>No formatting options.</comment>
@@ -269,6 +283,16 @@ blood, all that._</value>
   <data name="USER_EMBED_REALNESS_TITLE" xml:space="preserve">
     <value>:electric_plug: Bot or not{{OR}}
 :electric_plug: Human/Bot</value>
+    <comment>No formatting options.</comment>
+  </data>
+  <data name="USER_EMBED_REP_LOG_EMPTY" xml:space="preserve">
+    <value>Reputation? What's that?{{OR}}
+I don't see any reputation here...{{OR}}
+I've caught you empty-repped!</value>
+    <comment>No formatting options.</comment>
+  </data>
+  <data name="USER_EMBED_REP_LOG_TITLE" xml:space="preserve">
+    <value>**REPUTATION LOG**</value>
     <comment>No formatting options.</comment>
   </data>
   <data name="USER_EMBED_REP_TITLE" xml:space="preserve">
