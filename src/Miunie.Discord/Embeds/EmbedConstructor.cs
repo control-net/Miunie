@@ -62,6 +62,7 @@ namespace Miunie.Discord.Embeds
         public static Embed ToEmbed(this MiunieGuild mGuild, ILanguageProvider lang)
             => new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
+                .WithThumbnailUrl(mGuild.IconUrl)
                 .WithTitle(lang.GetPhrase(PhraseKey.GUILD_EMBED_TITLE.ToString()))
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_NAME_TITLE.ToString()), mGuild.Name)
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_STATS_TITLE.ToString()), mGuild.GetStats(), true)
