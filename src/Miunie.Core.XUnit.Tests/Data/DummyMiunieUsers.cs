@@ -1,3 +1,5 @@
+using System;
+
 namespace Miunie.Core.XUnit.Tests.Data
 {
     public class DummyMiunieUsers
@@ -35,6 +37,29 @@ namespace Miunie.Core.XUnit.Tests.Data
             {
                 Value = -1
             }
+        };
+
+        public readonly MiunieUser DraxWithUtcTimeOffSet = new MiunieUser
+        {
+            UserId = 123456789,
+            GuildId = DummyGuildId,
+            Name = "Drax",
+            UtcTimeOffset = new TimeSpan(0, 0, 0)
+        };
+
+        public readonly MiunieUser PeterWithNoTimeSet = new MiunieUser
+        {
+            UserId = 182941761801420802,
+            GuildId = DummyGuildId,
+            Name = "Peter"
+        };
+
+        public readonly MiunieUser PeterWithUtcPlusOneHourTimeSet = new MiunieUser
+        {
+            UserId = 123456789,
+            GuildId = DummyGuildId,
+            Name = "Drax",
+            UtcTimeOffset = new TimeSpan(1, 0, 0)
         };
     }
 }
