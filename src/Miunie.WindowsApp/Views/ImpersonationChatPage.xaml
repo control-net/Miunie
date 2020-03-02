@@ -6,17 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Miunie.Core"
+    xmlns:w="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
-
+    <Page.Resources>
+        <w:XamlUICommand Command="{Binding SendMessage}" x:Name="SendMessageCommand" />
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="MasterColumn" Width="320" />
             <ColumnDefinition x:Name="DetailColumn" Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListView ItemsSource="{Binding Channels}" x:Name="MasterListView">
+        <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}" x:Name="MasterListView">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="core:TextChannelView">
                     <TextBlock Text="{Binding Name}"/>
@@ -58,8 +62,8 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                         </ScrollViewer>
-                        <TextBox Grid.Row="1" x:Name="MessageTextBox" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10"/>
-                        <Button Grid.Row="1" Grid.Column="1" Click="Button_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
+                        <TextBox Grid.Row="1" x:Name="MessageTextBox" Text="{Binding NoText}" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10"/>
+                        <Button Grid.Row="1" Grid.Column="1" Command="{StaticResource SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
                     </Grid>
                 </DataTemplate>
             </ContentPresenter.ContentTemplate>

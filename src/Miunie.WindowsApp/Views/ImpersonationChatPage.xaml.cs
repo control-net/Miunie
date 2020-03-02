@@ -34,26 +34,5 @@ namespace Miunie.WindowsApp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e) 
             => _vm.FetchInfo((ulong)e.Parameter);
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var button = e.OriginalSource as Button;
-                var panel = button.Parent as Grid;
-                var textBox = panel.Children.FirstOrDefault(element => element is TextBox) as TextBox;
-                
-                var text = textBox.Text;
-                textBox.Text = string.Empty;
-
-                var vm = ((FrameworkElement)sender).DataContext as TextChannelView;
-
-                await _vm.SendMessageAsMiunieAsync(text, vm.Id);
-            }
-            catch (NullReferenceException)
-            {
-                return;
-            }
-        }
     }
 }
