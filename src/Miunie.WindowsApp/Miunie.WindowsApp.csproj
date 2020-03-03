@@ -125,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\TokenValidator.cs" />
     <Compile Include="ViewModels\ImpersonationChatPageViewModel.cs" />
+    <Compile Include="ViewModels\NotConnectedPageViewModel.cs" />
     <Compile Include="ViewModels\ServersPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
@@ -132,6 +133,9 @@
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\ImpersonationChatPage.xaml.cs">
       <DependentUpon>ImpersonationChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotConnectedPage.xaml.cs">
+      <DependentUpon>NotConnectedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServersPage.xaml.cs">
       <DependentUpon>ServersPage.xaml</DependentUpon>
@@ -254,6 +258,10 @@
     <Page Include="Views\ImpersonationChatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotConnectedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ServersPage.xaml">
       <SubType>Designer</SubType>

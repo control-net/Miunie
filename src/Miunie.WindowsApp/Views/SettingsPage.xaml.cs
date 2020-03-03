@@ -61,6 +61,8 @@ namespace Miunie.WindowsApp.Views
             }
 
             _vm.ApplyToken(CustomTokenField.Password);
+
+            Frame.Navigate(typeof(StatusPage), null);
         }
     }
 }
