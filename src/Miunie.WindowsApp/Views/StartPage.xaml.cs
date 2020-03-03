@@ -65,10 +65,13 @@ namespace Miunie.WindowsApp.Views
             else if (args.InvokedItemContainer != null)
             {
                 var navItemTag = args.InvokedItemContainer.Tag.ToString();
-                if (_miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTED && navItemTag != "home")
-                    NavView_Navigate("notconnected", args.RecommendedNavigationTransitionInfo);
-                else
+                if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED || navItemTag == "home")
+                {
                     NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+                    return;
+                }
+
+                NavView_Navigate("notconnected", args.RecommendedNavigationTransitionInfo);
             }
         }
 
