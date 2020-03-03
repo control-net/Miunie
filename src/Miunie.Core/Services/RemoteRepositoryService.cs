@@ -1,3 +1,4 @@
+using Miunie.Core.Attributes;
 using Miunie.Core.Discord;
 using System.Threading.Tasks;
 

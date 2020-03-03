@@ -1,6 +1,6 @@
-﻿using Discord.Commands;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core;
+using Miunie.Core.Attributes;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
 using Miunie.Core.Providers;
