@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord.Adapters
 {
@@ -51,20 +50,6 @@ namespace Miunie.Discord.Adapters
         {
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
             var result = string.Join("\n", dl.Result.Select(s => $":file_folder: {s}"));
-            await channel.SendMessageAsync(result);
-        }
-
-        public async Task SendMessageAsync(MiunieChannel mc, IEnumerable<CurrencyData> tc)
-        {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = string.Join("\n", tc.Select(c => $"{c.Amount} {c.Code} = {c.CzechCrowns} CZK"));
-            await channel.SendMessageAsync(result);
-        }
-
-        public async Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr)
-        {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = $"{ccr.FromValue} {ccr.FromCode} = {ccr.ToValue} {ccr.ToCode}";
             await channel.SendMessageAsync(result);
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Miunie.Core.Configuration;
 using Miunie.Discord;
-using Moq;
 using System;
 using Xunit;
 
