@@ -8,12 +8,12 @@ namespace Miunie.Core
     public class MiunieBot
     {
         public IBotConfiguration BotConfiguration { get; }
-        public IMiunieDiscord MiunieDiscord { get; }
+        public IDiscordConnection MiunieDiscord { get; }
         public IDiscordImpersonation Impersonation { get; }
 
         private CancellationTokenSource _tokenSource;
 
-        public MiunieBot(IMiunieDiscord miunieDiscord, IBotConfiguration botConfig, IDiscordImpersonation impersonation)
+        public MiunieBot(IDiscordConnection miunieDiscord, IBotConfiguration botConfig, IDiscordImpersonation impersonation)
         {
             MiunieDiscord = miunieDiscord;
             BotConfiguration = botConfig;

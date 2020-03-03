@@ -12,9 +12,9 @@ namespace Miunie.Core
         private readonly IDiscordMessages _discordMessages;
         private readonly IUserReputationProvider _reputationProvider;
         private readonly ILogWriter _logger;
-        private readonly IMiunieDiscord _miunieDiscord;
+        private readonly IDiscordConnection _miunieDiscord;
 
-        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogWriter logger, IMiunieDiscord miunieDiscord)
+        public ProfileService(IDiscordMessages discordMessages, IUserReputationProvider reputationProvider, ILogWriter logger, IDiscordConnection miunieDiscord)
         {
             _discordMessages = discordMessages;
             _reputationProvider = reputationProvider;

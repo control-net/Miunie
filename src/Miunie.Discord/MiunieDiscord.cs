@@ -1,14 +1,15 @@
-﻿using Miunie.Core;
+﻿using Discord;
+using Miunie.Core;
+using Miunie.Core.Discord;
+using Miunie.Core.Logging;
 using Miunie.Discord.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Miunie.Core.Logging;
-using Discord;
 
 namespace Miunie.Discord
 {
-    public class MiunieDiscord : IMiunieDiscord
+    public class MiunieDiscord : IDiscordConnection
     {
         public bool UserIsMiunie(MiunieUser user)
             => user.UserId == _discord.Client?.CurrentUser?.Id;

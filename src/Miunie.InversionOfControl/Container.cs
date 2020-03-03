@@ -21,7 +21,7 @@ namespace Miunie.InversionOfControl
             => collection.AddSingleton<EntityConvertor>()
                 .AddScoped<ILanguageProvider, LanguageProvider>()
                 .AddSingleton<IDiscord, MiunieDiscordClient>()
-                .AddSingleton<IMiunieDiscord, MiunieDiscord>()
+                .AddSingleton<IDiscordConnection, MiunieDiscord>()
                 .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
                 .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
                 .AddSingleton<IDiscordImpersonation, Impersonation>()

@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Miunie.Core
+namespace Miunie.Core.Discord
 {
-    public interface IMiunieDiscord
+    public interface IDiscordConnection
     {
         bool UserIsMiunie(MiunieUser user);
         Task RunAsync(CancellationToken cancellationToken);
