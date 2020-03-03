@@ -29,6 +29,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: Setup coverlet
+      run: dotnet tool install --global coverlet.console
     - name: Build with dotnet
       run: dotnet build src/Miunie.sln --configuration Release
     - name: Run tests
@@ -36,6 +38,5 @@ jobs:
     - name: Core test coverage
       run: |
         cd src
-        dotnet tool install --global coverlet.console
         coverlet Miunie.Core.XUnit.Tests/bin/Debug/netcoreapp3.1/Miunie.Core.XUnit.Tests.dll --target "dotnet" --targetargs "test ./Miunie.Core.XUnit.Tests --no-build" --threshold 100 --include "[Miunie.Core]*"
         
