@@ -30,6 +30,7 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register<StatusPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
             SimpleIoc.Default.Register<ServersPageViewModel>();
+            SimpleIoc.Default.Register<NotConnectedPageViewModel>();
             SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogReader>());
@@ -51,5 +52,8 @@ namespace Miunie.WindowsApp.ViewModels
 
         public ImpersonationChatPageViewModel ImpersonationChatPageInstance
             => ServiceLocator.Current.GetInstance<ImpersonationChatPageViewModel>();
+
+        public NotConnectedPageViewModel NotConnectedPageInstance
+            => ServiceLocator.Current.GetInstance<NotConnectedPageViewModel>();
     }
 }
