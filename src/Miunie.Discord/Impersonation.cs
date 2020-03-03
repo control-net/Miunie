@@ -14,6 +14,8 @@ namespace Miunie.Discord
         private readonly IDiscord _discord;
         private readonly ILogWriter _logger;
 
+        public event EventHandler MessageReceived;
+
         public Impersonation(IDiscord discord, ILogWriter logger)
         {
             _discord = discord;
@@ -53,7 +55,32 @@ namespace Miunie.Discord
             return result;
         }
 
-        public async Task<IEnumerable<MessageView>> GetMessagesFrom(SocketTextChannel channel)
+        public async Task SendTextToChannelAsync(string text, ulong id)
+        {
+            var textChannel = _discord.Client.GetChannel(id) as SocketTextChannel;
+            if (textChannel is null) { return; }
+
+            await textChannel.SendMessageAsync(text);
+        }
+
+        public void SubscribeForMessages()
+        {
+            _discord.Client.MessageReceived += Client_MessageReceivedHandler;
+        }
+
+        public void UnsubscribeForMessages()
+        {
+            _discord.Client.MessageReceived -= Client_MessageReceivedHandler;
+        }
+
+        private Task Client_MessageReceivedHandler(SocketMessage m)
+        {
+            MessageReceived?.Invoke(m, EventArgs.Empty);
+
+            return Task.CompletedTask;
+        }
+
+        private async Task<IEnumerable<MessageView>> GetMessagesFrom(SocketTextChannel channel)
         {
             var msgs = await channel.GetMessagesAsync(10).FlattenAsync();
             return msgs.Select(m => new MessageView
@@ -63,14 +90,6 @@ namespace Miunie.Discord
                 Content = m.Content,
                 TimeStamp = m.CreatedAt.ToLocalTime()
             });
-        }
-
-        public async Task SendTextToChannelAsync(string text, ulong id)
-        {
-            var textChannel = _discord.Client.GetChannel(id) as SocketTextChannel;
-            if(textChannel is null) { return; }
-
-            await textChannel.SendMessageAsync(text);
         }
     }
 }

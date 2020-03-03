@@ -32,7 +32,13 @@ namespace Miunie.WindowsApp.Views
             _vm = DataContext as ImpersonationChatPageViewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e) 
-            => _vm.FetchInfo((ulong)e.Parameter);
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _vm.FetchInfo((ulong)e.Parameter);
+            _vm.ConfigureMessagesSubscription();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+            => _vm.Dispose();
     }
 }

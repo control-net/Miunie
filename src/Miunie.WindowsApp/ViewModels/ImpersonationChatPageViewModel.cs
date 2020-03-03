@@ -6,16 +6,18 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Miunie.Core;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 namespace Miunie.WindowsApp.ViewModels
 {
-    public class ImpersonationChatPageViewModel : ViewModelBase
+    public class ImpersonationChatPageViewModel : ViewModelBase, IDisposable
     {
         private TextChannelView _selectedChannel;
 
         public TextChannelView SelectedChannel
         {
-            get { return _selectedChannel; }
+            get => _selectedChannel;
             set { 
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
@@ -28,14 +30,13 @@ namespace Miunie.WindowsApp.ViewModels
         public IEnumerable<TextChannelView> Channels
         {
             get => _channels;
-            set
-            {
+            set {
                 _channels = value;
                 RaisePropertyChanged(nameof(Channels));
             }
         }
 
-        public ICommand SendMessage { get; }
+        public ICommand SendMessageCommand { get; }
 
 
         private readonly MiunieBot _miunie;
@@ -45,23 +46,40 @@ namespace Miunie.WindowsApp.ViewModels
         {
             _miunie = miunie;
             _channels = new List<TextChannelView>();
-            SendMessage = new RelayCommand<string>(SendMessageAsMiunieAsync);
+            SendMessageCommand = new RelayCommand<string>(SendMessageAsMiunieAsync);
         }
 
-        private async void SendMessageAsMiunieAsync(string message)
+        internal void ConfigureMessagesSubscription()
         {
-            await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
-
-            // Needs to be re-worked
-            var selectedId = SelectedChannel.Id;
-            Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuild);
-            SelectedChannel = Channels.FirstOrDefault(x => x.Id == selectedId);
+            _miunie.Impersonation.MessageReceived += MessageReceivedHandler;
+            _miunie.Impersonation.SubscribeForMessages();
         }
 
         internal async void FetchInfo(ulong guildId)
         {
             Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(guildId);
             _currentGuild = guildId;
+        }
+
+        private async void SendMessageAsMiunieAsync(string message)
+        {
+            await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
+        }
+
+        private async void MessageReceivedHandler(object sender, EventArgs e)
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                var selectedId = SelectedChannel?.Id;
+                Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuild);
+                SelectedChannel = Channels.FirstOrDefault(x => x.Id == selectedId);
+            });
+        }
+
+        public void Dispose()
+        {
+            _miunie.Impersonation.MessageReceived -= MessageReceivedHandler;
+            _miunie.Impersonation.UnsubscribeForMessages();
         }
     }
 }
