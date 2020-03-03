@@ -1,4 +1,4 @@
-﻿using Miunie.Core.Views;
+﻿using Miunie.Core.Entities.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

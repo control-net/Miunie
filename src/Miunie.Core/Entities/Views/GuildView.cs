@@ -1,4 +1,4 @@
-﻿namespace Miunie.Core.Views
+﻿namespace Miunie.Core.Entities.Views
 {
     public class GuildView
     {

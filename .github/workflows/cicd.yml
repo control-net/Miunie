@@ -37,5 +37,5 @@ jobs:
       run: |
         dotnet new tool-manifest
         dotnet tool install coverlet.console
-        dotnet tool run coverlet src/Miunie.Core.XUnit.Tests/bin/Debug/netcoreapp3.1/Miunie.Core.XUnit.Tests.dll --target "dotnet" --targetargs "test ./src/Miunie.Core.XUnit.Tests --no-build" --threshold 100 --include "[Miunie.Core]*" --exclude "[Miunie.Core]Miunie.Core.Entities*"
+        dotnet tool run coverlet src/Miunie.Core.XUnit.Tests/bin/Debug/netcoreapp3.1/Miunie.Core.XUnit.Tests.dll --target "dotnet" --targetargs "test ./src/Miunie.Core.XUnit.Tests --no-build" --threshold 100 --include "[Miunie.Core]*" --exclude "[Miunie.Core]Miunie.Core.Entities*" --exclude "[Miunie.Core]Miunie.Core.Attributes*" --exclude "[Miunie.Core]Miunie.Core.Strings"
         
