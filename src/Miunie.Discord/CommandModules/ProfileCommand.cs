@@ -1,8 +1,9 @@
-using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 using Miunie.Core;
+using Miunie.Core.Entities.Discord;
 using Miunie.Discord.Convertors;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord.CommandModules
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Miunie.Core
+namespace Miunie.Core.Entities.Discord
 {
     public class MiunieGuild
     {

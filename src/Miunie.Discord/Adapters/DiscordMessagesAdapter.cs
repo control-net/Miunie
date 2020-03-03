@@ -1,6 +1,7 @@
 ﻿using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Discord;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
 using System.Collections.Generic;

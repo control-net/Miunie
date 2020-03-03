@@ -1,13 +1,13 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
-using Miunie.Core;
+using Miunie.Core.Configuration;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
-using Miunie.Discord.TypeReaders;
 using Miunie.Discord.Convertors;
+using Miunie.Discord.TypeReaders;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using Miunie.Core.Configuration;
 
 namespace Miunie.Discord
 {

@@ -1,3 +1,4 @@
+using Miunie.Core.Entities.Discord;
 using System;
 
 namespace Miunie.Core.XUnit.Tests.Data

@@ -1,6 +1,6 @@
 ﻿using Discord;
-using Miunie.Core;
 using Miunie.Core.Discord;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
 using Miunie.Discord.Logging;
 using System;

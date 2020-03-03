@@ -1,4 +1,5 @@
 ﻿using Miunie.Core.Discord;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using Miunie.Core.XUnit.Tests.Data;
