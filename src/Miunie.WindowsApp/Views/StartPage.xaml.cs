@@ -21,6 +21,7 @@ using Miunie.Core.Providers;
 using Miunie.Core;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace Miunie.WindowsApp.Views
 {
@@ -29,16 +30,19 @@ namespace Miunie.WindowsApp.Views
         private readonly List<(string Tag, Type Page)> _navigationPages = new List<(string Tag, Type Page)>
         {
             ("home", typeof(StatusPage)),
-            ("servers", typeof(ServersPage))
+            ("servers", typeof(ServersPage)),
+            ("notconnected", typeof(NotConnectedPage))
         };
 
         private bool _shouldCheckForClipboardToken = true;
         private readonly StartPageViewModel _vm;
+        private readonly MiunieBot _miunie;
 
         public StartPage()
         {
             InitializeComponent();
             _vm = DataContext as StartPageViewModel;
+            _miunie = SimpleIoc.Default.GetInstance<MiunieBot>();
         }
 
         private void MainNavigationView_OnLoaded(object sender, RoutedEventArgs e)
@@ -61,7 +65,10 @@ namespace Miunie.WindowsApp.Views
             else if (args.InvokedItemContainer != null)
             {
                 var navItemTag = args.InvokedItemContainer.Tag.ToString();
-                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+                if (_miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTED && navItemTag != "home")
+                    NavView_Navigate("notconnected", args.RecommendedNavigationTransitionInfo);
+                else
+                    NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
             }
         }
 
