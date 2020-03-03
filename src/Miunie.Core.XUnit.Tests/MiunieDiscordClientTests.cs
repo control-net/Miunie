@@ -1,6 +1,5 @@
 ﻿using Miunie.Core.Configuration;
 using Miunie.Discord;
-using Moq;
 using System;
 using Xunit;
 
@@ -14,7 +13,11 @@ namespace Miunie.Core.XUnit.Tests
         [InlineData("  ")]
         public void Initialize_ShouldThrowArgumentNullException_IfInvalidToken(string token)
         {
-            var config = Mock.Of<IBotConfiguration>(c => c.DiscordToken == token);
+            IBotConfiguration config = new BotConfiguration
+            {
+                DiscordToken = token,
+                CommandsEnabled = true
+            };
             var client = new MiunieDiscordClient(config);
 
             Assert.ThrowsAsync<ArgumentNullException>(client.InitializeAsync);

@@ -1,3 +1,7 @@
+using Miunie.Core.Attributes;
+using Miunie.Core.Discord;
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
 using System.Threading.Tasks;
 
 namespace Miunie.Core

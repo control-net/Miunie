@@ -1,8 +1,8 @@
-﻿using Discord.Commands;
-using Microsoft.Extensions.DependencyInjection;
-using Miunie.Core;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Miunie.Core.Attributes;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
+using Miunie.Core.Entities;
 using Miunie.Core.Providers;
 using Miunie.Core.Storage;
 using Miunie.Discord;
@@ -21,7 +21,7 @@ namespace Miunie.InversionOfControl
             => collection.AddSingleton<EntityConvertor>()
                 .AddScoped<ILanguageProvider, LanguageProvider>()
                 .AddSingleton<IDiscord, MiunieDiscordClient>()
-                .AddSingleton<IMiunieDiscord, MiunieDiscord>()
+                .AddSingleton<IDiscordConnection, MiunieDiscord>()
                 .AddScoped<IDiscordMessages, DiscordMessagesAdapter>()
                 .AddScoped<IDiscordGuilds, DiscordGuildsAdapter>()
                 .AddSingleton<IDiscordImpersonation, Impersonation>()

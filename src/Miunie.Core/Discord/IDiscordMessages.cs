@@ -1,17 +1,15 @@
-using Miunie.Core;
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Miunie.Core
+namespace Miunie.Core.Discord
 {
     public interface IDiscordMessages
     {
         Task SendMessageAsync(MiunieChannel targetChannel, PhraseKey phraseKey, params object[] parameters);
         Task SendMessageAsync(MiunieChannel targetChannel, MiunieUser user);
         Task SendMessageAsync(MiunieChannel targetChannel, MiunieGuild guild);
-        Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl);
-        Task SendMessageAsync(MiunieChannel channel, IEnumerable<CurrencyData> cd);
-        Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr);
         Task SendMessageAsync(MiunieChannel mc, IEnumerable<ReputationEntry> repEntries, int index);
     }
 }

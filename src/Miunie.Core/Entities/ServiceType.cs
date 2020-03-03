@@ -1,9 +1,9 @@
-﻿namespace Miunie.Core
+﻿namespace Miunie.Core.Entities
 {
     public enum ServiceType
     {
         SCOPED,
-        SINGLETON,        
+        SINGLETON,
         TRANSIENT
     }
 }

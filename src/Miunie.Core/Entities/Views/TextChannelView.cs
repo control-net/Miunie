@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Miunie.Core
+namespace Miunie.Core.Entities.Views
 {
     public class TextChannelView
     {

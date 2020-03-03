@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using Miunie.Core;
+using Miunie.Core.Discord;
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
+using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord.Adapters
 {
@@ -13,11 +15,13 @@ namespace Miunie.Discord.Adapters
     {
         private readonly IDiscord _discord;
         private readonly ILanguageProvider _lang;
+        private readonly ILogWriter _log;
 
-        public DiscordMessagesAdapter(IDiscord discord, ILanguageProvider lang)
+        public DiscordMessagesAdapter(IDiscord discord, ILanguageProvider lang, ILogWriter log)
         {
             _discord = discord;
             _lang = lang;
+            _log = log;
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, IEnumerable<ReputationEntry> repEntries, int index)
@@ -30,42 +34,40 @@ namespace Miunie.Discord.Adapters
 
         public async Task SendMessageAsync(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
             await channel.SendMessageAsync(msg);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieUser mu)
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
+            
+            if(channel is null)
+            {
+                LogSocketTextChannelCastFailed();
+                return;
+            }
+
             await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieGuild mg)
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
+            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
+
+            if (channel is null)
+            {
+                LogSocketTextChannelCastFailed();
+                return;
+            }
+
             await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
 
-        public async Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl)
+        private void LogSocketTextChannelCastFailed()
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = string.Join("\n", dl.Result.Select(s => $":file_folder: {s}"));
-            await channel.SendMessageAsync(result);
-        }
-
-        public async Task SendMessageAsync(MiunieChannel mc, IEnumerable<CurrencyData> tc)
-        {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = string.Join("\n", tc.Select(c => $"{c.Amount} {c.Code} = {c.CzechCrowns} CZK"));
-            await channel.SendMessageAsync(result);
-        }
-
-        public async Task SendMessageAsync(MiunieChannel mc, CurrencyConversionResult ccr)
-        {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = $"{ccr.FromValue} {ccr.FromCode} = {ccr.ToValue} {ccr.ToCode}";
-            await channel.SendMessageAsync(result);
+            _log.LogError("Invalid cast to SocketTextChannel.");
         }
     }
 }

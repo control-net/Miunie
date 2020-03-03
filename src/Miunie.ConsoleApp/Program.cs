@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Miunie.ConsoleApp.Configuration;
 using Miunie.Core;
+using Miunie.Core.Entities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

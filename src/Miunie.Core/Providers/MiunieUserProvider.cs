@@ -1,3 +1,5 @@
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Storage;
 using System.Collections.Generic;
 

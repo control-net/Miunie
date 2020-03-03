@@ -1,5 +1,5 @@
 ﻿using Discord.WebSocket;
-using Miunie.Core;
+using Miunie.Core.Entities.Discord;
 
 namespace Miunie.Discord.Convertors
 {

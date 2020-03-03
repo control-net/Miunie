@@ -1,4 +1,6 @@
-﻿using Miunie.Core.Providers;
+﻿using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
+using Miunie.Core.Providers;
 using Miunie.Core.Storage;
 using Miunie.Core.XUnit.Tests.Data;
 using Moq;
