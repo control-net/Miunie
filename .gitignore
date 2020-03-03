@@ -11,6 +11,9 @@
 *.sln.docstates
 src/.vscode/*
 
+# Code coverage
+coverage.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

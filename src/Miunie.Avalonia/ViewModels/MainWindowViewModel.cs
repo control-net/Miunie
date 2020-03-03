@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core;
+using Miunie.Core.Entities;
 using Miunie.Core.Logging;
 using ReactiveUI;
 

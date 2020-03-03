@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Miunie.Core;
+using Miunie.Core.Entities.Discord;
 using Miunie.Discord.Convertors;
 using System;
 using System.Threading.Tasks;

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Miunie.Core.Entities.Discord;
+using System;
 
 namespace Miunie.Core.Providers
 {

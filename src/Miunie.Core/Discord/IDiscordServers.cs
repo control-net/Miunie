@@ -1,5 +1,5 @@
+using Miunie.Core.Entities.Discord;
 using System.Threading.Tasks;
-using Miunie.Core;
 
 namespace Miunie.Core.Discord
 {

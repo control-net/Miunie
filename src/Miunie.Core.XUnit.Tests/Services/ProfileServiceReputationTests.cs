@@ -1,11 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using Xunit;
-using Moq;
-using System.Threading.Tasks;
+﻿using Miunie.Core.Discord;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using Miunie.Core.XUnit.Tests.Data;
+using Moq;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Miunie.Core.XUnit.Tests.Services
 {
@@ -23,7 +25,7 @@ namespace Miunie.Core.XUnit.Tests.Services
         {
             _repProviderMock = new Mock<IUserReputationProvider>();
             var discordMsgMock = new Mock<IDiscordMessages>();
-            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object, new Mock<IMiunieDiscord>().Object);
+            _profileService = new ProfileService(discordMsgMock.Object, _repProviderMock.Object, new Mock<ILogWriter>().Object, new Mock<IDiscordConnection>().Object);
             _users = new DummyMiunieUsers();
 
             _hasDraxId = u => u.UserId == _users.Drax.UserId;

@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Miunie.Core.Entities;
 
 namespace Miunie.WindowsApp.ViewModels
 {

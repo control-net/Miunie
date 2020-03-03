@@ -1,9 +1,11 @@
-using System;
-using Miunie.Core.Providers;
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
 using Miunie.Core.Infrastructure;
-using Xunit;
-using Moq;
+using Miunie.Core.Providers;
 using Miunie.Core.XUnit.Tests.Data;
+using Moq;
+using System;
+using Xunit;
 
 namespace Miunie.Core.XUnit.Tests.Providers
 {
