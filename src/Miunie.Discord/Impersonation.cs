@@ -32,6 +32,8 @@ namespace Miunie.Discord
 
         public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId)
         {
+            if(guildId == 0) { return new TextChannelView[0]; }
+
             var guild = _discord.Client.GetGuild(guildId);
             var textChannels = guild.Channels.Where(c => c is SocketTextChannel).Cast<SocketTextChannel>();
             var result = new List<TextChannelView>();
