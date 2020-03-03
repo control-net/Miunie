@@ -45,12 +45,5 @@ namespace Miunie.Discord.Adapters
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
             await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
-
-        public async Task SendMessageAsync(MiunieChannel mc, DirectoryListing dl)
-        {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel ?? throw new SocketTextChannelCastException();
-            var result = string.Join("\n", dl.Result.Select(s => $":file_folder: {s}"));
-            await channel.SendMessageAsync(result);
-        }
     }
 }
