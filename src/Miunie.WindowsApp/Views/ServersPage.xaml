@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Miunie.Core"
+    xmlns:views="using:Miunie.Core.Views"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ServersPageInstance, Source={StaticResource Locator}}">
@@ -13,7 +14,7 @@
     <Grid>
         <GridView ItemsSource="{Binding AvailableGuilds}" IsItemClickEnabled="True" ItemClick="ListViewBase_OnItemClick">
            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="core:GuildView">
+                <DataTemplate x:DataType="views:GuildView">
                     <StackPanel Margin="10">
                         <PersonPicture ProfilePicture="{Binding IconUrl}" DisplayName="{Binding Name}"/>
                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" TextAlignment="Center" Margin="0, 5, 0, 0" TextTrimming="CharacterEllipsis" MaxWidth="150"/>

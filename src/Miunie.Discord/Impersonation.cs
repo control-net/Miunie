@@ -1,8 +1,8 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using Miunie.Core;
 using Miunie.Core.Discord;
 using Miunie.Core.Logging;
+using Miunie.Core.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

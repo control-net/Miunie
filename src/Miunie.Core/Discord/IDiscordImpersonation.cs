@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Miunie.Core.Views;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Miunie.Core.Discord

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Miunie.Core
+namespace Miunie.Core.Views
 {
     public class MessageView
     {

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using Miunie.Core;
+using Miunie.Core.Views;
+using System.Collections.Generic;
 
 namespace Miunie.WindowsApp.ViewModels
 {
