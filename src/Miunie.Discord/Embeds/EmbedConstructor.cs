@@ -1,5 +1,5 @@
 ﻿using Discord;
-using Miunie.Core;
+using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Providers;
 using System;

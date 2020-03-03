@@ -22,6 +22,7 @@ using Miunie.Core;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
+using Miunie.Core.Entities;
 
 namespace Miunie.WindowsApp.Views
 {

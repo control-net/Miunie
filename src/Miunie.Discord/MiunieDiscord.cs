@@ -16,8 +16,8 @@ namespace Miunie.Discord
         public string GetBotAvatarUrl()
             => _discord.Client?.CurrentUser?.GetAvatarUrl();
 
-        private Core.ConnectionState _connectionState;
-        public Core.ConnectionState ConnectionState
+        private Core.Entities.ConnectionState _connectionState;
+        public Core.Entities.ConnectionState ConnectionState
         {
             get => _connectionState;
             private set
@@ -41,12 +41,12 @@ namespace Miunie.Discord
             _logger = logger;
             _commandHandler = commandHandler;
 
-            _connectionState = Core.ConnectionState.DISCONNECTED; 
+            _connectionState = Core.Entities.ConnectionState.DISCONNECTED; 
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
-            ConnectionState = Core.ConnectionState.CONNECTING;
+            ConnectionState = Core.Entities.ConnectionState.CONNECTING;
 
             try
             {
@@ -69,7 +69,7 @@ namespace Miunie.Discord
             }
             finally
             {
-                ConnectionState = Core.ConnectionState.DISCONNECTED;
+                ConnectionState = Core.Entities.ConnectionState.DISCONNECTED;
             }
         }
 
@@ -79,7 +79,7 @@ namespace Miunie.Discord
 #if DEBUG
             _discord.Client.SetGameAsync("Herself being created.", type: ActivityType.Watching);
 #endif
-            ConnectionState = Core.ConnectionState.CONNECTED;
+            ConnectionState = Core.Entities.ConnectionState.CONNECTED;
             return Task.CompletedTask;
         }
     }

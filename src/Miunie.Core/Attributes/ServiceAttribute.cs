@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Miunie.Core.Entities;
+using System;
 
 namespace Miunie.Core.Attributes
 {

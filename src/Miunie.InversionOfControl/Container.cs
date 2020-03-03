@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Miunie.Core;
 using Miunie.Core.Attributes;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
+using Miunie.Core.Entities;
 using Miunie.Core.Providers;
 using Miunie.Core.Storage;
 using Miunie.Discord;
