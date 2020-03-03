@@ -35,7 +35,7 @@ jobs:
       run: dotnet test src/Miunie.Core.XUnit.Tests
     - name: Core test coverage
       run: |
-        cd $Env:GITHUB_WORKSPACE\src
+        cd src
         dotnet tool install --global coverlet.console
         coverlet Miunie.Core.XUnit.Tests/bin/Debug/netcoreapp3.1/Miunie.Core.XUnit.Tests.dll --target "dotnet" --targetargs "test ./Miunie.Core.XUnit.Tests --no-build" --threshold 100 --include "[Miunie.Core]*"
         
