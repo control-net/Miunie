@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Discord;
+using Discord.WebSocket;
+using Miunie.Core;
+using Miunie.Core.Discord;
+using Miunie.Core.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
-using Miunie.Core;
-using Miunie.Core.Logging;
 
 namespace Miunie.Discord
 {

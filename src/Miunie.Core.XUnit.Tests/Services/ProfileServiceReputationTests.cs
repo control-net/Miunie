@@ -1,11 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using Xunit;
-using Moq;
-using System.Threading.Tasks;
+﻿using Miunie.Core.Discord;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using Miunie.Core.XUnit.Tests.Data;
+using Moq;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Miunie.Core.XUnit.Tests.Services
 {

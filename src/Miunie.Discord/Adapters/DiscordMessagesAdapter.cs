@@ -1,9 +1,9 @@
 ﻿using Discord.WebSocket;
 using Miunie.Core;
+using Miunie.Core.Discord;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Miunie.Discord.Adapters

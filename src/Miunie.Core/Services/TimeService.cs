@@ -1,4 +1,5 @@
-﻿using Miunie.Core.Infrastructure;
+﻿using Miunie.Core.Discord;
+using Miunie.Core.Infrastructure;
 using Miunie.Core.Providers;
 using System;
 using System.Threading.Tasks;

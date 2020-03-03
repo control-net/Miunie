@@ -1,3 +1,4 @@
+using Miunie.Core.Discord;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using System.Threading.Tasks;

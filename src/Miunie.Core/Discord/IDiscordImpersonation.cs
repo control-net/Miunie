@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Miunie.Core
+namespace Miunie.Core.Discord
 {
     public interface IDiscordImpersonation
     {

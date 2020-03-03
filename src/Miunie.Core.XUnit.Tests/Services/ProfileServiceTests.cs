@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Miunie.Core.Discord;
+using Moq;
 using System.Threading.Tasks;
 using Xunit;
 

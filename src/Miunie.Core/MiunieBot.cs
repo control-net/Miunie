@@ -1,4 +1,5 @@
 using Miunie.Core.Configuration;
+using Miunie.Core.Discord;
 using System.Threading;
 using System.Threading.Tasks;
 
