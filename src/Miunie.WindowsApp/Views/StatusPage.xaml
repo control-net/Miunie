@@ -60,7 +60,6 @@
                 </Grid.Resources>
             </Grid>
 
-
             <TextBlock Margin="0, 20" 
                        Style="{StaticResource TitleTextBlockStyle}" 
                        HorizontalAlignment="Stretch" 
@@ -69,16 +68,27 @@
 
             <Grid>
                 <ProgressBar IsIndeterminate="True" Margin="0, 20" Visibility="{Binding ProgressBarIsVisible}"/>
-
-                <Button Visibility="{Binding ActionButtonIsVisible}" 
+                <StackPanel>
+                    <Button Visibility="{Binding ActionButtonIsVisible}" 
+                        Margin="0 0 0 15"
                         Name="ActionBtn" 
                         Content="{Binding ActionButtonText}" 
                         HorizontalAlignment="Stretch" 
                         Style="{ThemeResource ButtonRevealStyle}" 
-                        Click="ActionBtn_OnClick"/>
+                        Command="{Binding ActionCommand}"/>
+
+                    <Button Visibility="{Binding SettingsButtonIsVisable}" 
+                        Name="SettingsBtn" 
+                        Content="Configure Token" 
+                        HorizontalAlignment="Stretch" 
+                        Style="{ThemeResource AccentButtonStyle}" 
+                        Click="SettingsBtn_OnClick"/>
+                </StackPanel>
+
             </Grid>
 
         </StackPanel>
+        
         <TextBlock HorizontalAlignment="Center"
                    Style="{StaticResource TitleTextBlockStyle}"
                    Margin="0,355,0,0" 

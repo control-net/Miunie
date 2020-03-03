@@ -3,6 +3,8 @@ using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -46,17 +48,29 @@ namespace Miunie.WindowsApp.ViewModels
             ? Visibility.Visible
             : Visibility.Collapsed;
 
+        public Visibility SettingsButtonIsVisable => string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
         public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
         public string ActionButtonText => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? "Stop" : "Start";
 
         private readonly MiunieBot _miunie;
 
+        public ICommand ActionCommand { get; }
+
         public StatusPageViewModel(MiunieBot miunie)
         {
             _miunie = miunie;
             miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
+            ActionCommand = new RelayCommand(ToggleBotStart, CanToggleStart);
+        }
+
+        private bool CanToggleStart()
+        {
+            return !string.IsNullOrEmpty(_miunie.BotConfiguration.DiscordToken);
         }
 
         public bool IsConnecting { get => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING; }
