@@ -9,6 +9,10 @@ using Miunie.Core;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Miunie.Core.Entities.Views;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
+using Discord.WebSocket;
+using System.Collections.Specialized;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -22,6 +26,11 @@ namespace Miunie.WindowsApp.ViewModels
             set { 
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
+                if (_selectedChannel != null && _selectedChannel.Messages.Any())
+                {
+                    Messages = new ObservableCollection<MessageView>(_selectedChannel.Messages);
+                    RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
+                }
             }
         }
 
@@ -37,18 +46,43 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        public ICommand SendMessageCommand { get; }
+
+        private ICollection<MessageView> _messages;
+
+        public ICollection<MessageView> Messages
+        {
+            get { return _messages; }
+            set { 
+                _messages = value;
+                RaisePropertyChanged(nameof(Messages));
+            }
+        }
+        
+
+        private string _messageText;
+
+        public string MessageText
+        {
+            get { return _messageText; }
+            set { 
+                _messageText = value;
+                RaisePropertyChanged(nameof(MessageText));
+            }
+        }
+
+        public bool IsMessageTextboxEnabled => _selectedChannel != null;
 
 
         private readonly MiunieBot _miunie;
-        private ulong _currentGuild;
 
         public ImpersonationChatPageViewModel(MiunieBot miunie)
         {
             _miunie = miunie;
             _channels = new List<TextChannelView>();
-            SendMessageCommand = new RelayCommand<string>(SendMessageAsMiunieAsync);
+            _messages = new List<MessageView>();
         }
+
+        public event EventHandler MessageReceived;
 
         internal void ConfigureMessagesSubscription()
         {
@@ -59,21 +93,35 @@ namespace Miunie.WindowsApp.ViewModels
         internal async void FetchInfo(ulong guildId)
         {
             Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(guildId);
-            _currentGuild = guildId;
         }
 
-        private async void SendMessageAsMiunieAsync(string message)
+        public ICommand SendMessageCommand => new RelayCommand<string>(SendMessageAsMiunieAsync, CanSendMessage);        
+
+        private bool CanSendMessage(string arg)
+        {
+            return !string.IsNullOrWhiteSpace(MessageText) && SelectedChannel != null;
+        }
+
+        internal async void SendMessageAsMiunieAsync(string message)
         {
             await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
         }
 
         private async void MessageReceivedHandler(object sender, EventArgs e)
         {
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
-                var selectedId = SelectedChannel?.Id;
-                Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuild);
-                SelectedChannel = Channels.FirstOrDefault(x => x.Id == selectedId);
+                var m = (SocketMessage)sender;
+                Messages.Add(new MessageView
+                {
+                    AuthorAvatarUrl = m.Author.GetAvatarUrl(),
+                    AuthorName = m.Author.Username,
+                    Content = m.Content,
+                    TimeStamp = m.CreatedAt.ToLocalTime()
+                });
+                MessageText = "";
+                RaisePropertyChanged(nameof(Messages));
+                MessageReceived?.Invoke(m, EventArgs.Empty);
             });
         }
 

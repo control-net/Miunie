@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
     <Page.Resources>
-        <w:XamlUICommand Command="{Binding SendMessage}" x:Name="SendMessageCommand" />
+        <w:XamlUICommand Command="{Binding SendMessageCommand}" x:Name="SendMessageCommand" />
     </Page.Resources>
     
     <Grid>
@@ -19,7 +19,7 @@
             <ColumnDefinition x:Name="DetailColumn" Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}" x:Name="MasterListView">
+        <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="views:TextChannelView">
                     <TextBlock Text="{Binding Name}"/>
@@ -27,45 +27,33 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ContentPresenter
-            x:Name="DetailContentPresenter"
-            Grid.Column="1"
-            Padding="0"
-            Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}" HorizontalAlignment="Stretch">
-            <ContentPresenter.ContentTemplate>
-                <DataTemplate x:DataType="views:TextChannelView">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ScrollViewer Grid.ColumnSpan="2">
-                            <ListView Height="Auto" ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="views:MessageView">
-                                        <StackPanel Orientation="Horizontal" Padding="10">
-                                            <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
-                                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                                    <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
-                                                </StackPanel>
-                                                <TextBlock Text="{Binding Content}"/>
-                                                <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </ScrollViewer>
-                        <TextBox Grid.Row="1" x:Name="MessageTextBox" Text="{Binding NoText}" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10"/>
-                        <Button Grid.Row="1" Grid.Column="1" Command="{StaticResource SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
-                    </Grid>
-                </DataTemplate>
-            </ContentPresenter.ContentTemplate>
-        </ContentPresenter>
+        <Grid Grid.Column="1" Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="views:MessageView">
+                        <StackPanel Orientation="Horizontal" Padding="10">
+                            <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Content}"/>
+                                <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="MessageTextBox_KeyUp" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
+            <Button Grid.Row="1" Grid.Column="1" Command="{Binding SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
+        </Grid>
     </Grid>
 </Page>
