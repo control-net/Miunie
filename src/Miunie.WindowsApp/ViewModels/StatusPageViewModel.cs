@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
+using Miunie.Core.Entities;
 
 namespace Miunie.WindowsApp.ViewModels
 {

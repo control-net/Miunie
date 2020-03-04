@@ -1,8 +1,9 @@
-﻿using System;
+using Miunie.Core.Entities.Views;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Miunie.Core
+namespace Miunie.Core.Discord
 {
     public interface IDiscordImpersonation
     {

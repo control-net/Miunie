@@ -5,8 +5,8 @@
     xmlns:local="using:Miunie.WindowsApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:core="using:Miunie.Core"
     xmlns:w="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:views="using:Miunie.Core.Entities.Views"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
@@ -22,7 +22,7 @@
 
         <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}" x:Name="MasterListView">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="core:TextChannelView">
+                <DataTemplate x:DataType="views:TextChannelView">
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -34,7 +34,7 @@
             Padding="0"
             Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}" HorizontalAlignment="Stretch">
             <ContentPresenter.ContentTemplate>
-                <DataTemplate x:DataType="core:TextChannelView">
+                <DataTemplate x:DataType="views:TextChannelView">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10*" />
@@ -47,7 +47,7 @@
                         <ScrollViewer Grid.ColumnSpan="2">
                             <ListView Height="Auto" ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
                                 <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="core:MessageView">
+                                    <DataTemplate x:DataType="views:MessageView">
                                         <StackPanel Orientation="Horizontal" Padding="10">
                                             <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
                                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">

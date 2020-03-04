@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using Miunie.Core;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Miunie.Core.Entities.Views;
 
 namespace Miunie.WindowsApp.ViewModels
 {

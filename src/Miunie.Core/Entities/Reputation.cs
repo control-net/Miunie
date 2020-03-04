@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Miunie.Core
+namespace Miunie.Core.Entities
 {
     public class Reputation
     {

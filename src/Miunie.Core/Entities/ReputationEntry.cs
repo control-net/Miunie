@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Miunie.Core
+namespace Miunie.Core.Entities
 {
     public class ReputationEntry
     {
@@ -19,6 +19,6 @@ namespace Miunie.Core
         public ReputationType Type { get; set; }
 
         public bool IsFromInvoker { get; set; }
-        
+
     }
 }

@@ -1,8 +1,10 @@
+using Miunie.Core.Entities;
+using Miunie.Core.Entities.Discord;
+using Miunie.Core.Infrastructure;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Miunie.Core.Infrastructure;
 
 namespace Miunie.Core.Providers
 {

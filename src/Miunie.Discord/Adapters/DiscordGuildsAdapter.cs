@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Miunie.Core;
-using Miunie.Core.Discord;
+﻿using Miunie.Core.Discord;
+using Miunie.Core.Entities.Discord;
 using Miunie.Discord.Convertors;
+using System.Threading.Tasks;
 
 namespace Miunie.Discord.Adapters
 {

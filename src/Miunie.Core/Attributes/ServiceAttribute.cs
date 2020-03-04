@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Miunie.Core.Entities;
+using System;
 
-namespace Miunie.Core
+namespace Miunie.Core.Attributes
 {
     public sealed class ServiceAttribute : Attribute
     {

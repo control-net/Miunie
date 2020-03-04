@@ -21,7 +21,7 @@ namespace Miunie.Discord.CommandModules
         public async Task SendRandomYesNoMaybeAnswer()
         {
             var c = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _service.SendRandomYesNoAnswer(c);
+            await _service.SendRandomYesNoAnswerAsync(c);
         }
     }
 }
