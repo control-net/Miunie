@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.UI.Xaml.Data;
 
 namespace Miunie.WindowsApp.Converters
@@ -11,7 +12,7 @@ namespace Miunie.WindowsApp.Converters
             {
                 if (token == "[NOT CONFIGURED]") return value;
 
-                value = $"{token.Substring(0, 5)} ****************************** {token.Substring(token.Length - 5)}";
+                value = $"{string.Join(string.Empty, token.Take(5))} ****************************** {string.Join(string.Empty, token.TakeLast(5))}";
             }
 
             return value;
