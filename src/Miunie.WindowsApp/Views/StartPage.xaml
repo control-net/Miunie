@@ -8,8 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
-    DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}"
-    GotFocus="StartPage_OnGotFocus">
+    DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
         <muxc:NavigationView Name="MainNavigationView"

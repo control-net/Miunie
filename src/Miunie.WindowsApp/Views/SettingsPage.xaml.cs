@@ -25,6 +25,12 @@ namespace Miunie.WindowsApp.Views
         {
             InitializeComponent();
             _vm = DataContext as SettingsPageViewModel;
+            _vm.TokenApplied += TokenAppliedEventHandler;
+        }
+
+        private void TokenAppliedEventHandler(object sender, EventArgs e)
+        {
+            Frame.Navigate(typeof(StatusPage), null);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,28 +47,6 @@ namespace Miunie.WindowsApp.Views
                     .GetForCurrentView()
                     .PrepareToAnimate("MiunieSettingsToStatus", MiunieSettingsAvatar);
             }
-        }
-
-        private async void ApplyCustomTokenBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (!_vm.TokenValidator.StringHasValidTokenStructure(CustomTokenField.Password))
-            {
-                var possiblyWrongTokenDialog = new ContentDialog
-                {
-                    Title = "That doesn't look like a token.",
-                    Content = "The token you provided doesn't follow the basic token length and content structure.",
-                    PrimaryButtonText = "Apply anyway",
-                    CloseButtonText = "Cancel"
-                };
-
-                var result = await possiblyWrongTokenDialog.ShowAsync();
-                
-                if (result != ContentDialogResult.Primary) { return; }
-            }
-
-            _vm.ApplyToken(CustomTokenField.Password);
-
-            Frame.Navigate(typeof(StatusPage), null);
         }
     }
 }

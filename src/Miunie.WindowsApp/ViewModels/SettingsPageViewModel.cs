@@ -6,6 +6,10 @@ using Miunie.Core;
 using Miunie.Core.Logging;
 using Miunie.WindowsApp.Utilities;
 using GalaSoft.MvvmLight.Threading;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using Windows.UI.Xaml.Controls;
+using GalaSoft.MvvmLight.Views;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -13,36 +17,54 @@ namespace Miunie.WindowsApp.ViewModels
     {
         private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
 
-        public string BotToken => _miunieBot.BotConfiguration.DiscordToken;
+        public string BotToken => _miunie.BotConfiguration.DiscordToken;
 
-        public TokenValidator TokenValidator { get; }
-
-        public string BotAvatar => _miunieBot.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
-
-        public string BotTokenBeginning => new string(BotToken?.Take(5).ToArray());
-
-        public string BotTokenEnd => new string(BotToken?.TakeLast(5).ToArray());
+        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
         public IEnumerable<object> Logs => _logReader.RetrieveLogs(10).Select(m => new { Message = m });
 
-        private readonly MiunieBot _miunieBot;
-
+        private readonly MiunieBot _miunie;
         private readonly ILogReader _logReader;
+        private readonly TokenManager _tokenManager;
 
-        public SettingsPageViewModel(MiunieBot miunie, ILogReader logReader, TokenValidator tokenValidator)
+        public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);
+
+        public SettingsPageViewModel(MiunieBot miunie, ILogReader logReader, TokenManager tokenManager)
         {
-            _miunieBot = miunie;
+            _miunie = miunie;
             _logReader = logReader;
+            _tokenManager = tokenManager;
             _logReader.LogRecieved += OnLogRecieved;
-            TokenValidator = tokenValidator;
         }
 
-        internal void ApplyToken(string token)
+        public event EventHandler TokenApplied;
+
+        private bool CanApplyToken(string arg)
         {
-            _miunieBot.BotConfiguration.DiscordToken = token;
+            return !string.IsNullOrEmpty(arg);
+        }
+
+        private async void ApplyToken(string token)
+        {
+            if (!_tokenManager.StringHasValidTokenStructure(token))
+            {
+                var possiblyWrongTokenDialog = new ContentDialog
+                {
+                    Title = "That doesn't look like a token.",
+                    Content = "The token you provided doesn't follow the basic token length and content structure.",
+                    PrimaryButtonText = "Apply anyway",
+                    CloseButtonText = "Cancel"
+                };
+
+                var result = await possiblyWrongTokenDialog.ShowAsync();
+
+                if (result != ContentDialogResult.Primary) { return; }
+            }
+
+            _tokenManager.ApplyToken(token, _miunie);
             RaisePropertyChanged(nameof(BotToken));
-            RaisePropertyChanged(nameof(BotTokenBeginning));
-            RaisePropertyChanged(nameof(BotTokenEnd));
+
+            TokenApplied?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnLogRecieved(object sender, EventArgs e)

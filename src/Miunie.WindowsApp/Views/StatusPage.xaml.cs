@@ -42,11 +42,6 @@ namespace Miunie.WindowsApp.Views
             };
         }
 
-        private void ActionBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            _vm.ToggleBotStart();
-        }
-
         private void SettingsBtn_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SettingsPage), null);

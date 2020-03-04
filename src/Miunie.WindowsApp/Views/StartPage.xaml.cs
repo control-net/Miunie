@@ -35,7 +35,6 @@ namespace Miunie.WindowsApp.Views
             ("notconnected", typeof(NotConnectedPage))
         };
 
-        private bool _shouldCheckForClipboardToken = true;
         private readonly StartPageViewModel _vm;
         private readonly MiunieBot _miunie;
 
@@ -50,11 +49,6 @@ namespace Miunie.WindowsApp.Views
         {
             MainNavigationView.SelectedItem = MainNavigationView.MenuItems[0];
             NavView_Navigate("home", new EntranceNavigationTransitionInfo());
-        }
-
-        private void StartPage_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            CheckForTokenInClipboard();
         }
 
         private void MainNavigationView_OnItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
@@ -74,32 +68,6 @@ namespace Miunie.WindowsApp.Views
 
                 NavView_Navigate("notconnected", args.RecommendedNavigationTransitionInfo);
             }
-        }
-
-        private async void CheckForTokenInClipboard()
-        {
-            if (!_shouldCheckForClipboardToken) { return; }
-            _shouldCheckForClipboardToken = false;
-
-            var clipboardContent = Clipboard.GetContent();
-
-            if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
-
-            var possibleToken = await Clipboard.GetContent().GetTextAsync();
-
-            if (!_vm.TokenValidator.StringHasValidTokenStructure(possibleToken)) { return; }
-
-            var clipboardTokenDialog = new ContentDialog
-            {
-                Title = "Paste copied bot token?",
-                Content = "It looks like you have a bot token copied.\nDo you want to use it?",
-                PrimaryButtonText = "Sure",
-                CloseButtonText = "No, thanks"
-            };
-
-            var result = await clipboardTokenDialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary) { _vm.ApplyToken(possibleToken); }
         }
 
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)

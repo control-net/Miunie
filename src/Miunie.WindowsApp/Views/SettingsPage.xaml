@@ -32,16 +32,12 @@
         </Grid>
         <StackPanel Margin="12, 32" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Active token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding BotTokenBeginning}" />
-                <Rectangle Fill="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" Width="300"/>
-                <TextBlock Text="{Binding BotTokenEnd}" />
-            </StackPanel>
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemAccentColorLight3}" Text="{Binding BotToken, Converter={StaticResource TokenMaskConverter}, TargetNullValue='[NOT CONFIGURED]'}" />
             <Rectangle Height="20"/>
             <TextBlock Text="Set new token" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 0, 0, 10"/>
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PasswordBox x:Name="CustomTokenField" Width="200"/>
-                <Button Content="Apply" x:Name="ApplyCustomTokenBtn" Click="ApplyCustomTokenBtn_Click"/>
+                <Button Content="Apply" Command="{Binding ApplyTokenCommand}" CommandParameter="{Binding Path=Password, ElementName=CustomTokenField}"/>
             </StackPanel>
             <Rectangle Height="20"/>
             <ListView ItemsSource="{Binding Logs}" MinHeight="100">
