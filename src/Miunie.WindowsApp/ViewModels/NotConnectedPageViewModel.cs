@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using Miunie.Core;
-using System.Collections.Generic;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -12,6 +11,9 @@ namespace Miunie.WindowsApp.ViewModels
         {
             _miunie = miunie;
         }
+
+        public bool StartIsEnabled => 
+            !string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken);
 
         public string ConnectionStatus => 
             _miunie.MiunieDiscord.ConnectionState.ToString();

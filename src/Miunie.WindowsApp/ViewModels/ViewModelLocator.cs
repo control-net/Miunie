@@ -14,7 +14,6 @@ namespace Miunie.WindowsApp.ViewModels
     {
         public ViewModelLocator()
         {
-
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -35,7 +34,7 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogReader>());
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILanguageProvider>());
-            SimpleIoc.Default.Register<TokenValidator>();
+            SimpleIoc.Default.Register<TokenManager>();
         }
 
         public StartPageViewModel StartPageInstance 
