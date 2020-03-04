@@ -14,7 +14,6 @@ namespace Miunie.WindowsApp.ViewModels
     {
         public ViewModelLocator()
         {
-
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             if (ViewModelBase.IsInDesignModeStatic)
             {

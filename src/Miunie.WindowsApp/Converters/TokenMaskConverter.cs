@@ -1,7 +1,4 @@
-﻿using Miunie.Core.Entities.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Windows.UI.Xaml.Data;
 
 namespace Miunie.WindowsApp.Converters

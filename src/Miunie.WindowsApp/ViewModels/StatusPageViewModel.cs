@@ -17,6 +17,27 @@ namespace Miunie.WindowsApp.ViewModels
     {
         private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
 
+        private readonly MiunieBot _miunie;
+        private readonly TokenManager _tokenManager;
+
+        public StatusPageViewModel(MiunieBot miunie, TokenManager tokenManager)
+        {
+            _miunie = miunie;
+            _tokenManager = tokenManager;
+            miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
+            ConnectionStatus = "Not connected";
+            CheckForTokenInClipboard();
+        }
+
+        public ICommand ActionCommand => new RelayCommand(ToggleBotStart, CanToggleStart);
+
+        private bool CanToggleStart()
+        {
+            return !string.IsNullOrEmpty(_miunie.BotConfiguration.DiscordToken);
+        }
+
+        public bool IsConnecting { get => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING; }
+
         private string _connectedStatus;
         public string ConnectionStatus
         {
@@ -45,8 +66,8 @@ namespace Miunie.WindowsApp.ViewModels
 
         public Action AvatarChanged;
 
-        public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING 
-            ? Visibility.Visible 
+        public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING
+            ? Visibility.Visible
             : Visibility.Collapsed;
 
         public Visibility ProgressBarIsVisible => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING
@@ -60,28 +81,6 @@ namespace Miunie.WindowsApp.ViewModels
         public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
         public string ActionButtonText => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED ? "Stop" : "Start";
-
-        private readonly MiunieBot _miunie;
-        private readonly TokenManager _tokenManager;
-
-        public ICommand ActionCommand { get; }
-
-        public StatusPageViewModel(MiunieBot miunie, TokenManager tokenManager)
-        {
-            _miunie = miunie;
-            _tokenManager = tokenManager;
-            miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
-            ConnectionStatus = "Not connected";
-            ActionCommand = new RelayCommand(ToggleBotStart, CanToggleStart);
-            CheckForTokenInClipboard();
-        }
-
-        private bool CanToggleStart()
-        {
-            return !string.IsNullOrEmpty(_miunie.BotConfiguration.DiscordToken);
-        }
-
-        public bool IsConnecting { get => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING; }
 
         public async void ToggleBotStart()
         {
@@ -106,8 +105,6 @@ namespace Miunie.WindowsApp.ViewModels
         private async void CheckForTokenInClipboard()
         {
             if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) { return; }
-
-            //_shouldCheckForClipboardToken = false;
 
             var clipboardContent = Clipboard.GetContent();
 

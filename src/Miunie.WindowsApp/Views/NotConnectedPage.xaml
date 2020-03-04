@@ -2,10 +2,8 @@
     x:Class="Miunie.WindowsApp.Views.NotConnectedPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Miunie.WindowsApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:core="using:Miunie.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding NotConnectedPageInstance, Source={StaticResource Locator}}">
@@ -43,11 +41,9 @@
                         Content="Start Miunie" 
                         HorizontalAlignment="Stretch" 
                         Style="{ThemeResource ButtonRevealStyle}" 
+                        IsEnabled="{Binding StartIsEnabled}"
                         Click="StartBtn_Click"/>
             </StackPanel>
-
         </StackPanel>
-
-
     </Grid>
 </Page>

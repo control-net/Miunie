@@ -9,7 +9,6 @@ using GalaSoft.MvvmLight.Threading;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Windows.UI.Xaml.Controls;
-using GalaSoft.MvvmLight.Views;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -17,17 +16,9 @@ namespace Miunie.WindowsApp.ViewModels
     {
         private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
 
-        public string BotToken => _miunie.BotConfiguration.DiscordToken;
-
-        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
-
-        public IEnumerable<object> Logs => _logReader.RetrieveLogs(10).Select(m => new { Message = m });
-
         private readonly MiunieBot _miunie;
         private readonly ILogReader _logReader;
         private readonly TokenManager _tokenManager;
-
-        public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);
 
         public SettingsPageViewModel(MiunieBot miunie, ILogReader logReader, TokenManager tokenManager)
         {
@@ -36,6 +27,14 @@ namespace Miunie.WindowsApp.ViewModels
             _tokenManager = tokenManager;
             _logReader.LogRecieved += OnLogRecieved;
         }
+
+        public string BotToken => _miunie.BotConfiguration.DiscordToken;
+
+        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
+
+        public IEnumerable<object> Logs => _logReader.RetrieveLogs(10).Select(m => new { Message = m });
+
+        public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);
 
         public event EventHandler TokenApplied;
 

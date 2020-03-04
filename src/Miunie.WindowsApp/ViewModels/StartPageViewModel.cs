@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using Miunie.Core;
 using Miunie.Core.Entities;
 using Miunie.Core.Providers;
-using Miunie.WindowsApp.Utilities;
 using System;
 
 namespace Miunie.WindowsApp.ViewModels
