@@ -47,8 +47,21 @@
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                     <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
                                 </StackPanel>
-                                <TextBlock Text="{Binding Content}"/>
-                                <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
+                                <TextBlock Text="{Binding Content}" Visibility="{Binding Content.Length, Converter={StaticResource IntToVisabilityConverter}}"/>
+                                <GridView x:Name="ImageList" Height="Auto" ItemsSource="{Binding Images}" 
+                                          Visibility="{Binding Images.Count, Converter={StaticResource IntToVisabilityConverter}}"
+                                          Margin="0 15 5 0">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:ObservableImage">
+                                            <Rectangle Width="{Binding Width}" Height="{Binding Height}">
+                                                <Rectangle.Fill>
+                                                    <ImageBrush ImageSource="{Binding ProxyUrl}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                                <TextBlock FontSize="10" FontStyle="Italic" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemBaseMediumColor}" Text="{Binding TimeStamp}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

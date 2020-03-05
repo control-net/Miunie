@@ -119,9 +119,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IntToVisabilityConverter.cs" />
     <Compile Include="Converters\TokenMaskConverter.cs" />
     <Compile Include="Infrastructure\UwpFileSystem.cs" />
     <Compile Include="InversionOfControl.cs" />
+    <Compile Include="Models\ObservableImage.cs" />
     <Compile Include="Models\ObservableMessageView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EnterKeyHelpers.cs" />

@@ -2,6 +2,7 @@
 using Miunie.Core.Entities.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,17 @@ namespace Miunie.WindowsApp.Models
 {
     public class ObservableMessageView : ObservableObject
     {
+        public ObservableMessageView()
+        {
+            Images = new ObservableCollection<ObservableImage>();
+        }
+
         private string _authorName;
         public string AuthorName
         {
             get { return _authorName; }
-            set { 
+            set 
+            { 
                 _authorName = value;
                 RaisePropertyChanged(nameof(AuthorName));
             }
@@ -50,6 +57,17 @@ namespace Miunie.WindowsApp.Models
             {
                 _timeStamp = value;
                 RaisePropertyChanged(nameof(TimeStamp));
+            }
+        }
+
+        private ObservableCollection<ObservableImage> _images;
+        public ObservableCollection<ObservableImage> Images
+        {
+            get { return _images; }
+            set
+            {
+                _images = value;
+                RaisePropertyChanged(nameof(Images));
             }
         }
     }

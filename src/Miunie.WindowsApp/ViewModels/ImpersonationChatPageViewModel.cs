@@ -149,7 +149,14 @@ namespace Miunie.WindowsApp.ViewModels
                         AuthorAvatarUrl = m.Author.GetAvatarUrl(),
                         AuthorName = m.Author.Username,
                         Content = m.Content,
-                        TimeStamp = m.CreatedAt.ToLocalTime()
+                        TimeStamp = m.CreatedAt.ToLocalTime(),
+                        Images = new ObservableCollection<ObservableImage>(m.Attachments
+                                        .Select(x => new ObservableImage 
+                                        { 
+                                            ProxyUrl = x.ProxyUrl, 
+                                            Width = x.Width, 
+                                            Height = x.Height 
+                                        }))
                     });
                     MessageText = "";
 
