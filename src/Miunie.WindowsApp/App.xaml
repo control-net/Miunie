@@ -7,7 +7,7 @@
     xmlns:vm="using:Miunie.WindowsApp.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
-            <cv:SortedListConverter x:Key="SortedListConverter" />
+            <cv:IntToVisabilityConverter x:Key="IntToVisabilityConverter"/>
             <cv:TokenMaskConverter x:Key="TokenMaskConverter" />
             <vm:ViewModelLocator xmlns:vm="using:Miunie.WindowsApp.ViewModels" x:Key="Locator"/>
             <ResourceDictionary.MergedDictionaries>

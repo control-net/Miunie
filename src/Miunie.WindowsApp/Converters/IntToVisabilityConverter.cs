@@ -1,18 +1,18 @@
-﻿using Miunie.Core.Entities.Views;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace Miunie.WindowsApp.Converters
 {
-    public class SortedListConverter : IValueConverter
+    public class IntToVisabilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is IEnumerable<MessageView> messages)
+            if (value is int count)
             {
-                value = messages.OrderBy(x => x.TimeStamp);
+
+                value = count > 0 ? Visibility.Visible : Visibility.Collapsed;
             }
 
             return value;

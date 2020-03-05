@@ -4,18 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:w="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:u="using:Miunie.WindowsApp.Utilities"
     xmlns:views="using:Miunie.Core.Entities.Views"
+    xmlns:models="using:Miunie.WindowsApp.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
-
+    <Page.Resources>
+        <w:XamlUICommand Command="{Binding SendMessageCommand}" x:Name="SendMessageCommand" />
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="MasterColumn" Width="320" />
             <ColumnDefinition x:Name="DetailColumn" Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListView ItemsSource="{Binding Channels}" x:Name="MasterListView">
+        <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="views:TextChannelView">
                     <TextBlock Text="{Binding Name}"/>
@@ -23,31 +29,46 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ContentPresenter
-            x:Name="DetailContentPresenter"
-            Grid.Column="1"
-            Padding="24, 0"
-            Content="{x:Bind MasterListView.SelectedItem, Mode=OneWay}">
-            <ContentPresenter.ContentTemplate>
-                <DataTemplate x:DataType="views:TextChannelView">
-                    <ListView ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="views:MessageView">
-                                <StackPanel Orientation="Horizontal" Padding="10">
-                                    <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                            <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
-                                        </StackPanel>
-                                        <TextBlock Text="{Binding Content}"/>
-                                        <TextBlock FontSize="10" FontStyle="Italic" Text="{Binding TimeStamp}"/>
-                                    </StackPanel>
+        <Grid Grid.Column="1" Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ObservableMessageView">
+                        <StackPanel Orientation="Horizontal" Padding="10">
+                            <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
                                 </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </DataTemplate>
-            </ContentPresenter.ContentTemplate>
-        </ContentPresenter>
+                                <TextBlock Text="{Binding Content}" Visibility="{Binding Content.Length, Converter={StaticResource IntToVisabilityConverter}}"/>
+                                <GridView x:Name="ImageList" Height="Auto" ItemsSource="{Binding Images}" 
+                                          Visibility="{Binding Images.Count, Converter={StaticResource IntToVisabilityConverter}}"
+                                          Margin="0 15 5 0">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:ObservableImage">
+                                            <Rectangle Width="{Binding Width}" Height="{Binding Height}">
+                                                <Rectangle.Fill>
+                                                    <ImageBrush ImageSource="{Binding ProxyUrl}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                                <TextBlock FontSize="10" FontStyle="Italic" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemBaseMediumColor}" Text="{Binding TimeStamp}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" u:EnterKeyHelpers.EnterKeyCommand="{Binding SendMessageCommand}" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
+            <Button Grid.Row="1" Grid.Column="1" Command="{Binding SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
+        </Grid>
     </Grid>
 </Page>
