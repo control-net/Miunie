@@ -58,6 +58,16 @@ namespace Miunie.Discord
             return result;
         }
 
+        public async Task<IEnumerable<MessageView>> GetMessagesFromTextChannelAsync(ulong guildId, ulong channelId)
+        {
+            var guild = _discord.Client.GetGuild(guildId);
+            var textChannel = guild.Channels.Where(c => c is SocketTextChannel && c.Id == channelId).Cast<SocketTextChannel>().FirstOrDefault();
+
+            if (textChannel == null) { return new MessageView[0]; }
+
+            return await GetMessagesFrom(textChannel);
+        }
+
         public async Task SendTextToChannelAsync(string text, ulong id)
         {
             var textChannel = _discord.Client.GetChannel(id) as SocketTextChannel;

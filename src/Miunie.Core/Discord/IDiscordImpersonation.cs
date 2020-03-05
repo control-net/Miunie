@@ -13,6 +13,7 @@ namespace Miunie.Core.Discord
 
         IEnumerable<GuildView> GetAvailableGuilds();
         Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId);
+        Task<IEnumerable<MessageView>> GetMessagesFromTextChannelAsync(ulong guildId, ulong channelId);
         Task SendTextToChannelAsync(string text, ulong id);
     }
 }
