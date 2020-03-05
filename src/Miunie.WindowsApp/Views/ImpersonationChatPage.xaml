@@ -5,7 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:w="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:u="using:Miunie.WindowsApp.Utilities"
     xmlns:views="using:Miunie.Core.Entities.Views"
+    xmlns:models="using:Miunie.WindowsApp.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ImpersonationChatPageInstance, Source={StaticResource Locator}}">
@@ -36,9 +38,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages, Converter={StaticResource SortedListConverter}}" >
+            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages}">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="views:MessageView">
+                    <DataTemplate x:DataType="models:ObservableMessageView">
                         <StackPanel Orientation="Horizontal" Padding="10">
                             <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
@@ -52,7 +54,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="MessageTextBox_KeyUp" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
+            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" u:EnterKeyHelpers.EnterKeyCommand="{Binding SendMessageCommand}" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
             <Button Grid.Row="1" Grid.Column="1" Command="{Binding SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
         </Grid>
     </Grid>

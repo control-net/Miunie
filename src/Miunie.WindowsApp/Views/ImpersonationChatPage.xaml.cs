@@ -5,6 +5,8 @@ using Miunie.Core;
 using System;
 using Windows.UI.Xaml.Input;
 using System.Linq;
+using CommonServiceLocator;
+using GalaSoft.MvvmLight.Ioc;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,23 +32,18 @@ namespace Miunie.WindowsApp.Views
             _vm.MessageReceived += MessageReceivedHandler;
         }
 
-        private void MessageReceivedHandler(object sender, EventArgs e)
-        {
-            MessageList.ScrollIntoView(_vm.Messages.Last());
-        }
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _vm.MessageReceived -= MessageReceivedHandler;
-            _vm.Dispose();
+            _vm.CleanupHandlers();
+
+            SimpleIoc.Default.Unregister<ImpersonationChatPageViewModel>();
+            SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
         }
-        
-        private void MessageTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
+
+        private void MessageReceivedHandler(object sender, EventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter && _vm.SelectedChannel != null && _vm.SendMessageCommand.CanExecute(MessageTextBox.Text))
-            {
-                _vm.SendMessageCommand.Execute(MessageTextBox.Text);
-            }
+            MessageList.ScrollIntoView(_vm.Messages.Last());
         }
     }
 }
