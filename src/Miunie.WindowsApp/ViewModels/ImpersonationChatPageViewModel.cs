@@ -89,10 +89,10 @@ namespace Miunie.WindowsApp.ViewModels
             _miunie.Impersonation.SubscribeForMessages();
         }
 
-        internal async void FetchInfo(ulong guildId)
+        internal void FetchInfo(ulong guildId)
         {
             _currentGuildId = guildId;
-            Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId, false);
+            Channels = _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
         }
 
         private bool CanSendMessage(string arg)

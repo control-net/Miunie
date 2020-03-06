@@ -31,41 +31,48 @@ namespace Miunie.Discord
                 Name = g.Name
             });
 
-        public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId, bool loadMessages = true)
+        public IEnumerable<TextChannelView> GetAvailableTextChannelsAsync(ulong guildId)
         {
             if(guildId == 0) { return new TextChannelView[0]; }
 
             var guild = _discord.Client.GetGuild(guildId);
-            var textChannels = guild.Channels.Where(c => c is SocketTextChannel).Cast<SocketTextChannel>();
-            var result = new List<TextChannelView>();
-            foreach (var channel in textChannels)
-            {
-                try
+            var textChannels = guild.Channels
+                .Where(c => c is SocketTextChannel && c.GetUser(_discord.Client.CurrentUser.Id).GetPermissions(c).ViewChannel)
+                .Cast<SocketTextChannel>()
+                .Select(channel => new TextChannelView
                 {
-                    result.Add(new TextChannelView
-                    {
-                        Id = channel.Id,
-                        Name = $"# {channel.Name}",
-                        Messages = loadMessages ? await GetMessagesFrom(channel) : new List<MessageView>()
-                    });
-                }
-                catch (Exception)
-                {
-                    _logger.Log($"Miunie cannot read from the '{channel.Name}' channel.");
-                }
-            }
+                    Id = channel.Id,
+                    Name = $"# {channel.Name}",
+                    Messages = new MessageView[0]
+                });
 
-            return result;
+            return textChannels;
         }
 
         public async Task<IEnumerable<MessageView>> GetMessagesFromTextChannelAsync(ulong guildId, ulong channelId)
         {
+            if (guildId == 0) { return new MessageView[0]; }
+
             var guild = _discord.Client.GetGuild(guildId);
-            var textChannel = guild.Channels.Where(c => c is SocketTextChannel && c.Id == channelId).Cast<SocketTextChannel>().FirstOrDefault();
+            var textChannel = guild.Channels
+                .Where(c => c.Id == channelId && c is SocketTextChannel && c.GetUser(_discord.Client.CurrentUser.Id).GetPermissions(c).ViewChannel)
+                .Cast<SocketTextChannel>()
+                .FirstOrDefault();
 
             if (textChannel == null) { return new MessageView[0]; }
 
-            return await GetMessagesFrom(textChannel);
+            var result = new List<MessageView>();
+
+            try
+            {
+                result.AddRange(await GetMessagesFrom(textChannel));
+            }
+            catch (Exception ex)
+            {
+                _logger.Log($"Miunie cannot read from the '{textChannel.Name}' channel. {ex.Message}");
+            }
+
+            return result;
         }
 
         public async Task SendTextToChannelAsync(string text, ulong id)

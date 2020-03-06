@@ -12,7 +12,7 @@ namespace Miunie.Core.Discord
         void UnsubscribeForMessages();
 
         IEnumerable<GuildView> GetAvailableGuilds();
-        Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId, bool loadMessages = true);
+        IEnumerable<TextChannelView> GetAvailableTextChannelsAsync(ulong guildId);
         Task<IEnumerable<MessageView>> GetMessagesFromTextChannelAsync(ulong guildId, ulong channelId);
         Task SendTextToChannelAsync(string text, ulong id);
     }
