@@ -77,8 +77,6 @@ namespace Miunie.WindowsApp.ViewModels
             _messages = new ObservableCollection<ObservableMessageView>();
         }
 
-        internal event EventHandler MessageReceived;
-
         internal void CleanupHandlers()
         {
             _miunie.Impersonation.MessageReceived -= Client_MessageReceivedHandler;
@@ -157,10 +155,6 @@ namespace Miunie.WindowsApp.ViewModels
                                             Height = x.Height 
                                         }))
                     });
-
-
-                    await Task.Delay(5);
-                    MessageReceived?.Invoke(m, EventArgs.Empty);
                 }
             });
         }

@@ -29,21 +29,14 @@ namespace Miunie.WindowsApp.Views
         {
             _vm.FetchInfo((ulong)e.Parameter);
             _vm.ConfigureMessagesSubscription();
-            _vm.MessageReceived += MessageReceivedHandler;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _vm.MessageReceived -= MessageReceivedHandler;
             _vm.CleanupHandlers();
 
             SimpleIoc.Default.Unregister<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
-        }
-
-        private void MessageReceivedHandler(object sender, EventArgs e)
-        {
-            MessageList.ScrollIntoView(_vm.Messages.Last());
         }
     }
 }

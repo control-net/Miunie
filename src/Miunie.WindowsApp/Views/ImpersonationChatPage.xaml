@@ -39,6 +39,12 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:ObservableMessageView">
                         <StackPanel Orientation="Horizontal" Padding="10">
