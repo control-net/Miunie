@@ -26,6 +26,7 @@ namespace Miunie.WindowsApp.ViewModels
             _tokenManager = tokenManager;
             miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
+            _tokenManager.LoadToken(_miunie);
             CheckForTokenInClipboard();
         }
 
@@ -104,31 +105,40 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void CheckForTokenInClipboard()
         {
-            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) { return; }
-
-            var clipboardContent = Clipboard.GetContent();
-
-            if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
-
-            var possibleToken = await Clipboard.GetContent().GetTextAsync();
-
-            if (!_tokenManager.StringHasValidTokenStructure(possibleToken)) { return; }
-
-            var clipboardTokenDialog = new ContentDialog
-            {
-                Title = "Paste copied bot token?",
-                Content = "It looks like you have a bot token copied.\nDo you want to use it?",
-                PrimaryButtonText = "Sure",
-                CloseButtonText = "No, thanks"
-            };
-
-            var result = await clipboardTokenDialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary) { 
-                _tokenManager.ApplyToken(possibleToken, _miunie);
+            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) {
                 RaisePropertyChanged(nameof(SettingsButtonIsVisable));
                 RaisePropertyChanged(nameof(ActionCommand));
+                return; 
             }
+
+            try
+            {
+                var clipboardContent = Clipboard.GetContent();
+
+                if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
+
+                var possibleToken = await Clipboard.GetContent().GetTextAsync();
+
+                if (!_tokenManager.StringHasValidTokenStructure(possibleToken)) { return; }
+
+                var clipboardTokenDialog = new ContentDialog
+                {
+                    Title = "Paste copied bot token?",
+                    Content = "It looks like you have a bot token copied.\nDo you want to use it?",
+                    PrimaryButtonText = "Sure",
+                    CloseButtonText = "No, thanks"
+                };
+
+                var result = await clipboardTokenDialog.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    _tokenManager.ApplyToken(possibleToken, _miunie);
+                    RaisePropertyChanged(nameof(SettingsButtonIsVisable));
+                    RaisePropertyChanged(nameof(ActionCommand));
+                }
+            }
+            catch { }
         }
 
         private void MiunieOnConnectionStateChanged(object sender, EventArgs e)
