@@ -26,7 +26,7 @@ namespace Miunie.WindowsApp.ViewModels
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
                 RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
-                LoadMessages();
+                LoadMessagesAsync();
             }
         }
 
@@ -104,10 +104,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void SendMessageAsMiunieAsync(string message)
         {
+            MessageText = "";
             await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
         }
 
-        private async void LoadMessages()
+        private async void LoadMessagesAsync()
         {
             Messages.Clear();
 
@@ -138,8 +139,6 @@ namespace Miunie.WindowsApp.ViewModels
         {
             var m = (SocketMessage)sender;
 
-            _channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
-
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
             {
                 if (m.Channel.Id == SelectedChannel?.Id)
@@ -158,9 +157,9 @@ namespace Miunie.WindowsApp.ViewModels
                                             Height = x.Height 
                                         }))
                     });
-                    MessageText = "";
 
-                    await Task.Delay(500);
+
+                    await Task.Delay(5);
                     MessageReceived?.Invoke(m, EventArgs.Empty);
                 }
             });
