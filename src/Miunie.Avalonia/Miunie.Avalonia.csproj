@@ -25,4 +25,9 @@
     <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
     <ProjectReference Include="..\Miunie.SystemInfrastructure\Miunie.SystemInfrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\avalonia-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
