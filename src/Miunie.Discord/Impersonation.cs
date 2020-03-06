@@ -31,7 +31,7 @@ namespace Miunie.Discord
                 Name = g.Name
             });
 
-        public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId)
+        public async Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId, bool loadMessages = true)
         {
             if(guildId == 0) { return new TextChannelView[0]; }
 
@@ -46,7 +46,7 @@ namespace Miunie.Discord
                     {
                         Id = channel.Id,
                         Name = $"# {channel.Name}",
-                        Messages = await GetMessagesFrom(channel)
+                        Messages = loadMessages ? await GetMessagesFrom(channel) : new List<MessageView>()
                     });
                 }
                 catch (Exception)
