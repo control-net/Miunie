@@ -137,7 +137,7 @@ namespace Miunie.WindowsApp.ViewModels
         {
             var m = (SocketMessage)sender;
 
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 if (m.Channel.Id == SelectedChannel?.Id)
                 {
