@@ -24,16 +24,16 @@ namespace Miunie.Discord
         }
 
         public IEnumerable<GuildView> GetAvailableGuilds()
-            =>_discord.Client?.Guilds.Select(g => new GuildView
+            => _discord.Client?.Guilds.Select(g => new GuildView
             {
                 Id = g.Id,
                 IconUrl = g.IconUrl,
                 Name = g.Name
             });
 
-        public IEnumerable<TextChannelView> GetAvailableTextChannelsAsync(ulong guildId)
+        public Task<IEnumerable<TextChannelView>> GetAvailableTextChannelsAsync(ulong guildId)
         {
-            if (guildId == 0) { return new TextChannelView[0]; }
+            if (guildId == 0) { return CompletedTextChannelViewTask(new TextChannelView[0]); }
 
             var guild = _discord.Client.GetGuild(guildId);
             var textChannels = guild.Channels
@@ -41,8 +41,11 @@ namespace Miunie.Discord
                 .Cast<SocketTextChannel>()
                 .Select(ToTextChannelView);
 
-            return textChannels;
+            return CompletedTextChannelViewTask(textChannels);
         }
+
+        private Task<IEnumerable<TextChannelView>> CompletedTextChannelViewTask(IEnumerable<TextChannelView> channels)
+            => Task.FromResult(channels);
 
         private TextChannelView ToTextChannelView(SocketTextChannel channel)
             => new TextChannelView
