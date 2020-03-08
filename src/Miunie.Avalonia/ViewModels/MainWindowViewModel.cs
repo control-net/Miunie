@@ -24,7 +24,7 @@ namespace Miunie.Avalonia.ViewModels
         {
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
             _urlImageConverter = InversionOfControl.Provider.GetRequiredService<UrlImageConverter>();
-            _miunieBitmap = new Bitmap(@".\Assets\miunie-icon.png");
+            _miunieBitmap = new Bitmap("Assets/miunie-icon.png");
             _botAvatarImage = _miunieBitmap;
             _miunie.MiunieDiscord.ConnectionChanged += ConectionStateChanged;
         }
