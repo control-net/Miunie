@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Miunie.Avalonia.Utilities;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
 using Miunie.Logger;
 using Miunie.SystemInfrastructure;
+using System.Net.Http;
 
 namespace Miunie.Avalonia
 {
@@ -31,6 +33,8 @@ namespace Miunie.Avalonia
                 .AddSingleton<ILogWriter>(s => s.GetRequiredService<ConsoleLogger>())
                 .AddTransient<IDateTime, SystemDateTime>()
                 .AddSingleton<IFileSystem, SystemFileSystem>()
+                .AddSingleton<HttpClient>()
+                .AddSingleton<UrlImageConverter>()
                 .AddMiunieTypes()
                 .BuildServiceProvider();
     }

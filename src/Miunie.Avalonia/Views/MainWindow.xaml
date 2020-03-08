@@ -14,6 +14,7 @@
 
     <StackPanel>
         <TextBox PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
+        <Image Source="{Binding BotAvatarImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="63" Height="63"></Image>
         <TextBlock Text="{Binding ConnectionStatusText, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
         <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
