@@ -133,7 +133,6 @@ namespace Miunie.WindowsApp.ViewModels
                 RaisePropertyChanged(nameof(SettingsButtonIsVisable));
                 RaisePropertyChanged(nameof(ActionCommand));
             }
-            catch { }
         }
 
         private async Task<string> TryGetClipboardContents()
