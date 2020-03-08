@@ -45,31 +45,22 @@ namespace Miunie.WindowsApp
             e.Handled = true;
             System.Diagnostics.Debug.WriteLine(e.Exception);
 
-            var logger = SimpleIoc.Default.GetInstance<ILogWriter>();
-            logger.LogError($"{e.Message}");
-
             var confirmRestart = new ContentDialog
             {
-                Title = "Opps! Wasn't expecting that...",
-                Content = "Miunie encountered an error that she was unprepared for. Would you like to reset Miunie with a clean restart?",
+                Title = "Unexpected Error",
+                Content = "An unexpected error occurred, would you like to restart Miunie, or ignore this problem?",
                 PrimaryButtonText = "Yes, restart Miunie",
-                CloseButtonText = "Try my luck and continue"
+                CloseButtonText = "Ignore and continue"
             };
 
             var confirmResult = await confirmRestart.ShowAsync();
 
-            if (confirmResult == ContentDialogResult.Primary) {
+            if (confirmResult != ContentDialogResult.Primary) { return; }
 
-                var restartResult = await CoreApplication.RequestRestartAsync($"Restart Failure: {e.Message}");
+            var restartResult = await CoreApplication.RequestRestartAsync($"Restart on Error: {e.Message}");
 
-                if (restartResult == AppRestartFailureReason.NotInForeground ||
-                    restartResult == AppRestartFailureReason.RestartPending ||
-                    restartResult == AppRestartFailureReason.Other)
-                {
-                    var msgBox = new MessageDialog("Restart Failed", restartResult.ToString());
-                    await msgBox.ShowAsync();
-                }
-            }
+            var failureAlert = new MessageDialog("Restart Failed", restartResult.ToString());
+            await failureAlert.ShowAsync();
         }
 
         /// <summary>
