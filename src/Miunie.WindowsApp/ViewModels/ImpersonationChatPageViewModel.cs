@@ -26,7 +26,7 @@ namespace Miunie.WindowsApp.ViewModels
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
                 RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
-                LoadMessages();
+                LoadMessagesAsync();
             }
         }
 
@@ -77,8 +77,6 @@ namespace Miunie.WindowsApp.ViewModels
             _messages = new ObservableCollection<ObservableMessageView>();
         }
 
-        internal event EventHandler MessageReceived;
-
         internal void CleanupHandlers()
         {
             _miunie.Impersonation.MessageReceived -= Client_MessageReceivedHandler;
@@ -91,7 +89,7 @@ namespace Miunie.WindowsApp.ViewModels
             _miunie.Impersonation.SubscribeForMessages();
         }
 
-        internal async void FetchInfo(ulong guildId)
+        internal async Task FetchInfoAsync(ulong guildId)
         {
             _currentGuildId = guildId;
             Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
@@ -104,10 +102,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void SendMessageAsMiunieAsync(string message)
         {
+            MessageText = "";
             await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
         }
 
-        private async void LoadMessages()
+        private async void LoadMessagesAsync()
         {
             Messages.Clear();
 
@@ -138,9 +137,7 @@ namespace Miunie.WindowsApp.ViewModels
         {
             var m = (SocketMessage)sender;
 
-            _channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
-
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 if (m.Channel.Id == SelectedChannel?.Id)
                 {
@@ -158,10 +155,6 @@ namespace Miunie.WindowsApp.ViewModels
                                             Height = x.Height 
                                         }))
                     });
-                    MessageText = "";
-
-                    await Task.Delay(500);
-                    MessageReceived?.Invoke(m, EventArgs.Empty);
                 }
             });
         }
