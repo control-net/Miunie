@@ -11,6 +11,7 @@ using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Miunie.WindowsApp.Utilities;
 using Miunie.Core.Logging;
+using System.Threading.Tasks;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -109,36 +110,42 @@ namespace Miunie.WindowsApp.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) { return; }
 
+            var possibleToken = await TryGetClipboardContents();
+
+            if (!_tokenManager.StringHasValidTokenStructure(possibleToken)) { return; }
+
+            var clipboardTokenDialog = new ContentDialog
+            {
+                Title = "Paste copied bot token?",
+                Content = "It looks like you have a bot token copied.\nDo you want to use it?",
+                PrimaryButtonText = "Sure",
+                CloseButtonText = "No, thanks"
+            };
+
+            if (await clipboardTokenDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                _tokenManager.ApplyToken(possibleToken, _miunie);
+                RaisePropertyChanged(nameof(SettingsButtonIsVisable));
+                RaisePropertyChanged(nameof(ActionCommand));
+            }
+        }
+
+        private async Task<string> TryGetClipboardContents()
+        {
+            var clipboardContent = Clipboard.GetContent();
+
             try
             {
-                var clipboardContent = Clipboard.GetContent();
+                //var clipboardContent = Clipboard.GetContent();
 
-                if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
+                if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return string.Empty; }
 
-                var possibleToken = await Clipboard.GetContent().GetTextAsync();
-
-                if (!_tokenManager.StringHasValidTokenStructure(possibleToken)) { return; }
-
-                var clipboardTokenDialog = new ContentDialog
-                {
-                    Title = "Paste copied bot token?",
-                    Content = "It looks like you have a bot token copied.\nDo you want to use it?",
-                    PrimaryButtonText = "Sure",
-                    CloseButtonText = "No, thanks"
-                };
-
-                var result = await clipboardTokenDialog.ShowAsync();
-
-                if (result == ContentDialogResult.Primary)
-                {
-                    _tokenManager.ApplyToken(possibleToken, _miunie);
-                    RaisePropertyChanged(nameof(SettingsButtonIsVisable));
-                    RaisePropertyChanged(nameof(ActionCommand));
-                }
+                return await Clipboard.GetContent().GetTextAsync();
             }
             catch (Exception ex)
             {
                 _logWriter.LogError($"Unable to query clipboard: {ex.Message}");
+                return string.Empty;
             }
         }
 
