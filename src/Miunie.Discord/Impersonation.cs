@@ -39,15 +39,18 @@ namespace Miunie.Discord
             var textChannels = guild.Channels
                 .Where(IsViewableTextChannel)
                 .Cast<SocketTextChannel>()
-                .Select(channel => new TextChannelView
-                {
-                    Id = channel.Id,
-                    Name = $"# {channel.Name}",
-                    Messages = new MessageView[0]
-                });
+                .Select(ToTextChannelView);
 
             return textChannels;
         }
+
+        private TextChannelView ToTextChannelView(SocketTextChannel channel)
+            => new TextChannelView
+            {
+                Id = channel.Id,
+                Name = $"# {channel.Name}",
+                Messages = new MessageView[0]
+            };
 
         private bool IsViewableTextChannel(SocketGuildChannel c)
         {
