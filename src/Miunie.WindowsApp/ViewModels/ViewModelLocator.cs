@@ -33,6 +33,7 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register(() => ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider));
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogReader>());
+            SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILogWriter>());
             SimpleIoc.Default.Register(() => InversionOfControl.Provider.GetRequiredService<ILanguageProvider>());
             SimpleIoc.Default.Register<TokenManager>();
         }
