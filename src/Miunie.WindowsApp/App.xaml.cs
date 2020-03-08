@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Threading;
 using Miunie.WindowsApp.Views;
 using Windows.UI.ViewManagement;
+using Windows.UI.Popups;
+using Windows.ApplicationModel.Core;
+using GalaSoft.MvvmLight.Ioc;
+using Miunie.Core.Logging;
 
 namespace Miunie.WindowsApp
 {
@@ -31,8 +35,41 @@ namespace Miunie.WindowsApp
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
+            UnhandledException += App_UnhandledException;
+        }
+
+        private async void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            System.Diagnostics.Debug.WriteLine(e.Exception);
+
+            var logger = SimpleIoc.Default.GetInstance<ILogWriter>();
+            logger.LogError($"{e.Message}");
+
+            var confirmRestart = new ContentDialog
+            {
+                Title = "Opps! Wasn't expecting that...",
+                Content = "Miunie encountered an error that she was unprepared for. Would you like to reset Miunie with a clean restart?",
+                PrimaryButtonText = "Yes, restart Miunie",
+                CloseButtonText = "Try my luck and continue"
+            };
+
+            var confirmResult = await confirmRestart.ShowAsync();
+
+            if (confirmResult == ContentDialogResult.Primary) {
+
+                var restartResult = await CoreApplication.RequestRestartAsync($"Restart Failure: {e.Message}");
+
+                if (restartResult == AppRestartFailureReason.NotInForeground ||
+                    restartResult == AppRestartFailureReason.RestartPending ||
+                    restartResult == AppRestartFailureReason.Other)
+                {
+                    var msgBox = new MessageDialog("Restart Failed", restartResult.ToString());
+                    await msgBox.ShowAsync();
+                }
+            }
         }
 
         /// <summary>
@@ -45,11 +82,9 @@ namespace Miunie.WindowsApp
             // Set preferred application window min size
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 400));
 
-            Frame rootFrame = Window.Current.Content as Frame;
-
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
