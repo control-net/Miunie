@@ -10,14 +10,12 @@ namespace Miunie.Discord.CommandModules
     public class ProfileCommand : ModuleBase<SocketCommandContext>
     {
         private readonly EntityConvertor _entityConvertor;
-        private readonly MiunieUserConverter _userConverter;
         private readonly ProfileService _profileService;
 
-        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService, MiunieUserConverter userConverter)
+        public ProfileCommand(EntityConvertor entityConvertor, ProfileService profileService)
         {
             _entityConvertor = entityConvertor;
             _profileService = profileService;
-            _userConverter = userConverter;
         }
 
         [Command("profile")]
