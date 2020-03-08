@@ -33,11 +33,11 @@ namespace Miunie.Discord
 
         public IEnumerable<TextChannelView> GetAvailableTextChannelsAsync(ulong guildId)
         {
-            if(guildId == 0) { return new TextChannelView[0]; }
+            if (guildId == 0) { return new TextChannelView[0]; }
 
             var guild = _discord.Client.GetGuild(guildId);
             var textChannels = guild.Channels
-                .Where(c => c is SocketTextChannel && c.GetUser(_discord.Client.CurrentUser.Id).GetPermissions(c).ViewChannel)
+                .Where(IsViewableTextChannel)
                 .Cast<SocketTextChannel>()
                 .Select(channel => new TextChannelView
                 {
@@ -49,13 +49,20 @@ namespace Miunie.Discord
             return textChannels;
         }
 
+        private bool IsViewableTextChannel(SocketGuildChannel c)
+        {
+            if(!(c is SocketTextChannel)) { return false; }
+
+            return c.GetUser(_discord.Client.CurrentUser.Id) != null;
+        }
+
         public async Task<IEnumerable<MessageView>> GetMessagesFromTextChannelAsync(ulong guildId, ulong channelId)
         {
             if (guildId == 0) { return new MessageView[0]; }
 
             var guild = _discord.Client.GetGuild(guildId);
             var textChannel = guild.Channels
-                .Where(c => c.Id == channelId && c is SocketTextChannel && c.GetUser(_discord.Client.CurrentUser.Id).GetPermissions(c).ViewChannel)
+                .Where(c => c.Id == channelId && IsViewableTextChannel(c))
                 .Cast<SocketTextChannel>()
                 .FirstOrDefault();
 
