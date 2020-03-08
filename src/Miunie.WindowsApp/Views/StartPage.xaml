@@ -10,7 +10,7 @@
     DataContext="{Binding StartPageInstance, Source={StaticResource Locator}}">
 
     <Grid>
-        <muxc:NavigationView Name="MainNavigationView"
+        <muxc:NavigationView x:Name="MainNavigationView"
                         Loaded="MainNavigationView_OnLoaded"
                         ItemInvoked="MainNavigationView_OnItemInvoked"
                         IsBackButtonVisible="Collapsed">
