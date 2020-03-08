@@ -38,7 +38,7 @@ namespace Miunie.WindowsApp.ViewModels
             SimpleIoc.Default.Register<TokenManager>();
         }
 
-        public StartPageViewModel StartPageInstance 
+        public StartPageViewModel StartPageInstance
             => ServiceLocator.Current.GetInstance<StartPageViewModel>();
 
         public StatusPageViewModel StatusPageInstance

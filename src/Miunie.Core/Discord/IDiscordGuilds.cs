@@ -14,14 +14,12 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using Miunie.Core.Entities.Discord;
-using System;
+using System.Threading.Tasks;
 
-namespace Miunie.Core.Providers
+namespace Miunie.Core.Discord
 {
-    public interface ITimeManipulationProvider
+    public interface IDiscordGuilds
     {
-        TimeSpan? GetTimeSpanFromString(string timeframe, int units);
-
-        DateTime? GetDateTimeLocalToUser(DateTime? utcDateTime, MiunieUser user);
+        Task<MiunieGuild> FromAsync(MiunieUser user);
     }
 }

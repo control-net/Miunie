@@ -17,7 +17,7 @@ namespace Miunie.WindowsApp.Utilities
         }
 
         public void LoadToken(MiunieBot miunie)
-        {            
+        {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             var token = localSettings.Values["MIUNIE_UWP_TOKEN"]?.ToString();
 

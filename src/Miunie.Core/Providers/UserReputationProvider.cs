@@ -1,3 +1,18 @@
+// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
 using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Infrastructure;
@@ -10,8 +25,6 @@ namespace Miunie.Core.Providers
 {
     public class UserReputationProvider : IUserReputationProvider
     {
-        public int TimeoutInSeconds { get; } = 1800;
-
         private readonly IMiunieUserProvider _userProvider;
         private readonly IDateTime _dateTime;
 
@@ -21,27 +34,34 @@ namespace Miunie.Core.Providers
             _dateTime = dateTime;
         }
 
+        public int TimeoutInSeconds { get; } = 1800;
+
         public IEnumerable<ReputationEntry> GetReputation(MiunieUser invoker)
         {
             var rep = new List<ReputationEntry>();
 
-            if(invoker is null || invoker.Reputation is null) { return rep; }
+            if (invoker is null || invoker.Reputation is null) { return rep; }
 
             foreach (MiunieUser user in _userProvider.GetAllUsers().Where(x => x.Id != invoker.Id))
             {
                 if (user.Reputation.PlusRepLog.ContainsKey(invoker.UserId))
+                {
                     rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Plus, true));
+                }
+
                 if (user.Reputation.MinusRepLog.ContainsKey(invoker.UserId))
+                {
                     rep.Add(new ReputationEntry(user.UserId, user.Name, user.Reputation.PlusRepLog[invoker.UserId], ReputationType.Minus, true));
+                }
             }
 
-            foreach(KeyValuePair<ulong, DateTime> entry in invoker.Reputation.PlusRepLog)
+            foreach (KeyValuePair<ulong, DateTime> entry in invoker.Reputation.PlusRepLog)
             {
                 var user = _userProvider.GetById(entry.Key, invoker.GuildId);
                 rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Plus));
             }
 
-            foreach(KeyValuePair<ulong, DateTime> entry in invoker.Reputation.MinusRepLog)
+            foreach (KeyValuePair<ulong, DateTime> entry in invoker.Reputation.MinusRepLog)
             {
                 var user = _userProvider.GetById(entry.Key, invoker.GuildId);
                 rep.Add(new ReputationEntry(user.UserId, user.Name, entry.Value, ReputationType.Minus));
@@ -53,14 +73,14 @@ namespace Miunie.Core.Providers
         public void AddReputation(MiunieUser invoker, MiunieUser target)
         {
             target.Reputation.Value++;
-            target.Reputation.PlusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
+            _ = target.Reputation.PlusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
             _userProvider.StoreUser(target);
         }
 
         public void RemoveReputation(MiunieUser invoker, MiunieUser target)
         {
             target.Reputation.Value--;
-            target.Reputation.MinusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
+            _ = target.Reputation.MinusRepLog.TryAdd(invoker.UserId, _dateTime.UtcNow);
             _userProvider.StoreUser(target);
         }
 
@@ -72,11 +92,11 @@ namespace Miunie.Core.Providers
 
         private bool HasTimeout(ConcurrentDictionary<ulong, DateTime> log, MiunieUser invoker)
         {
-            log.TryGetValue(invoker.UserId, out var lastRepDateTime);
+            _ = log.TryGetValue(invoker.UserId, out var lastRepDateTime);
 
             if ((_dateTime.UtcNow - lastRepDateTime).TotalSeconds <= TimeoutInSeconds) { return true; }
 
-            log.TryRemove(invoker.UserId, out _);
+            _ = log.TryRemove(invoker.UserId, out _);
             _userProvider.StoreUser(invoker);
             return false;
         }

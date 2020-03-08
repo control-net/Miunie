@@ -64,7 +64,7 @@ namespace Miunie.WindowsApp.Views
 
             if (newPage is null || MainFrame.CurrentSourcePageType == newPage) { return; }
 
-            MainFrame.Navigate(newPage, null, transitionInfo);
+            _ = MainFrame.Navigate(newPage, null, transitionInfo);
         }
 
         private Type GetPageTypeByNavItemTag(string navItemTag)
@@ -91,7 +91,7 @@ namespace Miunie.WindowsApp.Views
             aboutDialog.Commands.Add(new UICommand("Close"));
 
             aboutDialog.CancelCommandIndex = 0;
-            await aboutDialog.ShowAsync();
+            _ = await aboutDialog.ShowAsync();
         }
     }
 }

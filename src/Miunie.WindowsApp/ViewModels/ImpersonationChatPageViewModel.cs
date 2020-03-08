@@ -22,7 +22,8 @@ namespace Miunie.WindowsApp.ViewModels
         public TextChannelView SelectedChannel
         {
             get => _selectedChannel;
-            set { 
+            set
+            {
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
                 RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
@@ -35,7 +36,8 @@ namespace Miunie.WindowsApp.ViewModels
         public IEnumerable<TextChannelView> Channels
         {
             get => _channels;
-            set {
+            set
+            {
                 _channels = value;
                 RaisePropertyChanged(nameof(Channels));
             }
@@ -45,19 +47,21 @@ namespace Miunie.WindowsApp.ViewModels
 
         public ObservableCollection<ObservableMessageView> Messages
         {
-            get { return _messages; }
-            set { 
+            get => _messages;
+            set
+            {
                 _messages = value;
                 RaisePropertyChanged(nameof(Messages));
             }
-        }        
+        }
 
         private string _messageText;
 
         public string MessageText
         {
-            get { return _messageText; }
-            set { 
+            get => _messageText;
+            set
+            {
                 _messageText = value;
                 RaisePropertyChanged(nameof(MessageText));
             }
@@ -148,11 +152,11 @@ namespace Miunie.WindowsApp.ViewModels
                         Content = m.Content,
                         TimeStamp = m.CreatedAt.ToLocalTime(),
                         Images = new ObservableCollection<ObservableImage>(m.Attachments
-                                        .Select(x => new ObservableImage 
-                                        { 
-                                            ProxyUrl = x.ProxyUrl, 
-                                            Width = x.Width, 
-                                            Height = x.Height 
+                                        .Select(x => new ObservableImage
+                                        {
+                                            ProxyUrl = x.ProxyUrl,
+                                            Width = x.Width,
+                                            Height = x.Height
                                         }))
                     });
                 }
