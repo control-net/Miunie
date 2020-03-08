@@ -32,7 +32,7 @@ namespace Miunie.WindowsApp.ViewModels
 
         public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
-        public string Logs => string.Join(Environment.NewLine, _logReader.RetrieveLogs(10).Select(m => $"{m}"));
+        public string Logs => string.Join(Environment.NewLine, _logReader.RetrieveLogs(10));
 
         public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);
 
