@@ -1,4 +1,19 @@
-﻿using Discord.WebSocket;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Discord.WebSocket;
 using Miunie.Core;
 using Miunie.Core.Discord;
 using Miunie.Core.Entities;
@@ -29,27 +44,27 @@ namespace Miunie.Discord.Adapters
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var embed = EmbedConstructor.CreateReputationLog(repEntries, index, _lang);
 
-            await channel.SendMessageAsync(embed: embed);
+            _ = await channel.SendMessageAsync(embed: embed);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, PhraseKey phraseKey, params object[] parameters)
         {
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
             var msg = _lang.GetPhrase(phraseKey.ToString(), parameters);
-            await channel.SendMessageAsync(msg);
+            _ = await channel.SendMessageAsync(msg);
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieUser mu)
         {
             var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
-            
-            if(channel is null)
+
+            if (channel is null)
             {
                 LogSocketTextChannelCastFailed();
                 return;
             }
 
-            await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
+            _ = await channel.SendMessageAsync(embed: mu.ToEmbed(_lang));
         }
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieGuild mg)
@@ -62,7 +77,7 @@ namespace Miunie.Discord.Adapters
                 return;
             }
 
-            await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
+            _ = await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
         }
 
         private void LogSocketTextChannelCastFailed()

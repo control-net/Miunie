@@ -1,4 +1,19 @@
-﻿using Miunie.Core.Entities;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Providers;
 using Miunie.Core.Storage;
@@ -29,9 +44,9 @@ namespace Miunie.Core.XUnit.Tests.Providers
         public void GetById_ShouldFindAndReturnExpectedUser_IfUserFound()
         {
             var expected = _users.Drax;
-            _storageMock.Setup(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
+            _ = _storageMock.Setup(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
                 .Returns(expected);
-            _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
+            _ = _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
 
             var actual = _userProvider.GetById(expected.UserId, expected.GuildId);
 
@@ -46,9 +61,9 @@ namespace Miunie.Core.XUnit.Tests.Providers
         public void GetById_ShouldStoreAndReturnNewUser_IfUserNotFound(ulong userId, ulong guildID)
         {
             MiunieUser nullUser = null;
-            _storageMock.Setup(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
+            _ = _storageMock.Setup(s => s.RestoreSingle(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
                 .Returns(nullUser);
-            _storageMock.Setup(s => s.Store(nullUser));
+            _ = _storageMock.Setup(s => s.Store(nullUser));
 
             var newUser = _userProvider.GetById(userId, guildID);
 
@@ -60,9 +75,9 @@ namespace Miunie.Core.XUnit.Tests.Providers
         [Fact]
         public void StoreUser_ShouldUpdateUser_IfUserExists()
         {
-            _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
-            _storageMock.Setup(s => s.Update(It.IsAny<MiunieUser>()));
-            _storageMock.Setup(s => s.Exists(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
+            _ = _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
+            _ = _storageMock.Setup(s => s.Update(It.IsAny<MiunieUser>()));
+            _ = _storageMock.Setup(s => s.Exists(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
                 .Returns(true);
 
             _userProvider.StoreUser(_users.Drax);
@@ -81,9 +96,9 @@ namespace Miunie.Core.XUnit.Tests.Providers
                 UserId = 0,
                 Reputation = new Reputation()
             };
-            _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
-            _storageMock.Setup(s => s.Update(It.IsAny<MiunieUser>()));
-            _storageMock.Setup(s => s.Exists(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
+            _ = _storageMock.Setup(s => s.Store(It.IsAny<MiunieUser>()));
+            _ = _storageMock.Setup(s => s.Update(It.IsAny<MiunieUser>()));
+            _ = _storageMock.Setup(s => s.Exists(It.IsAny<Expression<Func<MiunieUser, bool>>>()))
                 .Returns(false);
 
             _userProvider.StoreUser(user);

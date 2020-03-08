@@ -96,7 +96,7 @@ namespace Miunie.WindowsApp.ViewModels
                     ErrorMessage = "No key found, input your key inside Settings!";
                     return;
                 }
-                
+
                 await _miunie?.StartAsync();
             }
             else
@@ -109,10 +109,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void CheckForTokenInClipboard()
         {
-            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) {
+            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken))
+            {
                 RaisePropertyChanged(nameof(SettingsButtonIsVisable));
                 RaisePropertyChanged(nameof(ActionCommand));
-                return; 
+                return;
             }
 
             var possibleToken = await TryGetClipboardContents();

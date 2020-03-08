@@ -9,39 +9,40 @@ namespace Miunie.WindowsApp.Models
 {
     public class ObservableImage : ObservableObject
     {
-		private string _proxyUrl;
+        private string _proxyUrl;
 
-		public string ProxyUrl
-		{
-			get { return _proxyUrl; }
-			set { 
-				_proxyUrl = value;
-				RaisePropertyChanged(nameof(ProxyUrl));
-			}
-		}
+        public string ProxyUrl
+        {
+            get => _proxyUrl;
+            set
+            {
+                _proxyUrl = value;
+                RaisePropertyChanged(nameof(ProxyUrl));
+            }
+        }
 
-		private int? _width;
+        private int? _width;
 
-		public int? Width
-		{
-			get { return _width; }
-			set
-			{
-				_width = value;
-				RaisePropertyChanged(nameof(Width));
-			}
-		}
+        public int? Width
+        {
+            get => _width;
+            set
+            {
+                _width = value;
+                RaisePropertyChanged(nameof(Width));
+            }
+        }
 
-		private int? _height;
+        private int? _height;
 
-		public int? Height
-		{
-			get { return _height; }
-			set
-			{
-				_height = value;
-				RaisePropertyChanged(nameof(Height));
-			}
-		}
-	}
+        public int? Height
+        {
+            get => _height;
+            set
+            {
+                _height = value;
+                RaisePropertyChanged(nameof(Height));
+            }
+        }
+    }
 }

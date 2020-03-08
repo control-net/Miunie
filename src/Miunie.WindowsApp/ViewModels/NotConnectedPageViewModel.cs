@@ -12,10 +12,10 @@ namespace Miunie.WindowsApp.ViewModels
             _miunie = miunie;
         }
 
-        public bool StartIsEnabled => 
+        public bool StartIsEnabled =>
             !string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken);
 
-        public string ConnectionStatus => 
+        public string ConnectionStatus =>
             _miunie.MiunieDiscord.ConnectionState.ToString();
     }
 }

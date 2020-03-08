@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Avalonia.Media.Imaging;
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Avalonia.Utilities;
 using Miunie.Core;
 using Miunie.Core.Entities;
-using Miunie.Core.Logging;
 using ReactiveUI;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
+using System;
+using System.Threading.Tasks;
 
 namespace Miunie.Avalonia.ViewModels
 {
@@ -19,6 +29,9 @@ namespace Miunie.Avalonia.ViewModels
         private readonly MiunieBot _miunie;
         private readonly UrlImageConverter _urlImageConverter;
         private readonly Bitmap _miunieBitmap;
+        private string _connectionStatusText = "Disconnected";
+        private Bitmap _botAvatarImage;
+        private string _discordToken = string.Empty;
 
         public MainWindowViewModel()
         {
@@ -29,34 +42,30 @@ namespace Miunie.Avalonia.ViewModels
             _miunie.MiunieDiscord.ConnectionChanged += ConectionStateChanged;
         }
 
-        private string _connectionStatusText = "Disconnected";
-
-        public string ConnectionStatusText 
-        { 
-            get { return _connectionStatusText; }
-            set { this.RaiseAndSetIfChanged(ref _connectionStatusText, value); }
+        public string ConnectionStatusText
+        {
+            get => _connectionStatusText;
+            set => _ = this.RaiseAndSetIfChanged(ref _connectionStatusText, value);
         }
-
-        private Bitmap _botAvatarImage;
 
         public Bitmap BotAvatarImage
         {
-            get { return _botAvatarImage; }
-            set { this.RaiseAndSetIfChanged(ref _botAvatarImage, value); }
+            get => _botAvatarImage;
+            set => _ = this.RaiseAndSetIfChanged(ref _botAvatarImage, value);
         }
 
-        private string _discordToken = "";
-
-        public string DiscordToken 
-        { 
-            get { return _discordToken; }
-            set { this.RaiseAndSetIfChanged(ref _discordToken, value); }
+        public string DiscordToken
+        {
+            get => _discordToken;
+            set => _ = this.RaiseAndSetIfChanged(ref _discordToken, value);
         }
 
         public async Task StartButton_ClickCommand()
         {
             if (string.IsNullOrWhiteSpace(DiscordToken))
+            {
                 return;
+            }
 
             _miunie.BotConfiguration.DiscordToken = DiscordToken;
             await _miunie.StartAsync();
