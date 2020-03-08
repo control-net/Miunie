@@ -132,11 +132,9 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async Task<string> TryGetClipboardContents()
         {
-            var clipboardContent = Clipboard.GetContent();
-
             try
             {
-                //var clipboardContent = Clipboard.GetContent();
+                var clipboardContent = Clipboard.GetContent();
 
                 if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return string.Empty; }
 
