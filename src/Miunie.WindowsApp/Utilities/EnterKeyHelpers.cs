@@ -38,13 +38,26 @@ namespace Miunie.WindowsApp.Utilities
             {
                 if (args.Key == Windows.System.VirtualKey.Enter)
                 {
-                    // make sure the textbox binding updates its source first
-                    BindingExpression b = control.GetBindingExpression(TextBox.TextProperty);
-                    if (b != null)
+                    if (control is TextBox textbox)
                     {
-                        b.UpdateSource();
+                        BindingExpression b = control.GetBindingExpression(TextBox.TextProperty);
+                        if (b != null)
+                        {
+                            b.UpdateSource();
+                        }
+                        command.Execute(textbox.Text);
                     }
-                    command.Execute((control as TextBox).Text);
+
+                    if (control is PasswordBox password)
+                    {
+                        BindingExpression b = control.GetBindingExpression(PasswordBox.PasswordProperty);
+                        if (b != null)
+                        {
+                            b.UpdateSource();
+                        }
+                        command.Execute(password.Password);
+                    }
+
                 }
             };
         }
