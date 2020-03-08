@@ -30,6 +30,7 @@ namespace Miunie.WindowsApp.ViewModels
             _logWriter = logWriter;
             miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
+            _tokenManager.LoadToken(_miunie);
             CheckForTokenInClipboard();
         }
 
@@ -108,7 +109,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void CheckForTokenInClipboard()
         {
-            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) { return; }
+            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) {
+                RaisePropertyChanged(nameof(SettingsButtonIsVisable));
+                RaisePropertyChanged(nameof(ActionCommand));
+                return; 
+            }
 
             var possibleToken = await TryGetClipboardContents();
 
