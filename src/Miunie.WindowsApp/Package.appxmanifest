@@ -8,14 +8,14 @@
 
   <Identity
     Name="83958896-b819-4147-8264-534c21397953"
-    Publisher="CN=angie"
+    Publisher="CN=Control .NET"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="83958896-b819-4147-8264-534c21397953" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Miunie.WindowsApp</DisplayName>
-    <PublisherDisplayName>angie</PublisherDisplayName>
+    <DisplayName>Miunie</DisplayName>
+    <PublisherDisplayName>Control .NET</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
