@@ -14,7 +14,7 @@ namespace Miunie.WindowsApp.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        private const string DefaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
+        private const string _defaultAvatarUrl = "../Assets/miunie-scarf-transparent.png";
 
         private readonly MiunieBot _miunie;
         private readonly ILogReader _logReader;
@@ -30,7 +30,7 @@ namespace Miunie.WindowsApp.ViewModels
 
         public string BotToken => _miunie.BotConfiguration.DiscordToken;
 
-        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
+        public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? _defaultAvatarUrl;
 
         public IEnumerable<object> Logs => _logReader.RetrieveLogs(10).Select(m => new { Message = m });
 
