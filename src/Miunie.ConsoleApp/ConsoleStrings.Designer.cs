@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace Miunie.ConsoleApp {
-    using System;
     
     
     /// <summary>
@@ -88,6 +87,15 @@ namespace Miunie.ConsoleApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Channel is read only, cannot send messages..
+        /// </summary>
+        internal static string CANNOT_SEND_READONLY {
+            get {
+                return ResourceManager.GetString("CANNOT_SEND_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuration Error:
         ///The configuration could not retrieve the item:&apos;{0}&apos;
         ///Enter your desired value: (or type EXIT).
@@ -147,7 +155,8 @@ namespace Miunie.ConsoleApp {
         /// <summary>
         ///   Looks up a localized string similar to [1] Edit bot configuration
         ///[2] Start/Stop Miunie
-        ///[3] Stop Miunie &amp; Exit.
+        ///[3] Stop Miunie &amp; Exit
+        ///[4] Servers.
         /// </summary>
         internal static string MAIN_MENU_OPTIONS {
             get {
@@ -205,6 +214,46 @@ namespace Miunie.ConsoleApp {
         internal static string RANDOM_TOKEN_MESSAGE {
             get {
                 return ResourceManager.GetString("RANDOM_TOKEN_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select channel:.
+        /// </summary>
+        internal static string SELECT_CHANNEL {
+            get {
+                return ResourceManager.GetString("SELECT_CHANNEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select guild:.
+        /// </summary>
+        internal static string SELECT_GUILD {
+            get {
+                return ResourceManager.GetString("SELECT_GUILD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send message to {0}.
+        /// </summary>
+        internal static string SEND_MESSAGE_TO {
+            get {
+                return ResourceManager.GetString("SEND_MESSAGE_TO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [1] Load messages
+        ///[2] Send message
+        ///[3] Back to channels
+        ///[4] Back to servers
+        ///[5] Main menu.
+        /// </summary>
+        internal static string SERVER_MENU_OPTIONS {
+            get {
+                return ResourceManager.GetString("SERVER_MENU_OPTIONS", resourceCulture);
             }
         }
         
