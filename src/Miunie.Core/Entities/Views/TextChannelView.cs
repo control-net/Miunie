@@ -24,5 +24,7 @@ namespace Miunie.Core.Entities.Views
         public string Name { get; set; }
 
         public IEnumerable<MessageView> Messages { get; set; }
+
+        public bool CanSendMessages { get; set; }
     }
 }

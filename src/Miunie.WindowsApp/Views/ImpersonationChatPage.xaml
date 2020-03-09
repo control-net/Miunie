@@ -73,7 +73,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" u:EnterKeyHelpers.EnterKeyCommand="{Binding SendMessageCommand}" PlaceholderText="Type your message here." HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
+            <TextBox Grid.Row="1" x:Name="MessageTextBox" IsEnabled="{Binding IsMessageTextboxEnabled}" Text="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" u:EnterKeyHelpers.EnterKeyCommand="{Binding SendMessageCommand}" PlaceholderText="{Binding SendMessageInputPlaceholder}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5,0,10" />
             <Button Grid.Row="1" Grid.Column="1" Command="{Binding SendMessageCommand}" CommandParameter="{Binding ElementName=MessageTextBox, Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontFamily="Segoe MDL2 Assets" Content="&#xE725;" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,5,10"/>
         </Grid>
     </Grid>

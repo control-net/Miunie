@@ -27,6 +27,7 @@ namespace Miunie.WindowsApp.ViewModels
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
                 RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
+                RaisePropertyChanged(nameof(SendMessageInputPlaceholder));
                 LoadMessagesAsync();
             }
         }
@@ -67,7 +68,9 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        public bool IsMessageTextboxEnabled => _selectedChannel != null;
+        public bool IsMessageTextboxEnabled => _selectedChannel?.CanSendMessages ?? false;
+
+        public string SendMessageInputPlaceholder => _selectedChannel?.CanSendMessages ?? true ? "Type your message here." : "This channel is read only.";
 
         public ICommand SendMessageCommand => new RelayCommand<string>(SendMessageAsMiunieAsync, CanSendMessage);
 
