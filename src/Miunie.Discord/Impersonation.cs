@@ -111,8 +111,12 @@ namespace Miunie.Discord
             {
                 Id = channel.Id,
                 Name = $"# {channel.Name}",
-                Messages = new MessageView[0]
+                Messages = new MessageView[0],
+                CanSendMessages = CanSendMessagesTo(channel)
             };
+
+        private bool CanSendMessagesTo(SocketTextChannel channel)
+            => channel.GetUser(_discord.Client.CurrentUser.Id)?.GetPermissions(channel).SendMessages ?? false;
 
         private bool IsViewableTextChannel(SocketGuildChannel c)
         {
