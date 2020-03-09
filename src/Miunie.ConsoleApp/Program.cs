@@ -132,7 +132,7 @@ namespace Miunie.ConsoleApp
         private static void AnyKeyToContinue()
         {
             Console.WriteLine(ConsoleStrings.ANY_KEY_TO_CONTINUE);
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
 
         private static void DrawMiunieState()
