@@ -32,14 +32,14 @@ namespace Miunie.WindowsApp.Views
 
         private void SettingsBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SettingsPage), null);
+            _ = Frame.Navigate(typeof(SettingsPage), null);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (e.SourcePageType == typeof(SettingsPage))
             {
-                ConnectedAnimationService
+                _ = ConnectedAnimationService
                     .GetForCurrentView()
                     .PrepareToAnimate("MiunieStatusToSettings", MiunieAvatar);
             }
@@ -49,7 +49,7 @@ namespace Miunie.WindowsApp.Views
         {
             var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("MiunieSettingsToStatus");
             if (animation is null) { return; }
-            animation.TryStart(MiunieAvatar);
+            _ = animation.TryStart(MiunieAvatar);
             _vm.RaisePropertyChanged(nameof(_vm.SettingsButtonIsVisable));
         }
     }

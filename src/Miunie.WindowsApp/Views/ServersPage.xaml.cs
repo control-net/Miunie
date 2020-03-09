@@ -23,7 +23,7 @@ namespace Miunie.WindowsApp.Views
             //    .GetForCurrentView()
             //    .PrepareToAnimate("ServerExpandAnimation", (UIElement) e.OriginalSource);
 
-            Frame.Navigate(typeof(ImpersonationChatPage), guild.Id);
+            _ = Frame.Navigate(typeof(ImpersonationChatPage), guild.Id);
         }
     }
 }

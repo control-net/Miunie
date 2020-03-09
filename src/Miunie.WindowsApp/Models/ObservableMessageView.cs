@@ -19,9 +19,9 @@ namespace Miunie.WindowsApp.Models
         private string _authorName;
         public string AuthorName
         {
-            get { return _authorName; }
-            set 
-            { 
+            get => _authorName;
+            set
+            {
                 _authorName = value;
                 RaisePropertyChanged(nameof(AuthorName));
             }
@@ -30,7 +30,7 @@ namespace Miunie.WindowsApp.Models
         private string _authorAvatarUrl;
         public string AuthorAvatarUrl
         {
-            get { return _authorAvatarUrl; }
+            get => _authorAvatarUrl;
             set
             {
                 _authorAvatarUrl = value;
@@ -41,7 +41,7 @@ namespace Miunie.WindowsApp.Models
         private string _content;
         public string Content
         {
-            get { return _content; }
+            get => _content;
             set
             {
                 _content = value;
@@ -52,7 +52,7 @@ namespace Miunie.WindowsApp.Models
         private DateTimeOffset _timeStamp;
         public DateTimeOffset TimeStamp
         {
-            get { return _timeStamp; }
+            get => _timeStamp;
             set
             {
                 _timeStamp = value;
@@ -63,7 +63,7 @@ namespace Miunie.WindowsApp.Models
         private ObservableCollection<ObservableImage> _images;
         public ObservableCollection<ObservableImage> Images
         {
-            get { return _images; }
+            get => _images;
             set
             {
                 _images = value;

@@ -19,20 +19,20 @@ namespace Miunie.WindowsApp.Views
 
         private void TokenAppliedEventHandler(object sender, EventArgs e)
         {
-            Frame.Navigate(typeof(StatusPage), null);
+            _ = Frame.Navigate(typeof(StatusPage), null);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("MiunieStatusToSettings");
-            animation?.TryStart(MiunieSettingsAvatar);
+            _ = animation?.TryStart(MiunieSettingsAvatar);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (e.SourcePageType == typeof(StatusPage))
             {
-                ConnectedAnimationService
+                _ = ConnectedAnimationService
                     .GetForCurrentView()
                     .PrepareToAnimate("MiunieSettingsToStatus", MiunieSettingsAvatar);
             }

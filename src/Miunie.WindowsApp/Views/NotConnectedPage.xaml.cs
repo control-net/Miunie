@@ -17,12 +17,12 @@ namespace Miunie.WindowsApp.Views
 
         private void ConfigBtn_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SettingsPage), null);
+            _ = Frame.Navigate(typeof(SettingsPage), null);
         }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(StatusPage), null);
+            _ = Frame.Navigate(typeof(StatusPage), null);
         }
     }
 }

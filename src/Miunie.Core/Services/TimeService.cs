@@ -1,4 +1,19 @@
-﻿using Miunie.Core.Attributes;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Miunie.Core.Attributes;
 using Miunie.Core.Discord;
 using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;
@@ -45,8 +60,8 @@ namespace Miunie.Core
                 return;
             }
 
-            var requesterOffset = requestUser.UtcTimeOffset ?? new TimeSpan();
-            var otherUserOffSet = user.UtcTimeOffset ?? new TimeSpan();
+            var requesterOffset = requestUser.UtcTimeOffset ?? default;
+            var otherUserOffSet = user.UtcTimeOffset ?? default;
 
             var requestUtcTime = requestTime - requesterOffset;
             var otherUserTime = requestUtcTime + otherUserOffSet;
@@ -62,7 +77,7 @@ namespace Miunie.Core
                 return;
             }
 
-            var timeFromLocal = _timeManipulator.GetTimeSpanFromString(timeframe, units);           
+            var timeFromLocal = _timeManipulator.GetTimeSpanFromString(timeframe, units);
 
             if (timeFromLocal is null)
             {
@@ -70,7 +85,7 @@ namespace Miunie.Core
                 return;
             }
 
-            var usersOffset = user.UtcTimeOffset ?? new TimeSpan();
+            var usersOffset = user.UtcTimeOffset ?? default;
             var usersLocalTime = _dateTime.UtcNow + usersOffset;
             var usersFutureTime = usersLocalTime + timeFromLocal;
 

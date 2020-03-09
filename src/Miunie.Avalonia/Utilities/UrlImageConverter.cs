@@ -13,15 +13,33 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
-using Miunie.Core.Entities.Discord;
-using System;
+using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace Miunie.Core.Providers
+namespace Miunie.Avalonia.Utilities
 {
-    public interface ITimeManipulationProvider
+    public class UrlImageConverter
     {
-        TimeSpan? GetTimeSpanFromString(string timeframe, int units);
+        private readonly HttpClient _httpClient;
 
-        DateTime? GetDateTimeLocalToUser(DateTime? utcDateTime, MiunieUser user);
+        public UrlImageConverter(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<Bitmap> UrlToBitmapAsync(string url)
+        {
+            Bitmap bitmap;
+            var byteArray = await _httpClient.GetByteArrayAsync(url);
+            using (var ms = new MemoryStream(byteArray))
+            {
+                bitmap = new Bitmap(ms);
+            }
+
+            return bitmap;
+        }
     }
 }

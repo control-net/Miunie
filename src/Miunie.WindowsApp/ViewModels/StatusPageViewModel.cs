@@ -10,6 +10,8 @@ using Windows.ApplicationModel.DataTransfer;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Miunie.WindowsApp.Utilities;
+using Miunie.Core.Logging;
+using System.Threading.Tasks;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -19,13 +21,16 @@ namespace Miunie.WindowsApp.ViewModels
 
         private readonly MiunieBot _miunie;
         private readonly TokenManager _tokenManager;
+        private readonly ILogWriter _logWriter;
 
-        public StatusPageViewModel(MiunieBot miunie, TokenManager tokenManager)
+        public StatusPageViewModel(MiunieBot miunie, TokenManager tokenManager, ILogWriter logWriter)
         {
             _miunie = miunie;
             _tokenManager = tokenManager;
+            _logWriter = logWriter;
             miunie.MiunieDiscord.ConnectionChanged += MiunieOnConnectionStateChanged;
             ConnectionStatus = "Not connected";
+            _tokenManager.LoadToken(_miunie);
             CheckForTokenInClipboard();
         }
 
@@ -91,7 +96,7 @@ namespace Miunie.WindowsApp.ViewModels
                     ErrorMessage = "No key found, input your key inside Settings!";
                     return;
                 }
-                
+
                 await _miunie?.StartAsync();
             }
             else
@@ -104,13 +109,14 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void CheckForTokenInClipboard()
         {
-            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken)) { return; }
+            if (!string.IsNullOrWhiteSpace(_miunie.BotConfiguration.DiscordToken))
+            {
+                RaisePropertyChanged(nameof(SettingsButtonIsVisable));
+                RaisePropertyChanged(nameof(ActionCommand));
+                return;
+            }
 
-            var clipboardContent = Clipboard.GetContent();
-
-            if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return; }
-
-            var possibleToken = await Clipboard.GetContent().GetTextAsync();
+            var possibleToken = await TryGetClipboardContents();
 
             if (!_tokenManager.StringHasValidTokenStructure(possibleToken)) { return; }
 
@@ -122,12 +128,28 @@ namespace Miunie.WindowsApp.ViewModels
                 CloseButtonText = "No, thanks"
             };
 
-            var result = await clipboardTokenDialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary) { 
+            if (await clipboardTokenDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
                 _tokenManager.ApplyToken(possibleToken, _miunie);
                 RaisePropertyChanged(nameof(SettingsButtonIsVisable));
                 RaisePropertyChanged(nameof(ActionCommand));
+            }
+        }
+
+        private async Task<string> TryGetClipboardContents()
+        {
+            try
+            {
+                var clipboardContent = Clipboard.GetContent();
+
+                if (!clipboardContent.AvailableFormats.Contains(StandardDataFormats.Text)) { return string.Empty; }
+
+                return await Clipboard.GetContent().GetTextAsync();
+            }
+            catch (Exception ex)
+            {
+                _logWriter.LogError($"Unable to query clipboard: {ex.Message}");
+                return string.Empty;
             }
         }
 

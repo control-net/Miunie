@@ -1,4 +1,19 @@
-﻿using Miunie.Core.Discord;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Miunie.Core.Discord;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
 using Miunie.Core.Providers;
@@ -18,7 +33,6 @@ namespace Miunie.Core.XUnit.Tests.Services
         private readonly DummyMiunieUsers _users;
 
         private readonly Expression<Func<MiunieUser, bool>> _hasDraxId;
-        private readonly Expression<Func<MiunieUser, bool>> _hasPeterId;
         private readonly Expression<Func<MiunieUser, bool>> _hasSenneId;
 
         public ProfileServiceReputationTests()
@@ -29,7 +43,6 @@ namespace Miunie.Core.XUnit.Tests.Services
             _users = new DummyMiunieUsers();
 
             _hasDraxId = u => u.UserId == _users.Drax.UserId;
-            _hasPeterId = u => u.UserId == _users.Peter.UserId;
             _hasSenneId = u => u.UserId == _users.Senne.UserId;
         }
 
@@ -38,15 +51,15 @@ namespace Miunie.Core.XUnit.Tests.Services
         {
             await _profileService.GiveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.CanAddReputation(
+            _repProviderMock.Verify(
+                rp => rp.CanAddReputation(
                 It.Is(_hasDraxId),
-                It.Is(_hasSenneId)
-            ), Times.Once());
+                It.Is(_hasSenneId)), Times.Once());
 
-            _repProviderMock.Verify(rp => rp.AddReputation(
+            _repProviderMock.Verify(
+                rp => rp.AddReputation(
                 It.Is(_hasDraxId),
-                It.Is(_hasSenneId)
-            ), Times.Once());
+                It.Is(_hasSenneId)), Times.Once());
         }
 
         [Fact]
@@ -65,15 +78,15 @@ namespace Miunie.Core.XUnit.Tests.Services
         {
             await _profileService.RemoveReputationAsync(_users.Drax, _users.Senne, new MiunieChannel());
 
-            _repProviderMock.Verify(rp => rp.CanRemoveReputation(
+            _repProviderMock.Verify(
+                rp => rp.CanRemoveReputation(
                 It.Is(_hasDraxId),
-                It.Is(_hasSenneId)
-            ), Times.Once());
+                It.Is(_hasSenneId)), Times.Once());
 
-            _repProviderMock.Verify(rp => rp.RemoveReputation(
+            _repProviderMock.Verify(
+                rp => rp.RemoveReputation(
                 It.Is(_hasDraxId),
-                It.Is(_hasSenneId)
-            ), Times.Once());
+                It.Is(_hasSenneId)), Times.Once());
         }
 
         [Fact]

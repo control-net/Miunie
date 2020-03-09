@@ -1,4 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using Microsoft.Extensions.DependencyInjection;
 using Miunie.ConsoleApp.Configuration;
 using Miunie.Core;
 using Miunie.Core.Entities;
@@ -13,6 +28,24 @@ namespace Miunie.ConsoleApp
         private static MiunieBot _miunie;
         private static ConfigManager _configManager;
         private static ConfigurationFileEditor _editor;
+
+        public static void DisplayMenu()
+        {
+            Console.Clear();
+            PrintHeader();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(ConsoleStrings.MAIN_MENU_OPTIONS);
+        }
+
+        public static void ClearCurrentConsoleLine()
+        {
+            var currentTop = Console.CursorTop;
+            var currentLeft = Console.CursorLeft;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(currentLeft, currentTop);
+        }
 
         private static async Task Main(string[] args)
         {
@@ -64,62 +97,58 @@ namespace Miunie.ConsoleApp
                 switch (choice)
                 {
                     case 1:
-                    {
-                        string token;
-                        do
                         {
-                            Console.Clear();
-                            Console.Write(ConsoleStrings.ENTER_TOKEN);
-                            token = Console.ReadLine();
+                            string token;
+                            do
+                            {
+                                Console.Clear();
+                                Console.Write(ConsoleStrings.ENTER_TOKEN);
+                                token = Console.ReadLine();
 
-                            Console.Clear();
-                            Console.WriteLine(ConsoleStrings.IS_TOKEN_CORRECT, token);
-                            Console.WriteLine(ConsoleStrings.YES_NO_PROMPT);
-                        } while (Console.ReadKey().Key != ConsoleKey.Y);
+                                Console.Clear();
+                                Console.WriteLine(ConsoleStrings.IS_TOKEN_CORRECT, token);
+                                Console.WriteLine(ConsoleStrings.YES_NO_PROMPT);
+                            }
+                            while (Console.ReadKey().Key != ConsoleKey.Y);
 
-                        _editor.WriteSetting("DiscordToken", token);
-                        _editor.Save();
-                        _miunie.BotConfiguration.DiscordToken = token;
-                        break;
-                    }
+                            _editor.WriteSetting("DiscordToken", token);
+                            _editor.Save();
+                            _miunie.BotConfiguration.DiscordToken = token;
+                            break;
+                        }
+
                     case 2:
-                    {
-                        if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
                         {
-                            _miunie.Stop();
-                            AnyKeyToContinue();
+                            if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED)
+                            {
+                                _miunie.Stop();
+                                AnyKeyToContinue();
+                            }
+                            else if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
+                            {
+                                _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
+                                _miunie.BotConfiguration.CommandsEnabled = true;
+                                _ = _miunie.StartAsync();
+                                AnyKeyToContinue();
+                            }
+
+                            break;
                         }
-                        else if(_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
-                        {
-                            _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
-                            _miunie.BotConfiguration.CommandsEnabled = true;
-                            _ = _miunie.StartAsync();
-                            AnyKeyToContinue();
-                        }
-                        break;
-                    }
+
                     case 3:
-                    {
-                        Environment.Exit(0);
-                        break;
-                    }
+                        {
+                            Environment.Exit(0);
+                            break;
+                        }
+
                     default:
-                    {
-                        Console.WriteLine(ConsoleStrings.UNKNOWN_OPTION_SELECTED);
-                        AnyKeyToContinue();
-                        break;
-                    }
+                        {
+                            Console.WriteLine(ConsoleStrings.UNKNOWN_OPTION_SELECTED);
+                            AnyKeyToContinue();
+                            break;
+                        }
                 }
             }
-        }
-
-        public static void DisplayMenu()
-        {
-            Console.Clear();
-            PrintHeader();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine(ConsoleStrings.MAIN_MENU_OPTIONS);
         }
 
         private static void PrintHeader()
@@ -132,7 +161,7 @@ namespace Miunie.ConsoleApp
         private static void AnyKeyToContinue()
         {
             Console.WriteLine(ConsoleStrings.ANY_KEY_TO_CONTINUE);
-            Console.ReadKey(true);
+            _ = Console.ReadKey();
         }
 
         private static void DrawMiunieState()
@@ -140,8 +169,8 @@ namespace Miunie.ConsoleApp
             var prevCursorLeft = Console.CursorLeft;
             var prevCursorTop = Console.CursorTop;
 
-            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED 
-                ? ConsoleStrings.BOT_IS_RUNNING 
+            var msg = _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTED
+                ? ConsoleStrings.BOT_IS_RUNNING
                 : ConsoleStrings.BOT_IS_NOT_RUNNING;
 
             var left = Math.Clamp(Console.WindowWidth - msg.Length, 0, Console.WindowWidth);
@@ -150,15 +179,6 @@ namespace Miunie.ConsoleApp
             ClearCurrentConsoleLine();
             Console.Write(msg);
             Console.SetCursorPosition(prevCursorLeft, prevCursorTop);
-        }
-
-        public static void ClearCurrentConsoleLine()
-        {
-            var currentTop = Console.CursorTop;
-            var currentLeft = Console.CursorLeft;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(currentLeft, currentTop);
         }
     }
 }

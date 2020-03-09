@@ -14,7 +14,7 @@ namespace Miunie.WindowsApp.ViewModels
             _lang = lang;
         }
 
-        internal string MiunieAboutText => 
+        internal string MiunieAboutText =>
             _lang.GetPhrase(PhraseKey.GPL3_NOTICE.ToString(), DateTime.Now, "https://github.com/control-net/Miunie");
     }
 }

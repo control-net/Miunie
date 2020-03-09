@@ -22,11 +22,13 @@ namespace Miunie.WindowsApp.ViewModels
         public TextChannelView SelectedChannel
         {
             get => _selectedChannel;
-            set { 
+            set
+            {
                 _selectedChannel = value;
                 RaisePropertyChanged(nameof(SelectedChannel));
                 RaisePropertyChanged(nameof(IsMessageTextboxEnabled));
-                LoadMessages();
+                RaisePropertyChanged(nameof(SendMessageInputPlaceholder));
+                LoadMessagesAsync();
             }
         }
 
@@ -35,7 +37,8 @@ namespace Miunie.WindowsApp.ViewModels
         public IEnumerable<TextChannelView> Channels
         {
             get => _channels;
-            set {
+            set
+            {
                 _channels = value;
                 RaisePropertyChanged(nameof(Channels));
             }
@@ -45,25 +48,29 @@ namespace Miunie.WindowsApp.ViewModels
 
         public ObservableCollection<ObservableMessageView> Messages
         {
-            get { return _messages; }
-            set { 
+            get => _messages;
+            set
+            {
                 _messages = value;
                 RaisePropertyChanged(nameof(Messages));
             }
-        }        
+        }
 
         private string _messageText;
 
         public string MessageText
         {
-            get { return _messageText; }
-            set { 
+            get => _messageText;
+            set
+            {
                 _messageText = value;
                 RaisePropertyChanged(nameof(MessageText));
             }
         }
 
-        public bool IsMessageTextboxEnabled => _selectedChannel != null;
+        public bool IsMessageTextboxEnabled => _selectedChannel?.CanSendMessages ?? false;
+
+        public string SendMessageInputPlaceholder => _selectedChannel?.CanSendMessages ?? true ? "Type your message here." : "This channel is read only.";
 
         public ICommand SendMessageCommand => new RelayCommand<string>(SendMessageAsMiunieAsync, CanSendMessage);
 
@@ -77,8 +84,6 @@ namespace Miunie.WindowsApp.ViewModels
             _messages = new ObservableCollection<ObservableMessageView>();
         }
 
-        internal event EventHandler MessageReceived;
-
         internal void CleanupHandlers()
         {
             _miunie.Impersonation.MessageReceived -= Client_MessageReceivedHandler;
@@ -91,7 +96,7 @@ namespace Miunie.WindowsApp.ViewModels
             _miunie.Impersonation.SubscribeForMessages();
         }
 
-        internal async void FetchInfo(ulong guildId)
+        internal async Task FetchInfoAsync(ulong guildId)
         {
             _currentGuildId = guildId;
             Channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
@@ -104,10 +109,11 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void SendMessageAsMiunieAsync(string message)
         {
+            MessageText = "";
             await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
         }
 
-        private async void LoadMessages()
+        private async void LoadMessagesAsync()
         {
             Messages.Clear();
 
@@ -138,9 +144,7 @@ namespace Miunie.WindowsApp.ViewModels
         {
             var m = (SocketMessage)sender;
 
-            _channels = await _miunie.Impersonation.GetAvailableTextChannelsAsync(_currentGuildId);
-
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 if (m.Channel.Id == SelectedChannel?.Id)
                 {
@@ -151,17 +155,13 @@ namespace Miunie.WindowsApp.ViewModels
                         Content = m.Content,
                         TimeStamp = m.CreatedAt.ToLocalTime(),
                         Images = new ObservableCollection<ObservableImage>(m.Attachments
-                                        .Select(x => new ObservableImage 
-                                        { 
-                                            ProxyUrl = x.ProxyUrl, 
-                                            Width = x.Width, 
-                                            Height = x.Height 
+                                        .Select(x => new ObservableImage
+                                        {
+                                            ProxyUrl = x.ProxyUrl,
+                                            Width = x.Width,
+                                            Height = x.Height
                                         }))
                     });
-                    MessageText = "";
-
-                    await Task.Delay(500);
-                    MessageReceived?.Invoke(m, EventArgs.Empty);
                 }
             });
         }
