@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using Discord.WebSocket;
 using Miunie.WindowsApp.Models;
 using Miunie.Core.Events;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -120,37 +121,33 @@ namespace Miunie.WindowsApp.ViewModels
 
             if (_selectedChannel != null)
             {
-                var currentMessages = await _miunie.Impersonation.GetMessagesFromTextChannelAsync(_currentGuildId, _selectedChannel.Id);
+                var messages = await _miunie.Impersonation.GetMessagesFromTextChannelAsync(_currentGuildId, _selectedChannel.Id);
 
-                Messages = new ObservableCollection<ObservableMessageView>(currentMessages
+                Messages = new ObservableCollection<ObservableMessageView>(messages
                     .OrderBy(x => x.TimeStamp)
-                    .Select(m => new ObservableMessageView
-                    {
-                        AuthorAvatarUrl = m.AuthorAvatarUrl,
-                        AuthorName = m.AuthorName,
-                        Content = m.Content,
-                        TimeStamp = m.TimeStamp
-                    }));
+                    .Select(ToObservableMessageView));
             }
         }
 
-        private async void Client_MessageReceivedHandler(object sender, MessageReceivedEventArgs args)
+        private void Client_MessageReceivedHandler(object sender, MessageReceivedEventArgs args)
         {
             var m = args.Message;
 
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            if (m.ChannelId == SelectedChannel?.Id)
             {
-                if (m.ChannelId == SelectedChannel?.Id)
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
-                    Messages.Add(new ObservableMessageView
-                    {
-                        AuthorAvatarUrl = m.AuthorAvatarUrl,
-                        AuthorName = m.AuthorName,
-                        Content = m.Content,
-                        TimeStamp = m.TimeStamp
-                    });
-                }
-            });
+                    Messages.Add(ToObservableMessageView(m));
+                });
+            }
         }
+
+        private ObservableMessageView ToObservableMessageView(MessageView m) => new ObservableMessageView
+        {
+            AuthorAvatarUrl = m.AuthorAvatarUrl,
+            AuthorName = m.AuthorName,
+            Content = m.Content,
+            TimeStamp = m.TimeStamp
+        };
     }
 }
