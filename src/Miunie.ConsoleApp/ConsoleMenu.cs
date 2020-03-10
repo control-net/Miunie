@@ -53,7 +53,7 @@ namespace Miunie.ConsoleApp
             do
             {
                 PrintTitle();
-                PrintItems(_selectedIndex);
+                PrintItems();
 
                 keyPressed = Console.ReadKey(true);
                 HandleMovementKey(keyPressed);
@@ -77,9 +77,9 @@ namespace Miunie.ConsoleApp
             }
         }
 
-        private void PrintItems(int hoveringNumber)
+        private void PrintItems()
         {
-            var items = _items.Select((item, i) => (i == hoveringNumber ? "->" : string.Empty) + _formatter.Invoke(item));
+            var items = _items.Select((item, i) => (i == _selectedIndex ? _formatter.Invoke(item).Replace("#", "=>") : _formatter.Invoke(item)) + string.Empty);
             Console.WriteLine(string.Join("\n", items));
         }
 
