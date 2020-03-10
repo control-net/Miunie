@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="83958896-b819-4147-8264-534c21397953"
-    Publisher="CN=Control .NET"
-    Version="1.0.0.0" />
+    Name="28486SpelosSoftware.Miunie"
+    Publisher="CN=9C3B3E5C-3E5F-4CEE-9155-9BC55A77C994"
+    Version="1.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="83958896-b819-4147-8264-534c21397953" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="60a828c1-b50f-4c62-83c4-270170976915" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Miunie</DisplayName>
-    <PublisherDisplayName>Control .NET</PublisherDisplayName>
+    <PublisherDisplayName>Spelos Software</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,8 +37,8 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Have you met Miunie? She is the best Discord server bot you&apos;ll ever meet. Use this application to serve, configure, and control Miunie."
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#00a1f1"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#723c6e"/>
       </uap:VisualElements>
     </Application>
   </Applications>
