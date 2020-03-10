@@ -79,7 +79,7 @@ namespace Miunie.ConsoleApp
 
         private void PrintItems()
         {
-            var items = _items.Select((item, i) => (i == _selectedIndex ? _formatter.Invoke(item).Replace("#", "=>") : _formatter.Invoke(item)) + string.Empty);
+            var items = _items.Select((item, i) => (i == _selectedIndex ? "=>" : string.Empty) + _formatter.Invoke(item));
             Console.WriteLine(string.Join("\n", items));
         }
 
