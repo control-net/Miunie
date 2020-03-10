@@ -13,20 +13,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
+using Miunie.Core.Entities.Views;
 using System;
 
-namespace Miunie.Core.Entities.Views
+namespace Miunie.Core.Events
 {
-    public class MessageView
+    public class MessageReceivedEventArgs : EventArgs
     {
-        public ulong ChannelId { get; set; }
+        public MessageReceivedEventArgs(MessageView message)
+        {
+            Message = message;
+        }
 
-        public string AuthorName { get; set; }
-
-        public string AuthorAvatarUrl { get; set; }
-
-        public string Content { get; set; }
-
-        public DateTimeOffset TimeStamp { get; set; }
+        public MessageView Message { get; }
     }
 }
