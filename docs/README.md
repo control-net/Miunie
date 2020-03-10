@@ -1,4 +1,4 @@
-![Miunie](https://i.ibb.co/dLV6YGz/new-header.png)
+![Miunie](https://i.ibb.co/MRJ6WcB/title.png)
 
 <a href="https://github.com/control-net/Miunie/actions">
   <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/control-net/miunie/.NET%20Core%20and%20UWP/master?style=plastic">
