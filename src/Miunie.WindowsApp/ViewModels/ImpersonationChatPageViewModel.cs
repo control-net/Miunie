@@ -121,13 +121,6 @@ namespace Miunie.WindowsApp.ViewModels
             if (_selectedChannel != null)
             {
                 var currentMessages = await _miunie.Impersonation.GetMessagesFromTextChannelAsync(_currentGuildId, _selectedChannel.Id);
-                var sortedMessages = currentMessages.OrderBy(x => x.TimeStamp).Select(m => new ObservableMessageView
-                {
-                    AuthorAvatarUrl = m.AuthorAvatarUrl,
-                    AuthorName = m.AuthorName,
-                    Content = m.Content,
-                    TimeStamp = m.TimeStamp
-                });
 
                 Messages = new ObservableCollection<ObservableMessageView>(currentMessages
                     .OrderBy(x => x.TimeStamp)
