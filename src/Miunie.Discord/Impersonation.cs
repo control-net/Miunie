@@ -17,6 +17,7 @@ using Discord;
 using Discord.WebSocket;
 using Miunie.Core.Discord;
 using Miunie.Core.Entities.Views;
+using Miunie.Core.Events;
 using Miunie.Core.Logging;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace Miunie.Discord
             _logger = logger;
         }
 
-        public event EventHandler MessageReceived;
+        public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
         public IEnumerable<GuildView> GetAvailableGuilds()
             => _discord.Client?.Guilds.Select(g => new GuildView
@@ -127,21 +128,25 @@ namespace Miunie.Discord
 
         private Task Client_MessageReceivedHandler(SocketMessage m)
         {
-            MessageReceived?.Invoke(m, EventArgs.Empty);
+            MessageReceived?.Invoke(this, new MessageReceivedEventArgs(ToMessageView(m)));
 
             return Task.CompletedTask;
         }
 
         private async Task<IEnumerable<MessageView>> GetMessagesFrom(SocketTextChannel channel)
         {
-            var msgs = await channel.GetMessagesAsync(10).FlattenAsync();
-            return msgs.Select(m => new MessageView
-            {
-                AuthorAvatarUrl = m.Author.GetAvatarUrl(),
-                AuthorName = m.Author.Username,
-                Content = m.Content,
-                TimeStamp = m.CreatedAt.ToLocalTime()
-            });
+            var socketMessages = await channel.GetMessagesAsync(10).FlattenAsync();
+
+            return socketMessages.Select(ToMessageView);
         }
+
+        private MessageView ToMessageView(IMessage message) => new MessageView
+        {
+            ChannelId = message.Channel.Id,
+            AuthorAvatarUrl = message.Author.GetAvatarUrl(),
+            AuthorName = message.Author.Username,
+            Content = message.Content,
+            TimeStamp = message.CreatedAt.ToLocalTime()
+        };
     }
 }

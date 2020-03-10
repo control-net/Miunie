@@ -14,6 +14,7 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using Miunie.Core.Entities.Views;
+using Miunie.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Miunie.Core.Discord
 {
     public interface IDiscordImpersonation
     {
-        event EventHandler MessageReceived;
+        event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
         void SubscribeForMessages();
 
