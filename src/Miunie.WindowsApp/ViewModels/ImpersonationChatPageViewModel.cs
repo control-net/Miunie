@@ -12,6 +12,7 @@ using Miunie.Core.Entities.Views;
 using System.Collections.ObjectModel;
 using Discord.WebSocket;
 using Miunie.WindowsApp.Models;
+using Miunie.Core.Events;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -140,27 +141,20 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        private async void Client_MessageReceivedHandler(object sender, EventArgs e)
+        private async void Client_MessageReceivedHandler(object sender, MessageReceivedEventArgs args)
         {
-            var m = (SocketMessage)sender;
+            var m = args.Message;
 
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
-                if (m.Channel.Id == SelectedChannel?.Id)
+                if (m.ChannelId == SelectedChannel?.Id)
                 {
                     Messages.Add(new ObservableMessageView
                     {
-                        AuthorAvatarUrl = m.Author.GetAvatarUrl(),
-                        AuthorName = m.Author.Username,
+                        AuthorAvatarUrl = m.AuthorAvatarUrl,
+                        AuthorName = m.AuthorName,
                         Content = m.Content,
-                        TimeStamp = m.CreatedAt.ToLocalTime(),
-                        Images = new ObservableCollection<ObservableImage>(m.Attachments
-                                        .Select(x => new ObservableImage
-                                        {
-                                            ProxyUrl = x.ProxyUrl,
-                                            Width = x.Width,
-                                            Height = x.Height
-                                        }))
+                        TimeStamp = m.TimeStamp
                     });
                 }
             });
