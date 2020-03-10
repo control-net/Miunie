@@ -136,15 +136,11 @@ namespace Miunie.Discord
         private async Task<IEnumerable<MessageView>> GetMessagesFrom(SocketTextChannel channel)
         {
             var socketMessages = await channel.GetMessagesAsync(10).FlattenAsync();
-            var messages = socketMessages
-                .Where(m => m is SocketMessage)
-                .Cast<SocketMessage>()
-                .Select(ToMessageView);
 
-            return messages;
+            return socketMessages.Select(ToMessageView);
         }
 
-        private MessageView ToMessageView(SocketMessage message) => new MessageView
+        private MessageView ToMessageView(IMessage message) => new MessageView
         {
             ChannelId = message.Channel.Id,
             AuthorAvatarUrl = message.Author.GetAvatarUrl(),
