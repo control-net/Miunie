@@ -29,22 +29,18 @@ namespace Miunie.Core.Providers
 
             timeframe = timeframe.Trim().ToLower();
 
-            if (timeframe == "hours" || timeframe == "hour" || timeframe == "hrs" || timeframe == "hr")
-            {
-                return new TimeSpan(units, 0, 0);
-            }
-            else if (timeframe == "minutes" || timeframe == "minute" || timeframe == "mins" || timeframe == "min")
-            {
-                return new TimeSpan(0, units, 0);
-            }
-            else if (timeframe == "seconds" || timeframe == "second" || timeframe == "secs" || timeframe == "sec")
-            {
-                return new TimeSpan(0, 0, units);
-            }
-            else
-            {
-                return null;
-            }
+            return timeframe switch {
+                var tframe when
+                    tframe == "hours" || tframe == "hour" || tframe == "hrs" || tframe == "hr"
+                    => new TimeSpan(units, 0, 0),
+                var tframe when
+                    tframe == "minutes" || tframe == "minute" || tframe == "mins" || tframe == "min"
+                    => new TimeSpan(0, units, 0),
+                var tframe when
+                    tframe == "seconds" || tframe == "second" || tframe == "secs" || tframe == "sec"
+                    => new TimeSpan(0, 0, units),
+                _ => null,
+            };
         }
 
         public DateTime? GetDateTimeLocalToUser(DateTime? utcDateTime, MiunieUser user)
