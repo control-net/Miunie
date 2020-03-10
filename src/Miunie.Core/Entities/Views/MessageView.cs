@@ -19,6 +19,8 @@ namespace Miunie.Core.Entities.Views
 {
     public class MessageView
     {
+        public ulong ChannelId { get; set; }
+
         public string AuthorName { get; set; }
 
         public string AuthorAvatarUrl { get; set; }
