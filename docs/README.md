@@ -25,6 +25,8 @@
 
 **Miunie** is a community Discord bot project.
 
+<a href='//www.microsoft.com/store/apps/9PHQTNTGZGL6?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='English badge' width=137 height=52/></a>
+
 🎮 Host Miunie on your favorite platform!
 
 ![platforms image](img/apps.png)
