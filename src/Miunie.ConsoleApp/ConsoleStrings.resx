@@ -134,7 +134,8 @@ Enter your desired value: (or type EXIT)</value>
   <data name="MAIN_MENU_OPTIONS" xml:space="preserve">
     <value>[1] Edit bot configuration
 [2] Start/Stop Miunie
-[3] Stop Miunie &amp; Exit</value>
+[3] Stop Miunie &amp; Exit
+[4] Servers</value>
   </data>
   <data name="MIUNIE_ASCII_HEADER" xml:space="preserve">
     <value>
@@ -180,5 +181,24 @@ Enter your desired value: (or type EXIT)</value>
   </data>
   <data name="HEADLESS_REQUIRES_TOKEN" xml:space="preserve">
     <value>When running Miunie headless, a token must be provided with a -token= argument.</value>
+  </data>
+  <data name="SEND_MESSAGE_TO" xml:space="preserve">
+    <value>Send message to {0}</value>
+  </data>
+  <data name="SERVER_MENU_OPTIONS" xml:space="preserve">
+    <value>[1] Load messages
+[2] Send message
+[3] Back to channels
+[4] Back to servers
+[5] Main menu</value>
+  </data>
+  <data name="CANNOT_SEND_READONLY" xml:space="preserve">
+    <value>Channel is read only, cannot send messages.</value>
+  </data>
+  <data name="SELECT_CHANNEL" xml:space="preserve">
+    <value>Select channel:</value>
+  </data>
+  <data name="SELECT_GUILD" xml:space="preserve">
+    <value>Select guild:</value>
   </data>
 </root>
