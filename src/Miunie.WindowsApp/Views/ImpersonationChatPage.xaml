@@ -17,14 +17,14 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="MasterColumn" Width="320" />
+            <ColumnDefinition x:Name="MasterColumn" Width="Auto" />
             <ColumnDefinition x:Name="DetailColumn" Width="*" />
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{Binding Channels}" SelectedValue="{Binding SelectedChannel, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="views:TextChannelView">
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding Name}" Margin="0 0 50 0" MinWidth="100"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -38,7 +38,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages}">
+            <ListView Grid.ColumnSpan="2" x:Name="MessageList" Height="Auto" ItemsSource="{Binding Messages}" IsItemClickEnabled="False" >
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Top" />
@@ -47,29 +47,18 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:ObservableMessageView">
-                        <StackPanel Orientation="Horizontal" Padding="10">
-                            <PersonPicture ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                    <TextBlock Foreground="LightGoldenrodYellow" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
-                                </StackPanel>
-                                <TextBlock Text="{Binding Content}" Visibility="{Binding Content.Length, Converter={StaticResource IntToVisabilityConverter}}"/>
-                                <GridView x:Name="ImageList" Height="Auto" ItemsSource="{Binding Images}" 
-                                          Visibility="{Binding Images.Count, Converter={StaticResource IntToVisabilityConverter}}"
-                                          Margin="0 15 5 0">
-                                    <GridView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:ObservableImage">
-                                            <Rectangle Width="{Binding Width}" Height="{Binding Height}">
-                                                <Rectangle.Fill>
-                                                    <ImageBrush ImageSource="{Binding ProxyUrl}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </DataTemplate>
-                                    </GridView.ItemTemplate>
-                                </GridView>
-                                <TextBlock FontSize="10" FontStyle="Italic" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemBaseMediumColor}" Text="{Binding TimeStamp}"/>
+                        <Grid Margin="0 5 0 5" MinWidth="300">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <PersonPicture Grid.Column="0" ProfilePicture="{Binding AuthorAvatarUrl}" Height="45" Width="45" VerticalAlignment="Top"/>
+                            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="12, 0, 0, 0">
+                                <TextBlock Foreground="{StaticResource SystemBaseMediumColor}" TextWrapping="Wrap" FontSize="15" FontWeight="Bold" Text="{Binding AuthorName}"/>
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Visibility="{Binding Content.Length, Converter={StaticResource IntToVisabilityConverter}}"/>
+                                <TextBlock FontSize="10" FontStyle="Italic" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Foreground="{StaticResource SystemBaseMediumColor}" Text="{Binding TimeStamp}"/>
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
