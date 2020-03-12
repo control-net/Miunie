@@ -88,6 +88,7 @@ namespace Miunie.Discord
 
         public async Task SendTextToChannelAsync(string text, ulong id)
         {
+            if (string.IsNullOrWhiteSpace(text)) { return; }
             var textChannel = _discord.Client.GetChannel(id) as SocketTextChannel;
             if (textChannel is null) { return; }
 
