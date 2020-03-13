@@ -13,6 +13,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
+using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core.Attributes;
 using Miunie.Core.Configuration;
@@ -47,6 +48,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<IMiunieUserProvider, MiunieUserProvider>()
                 .AddScoped<IUserReputationProvider, UserReputationProvider>()
                 .AddSingleton<ITimeManipulationProvider, TimeManipulationProvider>()
+                .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>()
                 .AddMiunieServices();
