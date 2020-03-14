@@ -1,13 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
 using Miunie.Core.Logging;
 using Miunie.WindowsApp.Utilities;
-using GalaSoft.MvvmLight.Threading;
+using System;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
 using Windows.UI.Xaml.Controls;
 
 namespace Miunie.WindowsApp.ViewModels
@@ -28,6 +41,8 @@ namespace Miunie.WindowsApp.ViewModels
             _logReader.LogRecieved += OnLogRecieved;
         }
 
+        public event EventHandler TokenApplied;
+
         public string BotToken => _miunie.BotConfiguration.DiscordToken;
 
         public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
@@ -35,8 +50,6 @@ namespace Miunie.WindowsApp.ViewModels
         public string Logs => string.Join(Environment.NewLine, _logReader.RetrieveLogs(10));
 
         public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);
-
-        public event EventHandler TokenApplied;
 
         private bool CanApplyToken(string arg)
         {

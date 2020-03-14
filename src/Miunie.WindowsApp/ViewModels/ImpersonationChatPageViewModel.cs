@@ -1,25 +1,49 @@
-using System;
+// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
+using Miunie.Core;
+using Miunie.Core.Entities.Views;
+using Miunie.Core.Events;
+using Miunie.WindowsApp.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using Miunie.Core;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Miunie.Core.Entities.Views;
-using System.Collections.ObjectModel;
-using Discord.WebSocket;
-using Miunie.WindowsApp.Models;
-using Miunie.Core.Events;
-using GalaSoft.MvvmLight.Threading;
 
 namespace Miunie.WindowsApp.ViewModels
 {
     public class ImpersonationChatPageViewModel : ViewModelBase
     {
+        private readonly MiunieBot _miunie;
+
         private TextChannelView _selectedChannel;
+        private IEnumerable<TextChannelView> _channels;
+        private ObservableCollection<ObservableMessageView> _messages;
+        private string _messageText;
+        private ulong _currentGuildId;
+
+        public ImpersonationChatPageViewModel(MiunieBot miunie)
+        {
+            _miunie = miunie;
+            _channels = new List<TextChannelView>();
+            _messages = new ObservableCollection<ObservableMessageView>();
+        }
 
         public TextChannelView SelectedChannel
         {
@@ -34,8 +58,6 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        private IEnumerable<TextChannelView> _channels;
-
         public IEnumerable<TextChannelView> Channels
         {
             get => _channels;
@@ -46,8 +68,6 @@ namespace Miunie.WindowsApp.ViewModels
             }
         }
 
-        private ObservableCollection<ObservableMessageView> _messages;
-
         public ObservableCollection<ObservableMessageView> Messages
         {
             get => _messages;
@@ -57,8 +77,6 @@ namespace Miunie.WindowsApp.ViewModels
                 RaisePropertyChanged(nameof(Messages));
             }
         }
-
-        private string _messageText;
 
         public string MessageText
         {
@@ -75,16 +93,6 @@ namespace Miunie.WindowsApp.ViewModels
         public string SendMessageInputPlaceholder => _selectedChannel?.CanSendMessages ?? true ? "Type your message here." : "This channel is read only.";
 
         public ICommand SendMessageCommand => new RelayCommand<string>(SendMessageAsMiunieAsync, CanSendMessage);
-
-        private readonly MiunieBot _miunie;
-        private ulong _currentGuildId;
-
-        public ImpersonationChatPageViewModel(MiunieBot miunie)
-        {
-            _miunie = miunie;
-            _channels = new List<TextChannelView>();
-            _messages = new ObservableCollection<ObservableMessageView>();
-        }
 
         internal void CleanupHandlers()
         {
@@ -111,7 +119,7 @@ namespace Miunie.WindowsApp.ViewModels
 
         private async void SendMessageAsMiunieAsync(string message)
         {
-            MessageText = "";
+            MessageText = string.Empty;
             await _miunie.Impersonation.SendTextToChannelAsync(message, SelectedChannel.Id);
         }
 
