@@ -33,7 +33,7 @@ namespace Miunie.Discord.TypeReaders
 
         public override async Task<TypeReaderResult> ReadAsync(ICommandContext context, string input, IServiceProvider services)
         {
-            _ = MentionUtils.TryParseUser(input, out var userId);
+            var discordUserId = MentionUtils.TryParseUser(input, out var userId);
 
             if (await context.Guild.GetUserAsync(userId) is SocketGuildUser discordUser)
             {

@@ -35,10 +35,10 @@ namespace Miunie.Discord
         private readonly EntityConvertor _convertor;
         private readonly IBotConfiguration _botConfig;
 
-        public CommandHandler(IDiscord discord, CommandService commandService, IServiceProvider services, ILogWriter logger, EntityConvertor convertor, IBotConfiguration botConfig)
+        public CommandHandler(IDiscord discord, IServiceProvider services, ILogWriter logger, EntityConvertor convertor, IBotConfiguration botConfig)
         {
             _discord = discord;
-            _commandService = commandService;
+            _commandService = new CommandService();
             _services = services;
             _logger = logger;
             _convertor = convertor;
