@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
-    <ProjectReference Include="..\Miunie.InversionOfControl\Miunie.InversionOfControl.csproj" />
-    <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
-    <ProjectReference Include="..\Miunie.SystemInfrastructure\Miunie.SystemInfrastructure.csproj" />
+    <ProjectReference Include="../Miunie.Core/Miunie.Core.csproj" />
+    <ProjectReference Include="../Miunie.InversionOfControl/Miunie.InversionOfControl.csproj" />
+    <ProjectReference Include="../Miunie.Logger/Miunie.Logger.csproj" />
+    <ProjectReference Include="../Miunie.SystemInfrastructure/Miunie.SystemInfrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
