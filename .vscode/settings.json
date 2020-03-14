@@ -1,3 +1,7 @@
 {
-    "editor.rulers": [80]
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#b92a82",
+        "titleBar.inactiveBackground": "#81275f",
+        "titleBar.activeForeground": "#ffffff"
+    }
 }
