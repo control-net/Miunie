@@ -17,7 +17,6 @@ using Discord;
 using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Providers;
-using Miunie.Discord.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,35 +25,17 @@ namespace Miunie.Discord.Embeds
 {
     internal static class EmbedConstructor
     {
-        private static readonly int _repLogPageSize = 10;
-        private static readonly uint _miuniePinkColor = 0xEC407A;
-
-        public static Embed CreateHelpEmbed(HelpResult result)
-        {
-            var builder = new EmbedBuilder().WithColor(_miuniePinkColor);
-
-            if (!string.IsNullOrWhiteSpace(result.Title))
-            {
-                _ = builder.WithTitle(result.Title);
-            }
-
-            foreach (HelpSection section in result.Sections)
-            {
-                _ = builder.AddField(section.Title, section.Content, false);
-            }
-
-            return builder.Build();
-        }
+        private static readonly int RepLogPageSize = 10;
 
         public static Embed CreateReputationLog(IEnumerable<ReputationEntry> entries, int index, ILanguageProvider lang)
         {
             var embed = Paginator.PaginateEmbed(
                 entries,
                 new EmbedBuilder()
-                .WithColor(new Color(_miuniePinkColor))
+                .WithColor(new Color(236, 64, 122))
                 .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_REP_LOG_TITLE.ToString())),
                 index,
-                _repLogPageSize,
+                RepLogPageSize,
                 x => $"{(x.IsFromInvoker ? "**To:**" : "**From:**")} {x.TargetName} (**{FormatReputationType(x.Type)}**) {x.GivenAt:d} at {x.GivenAt:t} UTC");
 
             if (string.IsNullOrWhiteSpace(embed.Description))
@@ -70,7 +51,7 @@ namespace Miunie.Discord.Embeds
             var realnessPhrase = lang.GetPhrase((mUser.IsBot ? PhraseKey.USER_EMBED_IS_BOT : PhraseKey.USER_EMBED_IS_HUMAN).ToString());
 
             return new EmbedBuilder()
-                .WithColor(new Color(_miuniePinkColor))
+                .WithColor(new Color(236, 64, 122))
                 .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString()))
                 .WithThumbnailUrl(mUser.AvatarUrl)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
@@ -85,7 +66,7 @@ namespace Miunie.Discord.Embeds
 
         public static Embed ToEmbed(this MiunieGuild mGuild, ILanguageProvider lang)
             => new EmbedBuilder()
-                .WithColor(new Color(_miuniePinkColor))
+                .WithColor(new Color(236, 64, 122))
                 .WithThumbnailUrl(mGuild.IconUrl)
                 .WithTitle(lang.GetPhrase(PhraseKey.GUILD_EMBED_TITLE.ToString()))
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_NAME_TITLE.ToString()), mGuild.Name)
@@ -95,11 +76,16 @@ namespace Miunie.Discord.Embeds
                 .Build();
 
         private static string FormatReputationType(ReputationType type)
-            => type switch
+        {
+            switch (type)
             {
-                ReputationType.Plus => "+1",
-                ReputationType.Minus => "-1",
-                _ => throw new ArgumentException("Unknown ReputationType.")
-            };
+                case ReputationType.Plus:
+                    return "+1";
+                case ReputationType.Minus:
+                    return "-1";
+                default:
+                    throw new ArgumentException("Unknown ReputationType.");
+            }
+        }
     }
 }

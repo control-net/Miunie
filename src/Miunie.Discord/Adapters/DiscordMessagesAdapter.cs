@@ -14,6 +14,7 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using Discord.WebSocket;
+using Miunie.Core;
 using Miunie.Core.Discord;
 using Miunie.Core.Entities;
 using Miunie.Core.Entities.Discord;

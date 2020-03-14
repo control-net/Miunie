@@ -158,28 +158,6 @@ Source code available at: {1}</value>
     <value>**ABOUT THIS SERVER**</value>
     <comment>No formatting options.</comment>
   </data>
-  <data name="HELP_EXAMPLE_EMPTY" xml:space="preserve">
-    <value>You'll figure it out.{{OR}}
-You know what? I've never used this command.{{OR}}
-Yeah, you're on your own with this one, buddy.{{OR}}
-I got nothing here.{{OR}}
-Just mess around with this, you'll figure it out eventually.</value>
-    <comment>No formatting options.</comment>
-  </data>
-  <data name="HELP_EXAMPLE_TITLE" xml:space="preserve">
-    <value>**Examples**: </value>
-    <comment>No formatting options.</comment>
-  </data>
-  <data name="HELP_SUMMARY_EMPTY" xml:space="preserve">
-    <value>This is kind of difficult to explain...{{OR}}
-How am I supposed to put this into words?{{OR}}
-It's a command, I think? Not sure.</value>
-    <comment>No formatting options.</comment>
-  </data>
-  <data name="HELP_SUMMARY_TITLE" xml:space="preserve">
-    <value>**Summary**: </value>
-    <comment>No formatting options.</comment>
-  </data>
   <data name="INCORRECT_VERB" xml:space="preserve">
     <value>You better start making sense with other than '{0}'{{OR}}
 Come again, I don't understand '{0}'{{OR}}
@@ -278,10 +256,6 @@ What are you trying to say with {0} {1}</value>
   </data>
   <data name="USER_EMBED_CREATED_AT_TITLE" xml:space="preserve">
     <value>:calendar_spiral: Creation date</value>
-    <comment>No formatting options.</comment>
-  </data>
-  <data name="USER_EMBED_HELP_TITLE" xml:space="preserve">
-    <value>**HELP MENU**</value>
     <comment>No formatting options.</comment>
   </data>
   <data name="USER_EMBED_IS_BOT" xml:space="preserve">
