@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Compile Update="**\*.xaml.cs">
+    <Folder Include="Models/" />
+    <Compile Update="**/*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <AvaloniaResource Include="**\*.xaml">
+    <AvaloniaResource Include="**/*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets/**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,17 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
-    <ProjectReference Include="..\Miunie.InversionOfControl\Miunie.InversionOfControl.csproj" />
-    <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
-    <ProjectReference Include="..\Miunie.SystemInfrastructure\Miunie.SystemInfrastructure.csproj" />
+    <ProjectReference Include="../Miunie.Core/Miunie.Core.csproj" />
+    <ProjectReference Include="../Miunie.InversionOfControl/Miunie.InversionOfControl.csproj" />
+    <ProjectReference Include="../Miunie.Logger/Miunie.Logger.csproj" />
+    <ProjectReference Include="../Miunie.SystemInfrastructure/Miunie.SystemInfrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\avalonia-icon.png">
+    <None Update="Assets/avalonia-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\miunie-icon.png">
+    <None Update="Assets/miunie-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
