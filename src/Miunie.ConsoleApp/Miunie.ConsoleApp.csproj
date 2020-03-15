@@ -3,8 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>../.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,14 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Miunie.Core\Miunie.Core.csproj" />
-    <ProjectReference Include="..\Miunie.InversionOfControl\Miunie.InversionOfControl.csproj" />
-    <ProjectReference Include="..\Miunie.Logger\Miunie.Logger.csproj" />
-    <ProjectReference Include="..\Miunie.SystemInfrastructure\Miunie.SystemInfrastructure.csproj" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <ProjectReference Include="../Miunie.Core/Miunie.Core.csproj" />
+    <ProjectReference Include="../Miunie.InversionOfControl/Miunie.InversionOfControl.csproj" />
+    <ProjectReference Include="../Miunie.Logger/Miunie.Logger.csproj" />
+    <ProjectReference Include="../Miunie.SystemInfrastructure/Miunie.SystemInfrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,12 +30,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsoleStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
   </ItemGroup>
 
 </Project>

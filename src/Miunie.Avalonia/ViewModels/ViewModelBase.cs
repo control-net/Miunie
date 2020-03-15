@@ -14,9 +14,6 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Miunie.Avalonia.ViewModels
 {

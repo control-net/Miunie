@@ -1,17 +1,32 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using Miunie.Core;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
 using Miunie.Core.Entities;
-using Windows.ApplicationModel.DataTransfer;
-using System.Linq;
-using Windows.UI.Xaml.Controls;
-using Miunie.WindowsApp.Utilities;
 using Miunie.Core.Logging;
+using Miunie.WindowsApp.Utilities;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -22,6 +37,8 @@ namespace Miunie.WindowsApp.ViewModels
         private readonly MiunieBot _miunie;
         private readonly TokenManager _tokenManager;
         private readonly ILogWriter _logWriter;
+        private string _connectedStatus;
+        private string _errorMessage;
 
         public StatusPageViewModel(MiunieBot miunie, TokenManager tokenManager, ILogWriter logWriter)
         {
@@ -36,40 +53,39 @@ namespace Miunie.WindowsApp.ViewModels
 
         public ICommand ActionCommand => new RelayCommand(ToggleBotStart, CanToggleStart);
 
-        private bool CanToggleStart()
-        {
-            return !string.IsNullOrEmpty(_miunie.BotConfiguration.DiscordToken);
-        }
+        public bool IsConnecting => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING;
 
-        public bool IsConnecting { get => _miunie.MiunieDiscord.ConnectionState == ConnectionState.CONNECTING; }
-
-        private string _connectedStatus;
         public string ConnectionStatus
         {
-
             get => _connectedStatus;
             set
             {
-                if (value == _connectedStatus) return;
+                if (value == _connectedStatus)
+                {
+                    return;
+                }
+
                 _connectedStatus = value;
                 RaisePropertyChanged(nameof(ConnectionStatus));
             }
         }
-
-        private string _errorMessage;
 
         public string ErrorMessage
         {
             get => _errorMessage;
             set
             {
-                if (value == _errorMessage) return;
+                if (value == _errorMessage)
+                {
+                    return;
+                }
+
                 _errorMessage = value;
                 RaisePropertyChanged(nameof(ErrorMessage));
             }
         }
 
-        public Action AvatarChanged;
+        public Action AvatarChanged { get; set; }
 
         public Visibility ActionButtonIsVisible => _miunie.MiunieDiscord.ConnectionState != ConnectionState.CONNECTING
             ? Visibility.Visible
@@ -105,6 +121,11 @@ namespace Miunie.WindowsApp.ViewModels
             }
 
             RaisePropertyChanged(nameof(ActionButtonText));
+        }
+
+        private bool CanToggleStart()
+        {
+            return !string.IsNullOrEmpty(_miunie.BotConfiguration.DiscordToken);
         }
 
         private async void CheckForTokenInClipboard()
@@ -159,7 +180,7 @@ namespace Miunie.WindowsApp.ViewModels
                 () =>
                 {
                     ConnectionStatus = _miunie.MiunieDiscord.ConnectionState.ToString();
-                    ErrorMessage = "";
+                    ErrorMessage = string.Empty;
                     RaisePropertyChanged(nameof(ActionButtonText));
                     RaisePropertyChanged(nameof(ActionButtonIsVisible));
                     RaisePropertyChanged(nameof(ProgressBarIsVisible));
