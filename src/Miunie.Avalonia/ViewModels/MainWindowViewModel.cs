@@ -33,10 +33,10 @@ namespace Miunie.Avalonia.ViewModels
         private Bitmap _botAvatarImage;
         private string _discordToken = string.Empty;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(MiunieBot miunie, UrlImageConverter urlImageConverter)
         {
-            _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
-            _urlImageConverter = InversionOfControl.Provider.GetRequiredService<UrlImageConverter>();
+            _miunie = miunie;
+            _urlImageConverter = urlImageConverter;
             _miunieBitmap = new Bitmap("Assets/miunie-icon.png");
             _botAvatarImage = _miunieBitmap;
             _miunie.MiunieDiscord.ConnectionChanged += ConectionStateChanged;
