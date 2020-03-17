@@ -201,4 +201,8 @@ Enter your desired value: (or type EXIT)</value>
   <data name="SELECT_GUILD" xml:space="preserve">
     <value>Select guild:</value>
   </data>
+  <data name="USE_ARROWKEYS" xml:space="preserve">
+    <value>Use arrowkeys to navigate. 
+Left and right arrow to switch pages.</value>
+  </data>
 </root>
