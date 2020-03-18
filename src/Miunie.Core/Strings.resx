@@ -319,10 +319,10 @@ Twelve... ten... -ish... Yeah I have no idea.</value>
     <comment>No formatting options.</comment>
   </data>
   <data name="USER_EMBED_TITLE" xml:space="preserve">
-    <value>**YOUR AWESOME PROFILE**{{OR}}
-**YOUR COOL PROFILE**{{OR}}
-**YOUR MAGNIFICENT PROFILE**{{OR}}
-**YOUR DANK PROFILE**</value>
+    <value>**AWESOME PROFILE**{{OR}}
+**COOL PROFILE**{{OR}}
+**MAGNIFICENT PROFILE**{{OR}}
+**DANK PROFILE**</value>
     <comment>No formatting options.</comment>
   </data>
   <data name="YES_NO_MAYBE" xml:space="preserve">

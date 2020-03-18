@@ -52,7 +52,7 @@ namespace Miunie.Discord.Embeds
 
             return new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
-                .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString()))
+                .WithTitle($"**{mUser.Name.ToUpper()}'S** {lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString())}")
                 .WithThumbnailUrl(mUser.AvatarUrl)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REALNESS_TITLE.ToString()), realnessPhrase, true)
