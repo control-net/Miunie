@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="../Miunie.Core/Miunie.Core.csproj" />
     <ProjectReference Include="../Miunie.Discord/Miunie.Discord.csproj" />
+    <ProjectReference Include="../Miunie.Json/Miunie.Json.csproj" />
     <ProjectReference Include="../Miunie.LiteDbStorage/Miunie.LiteDbStorage.csproj" />
   </ItemGroup>
 
