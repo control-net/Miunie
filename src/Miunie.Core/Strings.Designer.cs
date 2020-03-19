@@ -439,10 +439,10 @@ namespace Miunie.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to **AWESOME PROFILE**{{OR}}
-        ///**COOL PROFILE**{{OR}}
-        ///**MAGNIFICENT PROFILE**{{OR}}
-        ///**DANK PROFILE**.
+        ///   Looks up a localized string similar to **{0} AWESOME PROFILE**{{OR}}
+        ///**{0} COOL PROFILE**{{OR}}
+        ///**{0} MAGNIFICENT PROFILE**{{OR}}
+        ///**{0} DANK PROFILE**.
         /// </summary>
         public static string USER_EMBED_TITLE {
             get {
