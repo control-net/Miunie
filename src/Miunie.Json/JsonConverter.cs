@@ -13,19 +13,16 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
-using Miunie.Core.Entities.Discord;
-using System.Collections.Generic;
+using Miunie.Core.Json;
+using Newtonsoft.Json;
 
-namespace Miunie.Core.Providers
+namespace Miunie.Json
 {
-    public interface IMiunieUserProvider
+    public class JsonConverter : IJsonConverter
     {
-        MiunieUser GetById(ulong userId, ulong guildId);
-
-        void StoreUser(MiunieUser u);
-
-        void RemoveUser(MiunieUser u);
-
-        IEnumerable<MiunieUser> GetAllUsers();
+        public string Serialize<T>(T obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
     }
 }

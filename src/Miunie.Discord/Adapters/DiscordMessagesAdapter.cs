@@ -21,6 +21,7 @@ using Miunie.Core.Logging;
 using Miunie.Core.Providers;
 using Miunie.Discord.Embeds;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Miunie.Discord.Adapters
@@ -55,9 +56,7 @@ namespace Miunie.Discord.Adapters
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieUser mu)
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
-
-            if (channel is null)
+            if (!(_discord.Client.GetChannel(mc.ChannelId) is SocketTextChannel channel))
             {
                 LogSocketTextChannelCastFailed();
                 return;
@@ -68,15 +67,32 @@ namespace Miunie.Discord.Adapters
 
         public async Task SendMessageAsync(MiunieChannel mc, MiunieGuild mg)
         {
-            var channel = _discord.Client.GetChannel(mc.ChannelId) as SocketTextChannel;
-
-            if (channel is null)
+            if (!(_discord.Client.GetChannel(mc.ChannelId) is SocketTextChannel channel))
             {
                 LogSocketTextChannelCastFailed();
                 return;
             }
 
             _ = await channel.SendMessageAsync(embed: mg.ToEmbed(_lang));
+        }
+
+        public async Task SendDirectFileMessageAsync(MiunieUser mu, string userAsJson)
+        {
+            var dmChannel = await _discord.Client.GetUser(mu.UserId).GetOrCreateDMChannelAsync();
+            var msg = _lang.GetPhrase(PhraseKey.USER_PRIVACY_FILE_MESSAGE.ToString(), mu.Name);
+
+            using var fileStream = GenerateStreamFromString(userAsJson);
+            _ = await dmChannel.SendFileAsync(fileStream, $"{mu.Name}.json", msg);
+        }
+
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
 
         private void LogSocketTextChannelCastFailed()

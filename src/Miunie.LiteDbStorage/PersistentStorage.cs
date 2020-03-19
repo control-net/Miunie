@@ -35,20 +35,16 @@ namespace Miunie.LiteDbStorage
 
         public IEnumerable<T> RestoreMany<T>(Expression<Func<T, bool>> predicate)
         {
-            using (var db = new LiteDatabase(_dbFileName))
-            {
-                var collection = db.GetCollection<T>();
-                return collection.Find(predicate);
-            }
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            return collection.Find(predicate);
         }
 
         public IEnumerable<T> RestoreAll<T>()
         {
-            using (var db = new LiteDatabase(_dbFileName))
-            {
-                var collection = db.GetCollection<T>();
-                return collection.FindAll();
-            }
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            return collection.FindAll();
         }
 
         public T RestoreSingle<T>(Expression<Func<T, bool>> predicate)
@@ -56,29 +52,30 @@ namespace Miunie.LiteDbStorage
 
         public bool Exists<T>(Expression<Func<T, bool>> predicate)
         {
-            using (var db = new LiteDatabase(_dbFileName))
-            {
-                var collection = db.GetCollection<T>();
-                return collection.Exists(predicate);
-            }
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            return collection.Exists(predicate);
         }
 
         public void Store<T>(T item)
         {
-            using (var db = new LiteDatabase(_dbFileName))
-            {
-                var collection = db.GetCollection<T>();
-                _ = collection.Insert(item);
-            }
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            _ = collection.Insert(item);
         }
 
         public void Update<T>(T item)
         {
-            using (var db = new LiteDatabase(_dbFileName))
-            {
-                var collection = db.GetCollection<T>();
-                _ = collection.Update(item);
-            }
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            _ = collection.Update(item);
+        }
+
+        public void Remove<T>(Expression<Func<T, bool>> predicate)
+        {
+            using var db = new LiteDatabase(_dbFileName);
+            var collection = db.GetCollection<T>();
+            _ = collection.Delete(predicate);
         }
     }
 }

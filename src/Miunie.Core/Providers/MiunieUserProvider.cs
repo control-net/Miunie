@@ -47,6 +47,14 @@ namespace Miunie.Core.Providers
             }
         }
 
+        public void RemoveUser(MiunieUser user)
+        {
+            if (_persistentStorage.Exists<MiunieUser>(u => u.UserId == user.UserId && u.GuildId == user.GuildId))
+            {
+                _persistentStorage.Remove<MiunieUser>(u => u.UserId == user.UserId && u.GuildId == user.GuildId);
+            }
+        }
+
         public IEnumerable<MiunieUser> GetAllUsers()
             => _persistentStorage.RestoreAll<MiunieUser>();
 

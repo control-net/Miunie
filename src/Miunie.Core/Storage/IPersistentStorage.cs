@@ -25,6 +25,8 @@ namespace Miunie.Core.Storage
 
         void Update<T>(T item);
 
+        void Remove<T>(Expression<Func<T, bool>> predicate);
+
         IEnumerable<T> RestoreMany<T>(Expression<Func<T, bool>> predicate);
 
         IEnumerable<T> RestoreAll<T>();
