@@ -20,11 +20,13 @@ using Miunie.Core;
 using Miunie.Core.Entities.Views;
 using Miunie.Core.Events;
 using Miunie.WindowsApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -93,6 +95,31 @@ namespace Miunie.WindowsApp.ViewModels
         public string SendMessageInputPlaceholder => _selectedChannel?.CanSendMessages ?? true ? "Type your message here." : "This channel is read only.";
 
         public ICommand SendMessageCommand => new RelayCommand<string>(SendMessageAsMiunieAsync, CanSendMessage);
+
+        internal void EnableCommands()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(
+            async () =>
+            {
+                var enableCommandDialog = new ContentDialog
+                {
+                    Title = "Enable Commands?",
+                    Content = "Commands have been disabled while you were impersonating, would you like to re-enable them?",
+                    PrimaryButtonText = "Sure",
+                    CloseButtonText = "No, thanks"
+                };
+
+                if (await enableCommandDialog.ShowAsync() == ContentDialogResult.Primary)
+                {
+                    _miunie.BotConfiguration.CommandsEnabled = true;
+                }
+            });
+        }
+
+        internal void DisableCommands()
+        {
+            _miunie.BotConfiguration.CommandsEnabled = false;
+        }
 
         internal void CleanupHandlers()
         {
