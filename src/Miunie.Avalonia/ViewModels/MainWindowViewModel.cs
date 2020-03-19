@@ -32,7 +32,6 @@ namespace Miunie.Avalonia.ViewModels
         private string _connectionStatusText = "Disconnected";
         private Bitmap _botAvatarImage;
         private string _discordToken = string.Empty;
-        private bool _commandsEnabled = true;
 
         public MainWindowViewModel(MiunieBot miunie, UrlImageConverter urlImageConverter)
         {
@@ -63,8 +62,8 @@ namespace Miunie.Avalonia.ViewModels
 
         public bool CommandsEnabled
         {
-            get => _commandsEnabled;
-            set => _ = this.RaiseAndSetIfChanged(ref _commandsEnabled, value);
+            get => _miunie.BotConfiguration.CommandsEnabled;
+            set => _miunie.BotConfiguration.CommandsEnabled = value;
         }
 
         public async Task StartButton_ClickCommand()
@@ -75,7 +74,6 @@ namespace Miunie.Avalonia.ViewModels
             }
 
             _miunie.BotConfiguration.DiscordToken = DiscordToken;
-            _miunie.BotConfiguration.CommandsEnabled = CommandsEnabled;
             await _miunie.StartAsync();
         }
 
