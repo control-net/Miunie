@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Miunie.ConsoleApp {
+    using System;
     
     
     /// <summary>
@@ -263,6 +264,16 @@ namespace Miunie.ConsoleApp {
         internal static string UNKNOWN_OPTION_SELECTED {
             get {
                 return ResourceManager.GetString("UNKNOWN_OPTION_SELECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use arrowkeys to navigate. 
+        ///Left and right arrow to switch pages..
+        /// </summary>
+        internal static string USE_ARROWKEYS {
+            get {
+                return ResourceManager.GetString("USE_ARROWKEYS", resourceCulture);
             }
         }
         

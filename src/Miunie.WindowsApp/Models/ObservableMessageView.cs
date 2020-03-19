@@ -1,22 +1,37 @@
-﻿using GalaSoft.MvvmLight;
-using Miunie.Core.Entities.Views;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Miunie.WindowsApp.Models
 {
     public class ObservableMessageView : ObservableObject
     {
+        private string _authorName;
+        private string _authorAvatarUrl;
+        private string _content;
+        private DateTimeOffset _timeStamp;
+        private ObservableCollection<ObservableImage> _images;
+
         public ObservableMessageView()
         {
             Images = new ObservableCollection<ObservableImage>();
         }
 
-        private string _authorName;
         public string AuthorName
         {
             get => _authorName;
@@ -27,7 +42,6 @@ namespace Miunie.WindowsApp.Models
             }
         }
 
-        private string _authorAvatarUrl;
         public string AuthorAvatarUrl
         {
             get => _authorAvatarUrl;
@@ -38,7 +52,6 @@ namespace Miunie.WindowsApp.Models
             }
         }
 
-        private string _content;
         public string Content
         {
             get => _content;
@@ -49,7 +62,6 @@ namespace Miunie.WindowsApp.Models
             }
         }
 
-        private DateTimeOffset _timeStamp;
         public DateTimeOffset TimeStamp
         {
             get => _timeStamp;
@@ -60,7 +72,6 @@ namespace Miunie.WindowsApp.Models
             }
         }
 
-        private ObservableCollection<ObservableImage> _images;
         public ObservableCollection<ObservableImage> Images
         {
             get => _images;

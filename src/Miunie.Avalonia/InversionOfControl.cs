@@ -15,6 +15,8 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Avalonia.Utilities;
+using Miunie.Avalonia.ViewModels;
+using Miunie.Core;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
 using Miunie.InversionOfControl;
@@ -50,6 +52,8 @@ namespace Miunie.Avalonia
                 .AddSingleton<IFileSystem, SystemFileSystem>()
                 .AddSingleton<HttpClient>()
                 .AddSingleton<UrlImageConverter>()
+                .AddSingleton<MiunieBot>()
+                .AddTransient<MainWindowViewModel>()
                 .AddMiunieTypes()
                 .BuildServiceProvider();
     }

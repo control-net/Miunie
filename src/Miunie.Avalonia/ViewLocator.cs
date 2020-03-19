@@ -15,6 +15,7 @@
 
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using Microsoft.Extensions.DependencyInjection;
 using Miunie.Avalonia.ViewModels;
 using System;
 
@@ -34,7 +35,7 @@ namespace Miunie.Avalonia
                 return new TextBlock { Text = "Not Found: " + name };
             }
 
-            return (Control)Activator.CreateInstance(type);
+            return (Control)InversionOfControl.Provider.GetRequiredService(type);
         }
 
         public bool Match(object data)

@@ -1,8 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +22,13 @@ namespace Miunie.WindowsApp.Utilities
 {
     public static class EnterKeyHelpers
     {
+        public static readonly DependencyProperty EnterKeyCommandProperty =
+            DependencyProperty.RegisterAttached(
+                "EnterKeyCommand",
+                typeof(ICommand),
+                typeof(EnterKeyHelpers),
+                new PropertyMetadata(null, OnEnterKeyCommandChanged));
+
         public static ICommand GetEnterKeyCommand(DependencyObject target)
         {
             return (ICommand)target.GetValue(EnterKeyCommandProperty);
@@ -22,14 +39,7 @@ namespace Miunie.WindowsApp.Utilities
             target.SetValue(EnterKeyCommandProperty, value);
         }
 
-        public static readonly DependencyProperty EnterKeyCommandProperty =
-            DependencyProperty.RegisterAttached(
-                "EnterKeyCommand",
-                typeof(ICommand),
-                typeof(EnterKeyHelpers),
-                new PropertyMetadata(null, OnEnterKeyCommandChanged));
-
-        static void OnEnterKeyCommandChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        private static void OnEnterKeyCommandChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
             ICommand command = (ICommand)e.NewValue;
             FrameworkElement fe = (FrameworkElement)target;
@@ -45,6 +55,7 @@ namespace Miunie.WindowsApp.Utilities
                         {
                             b.UpdateSource();
                         }
+
                         command.Execute(textbox.Text);
                     }
 
@@ -55,9 +66,9 @@ namespace Miunie.WindowsApp.Utilities
                         {
                             b.UpdateSource();
                         }
+
                         command.Execute(password.Password);
                     }
-
                 }
             };
         }
