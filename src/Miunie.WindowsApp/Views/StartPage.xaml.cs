@@ -1,16 +1,31 @@
-﻿using System;
+﻿// This file is part of Miunie.
+//
+//  Miunie is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Miunie is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
+
+using GalaSoft.MvvmLight.Ioc;
+using Miunie.Core;
+using Miunie.Core.Entities;
+using Miunie.WindowsApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
-using Miunie.WindowsApp.ViewModels;
 using muxc = Microsoft.UI.Xaml.Controls;
-using Miunie.Core;
-using Windows.UI.Popups;
-using GalaSoft.MvvmLight.Ioc;
-using Miunie.Core.Entities;
 
 namespace Miunie.WindowsApp.Views
 {

@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="Rules for Miunie" Description="These rules apply to all Miunie application projects." ToolsVersion="16.0">
-  <Rules AnalyzerId="Microsoft.Analyzers.NativeCodeAnalysis" RuleNamespace="Microsoft.Rules.Native">
-    <Rule Id="C26438" Action="Error" />
-  </Rules>
-  <Rules AnalyzerId="Microsoft.CodeAnalysis.Analyzers" RuleNamespace="Microsoft.CodeAnalysis.Analyzers">
-    <Rule Id="RS1001" Action="Error" />
-    <Rule Id="RS1004" Action="Error" />
-  </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
-    <Rule Id="AD0001" Action="Error" />
     <Rule Id="CS0078" Action="Error" />
     <Rule Id="CS0105" Action="Error" />
     <Rule Id="CS0108" Action="Error" />
@@ -95,8 +87,6 @@
     <Rule Id="CS1696" Action="Error" />
     <Rule Id="CS1697" Action="Error" />
     <Rule Id="CS1700" Action="Error" />
-    <Rule Id="CS1701" Action="Error" />
-    <Rule Id="CS1702" Action="Error" />
     <Rule Id="CS1710" Action="Error" />
     <Rule Id="CS1711" Action="Error" />
     <Rule Id="CS1712" Action="Error" />
@@ -159,7 +149,6 @@
     <Rule Id="CS8009" Action="Error" />
     <Rule Id="CS8012" Action="Error" />
     <Rule Id="CS8018" Action="Error" />
-    <Rule Id="CS8019" Action="Error" />
     <Rule Id="CS8020" Action="Error" />
     <Rule Id="CS8021" Action="Error" />
     <Rule Id="CS8029" Action="Error" />

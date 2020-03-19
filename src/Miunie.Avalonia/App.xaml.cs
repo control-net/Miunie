@@ -16,6 +16,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
 using Miunie.Avalonia.ViewModels;
 using Miunie.Avalonia.Views;
 
@@ -34,7 +35,7 @@ namespace Miunie.Avalonia
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = InversionOfControl.Provider.GetRequiredService<MainWindowViewModel>()
                 };
             }
 

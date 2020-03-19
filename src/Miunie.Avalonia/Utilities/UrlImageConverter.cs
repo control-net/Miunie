@@ -14,6 +14,7 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using Avalonia.Media.Imaging;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -30,8 +31,9 @@ namespace Miunie.Avalonia.Utilities
 
         public async Task<Bitmap> UrlToBitmapAsync(string url)
         {
-            var stream = await _httpClient.GetStreamAsync(url);
-            var bitmap = new Bitmap(stream);
+            var byteArray = await _httpClient.GetByteArrayAsync(url);
+            using var ms = new MemoryStream(byteArray);
+            var bitmap = new Bitmap(ms);
 
             return bitmap;
         }

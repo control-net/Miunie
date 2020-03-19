@@ -6,18 +6,54 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Miunie.Avalonia.Views.MainWindow"
         Icon="/Assets/miunie-icon.png"
-        Title="Miunie">
+        Title="Miunie"
+        MinWidth="980"
+        MinHeight="500">
+    <Window.Styles>
+        <Style Selector="Button.sidePanelBtn">
+            <Setter Property="Button.Foreground" Value="White"/>
+            <Setter Property="Button.Background" Value="#573653"/>
+            <Setter Property="Button.BorderThickness" Value="2"/>
+            <Setter Property="Button.BorderBrush" Value="#87537e"/>
+        </Style>
+        <Style Selector="Button.sidePanelBtn:pointerover">
+            <Setter Property="Button.Foreground" Value="#c2c2c2"/>
+        </Style>
+    </Window.Styles>
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel>
-        <TextBox PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
-        <Image Source="{Binding BotAvatarImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="63" Height="63"></Image>
-        <TextBlock Text="{Binding ConnectionStatusText, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Width="160" Command="{Binding StartButton_ClickCommand}">Start</Button>
-        <Button Width="160" Command="{Binding StopButton_ClickCommand}">Stop</Button>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0" Background="#723c6e">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+			    <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <Image Margin="0, 20, 0, 0" Source="{Binding BotAvatarImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="200"></Image>
+                <TextBlock Margin="0 30 0 20" FontWeight="Bold" Foreground="White" FontSize="14" Text="{Binding ConnectionStatusText, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Classes="sidePanelBtn" Margin="10 10 10 0" Command="{Binding StartButton_ClickCommand}">Start</Button>
+                <Button Classes="sidePanelBtn" Margin="10 5 10 0" Command="{Binding StopButton_ClickCommand}">Stop</Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Miunie is Licensed under the GNU GPLv3 license." Foreground="#dd8ee6" Margin="10" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="#8a5080">
+        <StackPanel>
+            <TextBox Margin="20 30 20 0" PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
+        </StackPanel>
+        </Grid>
+
+    </Grid>
 </Window>
