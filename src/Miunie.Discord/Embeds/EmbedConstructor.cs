@@ -50,11 +50,9 @@ namespace Miunie.Discord.Embeds
         {
             var realnessPhrase = lang.GetPhrase((mUser.IsBot ? PhraseKey.USER_EMBED_IS_BOT : PhraseKey.USER_EMBED_IS_HUMAN).ToString());
 
-            var b = lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString(), mUser.Name.ToUpper().ToPossessiveForm());
-
             return new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
-                .WithTitle("AAA")
+                .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString(), mUser.Name.ToUpper().ToPossessiveForm()))
                 .WithThumbnailUrl(mUser.AvatarUrl)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REALNESS_TITLE.ToString()), realnessPhrase, true)
