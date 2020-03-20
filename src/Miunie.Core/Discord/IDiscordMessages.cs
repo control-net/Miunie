@@ -29,5 +29,7 @@ namespace Miunie.Core.Discord
         Task SendMessageAsync(MiunieChannel targetChannel, MiunieGuild guild);
 
         Task SendMessageAsync(MiunieChannel mc, IEnumerable<ReputationEntry> repEntries, int index);
+
+        Task SendDirectFileMessageAsync(MiunieUser mu, string userAsJson);
     }
 }

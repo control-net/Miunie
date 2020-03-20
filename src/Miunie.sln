@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.SystemInfrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.LiteDbStorage", "Miunie.LiteDbStorage\Miunie.LiteDbStorage.csproj", "{051A93BE-69B2-4443-8E2B-CA3846BF8B33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miunie.Avalonia", "Miunie.Avalonia\Miunie.Avalonia.csproj", "{D806151B-6A74-4A8E-B271-3C6D9E6DB5BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Avalonia", "Miunie.Avalonia\Miunie.Avalonia.csproj", "{D806151B-6A74-4A8E-B271-3C6D9E6DB5BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miunie.Json", "Miunie.Json\Miunie.Json.csproj", "{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,6 +217,26 @@ Global
 		{D806151B-6A74-4A8E-B271-3C6D9E6DB5BF}.Release|x64.Build.0 = Release|Any CPU
 		{D806151B-6A74-4A8E-B271-3C6D9E6DB5BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{D806151B-6A74-4A8E-B271-3C6D9E6DB5BF}.Release|x86.Build.0 = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|ARM.Build.0 = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|ARM64.Build.0 = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|x64.Build.0 = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE785CEF-B12D-4C33-BBA9-66235CAA11F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -325,6 +325,14 @@ Twelve... ten... -ish... Yeah I have no idea.</value>
 **{0} DANK PROFILE**</value>
     <comment>No formatting options.</comment>
   </data>
+  <data name="USER_PRIVACY_DATA_REMOVED" xml:space="preserve">
+    <value>{0}, your personal data has been removed from Miunie</value>
+    <comment>Target Username</comment>
+  </data>
+  <data name="USER_PRIVACY_FILE_MESSAGE" xml:space="preserve">
+    <value>The file named {0}.json contains all the data Miunie knows about you. Please refer to the ``personal data remove`` command to remove your personal data from Miunie.</value>
+    <comment>Target Username</comment>
+  </data>
   <data name="YES_NO_MAYBE" xml:space="preserve">
     <value>Chances are good{{OR}}
 No looking good{{OR}}
