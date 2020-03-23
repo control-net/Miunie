@@ -50,10 +50,10 @@
         </Grid>
 
         <Grid Grid.Column="1" Background="#8a5080">
-        <StackPanel>
-            <TextBox Margin="20 30 20 0" PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
-            <CheckBox Margin="20 30 20 0" IsChecked="{Binding CommandsEnabled, Mode=TwoWay}">Enable commands</CheckBox>
-        </StackPanel>
+            <StackPanel>
+                <TextBox Margin="20 30 20 0" PasswordChar="*" Watermark="Enter Token..." Text="{Binding DiscordToken, Mode=TwoWay}" />
+                <CheckBox Margin="20 30 20 0" IsChecked="{Binding CommandsEnabled, Mode=TwoWay}">Enable commands</CheckBox>
+            </StackPanel>
         </Grid>
 
     </Grid>
