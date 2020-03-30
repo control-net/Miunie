@@ -60,6 +60,12 @@ namespace Miunie.Avalonia.ViewModels
             set => _ = this.RaiseAndSetIfChanged(ref _discordToken, value);
         }
 
+        public bool CommandsEnabled
+        {
+            get => _miunie.BotConfiguration.CommandsEnabled;
+            set => _miunie.BotConfiguration.CommandsEnabled = value;
+        }
+
         public async Task StartButton_ClickCommand()
         {
             if (string.IsNullOrWhiteSpace(DiscordToken))
