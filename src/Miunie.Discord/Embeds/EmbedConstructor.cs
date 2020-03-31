@@ -52,7 +52,7 @@ namespace Miunie.Discord.Embeds
 
             return new EmbedBuilder()
                 .WithColor(new Color(236, 64, 122))
-                .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString()))
+                .WithTitle(lang.GetPhrase(PhraseKey.USER_EMBED_TITLE.ToString(), mUser.Name.ToUpper().ToPossessiveForm()))
                 .WithThumbnailUrl(mUser.AvatarUrl)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_NAME_TITLE.ToString()), mUser.Name)
                 .AddField(lang.GetPhrase(PhraseKey.USER_EMBED_REALNESS_TITLE.ToString()), realnessPhrase, true)
@@ -74,6 +74,11 @@ namespace Miunie.Discord.Embeds
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_ROLES_TITLE.ToString()), string.Join(", ", mGuild.Roles.Select(r => r.Name.Replace("@", string.Empty))), true)
                 .AddField(lang.GetPhrase(PhraseKey.GUILD_EMBED_CREATED_AT_TITLE.ToString()), $"{mGuild.CreationDate:d} at {mGuild.CreationDate:t} UTC")
                 .Build();
+
+        private static string ToPossessiveForm(this string s)
+            => s.Last() == 'S'
+                ? s + "'"
+                : s + "'S";
 
         private static string FormatReputationType(ReputationType type)
         {
