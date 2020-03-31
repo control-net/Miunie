@@ -47,6 +47,16 @@ namespace Miunie.WindowsApp.ViewModels
 
         public string BotAvatar => _miunie.MiunieDiscord.GetBotAvatarUrl() ?? DefaultAvatarUrl;
 
+        public bool CommandsEnabled
+        {
+            get => _miunie.BotConfiguration.CommandsEnabled;
+            set
+            {
+                _miunie.BotConfiguration.CommandsEnabled = value;
+                RaisePropertyChanged(nameof(CommandsEnabled));
+            }
+        }
+
         public string Logs => string.Join(Environment.NewLine, _logReader.RetrieveLogs(10));
 
         public ICommand ApplyTokenCommand => new RelayCommand<string>(ApplyToken, CanApplyToken);

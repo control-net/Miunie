@@ -38,11 +38,13 @@ namespace Miunie.WindowsApp.Views
         {
             await _vm.FetchInfoAsync((ulong)e.Parameter);
             _vm.ConfigureMessagesSubscription();
+            _vm.DisableCommands();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _vm.CleanupHandlers();
+            _vm.EnableCommands();
 
             SimpleIoc.Default.Unregister<ImpersonationChatPageViewModel>();
             SimpleIoc.Default.Register<ImpersonationChatPageViewModel>();
