@@ -17,6 +17,8 @@ using GalaSoft.MvvmLight;
 using Miunie.Core;
 using Miunie.Core.Entities.Views;
 using System.Collections.Generic;
+using System.Linq;
+using Windows.UI.Xaml;
 
 namespace Miunie.WindowsApp.ViewModels
 {
@@ -30,5 +32,13 @@ namespace Miunie.WindowsApp.ViewModels
         }
 
         public IEnumerable<GuildView> AvailableGuilds => _miunie.Impersonation.GetAvailableGuilds();
+
+        public Visibility ContentIsVisible => AvailableGuilds.Count() > 0
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
+        public Visibility NoContentIsVisible => AvailableGuilds.Count() <= 0
+            ? Visibility.Visible
+            : Visibility.Collapsed;
     }
 }

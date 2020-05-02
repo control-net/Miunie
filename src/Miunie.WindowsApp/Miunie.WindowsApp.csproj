@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NoContentControl.xaml.cs">
+      <DependentUpon>NoContentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\IntToVisabilityConverter.cs" />
     <Compile Include="Converters\TokenMaskConverter.cs" />
     <Compile Include="Infrastructure\UwpFileSystem.cs" />
@@ -249,6 +252,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\NoContentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ImpersonationChatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
