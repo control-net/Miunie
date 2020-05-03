@@ -50,14 +50,6 @@ namespace Miunie.Core
             await _discordMessages.SendMessageAsync(c, repGiven, page);
         }
 
-        public async Task ShowReputationLogAsync(MiunieUser invoker, MiunieUser target, int page, MiunieChannel c)
-        {
-            page -= 1;
-            var repGiven = _reputationProvider.GetReputation(target);
-
-            await _discordMessages.SendMessageAsync(c, repGiven, page);
-        }
-
         public async Task GiveReputationAsync(MiunieUser invoker, MiunieUser target, MiunieChannel c)
         {
             if (invoker.UserId == target.UserId)

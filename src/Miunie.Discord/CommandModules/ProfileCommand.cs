@@ -56,9 +56,8 @@ namespace Miunie.Discord.CommandModules
         [Command("rep log for")]
         public async Task ShowReputationLogAsync(MiunieUser user, int page = 1)
         {
-            var source = _entityConvertor.ConvertUser(Context.User as SocketGuildUser);
             var channel = _entityConvertor.ConvertChannel(Context.Channel as SocketGuildChannel);
-            await _profileService.ShowReputationLogAsync(source, user, page, channel);
+            await _profileService.ShowReputationLogAsync(user, page, channel);
         }
 
         [Command("+rep")]
