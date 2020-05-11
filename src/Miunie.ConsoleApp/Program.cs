@@ -50,10 +50,10 @@ namespace Miunie.ConsoleApp
 
         private static async Task Main(string[] args)
         {
-            Console.Title = "Miunie";
+            Console.Title = ConsoleStrings.BOT_NAME;
             _miunie = ActivatorUtilities.CreateInstance<MiunieBot>(InversionOfControl.Provider);
 
-            if (args.Contains("-headless")) { await RunHeadless(args); }
+            if (args.Contains(ConsoleStrings.HEADLESS_FLAG)) { await RunHeadless(args); }
 
             _serverMenu = new ServerMenu(_miunie);
 
@@ -65,14 +65,14 @@ namespace Miunie.ConsoleApp
 
         private static async Task RunHeadless(string[] args)
         {
-            if (!args.Any(arg => arg.StartsWith("-token=")))
+            if (!args.Any(arg => arg.StartsWith(ConsoleStrings.TOKENEQUALS_FLAG)))
             {
                 Console.WriteLine(ConsoleStrings.HEADLESS_REQUIRES_TOKEN);
                 Environment.Exit(0);
             }
 
             var token = args
-                .First(arg => arg.StartsWith("-token="))
+                .First(arg => arg.StartsWith(ConsoleStrings.TOKENEQUALS_FLAG))
                 .Substring(7);
 
             _miunie.BotConfiguration.DiscordToken = token;
@@ -115,7 +115,7 @@ namespace Miunie.ConsoleApp
                             }
                             while (Console.ReadKey().Key != ConsoleKey.Y);
 
-                            _editor.WriteSetting("DiscordToken", token);
+                            _editor.WriteSetting(ConsoleStrings.DISCORD_TOKEN, token);
                             _editor.Save();
                             _miunie.BotConfiguration.DiscordToken = token;
                             break;
@@ -130,7 +130,7 @@ namespace Miunie.ConsoleApp
                             }
                             else if (_miunie.MiunieDiscord.ConnectionState == ConnectionState.DISCONNECTED)
                             {
-                                _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor("DiscordToken");
+                                _miunie.BotConfiguration.DiscordToken = _configManager.GetValueFor(ConsoleStrings.DISCORD_TOKEN);
                                 _miunie.BotConfiguration.CommandsEnabled = true;
                                 _ = _miunie.StartAsync();
                                 AnyKeyToContinue();
