@@ -10,8 +10,8 @@
 
 namespace Miunie.ConsoleApp {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace Miunie.ConsoleApp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ConsoleStrings {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ConsoleStrings() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace Miunie.ConsoleApp {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace Miunie.ConsoleApp {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Press any key to continue....
         /// </summary>
@@ -68,7 +68,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("ANY_KEY_TO_CONTINUE", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to /!\ Miunie is not currently running....
         /// </summary>
@@ -77,7 +77,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("BOT_IS_NOT_RUNNING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to =) Miunie is running....
         /// </summary>
@@ -86,7 +86,16 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("BOT_IS_RUNNING", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miunie.
+        /// </summary>
+        internal static string BOT_NAME {
+            get {
+                return ResourceManager.GetString("BOT_NAME", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Channel is read only, cannot send messages..
         /// </summary>
@@ -95,7 +104,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("CANNOT_SEND_READONLY", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Configuration Error:
         ///The configuration could not retrieve the item:&apos;{0}&apos;
@@ -106,7 +115,16 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("CONFIG_ERROR", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DiscordToken.
+        /// </summary>
+        internal static string DISCORD_TOKEN {
+            get {
+                return ResourceManager.GetString("DISCORD_TOKEN", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Please enter your Discord bot&apos;s token: .
         /// </summary>
@@ -115,7 +133,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("ENTER_TOKEN", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Please enter a valid number. Don&apos;t type in the [ and ] characters. Just the number..
         /// </summary>
@@ -124,7 +142,16 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("ERROR_CHOICE_NOT_A_NUMBER", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --headless.
+        /// </summary>
+        internal static string HEADLESS_FLAG {
+            get {
+                return ResourceManager.GetString("HEADLESS_FLAG", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to When running Miunie headless, a token must be provided with a -token= argument..
         /// </summary>
@@ -133,7 +160,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("HEADLESS_REQUIRES_TOKEN", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Miunie is in the headless mode. The UI will not render for the lifetime of this application..
         /// </summary>
@@ -142,7 +169,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("HEADLESS_STARTED", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to You entered the following token, is it correct? (ignore the double quotes)
         ///&quot;{0}&quot;.
@@ -152,7 +179,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("IS_TOKEN_CORRECT", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to [1] Edit bot configuration
         ///[2] Start/Stop Miunie
@@ -164,9 +191,9 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("MAIN_MENU_OPTIONS", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to
+        ///   Looks up a localized string similar to 
         ///    __  __ _             _
         ///   |  \/  (_)           (_)
         ///   | \  / |_ _   _ _ __  _  ___
@@ -181,7 +208,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("MIUNIE_ASCII_HEADER", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Miunie has been started..
         /// </summary>
@@ -190,7 +217,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("MIUNIE_STARTED", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot enter headless mode without Miunie running....
         /// </summary>
@@ -199,7 +226,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("NO_HEADLESS_WITHOUT_RUNNING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Please select an action by typing its number: .
         /// </summary>
@@ -208,7 +235,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("PLEASE_ENTER_MENU_NUMBER", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Let&apos;s try {0}. I have a good feeling about this one..
         /// </summary>
@@ -217,7 +244,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("RANDOM_TOKEN_MESSAGE", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select channel:.
         /// </summary>
@@ -226,7 +253,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("SELECT_CHANNEL", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select guild:.
         /// </summary>
@@ -235,7 +262,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("SELECT_GUILD", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Send message to {0}.
         /// </summary>
@@ -244,7 +271,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("SEND_MESSAGE_TO", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to [1] Load messages
         ///[2] Send message
@@ -257,7 +284,16 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("SERVER_MENU_OPTIONS", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --token=.
+        /// </summary>
+        internal static string TOKENEQUALS_FLAG {
+            get {
+                return ResourceManager.GetString("TOKENEQUALS_FLAG", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Your choice was not recognized as an option in the menu. Please try again..
         /// </summary>
@@ -266,7 +302,7 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("UNKNOWN_OPTION_SELECTED", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use arrowkeys to navigate.
         ///Left and right arrow to switch pages..
@@ -276,49 +312,13 @@ namespace Miunie.ConsoleApp {
                 return ResourceManager.GetString("USE_ARROWKEYS", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to press either [Y] or [N].
         /// </summary>
         internal static string YES_NO_PROMPT {
             get {
                 return ResourceManager.GetString("YES_NO_PROMPT", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Miunie
-        /// </summary>
-        internal static string BOT_NAME {
-            get {
-                return ResourceManager.GetString("BOT_NAME", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to -headless
-        /// </summary>
-        internal static string HEADLESS_FLAG {
-            get {
-                return ResourceManager.GetString("HEADLESS_FLAG", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to -token=
-        /// </summary>
-        internal static string TOKENEQUALS_FLAG {
-            get {
-                return ResourceManager.GetString("TOKENEQUALS_FLAG", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to DiscordToken
-        /// </summary>
-        internal static string DISCORD_TOKEN {
-            get {
-                return ResourceManager.GetString("DISCORD_TOKEN", resourceCulture);
             }
         }
     }
