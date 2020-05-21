@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Copyright>GPL-3.0</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/control-net/Miunie</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/control-net/Miunie</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +14,13 @@
     <ProjectReference Include="../Miunie.Discord/Miunie.Discord.csproj" />
     <ProjectReference Include="../Miunie.Json/Miunie.Json.csproj" />
     <ProjectReference Include="../Miunie.LiteDbStorage/Miunie.LiteDbStorage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
