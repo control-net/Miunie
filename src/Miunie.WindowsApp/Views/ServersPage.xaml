@@ -21,6 +21,6 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        <c:NoContentControl Visibility="{Binding NoContentIsVisible}" Icon="&#xE90A;" Title="NO SERVERS FOUND" Description="This is weird... It doesn't appear that you have access to any servers, or there might be a bit of misconfiguration." />
+        <c:NoContentControl Visibility="{Binding NoContentIsVisible}" Icon="&#xE90A;" Title="NO SERVERS FOUND" Description="I'm not in any servers, chief. And I'll sooner be written in JavaScript before I show you my DMs." />
     </Grid>
 </Page>
