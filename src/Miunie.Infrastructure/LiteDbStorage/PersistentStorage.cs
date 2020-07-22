@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Miunie.LiteDbStorage
+namespace Miunie.Infrastructure.LiteDbStorage
 {
     public class PersistentStorage : IPersistentStorage
     {

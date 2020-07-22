@@ -17,7 +17,7 @@ using Miunie.Core.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace Miunie.Logger
+namespace Miunie.Infrastructure.Logging
 {
     public class InMemoryLogger : ILogWriter, ILogReader
     {

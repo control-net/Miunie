@@ -19,9 +19,9 @@ using Miunie.Avalonia.ViewModels;
 using Miunie.Core;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
+using Miunie.Infrastructure.Logging;
+using Miunie.Infrastructure.OS;
 using Miunie.InversionOfControl;
-using Miunie.Logger;
-using Miunie.SystemInfrastructure;
 using System.Net.Http;
 
 namespace Miunie.Avalonia

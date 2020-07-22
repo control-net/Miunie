@@ -16,7 +16,7 @@
 using Miunie.Core.Json;
 using Newtonsoft.Json;
 
-namespace Miunie.Json
+namespace Miunie.Infrastructure.Json
 {
     public class JsonConverter : IJsonConverter
     {

@@ -16,7 +16,7 @@
 using Miunie.Core.Logging;
 using System;
 
-namespace Miunie.Logger
+namespace Miunie.Infrastructure.Logging
 {
     public class ConsoleLogger : ILogWriter
     {

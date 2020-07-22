@@ -1,4 +1,4 @@
-// This file is part of Miunie.
+﻿// This file is part of Miunie.
 //
 //  Miunie is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -14,12 +14,18 @@
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
 using Miunie.Core.Infrastructure;
-using System;
+using System.IO;
+using System.Reflection;
 
-namespace Miunie.SystemInfrastructure
+namespace Miunie.Infrastructure.OS
 {
-    public class SystemDateTime : IDateTime
+    public class SystemFileSystem : IFileSystem
     {
-        public DateTime UtcNow => DateTime.UtcNow;
+        public SystemFileSystem()
+        {
+            DataStoragePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        }
+
+        public string DataStoragePath { get; }
     }
 }

@@ -16,9 +16,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
+using Miunie.Infrastructure.Logging;
+using Miunie.Infrastructure.OS;
 using Miunie.InversionOfControl;
-using Miunie.Logger;
-using Miunie.SystemInfrastructure;
 using Miunie.WindowsApp.Infrastructure;
 
 namespace Miunie.WindowsApp

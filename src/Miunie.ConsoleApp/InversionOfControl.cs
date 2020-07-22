@@ -17,8 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Miunie.ConsoleApp.Configuration;
 using Miunie.Core.Infrastructure;
 using Miunie.Core.Logging;
+using Miunie.Infrastructure.OS;
 using Miunie.InversionOfControl;
-using Miunie.SystemInfrastructure;
 
 namespace Miunie.ConsoleApp
 {
