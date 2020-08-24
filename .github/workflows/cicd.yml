@@ -1,4 +1,4 @@
-name: .NET Core and UWP
+name: Build and Test
 
 on:
   push:
@@ -9,15 +9,6 @@ on:
       - master
 
 jobs:
-  universal_windows_build:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build DotNET35
-      run: |
-        cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\MiunieWindows.sln -t:restore
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\MiunieWindows.sln /p:Configuration=Release /p:UapAppxPackageBuildMode=StoreUpload
   multiplatform_build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -32,4 +23,4 @@ jobs:
     - name: Build with dotnet
       run: dotnet build src/Miunie.sln --configuration Release
     - name: Run tests
-      run: dotnet test src/Miunie.Core.XUnit.Tests
+      run: dotnet test src/Miunie.Tests
