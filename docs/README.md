@@ -1,20 +1,17 @@
-![Miunie](https://i.ibb.co/MRJ6WcB/title.png)
+![Miunie](https://i.ibb.co/2SPrvT7/title.png)
 
 <a href="https://github.com/control-net/Miunie/actions">
-  <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/control-net/miunie/.NET%20Core%20and%20UWP/master?style=plastic">
+  <img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/control-net/miunie/.NET%20Core%20and%20UWP/master?style=for-the-badge">
 </a>
 
 <a href="https://github.com/discord-bot-tutorial/Miunie/graphs/contributors">
-  <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg" alt="license">
+  <img src="https://img.shields.io/github/contributors/discord-bot-tutorial/Miunie.svg?style=for-the-badge" alt="license">
 </a>
 <a href="https://discord.gg/cGhEZuk">
-  <img src="https://img.shields.io/discord/377879473158356992.svg" alt="license">
+  <img src="https://img.shields.io/discord/377879473158356992.svg?style=for-the-badge" alt="license">
 </a>
 <a href="https://github.com/discord-bot-tutorial/Miunie/blob/master/LICENSE">
-  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="license">
-</a>
-<a href="https://discordbots.org/bot/411505318124847114" >
-  <img src="https://discordbots.org/api/widget/status/411505318124847114.svg" alt="Community-Bot" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" alt="license">
 </a>
 
 **🧡 Miunie is built by these wonderful people:**
@@ -25,17 +22,17 @@
 
 - 🎨 **[wayanfa](https://www.instagram.com/haelequin_55/)** for drawing Miunie.
 
+**Miunie Core** is a Discord bot framework targetting [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) 2.0.
+
+We use Miunie Core in the following front-end projects:
+
+[![UWP](https://img.shields.io/badge/Miunie-UWP-purple?style=for-the-badge&logo=windows)](https://github.com/control-net/miunie-uwp)
+[![Console](https://img.shields.io/badge/Miunie-Console-orange?style=for-the-badge&logo=linux)](https://github.com/control-net/miunie-console)
+[![Avalonia UI](https://img.shields.io/badge/Miunie-Avalonia%20Ui-blue?style=for-the-badge&logo=linux)](https://github.com/control-net/miunie-avalonia)
+
 ![platforms image](img/apps.png)
 
-**Miunie** is a community Discord bot project.
-
 ## [🔗 Learn more about Miunie...](https://github.com/control-net/Miunie/wiki/About-Miunie)
-
-## Releases
-
-| Platform | Release | Version |
-| ------ | ------ | ------ |
-| Windows 10 | <a href='//www.microsoft.com/store/apps/9PHQTNTGZGL6?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='English badge' width=137 height=52/></a> | UWP
 
 ## Useful links
 
@@ -47,9 +44,8 @@
 
 ## Built With
 
-- [.Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core) - Platform Used
 - .NET Standard 2.0
-- .NET Framework
+- [.Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core)
 - [Discord.NET](https://github.com/discord-net/Discord.Net) - Discord API wrapper library
 - 💙 Collaborative spirit
 - ❤️ Passion
