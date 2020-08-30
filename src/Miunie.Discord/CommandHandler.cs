@@ -15,6 +15,7 @@
 
 using Discord.Commands;
 using Discord.WebSocket;
+using Miunie.Core.Commands;
 using Miunie.Core.Configuration;
 using Miunie.Core.Entities.Discord;
 using Miunie.Core.Logging;
@@ -34,8 +35,9 @@ namespace Miunie.Discord
         private readonly ILogWriter _logger;
         private readonly EntityConvertor _convertor;
         private readonly IBotConfiguration _botConfig;
+        private readonly ICommandProcessor _commandProcessor;
 
-        public CommandHandler(IDiscord discord, IServiceProvider services, ILogWriter logger, EntityConvertor convertor, IBotConfiguration botConfig)
+        public CommandHandler(IDiscord discord, IServiceProvider services, ILogWriter logger, EntityConvertor convertor, IBotConfiguration botConfig, ICommandProcessor commandProcessor)
         {
             _discord = discord;
             _commandService = new CommandService();
@@ -43,6 +45,7 @@ namespace Miunie.Discord
             _logger = logger;
             _convertor = convertor;
             _botConfig = botConfig;
+            _commandProcessor = commandProcessor;
         }
 
         public async Task InitializeAsync()
@@ -50,7 +53,26 @@ namespace Miunie.Discord
             _commandService.AddTypeReader(typeof(MiunieUser), new MiunieUserTypeReader(_convertor));
 
             _discord.Client.MessageReceived += HandleCommandAsync;
+            _discord.Client.MessageReceived += ProcessMessageAsync;
             _ = await _commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), _services);
+        }
+
+        private Task ProcessMessageAsync(SocketMessage s)
+        {
+            if (s is SocketUserMessage msg)
+            {
+                var input = new CommandProcessorInput
+                {
+                    Message = msg.Content,
+                    MessageId = msg.Id,
+                    ChannelId = msg.Channel.Id,
+                    GuildId = (msg.Author as SocketGuildUser)?.Guild.Id
+                };
+
+                return _commandProcessor.ProcessAsync(input);
+            }
+
+            return Task.CompletedTask;
         }
 
         private async Task HandleCommandAsync(SocketMessage s)

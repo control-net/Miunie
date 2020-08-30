@@ -15,6 +15,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Miunie.Core.Attributes;
+using Miunie.Core.Commands;
 using Miunie.Core.Configuration;
 using Miunie.Core.Discord;
 using Miunie.Core.Entities;
@@ -53,6 +54,7 @@ namespace Miunie.InversionOfControl
                 .AddSingleton<ITimeManipulationProvider, TimeManipulationProvider>()
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<MiunieUserConverter>()
+                .AddSingleton<ICommandProcessor, CommandProcessor>()
                 .AddMiunieServices();
 
         private static IServiceCollection AddMiunieServices(this IServiceCollection collection)
