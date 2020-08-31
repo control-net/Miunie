@@ -35,9 +35,13 @@ namespace Miunie.Core.Commands.PipelineSteps
                 return NextStep.ProcessAsync(input);
             }
 
-            return input.Message.StartsWith(_config.CommandPrefix)
-                ? NextStep.ProcessAsync(input)
-                : Task.CompletedTask;
+            if (input.Message.StartsWith(_config.CommandPrefix))
+            {
+                input.PrefixOffset = (uint)_config.CommandPrefix.Length;
+                return NextStep.ProcessAsync(input);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }
