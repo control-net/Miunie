@@ -13,19 +13,31 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
+using Miunie.Core.Configuration;
 using System.Threading.Tasks;
 
-namespace Miunie.Core.Commands
+namespace Miunie.Core.Commands.PipelineSteps
 {
-    public abstract class CommandPipelineStep : ICommandPipelineStep
+    public class PreconditionCheckStep : CommandPipelineStep
     {
-        public CommandPipelineStep(ICommandPipelineStep nextStep)
+        private readonly IBotConfiguration _config;
+
+        public PreconditionCheckStep(ICommandPipelineStep step, IBotConfiguration config)
+            : base(step)
         {
-            NextStep = nextStep;
+            _config = config;
         }
 
-        protected ICommandPipelineStep NextStep { get; }
+        public override Task ProcessAsync(CommandProcessorInput input)
+        {
+            if (!_config.PrefixIsSet)
+            {
+                return NextStep.ProcessAsync(input);
+            }
 
-        public abstract Task ProcessAsync(CommandProcessorInput input);
+            return input.Message.StartsWith(_config.CommandPrefix)
+                ? NextStep.ProcessAsync(input)
+                : Task.CompletedTask;
+        }
     }
 }

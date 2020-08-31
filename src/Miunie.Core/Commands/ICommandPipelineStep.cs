@@ -19,6 +19,6 @@ namespace Miunie.Core.Commands
 {
     public interface ICommandPipelineStep
     {
-        Task ProcessAsync(MiunieCommandContext context);
+        Task ProcessAsync(CommandProcessorInput input);
     }
 }

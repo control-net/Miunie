@@ -20,5 +20,9 @@ namespace Miunie.Core.Configuration
         bool CommandsEnabled { get; set; }
 
         string DiscordToken { get; set; }
+
+        string CommandPrefix { get; set; }
+
+        bool PrefixIsSet { get; }
     }
 }
