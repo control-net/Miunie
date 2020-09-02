@@ -13,35 +13,38 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
-using Miunie.Core.Configuration;
+using Miunie.Core.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Miunie.Core.Commands.PipelineSteps
 {
-    public class PreconditionCheckStep : CommandPipelineStep
+    public class ServiceLocationStep : CommandPipelineStep
     {
-        private readonly IBotConfiguration _config;
+        private readonly IMiunieServiceCollection _serviceCollection;
+        private readonly ILogWriter _logWriter;
 
-        public PreconditionCheckStep(ICommandPipelineStep step, IBotConfiguration config)
+        public ServiceLocationStep(ICommandPipelineStep step, IMiunieServiceCollection serviceCollection, ILogWriter logWriter)
             : base(step)
         {
-            _config = config;
+            _serviceCollection = serviceCollection;
+            _logWriter = logWriter;
         }
 
         public override Task ProcessAsync(CommandProcessorInput input)
         {
-            if (!_config.PrefixIsSet)
+            var commands = _serviceCollection.GetAvailableCommands();
+
+            if (commands is null || !commands.Any())
             {
-                return NextStep.ProcessAsync(input);
+                _logWriter.Log("Service Location did not get any available commands.");
+                return Task.CompletedTask;
             }
 
-            if (input.Message.StartsWith(_config.CommandPrefix))
-            {
-                input.PrefixOffset = (uint)_config.CommandPrefix.Length;
-                return NextStep.ProcessAsync(input);
-            }
+            var prompt = input.Message.Substring((int)input.PrefixOffset).Trim();
 
-            return Task.CompletedTask;
+            input.TargetedCommands = commands.Where(c => prompt.StartsWith(c.Prompt));
+            return NextStep.ProcessAsync(input);
         }
     }
 }

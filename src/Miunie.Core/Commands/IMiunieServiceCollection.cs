@@ -17,23 +17,8 @@ using System.Collections.Generic;
 
 namespace Miunie.Core.Commands
 {
-    public class CommandProcessorInput
+    public interface IMiunieServiceCollection
     {
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or sets the position in the Message where the prefix ends.
-        /// </summary>
-        public uint PrefixOffset { get; set; }
-
-        public ulong MessageId { get; set; }
-
-        public ulong UserId { get; set; }
-
-        public ulong ChannelId { get; set; }
-
-        public ulong? GuildId { get; set; }
-
-        public IEnumerable<MiunieServiceCommand> TargetedCommands { get; set; }
+        IEnumerable<MiunieServiceCommand> GetAvailableCommands();
     }
 }

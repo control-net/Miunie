@@ -13,27 +13,10 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Miunie. If not, see <https://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-
 namespace Miunie.Core.Commands
 {
-    public class CommandProcessorInput
+    public class MiunieServiceCommand
     {
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or sets the position in the Message where the prefix ends.
-        /// </summary>
-        public uint PrefixOffset { get; set; }
-
-        public ulong MessageId { get; set; }
-
-        public ulong UserId { get; set; }
-
-        public ulong ChannelId { get; set; }
-
-        public ulong? GuildId { get; set; }
-
-        public IEnumerable<MiunieServiceCommand> TargetedCommands { get; set; }
+        public string Prompt { get; set; }
     }
 }

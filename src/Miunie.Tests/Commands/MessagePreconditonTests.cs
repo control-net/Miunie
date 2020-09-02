@@ -28,11 +28,11 @@ namespace Miunie.Tests.Commands
         public async Task MessageWithNoPrefixIsIgnored()
         {
             var botConfig = CreateBotConfigWithPrefix("MyPrefix");
-            var firstStepContext = CreateInputWithMessage("Message without a prefix");
+            var input = CreateInputWithMessage("Message without a prefix");
             var nextStep = new Mock<ICommandPipelineStep>();
             var step = new PreconditionCheckStep(nextStep.Object, botConfig);
 
-            await step.ProcessAsync(firstStepContext);
+            await step.ProcessAsync(input);
 
             AssertNextStepIsNotCalled(nextStep);
         }
@@ -40,27 +40,31 @@ namespace Miunie.Tests.Commands
         [Fact]
         public async Task MessageWithPrefixCallsNextStep()
         {
+            const uint ExpectedPrefixOffset = 8;
             var botConfig = CreateBotConfigWithPrefix("MyPrefix");
-            var firstStepContext = CreateInputWithMessage("MyPrefix Message with a prefix");
+            var input = CreateInputWithMessage("MyPrefix Message with a prefix");
             var nextStep = new Mock<ICommandPipelineStep>();
             var step = new PreconditionCheckStep(nextStep.Object, botConfig);
 
-            await step.ProcessAsync(firstStepContext);
+            await step.ProcessAsync(input);
 
             AssertNextStepIsCalled(nextStep);
+            Assert.Equal(ExpectedPrefixOffset, input.PrefixOffset);
         }
 
         [Fact]
         public async Task NoPrefixSetIgnoreAllMessages()
         {
+            const uint ExpectedPrefixOffset = 0;
             var botConfig = CreateBotConfigWithNoPrefix();
-            var firstStepContext = CreateInputWithMessage("Any Message");
+            var input = CreateInputWithMessage("Any Message");
             var nextStep = new Mock<ICommandPipelineStep>();
             var step = new PreconditionCheckStep(nextStep.Object, botConfig);
 
-            await step.ProcessAsync(firstStepContext);
+            await step.ProcessAsync(input);
 
             AssertNextStepIsCalled(nextStep);
+            Assert.Equal(ExpectedPrefixOffset, input.PrefixOffset);
         }
 
         private void AssertNextStepIsNotCalled(Mock<ICommandPipelineStep> step)
